@@ -99,7 +99,7 @@ public class PoolManager : MonoBehaviour
     /// 如果对象不属于任何池子，则直接物理销毁。
     /// </summary>
     /// <param name="obj">需要回收的 GameObject 实例</param>
-    public static void Return(GameObject obj)
+    public static void Release(GameObject obj)
     {
         if (obj == null) return;
 
@@ -128,7 +128,7 @@ public class PoolManager : MonoBehaviour
 
         for (int i = 0; i < _prewarmList.Count; i++)
         {
-            Return(_prewarmList[i]);
+            Release(_prewarmList[i]);
         }
 
         _prewarmList.Clear();
