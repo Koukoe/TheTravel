@@ -6,13 +6,13 @@ using System.IO;
 
 public static class DataPath
 {
-    private const string FolderName = ".userdata";
+    private const string FOLDER_NAME = ".userdata";
 
     public static string GetRoot()
     {
         string baseDir = Directory.GetParent(Application.dataPath).FullName;
         string subPath = Application.isEditor ? "Temp" : "";
-        string finalPath = Path.Combine(baseDir, subPath, FolderName);
+        string finalPath = Path.Combine(baseDir, subPath, FOLDER_NAME);
 
         // 动态创建
         if (!Directory.Exists(finalPath))
@@ -33,21 +33,21 @@ public static class DataPath
 
 public static class DataSystem
 {
-    public static void SaveData<T>(string saveFileName, T data)
+    public static void SaveData<T>(string fileName, T data)
     {
         string j = JsonUtility.ToJson(data, true);
-        string p = Path.Combine(DataPath.GetRoot(), saveFileName);
+        string p = Path.Combine(DataPath.GetRoot(), fileName);
 
         File.WriteAllText(p, j);
     }
 
-    public static T LoadData<T>(string saveFileName) where T : new()
+    public static T LoadData<T>(string fileName) where T : new()
     {
-        string p = Path.Combine(DataPath.GetRoot(), saveFileName);
+        string p = Path.Combine(DataPath.GetRoot(), fileName);
 
         if (!File.Exists(p))
         {
-            Debug.LogWarning($"[DataSystem] 未找到数据: {saveFileName}");
+            Debug.LogWarning($"[DataSystem] 未找到数据: {fileName}");
             return new T();
         }
 
@@ -55,5 +55,22 @@ public static class DataSystem
         T data = JsonUtility.FromJson<T>(j);
         return data;
     }
+
+    public static void DeleteData(string fileName)
+    {
+        string p = Path.Combine(DataPath.GetRoot(), fileName);
+
+        if (File.Exists(p))
+        {
+            File.Delete(p);
+            Debug.Log($"<color=red>[DataSystem]</color> 数据已删除: {fileName}");
+        }
+        else
+        {
+            Debug.LogWarning($"[DataSystem] 未找到数据: {fileName}");
+        }
+    }
 }
+
+
 
