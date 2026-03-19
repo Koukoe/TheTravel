@@ -47,8 +47,7 @@ public class UIManager
 
         if(CanvasObj == null)
         {
-            Debug.LogError("UIManager未找到Canvas!");
-            return null;
+            CanvasObj = UIMethods.GetInstance().FindCanvas();
         }
 
         GameObject gameObject=GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(uIType.Path), CanvasObj.transform);
@@ -94,8 +93,8 @@ public class UIManager
         {
             if (stack_ui.Count > 0)
             {
-                stack_ui.Peak().OnDisable();
-                stack_ui.Peak().OnDestroy();
+                stack_ui.Peek().OnDisable();
+                stack_ui.Peek().OnDestroy();
                 GameObject.Destroy(dict_uiobject[stack_ui.Peek().uiType.Name]);
                 dict_uiobject.Remove(stack_ui.Peek().uiType.Name);
                 stack_ui.Pop();

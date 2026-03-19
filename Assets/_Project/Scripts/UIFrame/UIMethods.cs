@@ -29,7 +29,7 @@ public class UIMethods
 
     }
 
-    public GameObject FindObjectInChild(GameObject parent, string child_name)
+    public GameObject FindObjectInChild(GameObject panel, string child_name)
     {
         Transform[] transforms = panel.GetComponentsInChildren<Transform>();
         foreach (var tra in transforms)
@@ -39,7 +39,7 @@ public class UIMethods
                 return tra.gameObject;
             }
         }
-        Debug.LogWarning($"zai {panel.name} 中未找到 {child_name}!");
+        Debug.LogWarning($"在 {panel.name} 中未找到 {child_name}!");
         return null;
     }
 }
