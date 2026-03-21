@@ -24,12 +24,19 @@ public class InputReader : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    private void OnEnable()
     {
         if (_controls != null)
         {
-            _controls.Player.Disable();
-            _controls.UI.Disable();
+            _controls.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (_controls != null)
+        {
+            _controls.Disable();
         }
     }
 
@@ -54,7 +61,6 @@ public class InputReader : MonoBehaviour
     // 获取移动向量
     public Vector2 GetMove() => _controls.Player.Move.ReadValue<Vector2>();
 
-    // 订阅模式
     public GameInput.PlayerActions PlayerActions => _controls.Player;
     public GameInput.UIActions UIActions => _controls.UI;
 }
