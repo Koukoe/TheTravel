@@ -1,18 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class GameRoot : MonoBehaviour
+public static class GameRoot
 {
-    // Start is called before the first frame update
-    void Start()
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public static void GameEntry()
     {
-        
+        if (!DataSystem.Exists("settings.dat"))
+        {
+            // 打开新的游戏
+        }
+
+        ArchivesSystem.LoadAll();
+
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

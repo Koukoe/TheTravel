@@ -1,34 +1,29 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class StartPanel : BasePanel
 {
-    private static string name = "StartPanel";
-    private static string path = "UIPanel/StartPanel";
-    public static readonly UIType uiType = new UIType(name, path);
-    public StartPanel() : base(uiType)
-    {
+    // 第一个是路径，第二个是 PoolManager 里的 Name
+    public static readonly UIType uiType = new UIType("StartPanel");
 
-    }
-    public override void Onstart()
-    {
-        base.Onstart();
-        Debug.Log("StartPanel开始使用");
-    }
+    public StartPanel() : base(uiType) { }
+
+
     public override void OnEnable()
     {
-        base.OnEnable();
-        Debug.Log("StartPanel启用");
+        if (!isCreated) isCreated = true;
+        InputReader.Instance.UIActions.AnyKey.performed += OnAnyKey;
     }
+
     public override void OnDisable()
     {
-        base.OnDisable();
-        Debug.Log("StartPanel禁用");
+        InputReader.Instance.UIActions.AnyKey.performed -= OnAnyKey;
     }
-    public override void OnDestroy()
+
+    private void OnAnyKey(InputAction.CallbackContext context)
     {
-        base.OnDestroy();
-        Debug.Log("StartPanel销毁");
+        UIManager.GetInstance().Pop(false);
+        UIManager.GetInstance().Push(new MenuPanel());
     }
 }

@@ -70,6 +70,11 @@ public static class DataSystem
             Debug.LogWarning($"[DataSystem] 未找到数据: {fileName}");
         }
     }
+
+    public static bool Exists(string fileName)
+    {
+        return File.Exists(Path.Combine(DataPath.GetRoot(), fileName));
+    }
 }
 
 

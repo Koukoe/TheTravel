@@ -4,118 +4,110 @@ using UnityEngine;
 
 public class UIManager
 {
-    /// <summary>
-    /// 存储当前UI的栈
-    /// </summary>
-    public Stack<BasePanel> stack_ui;
-    /// <summary>
-    /// 存储Panel的名称与物体的对应关系
-    /// </summary>
-    public Dictionary<string, GameObject> dict_uiobject;
-    /// <summary>
-    /// 当前场景对应的Canvas
-    /// </summary>
-    public GameObject CanvasObj;
     private static UIManager instance;
-    /// <summary>
-    /// 获得UIManager的单例
-    /// </summary>
-    /// <returns></returns>
     public static UIManager GetInstance()
     {
-        if (instance == null)
-        {
-            Debug.Log("UIManager实例不存在");
-            return instance;
-        }
-        else
-        {
-            return instance;
-        }
+        if (instance == null) instance = new UIManager();
+        return instance;
     }
+
+    public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+    public Dictionary<string, GameObject> dict_uiobject = new Dictionary<string, GameObject>();
+    public GameObject CanvasObj;
+
     public UIManager()
     {
         instance = this;
     }
 
-    public GameObject GetSingleObject(UIType uIType)
+    // 内部方法：从你的 PoolManager 获取对象
+    private GameObject GetSingleObject(UIType uIType)
     {
-       if (dict_uiobject.ContainsKey(uIType.Name))
-        {
-            return dict_uiobject[uIType.Name];
-        }
-
-        if(CanvasObj == null)
+        if (CanvasObj == null)
         {
             CanvasObj = UIMethods.GetInstance().FindCanvas();
         }
 
-        GameObject gameObject=GameObject.Instantiate<GameObject>(Resources.Load<GameObject>(uIType.Path), CanvasObj.transform);
+        // 调用你的 PoolManager.Global.Get
+        GameObject gameObject = PoolManager.Global.Get(uIType.Name);
+        
+        if (gameObject != null)
+        {
+            gameObject.transform.SetParent(CanvasObj.transform, false);
+        }
+        else
+        {
+            Debug.LogError($"PoolManager中未找到名为 {uIType.Name} 的配置，请检查Inspector面板！");
+        }
+        
         return gameObject;
     }
-/// <summary>
-/// 将UI压入栈中
-/// </summary>
-/// <param name="basePanel">目标Panel</param>
+
     public void Push(BasePanel basePanel)
     {
-        Debug.Log($"{basePanel.uiType.Name}被Push进stack");
+        Debug.Log($"{basePanel.uiType.Name} 被推入栈");
+
+        // 1. 如果栈里有东西，先禁用当前的顶层 UI
         if (stack_ui.Count > 0)
         {
             stack_ui.Peek().OnDisable();
+            stack_ui.Peek().ActiveObj.SetActive(false); 
         }
 
+        // 2. 从对象池获取新物体
         GameObject ui_object = GetSingleObject(basePanel.uiType);
-        dict_uiobject.Add(basePanel.uiType.Name, ui_object);
         basePanel.ActiveObj = ui_object;
 
-        if (stack_ui.Count ==0)
+        // 3. 记录到字典并压入栈
+        if (!dict_uiobject.ContainsKey(basePanel.uiType.Name))
         {
-            stack_ui.Push(basePanel);
+            dict_uiobject.Add(basePanel.uiType.Name, ui_object);
         }
-        else
-        {
-            if (stack_ui.Peek().uiType.Name != basePanel.uiType.Name)
-            {
-                stack_ui.Push(basePanel);
-            }
-        }
+        
+        stack_ui.Push(basePanel);
 
-        basePanel.Onstart();
+        // 4. 执行生命周期
+        ui_object.SetActive(true);
+        basePanel.OnEnable();
+
     }
-/// <summary>
-/// 将UI从栈中弹出
-/// </summary>
-/// <param name="isload">isload为真时Pop全部，为假时Pop栈顶</param>
-    public void Pop(bool isload)
+
+    public void Pop(bool isAll)
     {
-        if (isload==true)
+        if (stack_ui.Count <= 0) return;
+
+        if (isAll)
         {
-            if (stack_ui.Count > 0)
+            while (stack_ui.Count > 0)
             {
-                stack_ui.Peek().OnDisable();
-                stack_ui.Peek().OnDestroy();
-                GameObject.Destroy(dict_uiobject[stack_ui.Peek().uiType.Name]);
-                dict_uiobject.Remove(stack_ui.Peek().uiType.Name);
-                stack_ui.Pop();
-                Pop (true);
+                CloseTopPanel();
             }
         }
         else
         {
+            CloseTopPanel();
+            // 恢复下层 UI
             if (stack_ui.Count > 0)
             {
-                stack_ui.Peek().OnDisable();
-                stack_ui.Peek().OnDestroy();
-                GameObject.Destroy(dict_uiobject[stack_ui.Peek().uiType.Name]);
-                dict_uiobject.Remove(stack_ui.Peek().uiType.Name);
-                stack_ui.Pop();
-
-                if (stack_ui.Count > 0)
-                {
-                    stack_ui.Peek().OnEnable();
-                }
+                BasePanel nextPanel = stack_ui.Peek();
+                nextPanel.ActiveObj.SetActive(true);
+                nextPanel.OnEnable();
             }
+        }
+    }
+
+    private void CloseTopPanel()
+    {
+        BasePanel topPanel = stack_ui.Pop();
+        topPanel.OnDisable();
+    
+
+        // 使用你的静态方法释放回对象池
+        PoolManager.Release(topPanel.ActiveObj);
+        
+        if (dict_uiobject.ContainsKey(topPanel.uiType.Name))
+        {
+            dict_uiobject.Remove(topPanel.uiType.Name);
         }
     }
 }

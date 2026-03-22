@@ -1,29 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class BasePanel
 {
     public UIType uiType;
     public GameObject ActiveObj;
+    public bool isCreated = false;
+
     public BasePanel(UIType uiType)
     {
-        uiType = uiType;
+        this.uiType = uiType;
+        this.isCreated = false;
     }
-    public virtual void Onstart()
-    {
-        Debug.Log("BasePanel开始使用");
-    }
-    public virtual void OnEnable()
-    {
-        
-    }
-    public virtual void OnDisable()
-    {
-        
-    }
-    public virtual void OnDestroy()
-    {
-        
-    }
+    public virtual void OnEnable() { }
+    public virtual void OnDisable() { }
 }

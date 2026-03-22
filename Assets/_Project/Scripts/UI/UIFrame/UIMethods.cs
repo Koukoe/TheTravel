@@ -29,14 +29,14 @@ public class UIMethods
 
     }
 
-    public GameObject FindObjectInChild(GameObject panel, string child_name)
+    public T FindObjectInChild<T>(GameObject panel, string child_name) where T : Component
     {
         Transform[] transforms = panel.GetComponentsInChildren<Transform>();
         foreach (var tra in transforms)
         {
             if (tra.gameObject.name == child_name)
             {
-                return tra.gameObject;
+                return tra.gameObject.GetComponent<T>();
             }
         }
         Debug.LogWarning($"在 {panel.name} 中未找到 {child_name}!");

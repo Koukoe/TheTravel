@@ -18,8 +18,7 @@ public static class ArchivesSystem
     private const int MAX_SLOTS = 9;
     private static List<ArchivesData> _archives = new();
 
-    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    public static void LoadAllArchives()
+    public static void LoadAll()
     {
         _archives.Clear();
         for (int i = 0; i < MAX_SLOTS; i++)
@@ -32,7 +31,7 @@ public static class ArchivesSystem
     /// <summary>
     /// 保存/覆盖指定索引槽位的数据
     /// </summary>
-    public static void SaveArchiveData(int index)
+    public static void Save(int index)
     {
         if (index < 0 || index >= _archives.Count) return;
         _archives[index].saveTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
@@ -51,7 +50,7 @@ public static class ArchivesSystem
     /// <summary>
     /// 删除指定索引槽位的数据
     /// </summary>
-    public static void DeleteArchiveData(int index)
+    public static void Delete(int index)
     {
         if (index < 0 || index >= _archives.Count) return;
         string fileName = $"slot_{index}.dat";
@@ -65,7 +64,7 @@ public static class ArchivesSystem
     /// <summary>
     /// 获取指定槽位的数据
     /// </summary>
-    public static ArchivesData GetArchiveData(int index)
+    public static ArchivesData Get(int index)
     {
         if (index < 0 || index >= _archives.Count) return null;
         return _archives[index];
@@ -74,12 +73,12 @@ public static class ArchivesSystem
     /// <summary>
     /// 获取所有存档数据
     /// </summary>
-    public static List<ArchivesData> GetAllArchives() => _archives;
+    public static List<ArchivesData> GetAll() => _archives;
 
     /// <summary>
     /// 获取时间戳最晚的存档数据
     /// </summary>
-    public static ArchivesData GetLatestArchive()
+    public static ArchivesData GetLatest()
     {
         int latestIndex = -1;
         DateTime latestTime = DateTime.MinValue;
@@ -97,6 +96,72 @@ public static class ArchivesSystem
                 }
             }
         }
-        return GetArchiveData(latestIndex);
+        return Get(latestIndex);
+    }
+}
+
+[Serializable]
+public class SettingData
+{
+    public string language;
+
+    public float masterVolume = 0.75f;
+    public float musicVolume = 0.75f;
+    public float sfxVolume = 0.75f;
+    public float ambVolume = 0.75f;
+
+    public int resolutionIndex = 0;  // 分辨率索引
+    public bool isFullScreen = true;
+    public int qualityLevel = 2;
+    public bool vSync = true;
+
+    public SettingData()
+    {
+        SystemLanguage sysLang = UnityEngine.Application.systemLanguage;
+
+        if (sysLang == SystemLanguage.Chinese || sysLang == SystemLanguage.ChineseSimplified)
+            language = "zh-CN";
+        else if (sysLang == SystemLanguage.ChineseTraditional)
+            language = "zh-TW";
+        else
+            language = "en-US";
+    }
+}
+
+public static class SettingDataSystem
+{
+    private static SettingData _current;
+
+    /// <summary>
+    /// 保存全局设置
+    /// </summary>
+    public static void Save()
+    {
+        DataSystem.SaveData("settings.dat", _current);
+    }
+
+    /// <summary>
+    /// 加载全局设置
+    /// </summary>
+    public static SettingData Load()
+    {
+        bool isFirstTime = !DataSystem.Exists("settings.dat");
+        _current = DataSystem.LoadData<SettingData>("settings.dat");
+
+        if (isFirstTime)
+        {
+            Save();
+        }
+        return _current;
+    }
+
+    /// <summary>
+    /// 恢复默认设置
+    /// </summary>
+    public static void Reset()
+    {
+        _current = new SettingData();
+        Save();
+        Debug.Log("<color=yellow>[Settings]</color> 已恢复默认设置。");
     }
 }
