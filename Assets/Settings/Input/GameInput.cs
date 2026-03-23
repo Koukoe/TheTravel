@@ -300,7 +300,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""UI"",
+            ""name"": ""UI(Legacy)"",
             ""id"": ""b873408c-eb4b-4913-859a-dbfb2f5271f3"",
             ""actions"": [
                 {

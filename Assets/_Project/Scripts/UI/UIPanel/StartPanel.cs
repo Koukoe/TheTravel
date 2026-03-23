@@ -24,6 +24,6 @@ public class StartPanel : BasePanel
     private void OnAnyKey(InputAction.CallbackContext context)
     {
         UIManager.GetInstance().Pop(false);
-        UIManager.GetInstance().Push(new MenuPanel());
+        UIManager.GetInstance().Push(new MainPanel());
     }
 }
