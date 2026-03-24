@@ -133,7 +133,7 @@ public static class SettingDataSystem
     private static SettingData _current;
 
     /// <summary>
-    /// 保存全局设置
+    /// 保存设置
     /// </summary>
     public static void Save()
     {
@@ -141,7 +141,7 @@ public static class SettingDataSystem
     }
 
     /// <summary>
-    /// 加载全局设置
+    /// 加载设置
     /// </summary>
     public static SettingData Load()
     {
@@ -163,5 +163,45 @@ public static class SettingDataSystem
         _current = new SettingData();
         Save();
         Debug.Log("<color=yellow>[Settings]</color> 已恢复默认设置。");
+    }
+}
+
+[Serializable]
+public class GlobalData
+{
+    public int clearCount;
+    public List<string> unlockedIds;
+    public bool isTrueEndingReached;
+    public GlobalData()
+    {
+
+    }
+}
+
+public static class GlobalDataSystem
+{
+    private static GlobalData _current;
+
+    /// <summary>
+    /// 保存全局数据
+    /// </summary>
+    public static void Save()
+    {
+        DataSystem.SaveData("global.dat", _current);
+    }
+
+    /// <summary>
+    /// 加载全局数据
+    /// </summary>
+    public static GlobalData Load()
+    {
+        bool isFirstTime = !DataSystem.Exists("global.dat");
+        _current = DataSystem.LoadData<GlobalData>("global.dat");
+
+        if (isFirstTime)
+        {
+            Save();
+        }
+        return _current;
     }
 }
