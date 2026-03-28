@@ -45,7 +45,7 @@ public class UIEntrance : MonoBehaviour
             elapsed += Time.deltaTime;
             float t = Mathf.Clamp01(elapsed / duration);
 
-                rectTransform.anchoredPosition = entranceEase.Lerp(startPos, originalAnchoredPos, t);
+            rectTransform.anchoredPosition = entranceEase.Lerp(startPos, originalAnchoredPos, t);
 
             yield return null;
         }

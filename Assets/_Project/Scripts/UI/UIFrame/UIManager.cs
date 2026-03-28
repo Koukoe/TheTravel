@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Diagnostics;
 
 public class UIManager
 {
@@ -14,7 +15,6 @@ public class UIManager
 
     public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
 
-    // --- 【新增】逻辑类缓存：防止每次 Push 都反射 new 一个 C# 对象 ---
     private Dictionary<string, BasePanel> panelCache = new Dictionary<string, BasePanel>();
 
     public Dictionary<string, GameObject> dict_uiobject = new Dictionary<string, GameObject>();
@@ -24,39 +24,45 @@ public class UIManager
 
     public UIManager() { instance = this; }
 
-    // --- 【修改】Push 现在直接传类名字符串 ---
     public BasePanel Push(string panelName)
     {
         if (isTransitioning) return null;
 
-        // 1. 获取或创建【逻辑类】实例
+        // 通过字符串反射获取类型与其对象
         if (!panelCache.TryGetValue(panelName, out BasePanel basePanel))
         {
-            // 通过字符串反射获取类型
+
             Type type = Type.GetType(panelName);
             if (type == null)
             {
-                Debug.LogError($"[UI] 找不到名为 {panelName} 的脚本类！");
+                UnityEngine.Debug.LogError($"[UI] 找不到名为 {panelName} 的脚本类！");
                 return null;
             }
             basePanel = (BasePanel)Activator.CreateInstance(type);
             panelCache.Add(panelName, basePanel);
         }
 
-        // 2. 禁用当前顶层 UI
-        if (stack_ui.Count > 0 && !basePanel.IsSubPanel)
+        // 禁用当前顶层 UI
+        if (stack_ui.Count > 0)
         {
             BasePanel top = stack_ui.Peek();
-            top.OnDisable();
-            // 注意：这里由于后面还要还给池子，现在只是暂时隐藏物理对象
-            if (top.ActiveObj != null) top.ActiveObj.SetActive(false);
+            if (!basePanel.IsSubPanel)
+            {
+                top.OnDisable();
+                // 压栈
+                if (top.ActiveObj != null) top.ActiveObj.SetActive(false);
+            }
+            else
+            {
+                UnityEngine.Debug.Log("xixi");
+                top.ParentDisfocus();
+            }
         }
 
-        // 3. 获取【物理对象】 (对接你的 PoolManager)
+        // 获取物理对象
         if (CanvasObj == null) CanvasObj = UIMethods.GetInstance().FindCanvas();
 
         bool isFirstCreated;
-        // 调用 PoolManager 获取 GameObject
         GameObject ui_object = PoolManager.Global.Get(basePanel.uiType.Name, out isFirstCreated);
 
         if (ui_object == null) return null;
@@ -64,7 +70,7 @@ public class UIManager
         ui_object.transform.SetParent(CanvasObj.transform, false);
         basePanel.ActiveObj = ui_object;
 
-        // 4. 初始化
+        // 初始化
         if (isFirstCreated)
         {
             // 如果是池子第一次实例化该物体，可以在这里调用一次性初始化
@@ -78,22 +84,18 @@ public class UIManager
 
         stack_ui.Push(basePanel);
 
-        // 5. 激活与延迟回调
-        // PoolManager 已经 SetActive(true) 了，直接跑协程即可
         CanvasObj.GetComponent<MonoBehaviour>().StartCoroutine(DelayOnEnable(basePanel));
 
         return basePanel;
     }
 
-    // --- 【配套修改】Close 逻辑 ---
-    private void CloseTopPanel()
+    private void CloseTopPanel(bool a = true)
     {
         if (stack_ui.Count == 0) return;
 
         BasePanel topPanel = stack_ui.Pop();
-        topPanel.OnDisable();
+        topPanel.OnDisable(a);
 
-        // 归还到 PoolManager，不要物理销毁
         PoolManager.Release(topPanel.ActiveObj);
 
         // 清理字典映射
@@ -110,7 +112,7 @@ public class UIManager
 
         if (isAll)
         {
-            while (stack_ui.Count > 0) CloseTopPanel();
+            while (stack_ui.Count > 0) CloseTopPanel(false);
         }
         else
         {
@@ -120,33 +122,34 @@ public class UIManager
             if (stack_ui.Count > 0)
             {
                 BasePanel nextPanel = stack_ui.Peek();
-                // 核心修复：延迟激活下层 UI，避开当前帧的输入残留
                 CanvasObj.GetComponent<MonoBehaviour>().StartCoroutine(DelayRestore(nextPanel));
+
             }
         }
     }
 
 
-    // --- 延迟处理逻辑 ---
+    // 延迟处理下一级面板出现
 
     private IEnumerator DelayOnEnable(BasePanel panel)
     {
         isTransitioning = true;
-        yield return new WaitForSecondsRealtime(0.001f); // 0.1秒足以让按键状态重置
+        yield return new WaitForSecondsRealtime(0f);
         panel.OnEnable();
         isTransitioning = false;
     }
 
+
+    // 延迟处理面板恢复
     private IEnumerator DelayRestore(BasePanel panel)
     {
         isTransitioning = true;
-        // 等待一小段时间，确保 Input System 已经处理完当前帧的“按下”事件
-        yield return new WaitForSecondsRealtime(0.001f);
+        yield return new WaitForSecondsRealtime(0f);
 
         if (panel != null && panel.ActiveObj != null)
         {
             panel.ActiveObj.SetActive(true);
-            panel.OnEnable();
+            panel.Resume();
         }
         isTransitioning = false;
     }

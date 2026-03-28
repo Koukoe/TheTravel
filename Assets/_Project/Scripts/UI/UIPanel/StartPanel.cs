@@ -16,7 +16,7 @@ public class StartPanel : BasePanel
         InputReader.Instance.UIActions.AnyKey.performed += OnAnyKey;
     }
 
-    public override void OnDisable()
+    public override void OnDisable(bool a)
     {
         InputReader.Instance.UIActions.AnyKey.performed -= OnAnyKey;
     }

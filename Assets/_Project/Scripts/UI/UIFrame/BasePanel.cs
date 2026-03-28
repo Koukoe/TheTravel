@@ -14,5 +14,7 @@ public class BasePanel
         this.isCreated = false;
     }
     public virtual void OnEnable() { }
-    public virtual void OnDisable() { }
+    public virtual void OnDisable(bool a = true) { }
+    public virtual void ParentDisfocus() { }
+    public virtual void Resume() { }
 }
