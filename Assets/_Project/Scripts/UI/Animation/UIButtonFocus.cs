@@ -6,8 +6,8 @@ using System.Collections;
 public class UIButtonFocus : MonoBehaviour, ISelectHandler, IDeselectHandler
 {
     public EaseParam scaleEase;
-    public float duration = 0.25f;
-    public float selectScale = 1.35f;
+    public float duration = 0.2f;
+    public float selectScale = 1.4f;
 
     private Vector3 initialScale;
     private Coroutine scaleRoutine;

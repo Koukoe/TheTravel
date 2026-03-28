@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 72030839734950015}
   - component: {fileID: 1893784051382795852}
   - component: {fileID: 6973217842400719209}
-  - component: {fileID: 5706998862911346766}
+  - component: {fileID: 5149225626238888362}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -177,7 +177,7 @@ MonoBehaviour:
   duration: 0.5
   delay: 0.592
   startOffset: {x: -250, y: 0}
---- !u!114 &5706998862911346766
+--- !u!114 &5149225626238888362
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -186,19 +186,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 1176914944838500204}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 42cc29bcf4b88ff47a57740714bb7062, type: 3}
+  m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectScale: 1.15
-  duration: 0.2
   scaleEase:
-    type: 2
+    type: 0
     curve:
       serializedVersion: 2
       m_Curve: []
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
+  duration: 0.2
+  selectScale: 1.4
 --- !u!1 &5416172975871433952
 GameObject:
   m_ObjectHideFlags: 0
