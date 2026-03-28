@@ -14,7 +14,7 @@ public class MainPanel : MenuPanel
         Button settingsBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Settings");
         settingsBtn?.onClick.AddListener(() =>
         {
-            UIManager.GetInstance().Push(new SettingsPanel());
+            UIManager.GetInstance().Push("SettingsPanel");
         });
 
         Button backBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Back");

@@ -16,6 +16,6 @@ public class UISystem : MonoBehaviour
     private void Start()
     {
         // 启动第一个面板
-        UIManager.GetInstance().Push(new StartPanel());
+        UIManager.GetInstance().Push("StartPanel");
     }
 }

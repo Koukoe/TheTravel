@@ -13,65 +13,95 @@ public class UIManager
     }
 
     public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+
+    // --- 【新增】逻辑类缓存：防止每次 Push 都反射 new 一个 C# 对象 ---
+    private Dictionary<string, BasePanel> panelCache = new Dictionary<string, BasePanel>();
+
     public Dictionary<string, GameObject> dict_uiobject = new Dictionary<string, GameObject>();
     public GameObject CanvasObj;
 
-    // 状态锁：防止在切换动画或处理输入时重复触发
     private bool isTransitioning = false;
 
-    public UIManager()
-    {
-        instance = this;
-    }
+    public UIManager() { instance = this; }
 
-    private GameObject GetSingleObject(UIType uIType)
+    // --- 【修改】Push 现在直接传类名字符串 ---
+    public BasePanel Push(string panelName)
     {
-        if (CanvasObj == null)
+        if (isTransitioning) return null;
+
+        // 1. 获取或创建【逻辑类】实例
+        if (!panelCache.TryGetValue(panelName, out BasePanel basePanel))
         {
-            CanvasObj = UIMethods.GetInstance().FindCanvas();
+            // 通过字符串反射获取类型
+            Type type = Type.GetType(panelName);
+            if (type == null)
+            {
+                Debug.LogError($"[UI] 找不到名为 {panelName} 的脚本类！");
+                return null;
+            }
+            basePanel = (BasePanel)Activator.CreateInstance(type);
+            panelCache.Add(panelName, basePanel);
         }
 
-        GameObject gameObject = PoolManager.Global.Get(uIType.Name);
-
-        if (gameObject != null)
-        {
-            gameObject.transform.SetParent(CanvasObj.transform, false);
-        }
-        else
-        {
-            Debug.LogError($"PoolManager中未找到名为 {uIType.Name} 的配置！");
-        }
-
-        return gameObject;
-    }
-
-    public void Push(BasePanel basePanel)
-    {
-        if (isTransitioning) return;
-
-        // 1. 禁用当前顶层 UI
-        if (stack_ui.Count > 0)
+        // 2. 禁用当前顶层 UI
+        if (stack_ui.Count > 0 && !basePanel.IsSubPanel)
         {
             BasePanel top = stack_ui.Peek();
             top.OnDisable();
-            top.ActiveObj.SetActive(false);
+            // 注意：这里由于后面还要还给池子，现在只是暂时隐藏物理对象
+            if (top.ActiveObj != null) top.ActiveObj.SetActive(false);
         }
 
-        // 2. 获取并设置新 UI
-        GameObject ui_object = GetSingleObject(basePanel.uiType);
+        // 3. 获取【物理对象】 (对接你的 PoolManager)
+        if (CanvasObj == null) CanvasObj = UIMethods.GetInstance().FindCanvas();
+
+        bool isFirstCreated;
+        // 调用 PoolManager 获取 GameObject
+        GameObject ui_object = PoolManager.Global.Get(basePanel.uiType.Name, out isFirstCreated);
+
+        if (ui_object == null) return null;
+
+        ui_object.transform.SetParent(CanvasObj.transform, false);
         basePanel.ActiveObj = ui_object;
 
-        if (!dict_uiobject.ContainsKey(basePanel.uiType.Name))
+        // 4. 初始化
+        if (isFirstCreated)
         {
-            dict_uiobject.Add(basePanel.uiType.Name, ui_object);
+            // 如果是池子第一次实例化该物体，可以在这里调用一次性初始化
+            // basePanel.OnFirstInit(); 
+        }
+
+        if (!dict_uiobject.ContainsKey(panelName))
+        {
+            dict_uiobject.Add(panelName, ui_object);
         }
 
         stack_ui.Push(basePanel);
 
-        // 3. 激活新 UI（同样使用延迟，防止吃掉触发 Push 的那个按键）
-        ui_object.SetActive(true);
-        // 借用 Canvas 上的任意脚本开启协程
+        // 5. 激活与延迟回调
+        // PoolManager 已经 SetActive(true) 了，直接跑协程即可
         CanvasObj.GetComponent<MonoBehaviour>().StartCoroutine(DelayOnEnable(basePanel));
+
+        return basePanel;
+    }
+
+    // --- 【配套修改】Close 逻辑 ---
+    private void CloseTopPanel()
+    {
+        if (stack_ui.Count == 0) return;
+
+        BasePanel topPanel = stack_ui.Pop();
+        topPanel.OnDisable();
+
+        // 归还到 PoolManager，不要物理销毁
+        PoolManager.Release(topPanel.ActiveObj);
+
+        // 清理字典映射
+        string name = topPanel.GetType().Name;
+        if (dict_uiobject.ContainsKey(name))
+        {
+            dict_uiobject.Remove(name);
+        }
     }
 
     public void Pop(bool isAll)
@@ -96,18 +126,6 @@ public class UIManager
         }
     }
 
-    private void CloseTopPanel()
-    {
-        BasePanel topPanel = stack_ui.Pop();
-        topPanel.OnDisable();
-
-        PoolManager.Release(topPanel.ActiveObj);
-
-        if (dict_uiobject.ContainsKey(topPanel.uiType.Name))
-        {
-            dict_uiobject.Remove(topPanel.uiType.Name);
-        }
-    }
 
     // --- 延迟处理逻辑 ---
 

@@ -15,6 +15,11 @@ public class SettingsPanel : MenuPanel
         {
             UIManager.GetInstance().Pop(false);
         });
+        Button audioBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Audio");
+        audioBtn?.onClick.AddListener(() =>
+        {
+            UIManager.GetInstance().Push("AudioPanel");
+        });
     }
 
     protected override GameObject GetFirstSelectable()

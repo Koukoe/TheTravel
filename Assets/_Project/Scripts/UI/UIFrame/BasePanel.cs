@@ -6,6 +6,8 @@ public class BasePanel
     public GameObject ActiveObj;
     public bool isCreated = false;
 
+    public virtual bool IsSubPanel => false;
+
     public BasePanel(UIType uiType)
     {
         this.uiType = uiType;

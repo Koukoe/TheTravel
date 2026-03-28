@@ -553,6 +553,11 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: AudioPanel
+    prefab: {fileID: 1951108595322846472, guid: d2f609445775a4440bcf8d3e94d0c9e4,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
 --- !u!114 &1699512827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -639,12 +644,10 @@ MonoBehaviour:
     type: 3}
   m_CancelAction: {fileID: -8519763267142535061, guid: 010430737367eac48954410037c16891,
     type: 3}
-  m_LeftClickAction: {fileID: 6732087491453881209, guid: 010430737367eac48954410037c16891,
-    type: 3}
+  m_LeftClickAction: {fileID: 0}
   m_MiddleClickAction: {fileID: -1586010019068468299, guid: 010430737367eac48954410037c16891,
     type: 3}
-  m_RightClickAction: {fileID: -660993118347486820, guid: 010430737367eac48954410037c16891,
-    type: 3}
+  m_RightClickAction: {fileID: 0}
   m_ScrollWheelAction: {fileID: 4738322000466917267, guid: 010430737367eac48954410037c16891,
     type: 3}
   m_TrackedDevicePositionAction: {fileID: -3859247382154003355, guid: 010430737367eac48954410037c16891,

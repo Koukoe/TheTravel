@@ -105,6 +105,8 @@ public class SettingData
 {
     public string language;
 
+    public float sensitivity;
+
     public float masterVolume = 0.75f;
     public float musicVolume = 0.75f;
     public float sfxVolume = 0.75f;
