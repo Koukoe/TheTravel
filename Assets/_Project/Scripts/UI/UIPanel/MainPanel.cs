@@ -29,6 +29,6 @@ public class MainPanel : MenuPanel
     protected override void OnCancelPressed(InputAction.CallbackContext context)
     {
         UIManager.GetInstance().Pop(true);
-        InputReader.Instance.EnablePlayerInput();
+        InputManager.Instance.EnablePlayerInput();
     }
 }

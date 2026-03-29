@@ -15,17 +15,17 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputReader.Instance.PlayerActions.Interact.performed += Interact;
+        InputManager.Instance.PlayerActions.Interact.performed += Interact;
     }
 
     private void OnDisable()
     {
-        InputReader.Instance.PlayerActions.Interact.performed -= Interact;
+        InputManager.Instance.PlayerActions.Interact.performed -= Interact;
     }
 
     void Update()
     {
-        Vector2 inputVector = InputReader.Instance.GetMove();
+        Vector2 inputVector = InputManager.Instance.GetMove();
         Vector3 movement = new Vector3(inputVector.x, inputVector.y, 0);
 
         transform.position += movement * moveSpeed * Time.deltaTime;

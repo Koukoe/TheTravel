@@ -26,8 +26,8 @@ public abstract class MenuPanel : BasePanel
             isCreated = true;
         }
 
-        if (InputReader.Instance != null)
-            InputReader.Instance.UIActions.Cancel.performed += OnCancelPressed;
+        if (InputManager.Instance != null)
+            InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
 
         // 默认显示鼠标
         Cursor.visible = true;
@@ -39,8 +39,8 @@ public abstract class MenuPanel : BasePanel
 
     public override void OnDisable(bool remainFocus = true)
     {
-        if (InputReader.Instance != null)
-            InputReader.Instance.UIActions.Cancel.performed -= OnCancelPressed;
+        if (InputManager.Instance != null)
+            InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
 
         ClearFocus(remainFocus);
     }
@@ -90,8 +90,8 @@ public abstract class MenuPanel : BasePanel
 
     public override void Resume()
     {
-        if (InputReader.Instance != null)
-            InputReader.Instance.UIActions.Cancel.performed += OnCancelPressed;
+        if (InputManager.Instance != null)
+            InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
         if (cg != null) cg.alpha = 1f;
         SetFocus();
     }

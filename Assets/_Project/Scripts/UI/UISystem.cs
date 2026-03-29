@@ -16,19 +16,19 @@ public class UISystem : MonoBehaviour
 
     private void Start()
     {
-        InputReader.Instance.PlayerActions.Menu.performed += Menu;
+        InputManager.Instance.PlayerActions.Menu.performed += Menu;
 
     }
 
     public void NewGame()
     {
-        InputReader.Instance.EnableAllInput();
+        InputManager.Instance.EnableAllInput();
         UIManager.GetInstance().Push("StartPanel");
     }
 
     public void Menu(InputAction.CallbackContext context)
     {
         UIManager.GetInstance().Push("MainPanel");
-        InputReader.Instance.EnableUIInput();
+        InputManager.Instance.EnableUIInput();
     }
 }
