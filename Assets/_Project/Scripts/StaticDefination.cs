@@ -5,7 +5,7 @@ using UnityEngine;
 public class StaticDefination
 {
     [SerializeField]
-    public Vector3 CameraPos = new Vector3(0, 0, -10);
-    public Vector3 CameraRot = new Vector3(1, 1, 1);
-    public float CameraZ = 10;
+    public static Vector3 CameraPos = new Vector3(0, 0, -10);
+    public static Vector3 CameraRot = new Vector3(1, 1, 1);
+    public static float CameraZ = 10;
 }

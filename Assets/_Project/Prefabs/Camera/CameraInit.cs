@@ -5,18 +5,18 @@ using UnityEngine;
 public class CameraInit : MonoBehaviour
 {
     [SerializeField]
-    public Vector3 cameraInitPos=new Vector3(new Vector2,StaticDefination.CameraZ);
-    
+    public Vector3 cameraInitPos = new Vector3(0, 0, StaticDefination.CameraZ);
+
     public Camera cam;
-    public Transform transform;
-    private Vector3 CamRot;
+    public Transform trans;
+    private Quaternion CamRot;
     // Start is called before the first frame update
     void Start()
     {
-        CamRot = Quaternion.Euler(StaticDefination.cameraInitRot);
-        cam=GetComponent<Camera>();
-        transform=GetComponent<Transform>();
-        transform.position = cameraInitPos;
-        transform.rotation = cam;
+        CamRot = Quaternion.Euler(StaticDefination.CameraRot);
+        cam = GetComponent<Camera>();
+        trans = GetComponent<Transform>();
+        trans.position = cameraInitPos;
+        trans.rotation = CamRot;
     }
 }
