@@ -18,10 +18,7 @@ public class InputManager : MonoBehaviour
 
             EnableUIInput();
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else { Destroy(gameObject); }
     }
 
     private void OnEnable()

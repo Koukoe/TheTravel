@@ -1,23 +1,28 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UISystem : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
-    private static UISystem instance;
-    public static UISystem GetInstance() => instance;
+    public static UIManager Instance { get; private set; }
 
     private void Awake()
     {
-        if (instance == null) instance = this;
-        else Destroy(gameObject);
-
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else { Destroy(gameObject); }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         InputManager.Instance.PlayerActions.Menu.performed += Menu;
+    }
 
+    private void OnDisable()
+    {
+        InputManager.Instance.PlayerActions.Menu.performed -= Menu;
     }
 
     public void NewGame()

@@ -1,20 +1,11 @@
 using UnityEngine;
 
-public class BasePanel
+public abstract class BasePanel : MonoBehaviour
 {
-    public UIType uiType;
-    public GameObject ActiveObj;
-    public bool isCreated = false;
+    public bool hidePreviousPanel = true;
 
-    public virtual bool IsSubPanel => false;
-
-    public BasePanel(UIType uiType)
-    {
-        this.uiType = uiType;
-        this.isCreated = false;
-    }
-    public virtual void OnEnable() { }
-    public virtual void OnDisable(bool a = true) { }
-    public virtual void ParentDisfocus() { }
-    public virtual void Resume() { }
+    public virtual void OnOpen() { }
+    public virtual void OnClose() { }
+    public virtual void OnSuspend() { }
+    public virtual void OnResume() { }
 }
