@@ -13,17 +13,17 @@ public class StartPanel : BasePanel
     public override void OnEnable()
     {
         if (!isCreated) isCreated = true;
-        InputReader.Instance.UIActions.AnyKey.performed += OnAnyKey;
+        InputReader.Instance.AllActions.AnyKey.performed += OnAnyKey;
     }
 
     public override void OnDisable(bool a)
     {
-        InputReader.Instance.UIActions.AnyKey.performed -= OnAnyKey;
+        InputReader.Instance.AllActions.AnyKey.performed -= OnAnyKey;
     }
 
     private void OnAnyKey(InputAction.CallbackContext context)
     {
         UIManager.GetInstance().Pop(false);
-        UIManager.GetInstance().Push("MainPanel");
+        InputReader.Instance.EnablePlayerInput();
     }
 }

@@ -18,14 +18,17 @@ public class MainPanel : MenuPanel
         });
 
         Button backBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Back");
-        backBtn?.onClick.AddListener(() =>
-        {
-            UIManager.GetInstance().Pop(false);
-        });
+        backBtn?.onClick.AddListener(() => OnCancelPressed(default));
     }
 
     protected override GameObject GetFirstSelectable()
     {
         return UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Settings").gameObject;
+    }
+
+    protected override void OnCancelPressed(InputAction.CallbackContext context)
+    {
+        UIManager.GetInstance().Pop(true);
+        InputReader.Instance.EnablePlayerInput();
     }
 }

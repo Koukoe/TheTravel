@@ -414,15 +414,6 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "AnyKey",
-                    "type": "Button",
-                    "id": "6d74decc-d002-4b54-a0a6-385293a731ea",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Submit",
                     "type": "Button",
                     "id": "600376c1-b22b-4bb1-9de8-89a3a2a5d01f",
@@ -771,39 +762,6 @@
                 },
                 {
                     "name": "",
-                    "id": "adecd021-5951-496f-adf9-9d1450a00f1c",
-                    "path": "<Keyboard>/anyKey",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AnyKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "06158ab8-38d5-4737-93f1-df0fe08c2d04",
-                    "path": "<Gamepad>/<Button>",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AnyKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "57f78039-374f-4a46-b9b0-946b56c2a36f",
-                    "path": "<Mouse>/<Button>",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "AnyKey",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "489bb69f-90f0-4aa7-92fa-8c30e2732d3a",
                     "path": "*/{Submit}",
                     "interactions": "",
@@ -953,6 +911,56 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "All",
+            "id": "e7f072fb-b985-4ec1-bf4b-16ff316aad49",
+            "actions": [
+                {
+                    "name": "AnyKey",
+                    "type": "Button",
+                    "id": "dd5cbaa0-f2ba-4228-bbd1-41f631e6f50c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "efc6f5d9-089b-4b36-a01f-a0c2a1afc361",
+                    "path": "<Keyboard>/anyKey",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "05b9830b-54cd-42ce-817f-072db2e6bb30",
+                    "path": "<Gamepad>/<Button>",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ed240e1-3519-4284-aa3f-c3d8d2050ab5",
+                    "path": "<Mouse>/<Button>",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "AnyKey",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

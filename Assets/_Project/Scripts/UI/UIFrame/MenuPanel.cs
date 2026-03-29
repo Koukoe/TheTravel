@@ -90,6 +90,8 @@ public abstract class MenuPanel : BasePanel
 
     public override void Resume()
     {
+        if (InputReader.Instance != null)
+            InputReader.Instance.UIActions.Cancel.performed += OnCancelPressed;
         if (cg != null) cg.alpha = 1f;
         SetFocus();
     }

@@ -46,6 +46,7 @@ public class InputReader : MonoBehaviour
     public void EnablePlayerInput()
     {
         _controls.UI.Disable();
+        _controls.All.Disable();
         _controls.Player.Enable();
     }
 
@@ -55,7 +56,18 @@ public class InputReader : MonoBehaviour
     public void EnableUIInput()
     {
         _controls.Player.Disable();
+        _controls.All.Disable();
         _controls.UI.Enable();
+    }
+
+    /// <summary>
+    /// 切换All输入模式。
+    /// </summary>
+    public void EnableAllInput()
+    {
+        _controls.Player.Disable();
+        _controls.UI.Disable();
+        _controls.All.Enable();
     }
 
     // 获取移动向量
@@ -63,4 +75,5 @@ public class InputReader : MonoBehaviour
 
     public GameInput.PlayerActions PlayerActions => _controls.Player;
     public GameInput.UIActions UIActions => _controls.UI;
+    public GameInput.AllActions AllActions => _controls.All;
 }
