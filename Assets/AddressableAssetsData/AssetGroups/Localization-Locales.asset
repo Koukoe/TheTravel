@@ -29,44 +29,8 @@ MonoBehaviour:
     m_SerializedLabels:
     - Locale
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 6aa3d193cb0a01e428573399a01cb30a
-    m_Address: Chinese (Traditional) (zh-TW)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a08c77d0d02476b4c91ae922dffac065
-    m_Address: Chinese (Traditional) (zh-TW)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: a91dc8e26e7653742b3ff779d7384bef
-    m_Address: English (en)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c62f26f9240500e489a76a528b872085
     m_Address: Chinese (Simplified) (zh-Hans)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: eaaeb247c8679fa4da2c14784dc1617c
-    m_Address: Chinese (Simplified) (zh-CN)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f6cd4e67c3f8d12418d336448c310645
-    m_Address: Chinese (Simplified) (zh-CN)
-    m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
-    FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: f9b5d663cc0b7604cb5274f18dafdc7a
-    m_Address: English (en)
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale
