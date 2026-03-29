@@ -1,0 +1,19 @@
+{
+    "dialogues": [
+        {
+            "id": "1",
+            "character": "NPC_001",
+            "content": "这是\n第一句话"
+        },
+        {
+            "id": "2",
+            "character": "NPC_002",
+            "content": "这是第二句话"
+        },
+        {
+            "id": "3",
+            "character": "NPC_003",
+            "content": "这是第三句话"
+        }
+    ]
+}
