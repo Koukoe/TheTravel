@@ -5,7 +5,7 @@ using UnityEngine;
 public class CameraInit : MonoBehaviour
 {
     [SerializeField]
-    public Vector3 cameraInitPos = new Vector3(0, 0, StaticDefination.CameraZ);
+    public Vector3 cameraInitPos = new Vector3(0, StaticDefination.CameraY, 0);
 
     public Camera cam;
     public Transform trans;
