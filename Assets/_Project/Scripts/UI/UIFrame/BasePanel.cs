@@ -1,16 +1,18 @@
 using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public abstract class BasePanel : MonoBehaviour
 {
-    public bool hidePreviousPanel = true;
     public float delay = 0f;
 
     private bool _isTransitioning = false;
     private Coroutine _delayRoutine;
 
-    public IUILifecycleListener[] _listeners;
+    [SerializeReference] public UIListener[] _listeners;
+
+    protected virtual void Awake() { }
 
     public virtual void Open(Action onAllFinished = null)
     {
@@ -20,7 +22,10 @@ public abstract class BasePanel : MonoBehaviour
         gameObject.SetActive(true);
 
         foreach (var listener in _listeners)
-            listener.AllOpen();
+        {
+            var mono = listener as MonoBehaviour;
+            if (mono != null && mono.gameObject.activeInHierarchy) listener.Open();
+        }
 
         _delayRoutine = StartCoroutine(ExcuteAfterDelay(() =>
         {
@@ -37,7 +42,10 @@ public abstract class BasePanel : MonoBehaviour
         _isTransitioning = true;
 
         foreach (var listener in _listeners)
-            listener.AllResume();
+        {
+            var mono = listener as MonoBehaviour;
+            if (mono != null && mono.gameObject.activeInHierarchy) listener.Resume();
+        }
 
         _delayRoutine = StartCoroutine(ExcuteAfterDelay(() =>
         {
@@ -53,7 +61,7 @@ public abstract class BasePanel : MonoBehaviour
         Abort();
         _isTransitioning = true;
 
-        ExecuteWithCallback((l, done) => l.AllClose(done), () =>
+        ExecuteWithCallback((l, done) => l.Close(done), () =>
         {
             _isTransitioning = false;
             OnClose();
@@ -67,7 +75,7 @@ public abstract class BasePanel : MonoBehaviour
         Abort();
         _isTransitioning = true;
 
-        ExecuteWithCallback((l, done) => l.AllSuspend(done), () =>
+        ExecuteWithCallback((l, done) => l.Suspend(done), () =>
         {
             _isTransitioning = false;
             OnSuspend();
@@ -75,7 +83,7 @@ public abstract class BasePanel : MonoBehaviour
         });
     }
 
-    private void ExecuteWithCallback(Action<IUILifecycleListener, Action> actionRef, Action on)
+    private void ExecuteWithCallback(Action<UIListener, Action> actionRef, Action on)
     {
         // 无监听组件
         if (_listeners == null || _listeners.Length == 0)
@@ -118,7 +126,7 @@ public abstract class BasePanel : MonoBehaviour
         on?.Invoke();
     }
 
-    private void Abort()
+    public void Abort()
     {
         if (!_isTransitioning) return;
 
@@ -133,7 +141,7 @@ public abstract class BasePanel : MonoBehaviour
         foreach (var listener in _listeners)
         {
             var mono = listener as MonoBehaviour;
-            if (mono != null) mono.Abort(); // 强制停止
+            if (mono != null && mono.gameObject.activeInHierarchy) listener.Abort(); // 强制停止
         }
 
         _isTransitioning = false;
@@ -144,6 +152,5 @@ public abstract class BasePanel : MonoBehaviour
     public virtual void OnClose() { }
     public virtual void OnSuspend() { }
     public virtual void OnResume() { }
-
 
 }

@@ -5,6 +5,8 @@ public abstract class MenuPanel : BasePanel
 {
     private GameObject lastFocused;
 
+    protected override void Awake() { }
+
     public override void OnOpen()
     {
         SetFocus(DefaultFocused());

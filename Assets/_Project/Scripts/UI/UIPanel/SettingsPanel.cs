@@ -1,29 +1,25 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class SettingsPanel : MenuPanel
 {
-    public static readonly UIType uiType = new UIType("SettingsPanel");
-    public SettingsPanel() : base(uiType) { }
+    [SerializeField] private Button backBtn;
+    [SerializeField] private Button audioBtn;
 
-    protected override void Init()
+    protected override void Awake()
     {
-        Button backBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Back");
+        base.Awake();
+
         backBtn?.onClick.AddListener(() =>
         {
-            UIManager.GetInstance().Pop(false);
+            UIManager.Instance.Pop();
         });
-        Button audioBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Audio");
+
         audioBtn?.onClick.AddListener(() =>
         {
-            UIManager.GetInstance().Push("AudioPanel");
+            UIManager.Instance.Push("AudioPanel");
         });
     }
 
-    protected override GameObject GetFirstSelectable()
-    {
-        return UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Back").gameObject;
-    }
+    protected override GameObject DefaultFocused() => backBtn != null ? backBtn.gameObject : null;
 }

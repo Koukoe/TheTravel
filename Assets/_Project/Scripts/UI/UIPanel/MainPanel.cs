@@ -1,34 +1,65 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.EventSystems;
 
 public class MainPanel : MenuPanel
 {
-    public static readonly UIType uiType = new UIType("MainPanel");
-    public MainPanel() : base(uiType) { }
+    [SerializeField] private Button settingsBtn;
+    [SerializeField] private Button backBtn;
 
-    protected override void Init()
+    protected override void Awake()
     {
-        // 绑定按钮
-        Button settingsBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Settings");
-        settingsBtn?.onClick.AddListener(() =>
-        {
-            UIManager.GetInstance().Push("SettingsPanel");
-        });
+        base.Awake();
 
-        Button backBtn = UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Back");
-        backBtn?.onClick.AddListener(() => OnCancelPressed(default));
+        // 绑定按钮监听事件
+        settingsBtn?.onClick.AddListener(OnSettingsClicked);
+        backBtn?.onClick.AddListener(OnBackClicked);
     }
 
-    protected override GameObject GetFirstSelectable()
+    protected override GameObject DefaultFocused() => settingsBtn != null ? settingsBtn.gameObject : null;
+
+    public override void OnOpen()
     {
-        return UIMethods.GetInstance().FindObjectInChild<Button>(ActiveObj, "Settings").gameObject;
+        base.OnOpen();
+        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
-    protected override void OnCancelPressed(InputAction.CallbackContext context)
+    public override void OnSuspend()
     {
-        UIManager.GetInstance().Pop(true);
+        base.OnSuspend();
+        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
+    }
+
+    public override void OnResume()
+    {
+        base.OnResume();
+        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
+    }
+
+    public override void OnClose()
+    {
+        base.OnClose();
+        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
+    }
+
+    #region
+    private void OnSettingsClicked()
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+        UIManager.Instance.Push("SettingsPanel");
+    }
+
+    private void OnBackClicked()
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+
+        UIManager.Instance.Pop();
         InputManager.Instance.EnablePlayerInput();
     }
+
+    private void OnCancelPressed(InputAction.CallbackContext context)
+    {
+        OnBackClicked();
+    }
+    #endregion
 }

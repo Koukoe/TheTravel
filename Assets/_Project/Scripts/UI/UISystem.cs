@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UIManager : MonoBehaviour
+public class UISystem : MonoBehaviour
 {
-    public static UIManager Instance { get; private set; }
+    public static UISystem Instance { get; private set; }
 
     private void Awake()
     {
@@ -28,12 +28,12 @@ public class UIManager : MonoBehaviour
     public void NewGame()
     {
         InputManager.Instance.EnableAllInput();
-        UIManager.GetInstance().Push("StartPanel");
+        UIManager.Instance.Push("StartPanel");
     }
 
     public void Menu(InputAction.CallbackContext context)
     {
-        UIManager.GetInstance().Push("MainPanel");
+        UIManager.Instance.Push("MainPanel");
         InputManager.Instance.EnableUIInput();
     }
 }

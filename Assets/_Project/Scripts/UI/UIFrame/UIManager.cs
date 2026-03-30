@@ -1,155 +1,100 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Diagnostics;
 
-public class UIManager
+public class UIManager : MonoBehaviour
 {
-    private static UIManager instance;
-    public static UIManager GetInstance()
+    public static UIManager Instance { get; private set; }
+
+    [SerializeField] private GameObject canvasObj;
+    public GameObject CanvasObj => canvasObj;
+
+    private Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+
+    [SerializeField] private bool isTransitioning = false;
+    public bool IsTransitioning => isTransitioning;
+
+    private void Awake()
     {
-        if (instance == null) instance = new UIManager();
-        return instance;
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            if (canvasObj == null)
+                canvasObj = GameObject.FindObjectOfType<Canvas>()?.gameObject;
+        }
+        else { Destroy(gameObject); }
     }
 
-    public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+    public BasePanel Peek() => stack_ui.Count > 0 ? stack_ui.Peek() : null;
+    public int Count => stack_ui.Count;
 
-    private Dictionary<string, BasePanel> panelCache = new Dictionary<string, BasePanel>();
-
-    public Dictionary<string, GameObject> dict_uiobject = new Dictionary<string, GameObject>();
-    public GameObject CanvasObj;
-
-    private bool isTransitioning = false;
-
-    public UIManager() { instance = this; }
-
+    /// <summary>
+    /// 打开新的面板，挂起旧的面板
+    /// </summary>
     public BasePanel Push(string panelName)
     {
         if (isTransitioning) return null;
 
-        // 通过字符串反射获取类型与其对象
-        if (!panelCache.TryGetValue(panelName, out BasePanel basePanel))
-        {
-
-            Type type = Type.GetType(panelName);
-            if (type == null)
-            {
-                UnityEngine.Debug.LogError($"[UI] 找不到名为 {panelName} 的脚本类！");
-                return null;
-            }
-            basePanel = (BasePanel)Activator.CreateInstance(type);
-            panelCache.Add(panelName, basePanel);
-        }
-
-        // 禁用当前顶层 UI
-        if (stack_ui.Count > 0)
-        {
-            BasePanel top = stack_ui.Peek();
-            if (!basePanel.IsSubPanel)
-            {
-                top.OnDisable();
-                // 压栈
-                if (top.ActiveObj != null) top.ActiveObj.SetActive(false);
-            }
-            else
-            {
-                UnityEngine.Debug.Log("xixi");
-                top.ParentDisfocus();
-            }
-        }
-
-        // 获取物理对象
-        if (CanvasObj == null) CanvasObj = UIMethods.GetInstance().FindCanvas();
-
-        bool isFirstCreated;
-        GameObject ui_object = PoolManager.Global.Get(basePanel.uiType.Name, out isFirstCreated);
-
+        // 获取对象
+        GameObject ui_object = PoolManager.Global.Get(panelName);
         if (ui_object == null) return null;
 
-        ui_object.transform.SetParent(CanvasObj.transform, false);
-        basePanel.ActiveObj = ui_object;
+        ui_object.transform.SetParent(canvasObj.transform, false);  // 设置为 Canvas 的子物体
+        ui_object.transform.SetAsLastSibling();  // 移动到最新一位
 
-        // 初始化
-        if (isFirstCreated)
-        {
-            // 如果是池子第一次实例化该物体，可以在这里调用一次性初始化
-            // basePanel.OnFirstInit(); 
-        }
-
-        if (!dict_uiobject.ContainsKey(panelName))
-        {
-            dict_uiobject.Add(panelName, ui_object);
-        }
+        // 处理旧面板
+        BasePanel basePanel = ui_object.GetComponent<BasePanel>();
+        if (stack_ui.Count > 0) stack_ui.Peek().Suspend();
 
         stack_ui.Push(basePanel);
+        isTransitioning = true;
 
-        CanvasObj.GetComponent<MonoBehaviour>().StartCoroutine(DelayOnEnable(basePanel));
+        // Open 回调
+        basePanel.Open(() => isTransitioning = false);
 
         return basePanel;
     }
 
-    private void CloseTopPanel(bool a = true)
-    {
-        if (stack_ui.Count == 0) return;
-
-        BasePanel topPanel = stack_ui.Pop();
-        topPanel.OnDisable(a);
-
-        PoolManager.Release(topPanel.ActiveObj);
-
-        // 清理字典映射
-        string name = topPanel.GetType().Name;
-        if (dict_uiobject.ContainsKey(name))
-        {
-            dict_uiobject.Remove(name);
-        }
-    }
-
-    public void Pop(bool isAll)
+    /// <summary>
+    /// 关闭当前顶层面板，恢复上一个面板
+    /// </summary>
+    public void Pop()
     {
         if (stack_ui.Count <= 0 || isTransitioning) return;
 
-        if (isAll)
-        {
-            while (stack_ui.Count > 0) CloseTopPanel(false);
-        }
-        else
-        {
-            CloseTopPanel();
+        isTransitioning = true;
+        BasePanel topPanel = stack_ui.Pop();
 
-            // 恢复下层 UI
+        topPanel.Close(() =>
+        {
+            PoolManager.Release(topPanel.gameObject);
+
+            // 尝试恢复底下的面板
             if (stack_ui.Count > 0)
             {
-                BasePanel nextPanel = stack_ui.Peek();
-                CanvasObj.GetComponent<MonoBehaviour>().StartCoroutine(DelayRestore(nextPanel));
-
+                stack_ui.Peek().Resume(() => isTransitioning = false);
             }
-        }
+            else
+            {
+                isTransitioning = false;
+            }
+        });
     }
 
-
-    // 延迟处理下一级面板出现
-
-    private IEnumerator DelayOnEnable(BasePanel panel)
+    /// <summary>
+    /// 清空所有面板
+    /// </summary>
+    public void PopAll()
     {
+        // 清空不需要等待动画，直接物理切断
         isTransitioning = true;
-        yield return new WaitForSecondsRealtime(0f);
-        panel.OnEnable();
-        isTransitioning = false;
-    }
-
-
-    // 延迟处理面板恢复
-    private IEnumerator DelayRestore(BasePanel panel)
-    {
-        isTransitioning = true;
-        yield return new WaitForSecondsRealtime(0f);
-
-        if (panel != null && panel.ActiveObj != null)
+        while (stack_ui.Count > 0)
         {
-            panel.ActiveObj.SetActive(true);
-            panel.Resume();
+            BasePanel panel = stack_ui.Pop();
+            panel.Abort();  // 清理协程
+            panel.gameObject.SetActive(false);
+            PoolManager.Release(panel.gameObject);
         }
         isTransitioning = false;
     }

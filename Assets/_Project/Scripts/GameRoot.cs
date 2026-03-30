@@ -18,7 +18,7 @@ public static class GameRoot
         if (!DataSystem.Exists("settings.dat"))
         {
             // 打开新的游戏
-            UISystem.GetInstance().NewGame();
+            UISystem.Instance.NewGame();
 
         }
     }
