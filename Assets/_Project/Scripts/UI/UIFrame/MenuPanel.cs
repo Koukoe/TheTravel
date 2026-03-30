@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
+using System;
 
 public abstract class MenuPanel : BasePanel
 {
@@ -18,7 +19,7 @@ public abstract class MenuPanel : BasePanel
         SetFocus(lastFocused ?? DefaultFocused());
     }
 
-    public override void OnSuspend()
+    public override void Suspend(Action onAllFinished = null)
     {
         // 记录当前焦点
         if (EventSystem.current != null)
@@ -29,14 +30,15 @@ public abstract class MenuPanel : BasePanel
         }
 
         ReleaseFocus();
+        base.Suspend();
     }
 
-    public override void OnClose()
+    public override void Close(Action onAllFinished = null)
     {
-        ReleaseFocus();
         lastFocused = null;
+        ReleaseFocus();
+        base.Close();
     }
-
 
     protected abstract GameObject DefaultFocused();
 

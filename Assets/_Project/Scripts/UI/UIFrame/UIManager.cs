@@ -14,6 +14,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
 
+    private BasePanel closingPanel = null;
+
     private void Awake()
     {
         if (Instance == null)
@@ -34,6 +36,18 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public BasePanel Push(string panelName)
     {
+        if (isTransitioning && closingPanel != null && closingPanel.name.Contains(panelName))
+        {
+            BasePanel recoveredPanel = closingPanel;
+            recoveredPanel.Abort(); // 停止当前的 Close 协程
+            closingPanel = null;    // 清除离场标记
+
+            stack_ui.Push(recoveredPanel); // 重新入栈
+            recoveredPanel.Open(() => isTransitioning = false); // 重新开始 Open 动画
+            return recoveredPanel;
+        }
+
+        // 处理其他面板的转场，依然保持锁定
         if (isTransitioning) return null;
 
         // 获取对象
@@ -65,19 +79,23 @@ public class UIManager : MonoBehaviour
 
         isTransitioning = true;
         BasePanel topPanel = stack_ui.Pop();
+        closingPanel = topPanel;
 
         topPanel.Close(() =>
         {
-            PoolManager.Release(topPanel.gameObject);
+            if (closingPanel == topPanel)
+            {
+                PoolManager.Release(topPanel.gameObject);
+                closingPanel = null;
 
-            // 尝试恢复底下的面板
-            if (stack_ui.Count > 0)
-            {
-                stack_ui.Peek().Resume(() => isTransitioning = false);
-            }
-            else
-            {
-                isTransitioning = false;
+                if (stack_ui.Count > 0)
+                {
+                    stack_ui.Peek().Resume(() => isTransitioning = false);
+                }
+                else
+                {
+                    isTransitioning = false;
+                }
             }
         });
     }
@@ -89,6 +107,7 @@ public class UIManager : MonoBehaviour
     {
         // 清空不需要等待动画，直接物理切断
         isTransitioning = true;
+        closingPanel = null;
         while (stack_ui.Count > 0)
         {
             BasePanel panel = stack_ui.Pop();

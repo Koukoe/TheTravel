@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
+using System;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
@@ -24,11 +25,16 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
         if (selectable == null) selectable = GetComponent<Selectable>();
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
 
+        Init();
+    }
+    void Init()
+    {
         initialScale = Vector3.one;
         transform.localScale = initialScale;
 
         SyncInteractable();
     }
+
 
     public void SetInteractable(bool state)
     {

@@ -28,8 +28,17 @@ public class UIMoveListener : UIListener
         targetPos = rectTransform.anchoredPosition;
     }
 
-    public override void Open() => ExecuteMove(openSettings, rectTransform.anchoredPosition = targetPos + openSettings.offset, targetPos);
-    public override void Resume() => ExecuteMove(resumeSettings, rectTransform.anchoredPosition = moveRoutine == null ? targetPos + resumeSettings.offset : rectTransform.anchoredPosition, targetPos);
+    public override void Open()
+    {
+        if (moveRoutine == null) rectTransform.anchoredPosition = targetPos + openSettings.offset;
+        ExecuteMove(openSettings, rectTransform.anchoredPosition, targetPos);
+    }
+
+    public override void Resume()
+    {
+        if (moveRoutine == null) rectTransform.anchoredPosition = targetPos + resumeSettings.offset;
+        ExecuteMove(resumeSettings, rectTransform.anchoredPosition, targetPos);
+    }
     public override void Close(Action onFinished) => ExecuteMove(closeSettings, rectTransform.anchoredPosition, targetPos + closeSettings.offset, onFinished);
     public override void Suspend(Action onFinished) => ExecuteMove(suspendSettings, rectTransform.anchoredPosition, targetPos + suspendSettings.offset, onFinished);
 

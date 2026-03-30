@@ -106,8 +106,13 @@ public abstract class BasePanel : MonoBehaviour
         foreach (var listener in _listeners)
         {
             var mono = listener as MonoBehaviour;
-            if (mono == null || !mono.gameObject.activeInHierarchy)
+            if (mono == null || !mono.gameObject.activeInHierarchy || !listener.needCallback)
             {
+                // 如果不需要回调，立刻算完成
+                if (mono != null && mono.gameObject.activeInHierarchy)
+                {
+                    actionRef(listener, null); // null 传给 Close(Action) ，防止它重复调 done
+                }
                 onItemDone();
                 continue;
             }
@@ -126,16 +131,19 @@ public abstract class BasePanel : MonoBehaviour
         on?.Invoke();
     }
 
-    public void Abort()
+    // 停止协程
+    private void StopBaseRoutines()
     {
-        if (!_isTransitioning) return;
-
-        // 停止协程
         if (_delayRoutine != null)
         {
             StopCoroutine(_delayRoutine);
             _delayRoutine = null;
         }
+    }
+
+    public void Abort()
+    {
+        StopBaseRoutines();
 
         // 表现层打断
         foreach (var listener in _listeners)

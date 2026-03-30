@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13
@@ -426,6 +427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13
@@ -823,6 +825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13
@@ -1700,6 +1703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13
@@ -2097,6 +2101,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13
@@ -2494,6 +2499,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13
@@ -2673,6 +2679,7 @@ MonoBehaviour:
   - {fileID: 5095448180819357419}
   - {fileID: 8132762673319373340}
   - {fileID: 1935503752815750510}
+  saveBtn: {fileID: 8997380335770747363}
   settingsBtn: {fileID: 1184064476380251935}
   backBtn: {fileID: 8490067733586533676}
 --- !u!1 &9100329419255403148
@@ -2864,6 +2871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needCallback: 1
   openSettings:
     ease:
       type: 13

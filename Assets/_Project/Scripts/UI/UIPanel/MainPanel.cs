@@ -4,6 +4,7 @@ using UnityEngine.InputSystem;
 
 public class MainPanel : MenuPanel
 {
+    [SerializeField] private Button saveBtn;
     [SerializeField] private Button settingsBtn;
     [SerializeField] private Button backBtn;
 
@@ -16,7 +17,7 @@ public class MainPanel : MenuPanel
         backBtn?.onClick.AddListener(OnBackClicked);
     }
 
-    protected override GameObject DefaultFocused() => settingsBtn != null ? settingsBtn.gameObject : null;
+    protected override GameObject DefaultFocused() => saveBtn != null ? saveBtn.gameObject : null;
 
     public override void OnOpen()
     {
