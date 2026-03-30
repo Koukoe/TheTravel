@@ -146,9 +146,8 @@ GameObject:
   - component: {fileID: 3166124479200679835}
   - component: {fileID: 2154780751003990807}
   - component: {fileID: 1802481896430792456}
-  - component: {fileID: 769161777511074872}
   m_Layer: 5
-  m_Name: StartPanel
+  m_Name: 3StartPanel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -212,17 +211,3 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &769161777511074872
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4186322245228520004}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed34c57334a974e4f8dae919e94527b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 0
-  _listeners: []

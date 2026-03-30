@@ -15,14 +15,15 @@ public class UISystem : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-    private void OnEnable()
+    private void Start()
     {
-        InputManager.Instance.PlayerActions.Menu.performed += Menu;
-    }
-
-    private void OnDisable()
-    {
-        InputManager.Instance.PlayerActions.Menu.performed -= Menu;
+        if (InputManager.Instance != null)
+        {
+            InputManager.Instance.PlayerActions.Menu.performed += Menu;
+        }
+        else
+        {
+        }
     }
 
     public void NewGame()
