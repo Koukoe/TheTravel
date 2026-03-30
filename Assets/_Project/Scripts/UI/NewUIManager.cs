@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class UIManager : MonoBehaviour
 {
-    // 单例模式
     public static UIManager Instance { get; private set; }
 
     [Header("UI 配置")]
@@ -37,7 +36,6 @@ public class UIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        // 确保 InputManager 已初始化
         if (InputManager.Instance != null)
         {
             InputManager.Instance.PlayerActions.Menu.performed += OnMenuPressed;
@@ -72,20 +70,24 @@ public class UIManager : MonoBehaviour
     {
         if (isTransitioning) return null;
 
-        // 1. 获取或创建面板实例 (反射)
-        if (!panelCache.TryGetValue(panelName, out BasePanel basePanel))
+        // 1. 直接从对象池/资源路径获取物理对象
+        bool isFirstCreated;
+        GameObject ui_object = PoolManager.Global.Get(panelName, out isFirstCreated);
+        if (ui_object == null) return null;
+
+        // 2. 获取物体上挂载的脚本（取代反射）
+        BasePanel basePanel = ui_object.GetComponent<BasePanel>();
+        if (basePanel == null)
         {
-            Type type = Type.GetType(panelName);
-            if (type == null)
-            {
-                Debug.LogError($"[UI] 找不到名为 {panelName} 的脚本类！");
-                return null;
-            }
-            basePanel = (BasePanel)Activator.CreateInstance(type);
-            panelCache.Add(panelName, basePanel);
+            Debug.LogError($"[UI] 预制体 {panelName} 上没有挂载 BasePanel 脚本！");
+            return null;
         }
 
-        // 2. 处理当前顶层 UI 的失焦
+        // 设置父级并记录引用
+        ui_object.transform.SetParent(canvasObj.transform, false);
+        basePanel.ActiveObj = ui_object;
+
+        // 3. 处理当前顶层 UI 的失焦逻辑（保持不变）
         if (stack_ui.Count > 0)
         {
             BasePanel top = stack_ui.Peek();
@@ -100,22 +102,8 @@ public class UIManager : MonoBehaviour
             }
         }
 
-        // 3. 从对象池获取物理物体
-        bool isFirstCreated;
-        GameObject ui_object = PoolManager.Global.Get(basePanel.uiType.Name, out isFirstCreated);
-        if (ui_object == null) return null;
-
-        ui_object.transform.SetParent(canvasObj.transform, false);
-        basePanel.ActiveObj = ui_object;
-
-        if (!dict_uiobject.ContainsKey(panelName))
-        {
-            dict_uiobject.Add(panelName, ui_object);
-        }
-
+        // 4. 压栈并启用
         stack_ui.Push(basePanel);
-
-        // 4. 执行启用逻辑 (直接使用 this 发起协程)
         StartCoroutine(DelayOnEnable(basePanel));
 
         return basePanel;
