@@ -7,16 +7,16 @@ public static class GameStatic
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void DataLoad()
     {
-        GlobalDataSystem.Load();
-        SettingDataSystem.Load();
-        ArchivesSystem.LoadAll();
+        DataGlobalSystem.Load();
+        DataSettingSystem.Load();
+        DataArchivesSystem.LoadAll();
 
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     public static void GameEntry()
     {
-        if (!GlobalDataSystem.Get().hasEnteredGame)
+        if (!DataGlobalSystem.Get().hasEnteredGame)
         {
             // 打开新的游戏
             InputManager.Instance.EnableAllInput();

@@ -1,8 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class AudioPanel : MenuPanel
+public class SettingSubPanel : MenuPanel
 {
+    [SerializeField] private Button defaultBtn;
     [SerializeField] private Button backBtn;
 
     protected override void Awake()
@@ -17,14 +18,4 @@ public class AudioPanel : MenuPanel
     }
 
     protected override GameObject DefaultFocused() => backBtn != null ? backBtn.gameObject : null;
-
-    private void OnVolumeChanged(float value)
-    {
-    }
-
-    public override void OnOpen()
-    {
-        base.OnOpen();
-
-    }
 }

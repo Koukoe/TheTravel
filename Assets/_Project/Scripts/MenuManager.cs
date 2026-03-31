@@ -15,16 +15,24 @@ public class MenuManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-    private void Start()
+    private void OnEnable()
     {
         if (InputManager.Instance != null)
         {
             InputManager.Instance.PlayerActions.Menu.performed += Menu;
         }
-        else
+    }
+
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null)
         {
+            InputManager.Instance.PlayerActions.Menu.performed += Menu;
         }
     }
+
+    public void SetEnabled(bool value = true) => this.enabled = value;
+
 
     public void NewGame()
     {

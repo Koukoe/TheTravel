@@ -23,6 +23,7 @@ public class SettingsPanel : MenuPanel
 
         audioBtn?.onClick.AddListener(() =>
         {
+            UIManager.Instance.Push("AudioPanel");
         });
 
         languageBtn?.onClick.AddListener(() =>
@@ -42,5 +43,5 @@ public class SettingsPanel : MenuPanel
         });
     }
 
-    protected override GameObject DefaultFocused() => backBtn != null ? backBtn.gameObject : null;
+    protected override GameObject DefaultFocused() => graphicsBtn != null ? graphicsBtn.gameObject : null;
 }

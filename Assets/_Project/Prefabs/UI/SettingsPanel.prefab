@@ -494,16 +494,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.296
-    offset: {x: -200, y: 0}
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -516,7 +516,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &1590856804387310272
@@ -853,16 +853,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.272
-    offset: {x: -200, y: 0}
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -875,7 +875,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &2129640575176215517
@@ -1265,7 +1265,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.003921569}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1510,16 +1510,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.3
-    offset: {x: -200, y: 0}
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -1532,7 +1532,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &5156429154874279557
@@ -1709,16 +1709,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
+    duration: 0
     delay: 0
-    offset: {x: -200, y: 0}
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -1731,7 +1731,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &5879121826837618431
@@ -1908,16 +1908,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.228
-    offset: {x: -200, y: 0}
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -1930,7 +1930,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &5931220240370808967
@@ -2267,16 +2267,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.168
-    offset: {x: -200, y: 0}
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -2289,7 +2289,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &6950476901939853609
@@ -2466,16 +2466,16 @@ MonoBehaviour:
     offset: {x: 0, y: 0}
   resumeConfig:
     ease:
-      type: 23
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.092
-    offset: {x: -200, y: 0}
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
   suspendConfig:
     ease:
       type: 0
@@ -2488,7 +2488,7 @@ MonoBehaviour:
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
 --- !u!1 &7024097527382228542

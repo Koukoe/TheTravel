@@ -2,109 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+// 使用类便于 json 储存
+
 [Serializable]
-public class ArchivesData
+public class DataArchives
 {
     public string saveTime;
 
-    public ArchivesData()
+    public DataArchives()
     {
         saveTime = "----/--/--";
     }
 }
 
-public static class ArchivesSystem
-{
-    private const int MAX_SLOTS = 9;
-    private static List<ArchivesData> _archives = new();
 
-    /// <summary>
-    /// 加载数据文件 ( F -> _ )
-    /// </summary>
-    public static void LoadAll()
-    {
-        _archives.Clear();
-        for (int i = 0; i < MAX_SLOTS; i++)
-        {
-            ArchivesData data = DataSystem.LoadData<ArchivesData>($"slot_{i}.dat");
-            _archives.Add(data);
-        }
-    }
-
-    /// <summary>
-    /// 保存/覆盖指定索引槽位的数据 ( M -> _ -> F )
-    /// </summary>
-    public static void Save(int index)
-    {
-        if (index < 0 || index >= _archives.Count) return;
-        _archives[index].saveTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
-        DataSystem.SaveData($"slot_{index}.dat", _archives[index]);
-    }
-
-    /// <summary>
-    /// 检查指定索引的槽位是否已经有数据 ( _ -> M )
-    /// </summary>
-    public static bool IsSlotOccupied(int index)
-    {
-        if (index < 0 || index >= _archives.Count) return false;
-        return _archives[index].saveTime != "----/--/--";
-    }
-
-    /// <summary>
-    /// 删除指定索引槽位的数据 ( _ & F )
-    /// </summary>
-    public static void Delete(int index)
-    {
-        if (index < 0 || index >= _archives.Count) return;
-        string fileName = $"slot_{index}.dat";
-
-        DataSystem.DeleteData(fileName);
-        _archives[index] = new ArchivesData();
-
-        Debug.Log($"[Archives] 槽位 {index} 已重置为默认状态");
-    }
-
-    /// <summary>
-    /// 获取指定槽位的数据 ( _ -> M )
-    /// </summary>
-    public static ArchivesData Get(int index)
-    {
-        if (index < 0 || index >= _archives.Count) return null;
-        return _archives[index];
-    }
-
-    /// <summary>
-    /// 获取所有存档数据 ( _ -> M )
-    /// </summary>
-    public static List<ArchivesData> GetAll() => _archives;
-
-    /// <summary>
-    /// 获取时间戳最晚的存档数据 ( _ -> M )
-    /// </summary>
-    public static ArchivesData GetLatest()
-    {
-        int latestIndex = -1;
-        DateTime latestTime = DateTime.MinValue;
-
-        for (int i = 0; i < _archives.Count; i++)
-        {
-            if (!IsSlotOccupied(i)) continue;
-
-            if (DateTime.TryParse(_archives[i].saveTime, out DateTime time))
-            {
-                if (time > latestTime)
-                {
-                    latestTime = time;
-                    latestIndex = i;
-                }
-            }
-        }
-        return Get(latestIndex);
-    }
-}
 
 [Serializable]
-public class SettingData
+public class DataSetting
 {
     public string language;
 
@@ -120,7 +34,7 @@ public class SettingData
     public int qualityLevel = 2;
     public bool vSync = true;
 
-    public SettingData()
+    public DataSetting()
     {
         SystemLanguage sysLang = UnityEngine.Application.systemLanguage;
 
@@ -133,101 +47,19 @@ public class SettingData
     }
 }
 
-public static class SettingDataSystem
-{
-    private static SettingData _current;
 
-    /// <summary>
-    /// 保存设置数据 ( _ -> F )
-    /// </summary>
-    public static void Save()
-    {
-        DataSystem.SaveData("settings.dat", _current);
-    }
-
-    /// <summary>
-    /// 加载设置数据并同步 ( F -> _ )
-    /// </summary>
-    public static void Load()
-    {
-        bool isFirstTime = !DataSystem.Exists("settings.dat");
-        _current = DataSystem.LoadData<SettingData>("settings.dat");
-
-        if (isFirstTime)
-        {
-            Save();
-        }
-    }
-
-    /// <summary>
-    /// 获取当前设置数据 ( _ -> M )
-    /// </summary>
-    public static SettingData Get() => _current;
-
-    /// <summary>
-    /// 设定当前设置数据 ( M -> _ )
-    /// </summary>
-    public static void Set(SettingData d) => _current = d;
-
-    /// <summary>
-    /// 恢复默认设置数据 ( _ & M )
-    /// </summary>
-    public static void Reset()
-    {
-        _current = new SettingData();
-        Save();
-        Debug.Log("<color=yellow>[Settings]</color> 已恢复默认设置。");
-    }
-}
 
 [Serializable]
-public class GlobalData
+public class DataGlobal
 {
     public bool hasEnteredGame;
     public int clearCount;
     public List<string> unlockedIds;
     public bool isTrueEndingReached;
-    public GlobalData()
+    public DataGlobal()
     {
         hasEnteredGame = false;
         clearCount = 0;
     }
 }
 
-public static class GlobalDataSystem
-{
-    private static GlobalData _current;
-
-    /// <summary>
-    /// 保存全局数据 ( _ -> F )
-    /// </summary>
-    public static void Save()
-    {
-        DataSystem.SaveData("global.dat", _current);
-    }
-
-    /// <summary>
-    /// 加载全局数据 (F -> _ )
-    /// </summary>
-    public static GlobalData Load()
-    {
-        bool isFirstTime = !DataSystem.Exists("global.dat");
-        _current = DataSystem.LoadData<GlobalData>("global.dat");
-
-        if (isFirstTime)
-        {
-            Save();
-        }
-        return _current;
-    }
-
-    /// <summary>
-    /// 获取当前全局数据 ( _ -> M )
-    /// </summary>
-    public static GlobalData Get() => _current;
-
-    /// <summary>
-    /// 设定当前全局数据 ( M -> _ )
-    /// </summary>
-    public static void Set(GlobalData d) => _current = d;
-}
