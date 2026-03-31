@@ -9,7 +9,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject canvasObj;
     public GameObject CanvasObj => canvasObj;
 
-    private Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+    public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
 
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
@@ -83,6 +83,7 @@ public class UIManager : MonoBehaviour
 
         topPanel.Close(() =>
         {
+            Debug.Log($"[UI] Close回调触发. 当前关闭的Panel: {topPanel.name}, 标记的closingPanel: {(closingPanel != null ? closingPanel.name : "null")}");
             if (closingPanel == topPanel)
             {
                 PoolManager.Release(topPanel.gameObject);

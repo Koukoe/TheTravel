@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using System;
+using UnityEngine.InputSystem;
 
 public abstract class MenuPanel : BasePanel
 {
@@ -10,13 +11,36 @@ public abstract class MenuPanel : BasePanel
 
     public override void OnOpen()
     {
+        base.OnOpen();
         SetFocus(DefaultFocused());
+        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
+    }
+
+    public override void OnClose()
+    {
+        base.OnClose();
+        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
     }
 
     public override void OnResume()
     {
+        base.OnResume();
         // 没有则选默认
         SetFocus(lastFocused ?? DefaultFocused());
+        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
+    }
+
+    public override void OnSuspend()
+    {
+        base.OnSuspend();
+        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
+    }
+
+    public override void Close(Action onAllFinished = null)
+    {
+        lastFocused = null;
+        ReleaseFocus();
+        base.Close(onAllFinished);
     }
 
     public override void Suspend(Action onAllFinished = null)
@@ -30,15 +54,9 @@ public abstract class MenuPanel : BasePanel
         }
 
         ReleaseFocus();
-        base.Suspend();
+        base.Suspend(onAllFinished);
     }
 
-    public override void Close(Action onAllFinished = null)
-    {
-        lastFocused = null;
-        ReleaseFocus();
-        base.Close();
-    }
 
     protected abstract GameObject DefaultFocused();
 
@@ -53,5 +71,17 @@ public abstract class MenuPanel : BasePanel
     {
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
+    }
+
+    private void OnCancelPressed(InputAction.CallbackContext context)
+    {
+        OnBackClicked();
+    }
+
+    protected virtual void OnBackClicked()
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+
+        UIManager.Instance.Pop();
     }
 }

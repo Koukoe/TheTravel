@@ -145,10 +145,9 @@ public abstract class BasePanel : MonoBehaviour
                 var mono = listener as MonoBehaviour;
                 if (mono != null && mono.gameObject.activeInHierarchy) listener.Abort(); // 强制停止
             }
-
-            _isTransitioning = false;
         }
 
+        _isTransitioning = false;
     }
 
 

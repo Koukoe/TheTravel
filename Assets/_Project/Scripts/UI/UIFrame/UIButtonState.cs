@@ -92,4 +92,10 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
         }
         transform.localScale = target;
     }
+
+    private void OnDisable()
+    {
+        if (scaleRoutine != null) StopCoroutine(scaleRoutine);
+        transform.localScale = initialScale; // 强制复位
+    }
 }

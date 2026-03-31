@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Runtime.CompilerServices;
 
 public class MainPanel : MenuPanel
 {
@@ -19,48 +20,15 @@ public class MainPanel : MenuPanel
 
     protected override GameObject DefaultFocused() => saveBtn != null ? saveBtn.gameObject : null;
 
-    public override void OnOpen()
-    {
-        base.OnOpen();
-        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
-    }
-
-    public override void OnSuspend()
-    {
-        base.OnSuspend();
-        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
-    }
-
-    public override void OnResume()
-    {
-        base.OnResume();
-        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
-    }
-
-    public override void OnClose()
-    {
-        base.OnClose();
-        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
-    }
-
-    #region
     private void OnSettingsClicked()
     {
         if (UIManager.Instance.IsTransitioning) return;
         UIManager.Instance.Push("SettingsPanel");
     }
 
-    private void OnBackClicked()
+    protected override void OnBackClicked()
     {
-        if (UIManager.Instance.IsTransitioning) return;
-
-        UIManager.Instance.Pop();
+        base.OnBackClicked();
         InputManager.Instance.EnablePlayerInput();
     }
-
-    private void OnCancelPressed(InputAction.CallbackContext context)
-    {
-        OnBackClicked();
-    }
-    #endregion
 }

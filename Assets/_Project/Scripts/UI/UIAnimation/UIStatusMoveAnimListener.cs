@@ -33,7 +33,7 @@ public class UIStatusMoveAnimListener : UIListener
     }
 
     public override void Open() => StartMove(targetPos + openConfig.offset, targetPos, openConfig, true, false);
-    public override void Resume() => StartMove(targetPos + suspendConfig.offset, targetPos, resumeConfig, useHideLogicForSuspend, false);
+    public override void Resume() => StartMove(targetPos + resumeConfig.offset, targetPos, resumeConfig, useHideLogicForSuspend, false);
     public override void Close(Action onFinished) => StartMove(targetPos, targetPos + closeConfig.offset, closeConfig, false, true, onFinished);
     public override void Suspend(Action onFinished) => StartMove(targetPos, targetPos + suspendConfig.offset, suspendConfig, false, useHideLogicForSuspend, onFinished);
 
@@ -141,7 +141,7 @@ public class UIMoveListener : UIListener
     }
 
     public override void Open() => StartMove(targetPos + openConfig.offset, targetPos, openConfig, true, false);
-    public override void Resume() => StartMove(targetPos + suspendConfig.offset, targetPos, resumeConfig, useHideLogicForSuspend, false);
+    public override void Resume() => StartMove(targetPos + resumeConfig.offset, targetPos, resumeConfig, useHideLogicForSuspend, false);
     public override void Close(Action onFinished) => StartMove(targetPos, targetPos + closeConfig.offset, closeConfig, false, true, onFinished);
     public override void Suspend(Action onFinished) => StartMove(targetPos, targetPos + suspendConfig.offset, suspendConfig, false, useHideLogicForSuspend, onFinished);
 
