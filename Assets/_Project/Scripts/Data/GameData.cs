@@ -18,6 +18,9 @@ public static class ArchivesSystem
     private const int MAX_SLOTS = 9;
     private static List<ArchivesData> _archives = new();
 
+    /// <summary>
+    /// 加载数据文件 ( F -> _ )
+    /// </summary>
     public static void LoadAll()
     {
         _archives.Clear();
@@ -29,7 +32,7 @@ public static class ArchivesSystem
     }
 
     /// <summary>
-    /// 保存/覆盖指定索引槽位的数据
+    /// 保存/覆盖指定索引槽位的数据 ( M -> _ -> F )
     /// </summary>
     public static void Save(int index)
     {
@@ -39,7 +42,7 @@ public static class ArchivesSystem
     }
 
     /// <summary>
-    /// 检查指定索引的槽位是否已经有数据
+    /// 检查指定索引的槽位是否已经有数据 ( _ -> M )
     /// </summary>
     public static bool IsSlotOccupied(int index)
     {
@@ -48,7 +51,7 @@ public static class ArchivesSystem
     }
 
     /// <summary>
-    /// 删除指定索引槽位的数据
+    /// 删除指定索引槽位的数据 ( _ & F )
     /// </summary>
     public static void Delete(int index)
     {
@@ -62,7 +65,7 @@ public static class ArchivesSystem
     }
 
     /// <summary>
-    /// 获取指定槽位的数据
+    /// 获取指定槽位的数据 ( _ -> M )
     /// </summary>
     public static ArchivesData Get(int index)
     {
@@ -71,12 +74,12 @@ public static class ArchivesSystem
     }
 
     /// <summary>
-    /// 获取所有存档数据
+    /// 获取所有存档数据 ( _ -> M )
     /// </summary>
     public static List<ArchivesData> GetAll() => _archives;
 
     /// <summary>
-    /// 获取时间戳最晚的存档数据
+    /// 获取时间戳最晚的存档数据 ( _ -> M )
     /// </summary>
     public static ArchivesData GetLatest()
     {
@@ -135,7 +138,7 @@ public static class SettingDataSystem
     private static SettingData _current;
 
     /// <summary>
-    /// 保存设置
+    /// 保存设置数据 ( _ -> F )
     /// </summary>
     public static void Save()
     {
@@ -143,9 +146,9 @@ public static class SettingDataSystem
     }
 
     /// <summary>
-    /// 加载设置
+    /// 加载设置数据并同步 ( F -> _ )
     /// </summary>
-    public static SettingData Load()
+    public static void Load()
     {
         bool isFirstTime = !DataSystem.Exists("settings.dat");
         _current = DataSystem.LoadData<SettingData>("settings.dat");
@@ -154,11 +157,20 @@ public static class SettingDataSystem
         {
             Save();
         }
-        return _current;
     }
 
     /// <summary>
-    /// 恢复默认设置
+    /// 获取当前设置数据 ( _ -> M )
+    /// </summary>
+    public static SettingData Get() => _current;
+
+    /// <summary>
+    /// 设定当前设置数据 ( M -> _ )
+    /// </summary>
+    public static void Set(SettingData d) => _current = d;
+
+    /// <summary>
+    /// 恢复默认设置数据 ( _ & M )
     /// </summary>
     public static void Reset()
     {
@@ -171,12 +183,14 @@ public static class SettingDataSystem
 [Serializable]
 public class GlobalData
 {
+    public bool hasEnteredGame;
     public int clearCount;
     public List<string> unlockedIds;
     public bool isTrueEndingReached;
     public GlobalData()
     {
-
+        hasEnteredGame = false;
+        clearCount = 0;
     }
 }
 
@@ -185,7 +199,7 @@ public static class GlobalDataSystem
     private static GlobalData _current;
 
     /// <summary>
-    /// 保存全局数据
+    /// 保存全局数据 ( _ -> F )
     /// </summary>
     public static void Save()
     {
@@ -193,7 +207,7 @@ public static class GlobalDataSystem
     }
 
     /// <summary>
-    /// 加载全局数据
+    /// 加载全局数据 (F -> _ )
     /// </summary>
     public static GlobalData Load()
     {
@@ -206,4 +220,14 @@ public static class GlobalDataSystem
         }
         return _current;
     }
+
+    /// <summary>
+    /// 获取当前全局数据 ( _ -> M )
+    /// </summary>
+    public static GlobalData Get() => _current;
+
+    /// <summary>
+    /// 设定当前全局数据 ( M -> _ )
+    /// </summary>
+    public static void Set(GlobalData d) => _current = d;
 }

@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class UISystem : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
-    public static UISystem Instance { get; private set; }
+    public static MenuManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -28,6 +28,9 @@ public class UISystem : MonoBehaviour
 
     public void NewGame()
     {
+        // 先清理现在状态
+
+
         InputManager.Instance.EnableAllInput();
         UIManager.Instance.Push("StartPanel");
     }

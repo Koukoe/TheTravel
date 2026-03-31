@@ -1,13 +1,14 @@
 using UnityEngine;
 using System;
 
-public static class GameRoot
+public static class GameStatic
 {
+
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
     public static void DataLoad()
     {
-
-
+        GlobalDataSystem.Load();
+        SettingDataSystem.Load();
         ArchivesSystem.LoadAll();
 
     }
@@ -15,11 +16,11 @@ public static class GameRoot
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     public static void GameEntry()
     {
-        if (!DataSystem.Exists("settings.dat"))
+        if (!GlobalDataSystem.Get().hasEnteredGame)
         {
             // 打开新的游戏
-            UISystem.Instance.NewGame();
-
+            InputManager.Instance.EnableAllInput();
+            UIManager.Instance.Push("StartPanel");
         }
     }
 
