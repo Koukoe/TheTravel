@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using System.Runtime.Serialization;
 
 public class UIMoveListener : UIListener
 {
@@ -10,37 +11,30 @@ public class UIMoveListener : UIListener
         public EaseParam ease;
         public float duration;
         public float delay;
-        public Vector2 offset; // 相对 targetPos 的偏移
+        public Vector2 offset;
+        public bool hideOnDelay;
     }
 
-    public MoveConfig openSettings = new MoveConfig { duration = 0.5f, offset = new Vector2(-250, 0) };
-    public MoveConfig resumeSettings = new MoveConfig { duration = 0.5f, offset = new Vector2(-250, 0) };
-    public MoveConfig closeSettings = new MoveConfig { duration = 0f, offset = Vector2.zero };
-    public MoveConfig suspendSettings = new MoveConfig { duration = 0f, offset = Vector2.zero };
+    public MoveConfig openConfig;
+    public MoveConfig closeConfig;
+    public MoveConfig resumeConfig;
+    public MoveConfig suspendConfig;
 
-    protected RectTransform rectTransform;
-    protected Vector2 targetPos;  // UI 在 Hierarchy 中原本的位置
+    [SerializeField] protected RectTransform rectTransform;
+    [SerializeField] protected Vector2 targetPos;
+
     protected Coroutine moveRoutine;
 
     protected virtual void Awake()
     {
-        rectTransform = GetComponent<RectTransform>();
+        if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
         targetPos = rectTransform.anchoredPosition;
     }
 
-    public override void Open()
-    {
-        if (moveRoutine == null) rectTransform.anchoredPosition = targetPos + openSettings.offset;
-        ExecuteMove(openSettings, rectTransform.anchoredPosition, targetPos);
-    }
-
-    public override void Resume()
-    {
-        if (moveRoutine == null) rectTransform.anchoredPosition = targetPos + resumeSettings.offset;
-        ExecuteMove(resumeSettings, rectTransform.anchoredPosition, targetPos);
-    }
-    public override void Close(Action onFinished) => ExecuteMove(closeSettings, rectTransform.anchoredPosition, targetPos + closeSettings.offset, onFinished);
-    public override void Suspend(Action onFinished) => ExecuteMove(suspendSettings, rectTransform.anchoredPosition, targetPos + suspendSettings.offset, onFinished);
+    public override void Open() => StartMove(targetPos + openConfig.offset, targetPos, openConfig);
+    public override void Resume() => StartMove(targetPos + suspendConfig.offset, targetPos, resumeConfig);
+    public override void Close(Action onFinished) => StartMove(targetPos, targetPos + closeConfig.offset, closeConfig, onFinished);
+    public override void Suspend(Action onFinished) => StartMove(targetPos, targetPos + suspendConfig.offset, suspendConfig, onFinished);
 
     public override void Abort()
     {
@@ -51,50 +45,54 @@ public class UIMoveListener : UIListener
         }
     }
 
-    private void ExecuteMove(MoveConfig config, Vector2 from, Vector2 to, Action onDone = null)
+    private void StartMove(Vector2 from, Vector2 to, MoveConfig config, Action onDone = null)
     {
-        if (moveRoutine != null) StopCoroutine(moveRoutine);
+        Abort();
 
-        float distance = Vector2.Distance(from, to);
-        // 考虑到可能只有 delay 没有 duration 的情况
-        if (config.duration <= 0f && config.delay <= 0f || distance < 0.01f)
+        if (config.hideOnDelay && config.delay > 0)
+        {
+            rectTransform.anchoredPosition = new Vector2(10000, 10000);
+        }
+        else
+        {
+            rectTransform.anchoredPosition = from;
+        }
+
+        if (config.duration <= 0f && config.delay <= 0f)
         {
             rectTransform.anchoredPosition = to;
             onDone?.Invoke();
             return;
         }
 
-        moveRoutine = StartCoroutine(DoMove(config, from, to, onDone));
+        moveRoutine = StartCoroutine(DoMove(from, to, config, onDone));
     }
 
-    private IEnumerator DoMove(MoveConfig config, Vector2 from, Vector2 to, Action onDone)
+    private IEnumerator DoMove(Vector2 from, Vector2 to, MoveConfig config, Action onDone)
     {
-        // 增加延迟处理逻辑
         if (config.delay > 0)
         {
             yield return new WaitForSecondsRealtime(config.delay);
+            rectTransform.anchoredPosition = from;
         }
 
         float elapsed = 0;
-        // 以当前位置为起点，保证连点时的平滑
-        Vector2 currentStart = rectTransform.anchoredPosition;
-
         while (elapsed < config.duration)
         {
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / config.duration);
 
-            rectTransform.anchoredPosition = config.ease.Lerp(currentStart, to, t);
+            rectTransform.anchoredPosition = config.ease.Lerp(from, to, t);
             yield return null;
         }
 
         rectTransform.anchoredPosition = to;
         onDone?.Invoke();
-
         moveRoutine = null;
     }
 
-    // 编辑器里快速同步 TargetPos
+    private void OnDisable() => Abort();
+
     [ContextMenu("Update Target Position")]
     private void UpdateTargetPos()
     {
@@ -102,3 +100,96 @@ public class UIMoveListener : UIListener
         targetPos = rectTransform.anchoredPosition;
     }
 }
+
+
+
+// DOTween版本
+
+/*
+
+using UnityEngine;
+using System;
+using DG.Tweening; // 1
+
+public class UIMoveListener : UIListener
+{
+    [Serializable]
+    public struct MoveConfig
+    {
+        public Ease ease;      // 2
+        public float duration;
+        public float delay;
+        public Vector2 offset;
+        public bool hideOnDelay;
+    }
+
+    public MoveConfig openConfig;
+    public MoveConfig closeConfig;
+    public MoveConfig resumeConfig;
+    public MoveConfig suspendConfig;
+
+    [SerializeField] protected RectTransform rectTransform;
+    [SerializeField] protected Vector2 targetPos;
+
+    // 3
+
+    protected virtual void Awake()
+    {
+        if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
+        targetPos = rectTransform.anchoredPosition;
+    }
+
+    public override void Open() => StartMove(targetPos + openConfig.offset, targetPos, openConfig);
+    public override void Resume() => StartMove(targetPos + suspendConfig.offset, targetPos, resumeConfig);
+    public override void Close(Action onFinished) => StartMove(targetPos, targetPos + closeConfig.offset, closeConfig, onFinished);
+    public override void Suspend(Action onFinished) => StartMove(targetPos, targetPos + suspendConfig.offset, suspendConfig, onFinished);
+
+    public override void Abort()
+    {
+        // 杀死所有的位点动画
+        rectTransform.DOKill();  // 4
+    }
+
+    // 5
+    private void StartMove(Vector2 from, Vector2 to, MoveConfig config, Action onDone = null)
+    {
+        Abort();
+
+        if (config.hideOnDelay && config.delay > 0)
+        {
+            rectTransform.anchoredPosition = new Vector2(10000, 10000);
+        }
+        else
+        {
+            rectTransform.anchoredPosition = from;
+        }
+
+        if (config.duration <= 0f && config.delay <= 0f)
+        {
+            rectTransform.anchoredPosition = to;
+            onDone?.Invoke();
+            return;
+        }
+
+        rectTransform.DOAnchorPos(to, config.duration)
+            .SetEase(config.ease)
+            .SetDelay(config.delay)
+            .SetUpdate(true) // 相当于 Time.unscaledDeltaTime
+            .OnStart(() => 
+            {
+                rectTransform.anchoredPosition = from;
+            })
+            .OnComplete(() => onDone?.Invoke());
+    }
+
+    private void OnDisable() => Abort();
+
+    [ContextMenu("Update Target Position")]
+    private void UpdateTargetPos()
+    {
+        if (rectTransform == null) rectTransform = GetComponent<RectTransform>();
+        targetPos = rectTransform.anchoredPosition;
+    }
+}
+
+*/
