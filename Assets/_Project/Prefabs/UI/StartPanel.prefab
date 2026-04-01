@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 2154780751003990807}
   - component: {fileID: 1802481896430792456}
   - component: {fileID: 769161777511074872}
+  - component: {fileID: -1698177666109926463}
   m_Layer: 5
   m_Name: StartPanel
   m_TagString: Untagged
@@ -224,5 +225,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed34c57334a974e4f8dae919e94527b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasRenderMode: 0
   delay: 0
-  _listeners: []
+  _listeners:
+  - {fileID: -1698177666109926463}
+--- !u!114 &-1698177666109926463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186322245228520004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 619b7316847adfb4d9026c34f8b1f4f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isProvider: 0
+  floatRange: {x: 0, y: 5, z: 0}
+  floatFrequency: 3
+  scaleAmplitude: 0.025
+  scaleFrequency: 3
+  randomStart: 0
+  smoothSuspend: 1
+  rect: {fileID: 3166124479200679835}

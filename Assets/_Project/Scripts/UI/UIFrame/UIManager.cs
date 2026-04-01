@@ -53,22 +53,24 @@ public class UIManager : MonoBehaviour
             recoveredPanel.Abort(); // 停止当前的 Close 协程
             closingPanel = null;    // 清除离场标记
 
+            recoveredPanel.transform.SetAsLastSibling();
             stack_ui.Push(recoveredPanel); // 重新入栈
             recoveredPanel.Open(() => isTransitioning = false); // 重新开始 Open 动画
             return recoveredPanel;
         }
 
-        // 处理其他面板的转场，依然保持锁定
+        // 处理其他面板的转场，保持锁定
         if (isTransitioning) return null;
 
         // 获取对象
         GameObject ui_object = PoolManager.Global.Get(panelName);
-        BasePanel basePanel = ui_object.GetComponent<BasePanel>();
-
         if (ui_object == null) return null;
 
-        ui_object.transform.SetParent(CanvasObj(basePanel.CanvasRenderMode).transform, false);  // 设置为 Canvas 的子物体
-        ui_object.transform.SetAsLastSibling();  // 移动到最新一位
+        BasePanel basePanel = ui_object.GetComponent<BasePanel>();
+        if (basePanel == null) return null;
+
+        basePanel.transform.SetParent(CanvasObj(basePanel.CanvasRenderMode).transform, false);  // 设置为 Canvas 的子物体
+        basePanel.transform.SetAsLastSibling();  // 移动到最新一位
 
         // 处理旧面板
         if (stack_ui.Count > 0) stack_ui.Peek().Suspend();
