@@ -6,13 +6,15 @@ using UnityEngine.InputSystem;
 public abstract class MenuPanel : BasePanel
 {
     private GameObject lastFocused;
+    [SerializeField] private bool clearFocused = true;
 
     protected override void Awake() { }
 
     public override void OnOpen()
     {
         base.OnOpen();
-        SetFocus(DefaultFocused());
+        if (clearFocused) { SetFocus(lastFocused ?? DefaultFocused()); }
+        else { SetFocus(DefaultFocused()); }
         InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
@@ -38,7 +40,7 @@ public abstract class MenuPanel : BasePanel
 
     public override void Close(Action onAllFinished = null)
     {
-        lastFocused = null;
+        if (clearFocused) lastFocused = null;
         ReleaseFocus();
         base.Close(onAllFinished);
     }

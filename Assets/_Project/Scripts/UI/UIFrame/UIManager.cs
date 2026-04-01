@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public enum CanvasRender
 {
@@ -17,10 +18,13 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject cameraCanvasObj;
     [SerializeField] private GameObject worldCanvasObj;
 
+    [SerializeField] private Volume blurVolume;
+
     public GameObject CanvasObj(CanvasRender m = CanvasRender.OVERLAY) =>
     m == CanvasRender.OVERLAY ? overlayCanvasObj : (m == CanvasRender.CAMERA ? cameraCanvasObj : worldCanvasObj);
 
     public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+    public List<BasePanel> list_ui = new List<BasePanel>();  // 先预留吧，看看有没有用
 
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
@@ -131,5 +135,28 @@ public class UIManager : MonoBehaviour
             PoolManager.Release(panel.gameObject);
         }
         isTransitioning = false;
+    }
+
+
+
+    public void SetBackgroundBlur(bool enable)
+    {
+        float target = enable ? 1f : 0f;
+
+        StopAllCoroutines();
+        StartCoroutine(FadeBlur(target));
+    }
+
+    private System.Collections.IEnumerator FadeBlur(float targetWeight)
+    {
+        float startWeight = blurVolume.weight;
+        float time = 0;
+        while (time < 0.5f)
+        {
+            time += Time.deltaTime;
+            blurVolume.weight = Mathf.Lerp(startWeight, targetWeight, time / 0.5f);
+            yield return null;
+        }
+        blurVolume.weight = targetWeight;
     }
 }

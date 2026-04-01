@@ -45,6 +45,7 @@ public class MenuManager : MonoBehaviour
 
     public void Menu(InputAction.CallbackContext context)
     {
+        UIManager.Instance.SetBackgroundBlur(true);
         UIManager.Instance.Push("MainPanel");
         InputManager.Instance.EnableUIInput();
     }
