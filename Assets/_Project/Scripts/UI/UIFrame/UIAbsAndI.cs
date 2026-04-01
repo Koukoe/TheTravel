@@ -10,3 +10,12 @@ public abstract class UIListener : MonoBehaviour
 
     public abstract void Abort();
 }
+
+public interface IUIAppearanceSource
+{
+    bool IsProvider { get; }
+    Vector3 PosOffset { get; }
+    Vector3 AngleOffset { get; }
+    Vector3 ScaleMult { get; }
+    float AlphaMult { get; }
+}

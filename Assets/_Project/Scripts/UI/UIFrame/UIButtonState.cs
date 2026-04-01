@@ -5,8 +5,11 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
+public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler, IUIAppearanceSource
 {
+    [SerializeField] private bool isProvider = false;
+    public bool IsProvider => isProvider;
+
     [Header("Selected")]
     public EaseParam scaleEase;
     public float duration = 0.2f;
@@ -16,6 +19,14 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
     [Range(0, 1)] public float disabledAlpha = 0.6f;
     [SerializeField] private Selectable selectable;
     [SerializeField] private CanvasGroup canvasGroup;
+
+    private Vector3 currentScaleMult = Vector3.one;
+    private float currentAlphaMult = 1f;
+
+    public Vector3 PosOffset => Vector3.zero;
+    public Vector3 AngleOffset => Vector3.zero;
+    public Vector3 ScaleMult => currentScaleMult;
+    public float AlphaMult => currentAlphaMult;
 
     private Vector3 initialScale;
     private Coroutine scaleRoutine;
@@ -30,7 +41,15 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
     void Init()
     {
         initialScale = Vector3.one;
-        transform.localScale = initialScale;
+
+        // 初始化数据状态
+        currentScaleMult = initialScale;
+        currentAlphaMult = 1f;
+
+        if (!isProvider)
+        {
+            transform.localScale = initialScale;
+        }
 
         SyncInteractable();
     }
@@ -47,7 +66,10 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
         if (selectable == null || canvasGroup == null) return;
 
         bool isReady = selectable.interactable;
-        canvasGroup.alpha = isReady ? 1f : disabledAlpha;
+
+        currentAlphaMult = isReady ? 1f : disabledAlpha;
+        if (!isProvider) canvasGroup.alpha = currentAlphaMult;
+
         // canvasGroup.blocksRaycasts = isReady;  这个项目没有鼠标对 UI 的操作所以其实是否禁用射线检测无所谓
 
         if (!isReady)
@@ -61,7 +83,10 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
             }
 
             if (scaleRoutine != null) StopCoroutine(scaleRoutine);
-            transform.localScale = initialScale;
+
+            // 复位数据并根据模式决定是否驱动组件
+            currentScaleMult = initialScale;
+            if (!isProvider) transform.localScale = initialScale;
         }
     }
 
@@ -82,20 +107,34 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler
     private IEnumerator AnimateScale(Vector3 target)
     {
         float t = 0;
-        Vector3 start = transform.localScale; // 抓取当前值，保证丝滑折返
+        // Provider 模式，从变量读取当前进度而非组件
+        Vector3 start = isProvider ? currentScaleMult : transform.localScale;
 
         while (t < duration)
         {
             t += Time.unscaledDeltaTime;
-            transform.localScale = scaleEase.Lerp(start, target, t / duration);
+
+            currentScaleMult = scaleEase.Lerp(start, target, t / duration);
+
+            if (!isProvider) transform.localScale = currentScaleMult;
             yield return null;
         }
-        transform.localScale = target;
+
+        currentScaleMult = target;
+        if (!isProvider)
+        {
+            transform.localScale = target;
+        }
     }
 
     private void OnDisable()
     {
         if (scaleRoutine != null) StopCoroutine(scaleRoutine);
-        transform.localScale = initialScale; // 强制复位
+
+        currentScaleMult = initialScale;
+        if (!isProvider)
+        {
+            transform.localScale = initialScale;  // 强制复位
+        }
     }
 }

@@ -2,12 +2,23 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CanvasRender
+{
+    OVERLAY = 0,
+    CAMERA,
+    WORLD,
+}
+
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] private GameObject canvasObj;
-    public GameObject CanvasObj => canvasObj;
+    [SerializeField] private GameObject overlayCanvasObj;
+    [SerializeField] private GameObject cameraCanvasObj;
+    [SerializeField] private GameObject worldCanvasObj;
+
+    public GameObject CanvasObj(CanvasRender m = CanvasRender.OVERLAY) =>
+    m == CanvasRender.OVERLAY ? overlayCanvasObj : (m == CanvasRender.CAMERA ? cameraCanvasObj : worldCanvasObj);
 
     public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
 
@@ -22,8 +33,8 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            if (canvasObj == null)
-                canvasObj = GameObject.FindObjectOfType<Canvas>()?.gameObject;
+            // if (canvasObj == null)
+            //     canvasObj = GameObject.FindObjectOfType<Canvas>()?.gameObject; 三个还是自己拖吧
         }
         else { Destroy(gameObject); }
     }
@@ -52,13 +63,14 @@ public class UIManager : MonoBehaviour
 
         // 获取对象
         GameObject ui_object = PoolManager.Global.Get(panelName);
+        BasePanel basePanel = ui_object.GetComponent<BasePanel>();
+
         if (ui_object == null) return null;
 
-        ui_object.transform.SetParent(canvasObj.transform, false);  // 设置为 Canvas 的子物体
+        ui_object.transform.SetParent(CanvasObj(basePanel.CanvasRenderMode).transform, false);  // 设置为 Canvas 的子物体
         ui_object.transform.SetAsLastSibling();  // 移动到最新一位
 
         // 处理旧面板
-        BasePanel basePanel = ui_object.GetComponent<BasePanel>();
         if (stack_ui.Count > 0) stack_ui.Peek().Suspend();
 
         stack_ui.Push(basePanel);

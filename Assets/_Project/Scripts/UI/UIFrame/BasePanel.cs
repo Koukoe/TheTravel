@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 public abstract class BasePanel : MonoBehaviour
 {
+    [SerializeField] private CanvasRender canvasRenderMode = CanvasRender.OVERLAY;
+    public CanvasRender CanvasRenderMode => canvasRenderMode;
+
     public float delay = 0f;
 
     private bool _isTransitioning = false;

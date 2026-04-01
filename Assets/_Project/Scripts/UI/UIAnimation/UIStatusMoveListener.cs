@@ -1,9 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System;
-using System.Runtime.Serialization;
 
-public class UIStatusMoveAnimListener : UIListener
+public class UIStatusMoveListener : UIListener, IUIAppearanceSource
 {
     [Serializable]
     public struct MoveConfig
@@ -14,6 +13,9 @@ public class UIStatusMoveAnimListener : UIListener
         public Vector2 offset;
     }
 
+    [SerializeField] private bool isProvider = false;
+    public bool IsProvider => isProvider;
+
     public MoveConfig openConfig;
     public MoveConfig closeConfig;
     public MoveConfig resumeConfig;
@@ -23,6 +25,12 @@ public class UIStatusMoveAnimListener : UIListener
 
     [SerializeField] protected RectTransform rectTransform;
     [SerializeField] protected Vector2 targetPos;
+
+    private Vector2 currentPosOffset = Vector2.zero;
+    public Vector3 PosOffset => currentPosOffset;
+    public Vector3 AngleOffset => Vector3.zero;
+    public Vector3 ScaleMult => Vector3.one;
+    public float AlphaMult => 1f;
 
     protected Coroutine moveRoutine;
 
@@ -52,16 +60,17 @@ public class UIStatusMoveAnimListener : UIListener
 
         if (hideOnDelay && config.delay > 0)
         {
-            rectTransform.anchoredPosition = new Vector2(10000, 10000);
+            ApplyPosition(new Vector2(14514, 19810), from - targetPos);
         }
         else
         {
-            rectTransform.anchoredPosition = from;
+            ApplyPosition(from, from - targetPos);
         }
 
         if (config.duration <= 0f && config.delay <= 0f)
         {
-            rectTransform.anchoredPosition = hideOnComplete ? new Vector2(10000, 10000) : to;
+            Vector2 finalPos = hideOnComplete ? new Vector2(14514, 19810) : to;
+            ApplyPosition(finalPos, to - targetPos);
             onDone?.Invoke();
             return;
         }
@@ -74,7 +83,7 @@ public class UIStatusMoveAnimListener : UIListener
         if (config.delay > 0)
         {
             yield return new WaitForSecondsRealtime(config.delay);
-            rectTransform.anchoredPosition = from;
+            ApplyPosition(from, from - targetPos);
         }
 
         float elapsed = 0;
@@ -82,13 +91,25 @@ public class UIStatusMoveAnimListener : UIListener
         {
             elapsed += Time.unscaledDeltaTime;
             float t = Mathf.Clamp01(elapsed / config.duration);
-            rectTransform.anchoredPosition = config.ease.Lerp(from, to, t);
+            Vector2 curPos = config.ease.Lerp(from, to, t);
+            ApplyPosition(curPos, curPos - targetPos);
             yield return null;
         }
 
-        rectTransform.anchoredPosition = hideOnComplete ? new Vector2(10000, 10000) : to;
+        Vector2 endPos = hideOnComplete ? new Vector2(14514, 19810) : to;
+        ApplyPosition(endPos, to - targetPos);
         onDone?.Invoke();
         moveRoutine = null;
+    }
+
+    private void ApplyPosition(Vector2 actualPos, Vector2 offset)
+    {
+        if (actualPos.x == 14514 && actualPos.y == 19810) currentPosOffset = new Vector2(14514, 19810); // 抛出信号
+
+        else currentPosOffset = offset; // 正常偏移
+
+        // 自己动
+        if (!isProvider) rectTransform.anchoredPosition = actualPos;
     }
 
     private void OnDisable() => Abort();
@@ -158,7 +179,7 @@ public class UIMoveListener : UIListener
 
         if (hideOnDelay && config.delay > 0)
         {
-            rectTransform.anchoredPosition = new Vector2(10000, 10000);
+            rectTransform.anchoredPosition = new Vector2(14514, 19810);
         }
         else
         {
@@ -167,7 +188,7 @@ public class UIMoveListener : UIListener
 
         if (config.duration <= 0f && config.delay <= 0f)
         {
-            rectTransform.anchoredPosition = hideOnComplete ? new Vector2(10000, 10000) : to;
+            rectTransform.anchoredPosition = hideOnComplete ? new Vector2(14514, 19810) : to;
             onDone?.Invoke();
             return;
         }
@@ -182,7 +203,7 @@ public class UIMoveListener : UIListener
             })
             .OnComplete(() => 
             {
-                if (hideOnComplete) rectTransform.anchoredPosition = new Vector2(10000, 10000);
+                if (hideOnComplete) rectTransform.anchoredPosition = new Vector2(14514, 19810);
                 onDone?.Invoke();
             });
     }
