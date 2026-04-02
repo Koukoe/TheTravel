@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
     public GameObject CanvasObj(CanvasRender m = CanvasRender.OVERLAY) =>
     m == CanvasRender.OVERLAY ? overlayCanvasObj : (m == CanvasRender.CAMERA ? cameraCanvasObj : worldCanvasObj);
 
-    public Stack<BasePanel> stack_ui = new Stack<BasePanel>();
+    public Stack<BasePanel> panelStack = new Stack<BasePanel>();
     public List<BasePanel> list_ui = new List<BasePanel>();  // 先预留吧，看看有没有用
 
     [SerializeField] private bool isTransitioning = false;
@@ -43,8 +43,8 @@ public class UIManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-    public BasePanel Peek() => stack_ui.Count > 0 ? stack_ui.Peek() : null;
-    public int Count => stack_ui.Count;
+    public BasePanel Peek() => panelStack.Count > 0 ? panelStack.Peek() : null;
+    public int Count => panelStack.Count;
 
     /// <summary>
     /// 打开新的面板，挂起旧的面板
@@ -58,7 +58,7 @@ public class UIManager : MonoBehaviour
             closingPanel = null;    // 清除离场标记
 
             recoveredPanel.transform.SetAsLastSibling();
-            stack_ui.Push(recoveredPanel); // 重新入栈
+            panelStack.Push(recoveredPanel); // 重新入栈
             recoveredPanel.Open(() => isTransitioning = false); // 重新开始 Open 动画
             return recoveredPanel;
         }
@@ -77,9 +77,9 @@ public class UIManager : MonoBehaviour
         basePanel.transform.SetAsLastSibling();  // 移动到最新一位
 
         // 处理旧面板
-        if (stack_ui.Count > 0) stack_ui.Peek().Suspend();
+        if (panelStack.Count > 0) panelStack.Peek().Suspend();
 
-        stack_ui.Push(basePanel);
+        panelStack.Push(basePanel);
         isTransitioning = true;
 
         // Open 回调
@@ -93,10 +93,10 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void Pop()
     {
-        if (stack_ui.Count <= 0 || isTransitioning) return;
+        if (panelStack.Count <= 0 || isTransitioning) return;
 
         isTransitioning = true;
-        BasePanel topPanel = stack_ui.Pop();
+        BasePanel topPanel = panelStack.Pop();
         closingPanel = topPanel;
 
         topPanel.Close(() =>
@@ -107,9 +107,9 @@ public class UIManager : MonoBehaviour
                 PoolManager.Release(topPanel.gameObject);
                 closingPanel = null;
 
-                if (stack_ui.Count > 0)
+                if (panelStack.Count > 0)
                 {
-                    stack_ui.Peek().Resume(() => isTransitioning = false);
+                    panelStack.Peek().Resume(() => isTransitioning = false);
                 }
                 else
                 {
@@ -127,9 +127,9 @@ public class UIManager : MonoBehaviour
         // 清空不需要等待动画，直接物理切断
         isTransitioning = true;
         closingPanel = null;
-        while (stack_ui.Count > 0)
+        while (panelStack.Count > 0)
         {
-            BasePanel panel = stack_ui.Pop();
+            BasePanel panel = panelStack.Pop();
             panel.Abort();  // 清理协程
             panel.gameObject.SetActive(false);
             PoolManager.Release(panel.gameObject);

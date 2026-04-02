@@ -67,23 +67,18 @@ public class PoolManager : MonoBehaviour
     /// 如果对应的池子尚未建立，则会自动根据配置表初始化。
     /// </summary>
     /// <param name="n">在 Inspector 清单中定义的唯一标识符名字</param>
-    /// /// <param name="isCreated">返回是否第一次创建，可以不输入</param>
+    /// /// <param name="isNewInstance">返回是否第一次创建，可以不输入</param>
     /// <returns>返回一个激活的对象实例；若未注册则返回 null</returns>
-    public GameObject Get(string n, out bool isCreated)
+    public GameObject Get(string n, out bool isNewInstance)
     {
-        isCreated = false;
+        isNewInstance = false;
         if (!_lib.TryGetValue(n, out var conf)) return null;
 
-        bool internalCreated = false;
-
+        // 确保池子存在
         if (!_pools.TryGetValue(conf.prefab, out var pool))
         {
             pool = new ObjectPool<GameObject>(
-                createFunc: () =>
-                {
-                    internalCreated = true;
-                    return Instantiate(conf.prefab, transform);
-                },
+                createFunc: () => Instantiate(conf.prefab, transform),
                 actionOnGet: obj => obj.SetActive(true),
                 actionOnRelease: obj => obj.SetActive(false),
                 actionOnDestroy: obj =>
@@ -98,12 +93,10 @@ public class PoolManager : MonoBehaviour
             _pools.Add(conf.prefab, pool);
         }
 
+        // 从池中取出对象
         var inst = pool.Get();
 
-        // 将 Lambda 捕获到的状态传出
-        isCreated = internalCreated;
-
-        _instanceMap[inst] = pool;
+        if (_instanceMap.TryAdd(inst, pool)) isNewInstance = true;
         return inst;
     }
 
@@ -121,18 +114,9 @@ public class PoolManager : MonoBehaviour
     {
         if (obj == null) return;
 
-        if (Scene != null && Scene._instanceMap.TryGetValue(obj, out var sPool))
-        {
-            sPool.Release(obj);
-        }
-        else if (Global != null && Global._instanceMap.TryGetValue(obj, out var gPool))
-        {
-            gPool.Release(obj);
-        }
-        else
-        {
-            Destroy(obj);  // 找不到对应池则销毁
-        }
+        if (Scene != null && Scene._instanceMap.TryGetValue(obj, out var sPool)) sPool.Release(obj);
+        else if (Global != null && Global._instanceMap.TryGetValue(obj, out var gPool)) gPool.Release(obj);
+        else Destroy(obj);  // 找不到对应池则销毁
     }
 
     public void Prewarm(string n, int c)
@@ -154,4 +138,13 @@ public class PoolManager : MonoBehaviour
 
     // 预分配空间的私有列表
     private readonly List<GameObject> _prewarmList = new List<GameObject>(128);
+
+    private void OnDestroy()
+    {
+        // 销毁时清理引用
+        _instanceMap?.Clear();
+        _pools?.Clear();
+        if (isGlobal && Global == this) Global = null;
+        else if (Scene == this) Scene = null;
+    }
 }

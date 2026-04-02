@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using System.Collections;
+using System;
 
 public class AudioChannelGroup
 {
@@ -11,6 +12,8 @@ public class AudioChannelGroup
 
     // 轮询以确保双轨切换不冲突 (0, 1)
     private int _toggle = 0;
+
+    public Action<string> OnTrackEnded;  // 音轨播放完的委托
 
     public AudioChannelGroup(string name, MonoBehaviour owner, AudioSource s1, AudioSource s2)
     {
@@ -145,7 +148,9 @@ public class AudioChannelGroup
             if (_channelCoroutines[index] != thisCoroutine) yield break;
 
             elapsed += Time.deltaTime;
-            source.volume = Mathf.Lerp(0f, s.volume, elapsed / duration);
+            float normalizedTime = Mathf.Clamp01(elapsed / duration);
+            float easeT = EasingUtils.GetValue(EasingUtils.EaseType.OutSine, normalizedTime);  // 使用 OutSine
+            source.volume = Mathf.Lerp(0f, s.volume, easeT);
             yield return null;
         }
 
@@ -153,7 +158,31 @@ public class AudioChannelGroup
         if (_channelCoroutines[index] == thisCoroutine)
         {
             source.volume = s.volume;
-            _channelCoroutines[index] = null;
+            if (s.loop) _channelCoroutines[index] = null;  // 如果是循环，直接清理引用并退出，协程结束
+            else
+            {
+                // float anticipateTime = 2.0f;  // 提前预判
+
+                // 进入逐帧监听循环
+                while (source.isPlaying)
+                {
+                    if (_channelCoroutines[index] != thisCoroutine) yield break;
+
+                    // if (source.clip.length - source.time <= anticipateTime)
+                    // {
+                    //     break; // 跳出循环，提前触发结束逻辑
+                    // }
+
+                    yield return null;
+                }
+
+                // 顺利播放完
+                if (_channelCoroutines[index] == thisCoroutine)
+                {
+                    _channelCoroutines[index] = null;
+                    OnTrackEnded?.Invoke(s.name);
+                }
+            }
         }
     }
 
@@ -170,7 +199,9 @@ public class AudioChannelGroup
             if (_channelCoroutines[index] != thisCoroutine) yield break;
 
             elapsed += Time.deltaTime;
-            source.volume = Mathf.Lerp(startVol, 0, elapsed / duration);
+            float normalizedTime = Mathf.Clamp01(elapsed / duration);
+            float easeT = EasingUtils.GetValue(EasingUtils.EaseType.InSine, normalizedTime);  // 使用 InSine
+            source.volume = Mathf.Lerp(startVol, 0f, easeT);
             yield return null;
         }
 
