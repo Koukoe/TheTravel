@@ -29,7 +29,7 @@ public class MainPanel : MenuPanel
     protected override void OnBackClicked()
     {
         base.OnBackClicked();
-        UIManager.Instance.SetBackgroundBlur(false);
+        EffectManager.Instance.SetBackgroundBlur(false);
         InputManager.Instance.EnablePlayerInput();
     }
 }

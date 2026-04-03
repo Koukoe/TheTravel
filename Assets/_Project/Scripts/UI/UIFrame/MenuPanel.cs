@@ -75,15 +75,12 @@ public abstract class MenuPanel : BasePanel
             EventSystem.current.SetSelectedGameObject(null);
     }
 
-    private void OnCancelPressed(InputAction.CallbackContext context)
-    {
-        OnBackClicked();
-    }
-
     protected virtual void OnBackClicked()
     {
         if (UIManager.Instance.IsTransitioning) return;
 
         UIManager.Instance.Pop();
     }
+
+    private void OnCancelPressed(InputAction.CallbackContext context) => OnBackClicked();
 }

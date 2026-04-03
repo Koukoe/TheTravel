@@ -1,33 +1,42 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public enum CanvasRender
 {
-    OVERLAY = 0,
-    CAMERA,
-    WORLD,
+    SYS2D = 0,
+    SYS3D,
+    GAMECAMERA,
+    GAMEWORLD,
 }
 
 public class UIManager : MonoBehaviour
 {
     public static UIManager Instance { get; private set; }
 
-    [SerializeField] private GameObject overlayCanvasObj;
-    [SerializeField] private GameObject cameraCanvasObj;
-    [SerializeField] private GameObject worldCanvasObj;
+    [SerializeField] private GameObject sys2dCanvasObj;
+    [SerializeField] private GameObject sys3dCanvasObj;
+    [SerializeField] private GameObject gameCameraCanvasObj;
+    [SerializeField] private GameObject gameWorldCanvasObj;
 
-    [SerializeField] private Volume blurVolume;
+    public GameObject CanvasObj(CanvasRender m) => m switch
+    {
+        CanvasRender.SYS2D => sys2dCanvasObj,
+        CanvasRender.SYS3D => sys3dCanvasObj,
+        CanvasRender.GAMECAMERA => gameCameraCanvasObj,
+        CanvasRender.GAMEWORLD => gameWorldCanvasObj,
+        _ => sys2dCanvasObj
+    };
 
-    public GameObject CanvasObj(CanvasRender m = CanvasRender.OVERLAY) =>
-    m == CanvasRender.OVERLAY ? overlayCanvasObj : (m == CanvasRender.CAMERA ? cameraCanvasObj : worldCanvasObj);
-
-    public Stack<BasePanel> panelStack = new Stack<BasePanel>();
-    public List<BasePanel> list_ui = new List<BasePanel>();  // 先预留吧，看看有没有用
+    public Stack<BasePanel> _singleStack = new Stack<BasePanel>();
+    public List<BasePanel> _singleList = new List<BasePanel>();
+    public Dictionary<string, BasePanel> _register = new Dictionary<string, BasePanel>();
+    public Queue<string> _msgQueue = new Queue<string>();
 
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
+
+    [SerializeField] private bool isQueueProcessing = false;
 
     private BasePanel closingPanel = null;
 
@@ -43,11 +52,12 @@ public class UIManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
-    public BasePanel Peek() => panelStack.Count > 0 ? panelStack.Peek() : null;
-    public int Count => panelStack.Count;
+
+    public BasePanel Peek() => _singleStack.Count > 0 ? _singleStack.Peek() : null;
+    public int Count => _singleStack.Count;
 
     /// <summary>
-    /// 打开新的面板，挂起旧的面板
+    /// 在栈中打开新的面板，挂起旧的面板
     /// </summary>
     public BasePanel Push(string panelName)
     {
@@ -58,7 +68,7 @@ public class UIManager : MonoBehaviour
             closingPanel = null;    // 清除离场标记
 
             recoveredPanel.transform.SetAsLastSibling();
-            panelStack.Push(recoveredPanel); // 重新入栈
+            _singleStack.Push(recoveredPanel); // 重新入栈
             recoveredPanel.Open(() => isTransitioning = false); // 重新开始 Open 动画
             return recoveredPanel;
         }
@@ -77,9 +87,9 @@ public class UIManager : MonoBehaviour
         basePanel.transform.SetAsLastSibling();  // 移动到最新一位
 
         // 处理旧面板
-        if (panelStack.Count > 0) panelStack.Peek().Suspend();
+        if (_singleStack.Count > 0) _singleStack.Peek().Suspend();
 
-        panelStack.Push(basePanel);
+        _singleStack.Push(basePanel);
         isTransitioning = true;
 
         // Open 回调
@@ -89,14 +99,14 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 关闭当前顶层面板，恢复上一个面板
+    /// 关闭栈当前顶层面板，恢复上一个面板
     /// </summary>
     public void Pop()
     {
-        if (panelStack.Count <= 0 || isTransitioning) return;
+        if (_singleStack.Count <= 0 || isTransitioning) return;
 
         isTransitioning = true;
-        BasePanel topPanel = panelStack.Pop();
+        BasePanel topPanel = _singleStack.Pop();
         closingPanel = topPanel;
 
         topPanel.Close(() =>
@@ -107,9 +117,9 @@ public class UIManager : MonoBehaviour
                 PoolManager.Release(topPanel.gameObject);
                 closingPanel = null;
 
-                if (panelStack.Count > 0)
+                if (_singleStack.Count > 0)
                 {
-                    panelStack.Peek().Resume(() => isTransitioning = false);
+                    _singleStack.Peek().Resume(() => isTransitioning = false);
                 }
                 else
                 {
@@ -120,16 +130,16 @@ public class UIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 清空所有面板
+    /// 清空栈中所有面板
     /// </summary>
     public void PopAll()
     {
         // 清空不需要等待动画，直接物理切断
         isTransitioning = true;
         closingPanel = null;
-        while (panelStack.Count > 0)
+        while (_singleStack.Count > 0)
         {
-            BasePanel panel = panelStack.Pop();
+            BasePanel panel = _singleStack.Pop();
             panel.Abort();  // 清理协程
             panel.gameObject.SetActive(false);
             PoolManager.Release(panel.gameObject);
@@ -138,25 +148,82 @@ public class UIManager : MonoBehaviour
     }
 
 
-
-    public void SetBackgroundBlur(bool enable)
+    /// <summary>
+    /// 打开并登记一个无层级面板
+    /// </summary>
+    public BasePanel Show(string panelName)
     {
-        float target = enable ? 1f : 0f;
+        // 如果已经登记并显示了，直接返回
+        if (_register.TryGetValue(panelName, out var panel)) return panel;
 
-        StopAllCoroutines();
-        StartCoroutine(FadeBlur(target));
+        GameObject obj = PoolManager.Global.Get(panelName);
+        BasePanel newPanel = obj.GetComponent<BasePanel>();
+
+        newPanel.transform.SetParent(CanvasObj(newPanel.CanvasRenderMode).transform, false);
+        _register.Add(panelName, newPanel);
+
+        newPanel.Open();
+        return newPanel;
     }
 
-    private System.Collections.IEnumerator FadeBlur(float targetWeight)
+    /// <summary>
+    /// 关闭并注销一个无层级面板
+    /// </summary>
+    public void Hide(string panelName)
     {
-        float startWeight = blurVolume.weight;
-        float time = 0;
-        while (time < 0.5f)
+        if (_register.TryGetValue(panelName, out var panel))
         {
-            time += Time.deltaTime;
-            blurVolume.weight = Mathf.Lerp(startWeight, targetWeight, time / 0.5f);
-            yield return null;
+            panel.Close(() =>
+            {
+                PoolManager.Release(panel.gameObject);
+                _register.Remove(panelName);
+            });
         }
-        blurVolume.weight = targetWeight;
+    }
+
+
+    /// <summary>
+    /// 初始化列表面板
+    /// </summary>
+    public void InitList(params string[] panelNames)
+    {
+        ClearList();
+        foreach (var name in panelNames)
+        {
+            GameObject obj = PoolManager.Global.Get(name);
+            BasePanel panel = obj.GetComponent<BasePanel>();
+            panel.transform.SetParent(CanvasObj(panel.CanvasRenderMode).transform, false);
+            panel.gameObject.SetActive(false);
+            _singleList.Add(panel);
+        }
+    }
+
+    /// <summary>
+    /// 切换列表面板的页面
+    /// </summary>
+    public void SwitchPage(int index)
+    {
+        if (index < 0 || index >= _singleList.Count) return;
+
+        for (int i = 0; i < _singleList.Count; i++)
+        {
+            if (i == index)
+            {
+                if (!_singleList[i].gameObject.activeSelf) _singleList[i].Open();
+            }
+            else
+            {
+                if (_singleList[i].gameObject.activeSelf) _singleList[i].Close();
+            }
+        }
+    }
+
+    /// <summary>
+    /// 清理列表面板
+    /// </summary>
+    public void ClearList()
+    {
+        foreach (var p in _singleList) PoolManager.Release(p.gameObject);
+        _singleList.Clear();
     }
 }
