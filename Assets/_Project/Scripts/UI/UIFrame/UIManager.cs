@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 using UnityEngine;
 
 public enum CanvasRender
@@ -30,8 +31,8 @@ public class UIManager : MonoBehaviour
 
     public Stack<BasePanel> _singleStack = new Stack<BasePanel>();
     public List<BasePanel> _singleList = new List<BasePanel>();
-    public Dictionary<string, BasePanel> _register = new Dictionary<string, BasePanel>();
-    public Queue<string> _msgQueue = new Queue<string>();
+    public Dictionary<string, BasePanel> _uniqueDict = new Dictionary<string, BasePanel>();
+    public Dictionary<string, Queue<BasePanel>> _multiDict = new Dictionary<string, Queue<BasePanel>>();
 
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
@@ -150,34 +151,70 @@ public class UIManager : MonoBehaviour
 
     /// <summary>
     /// 打开并登记一个无层级面板
+    /// <param name="isUnique"> 这个面板是不是唯一的
     /// </summary>
-    public BasePanel Show(string panelName)
+    public BasePanel Show(string panelName, bool isUnique = true)
     {
-        // 如果已经登记并显示了，直接返回
-        if (_register.TryGetValue(panelName, out var panel)) return panel;
+        // 如果已经在 unique 已登记，直接返回
+        if (_uniqueDict.TryGetValue(panelName, out var panel)) return panel;
 
         GameObject obj = PoolManager.Global.Get(panelName);
         BasePanel newPanel = obj.GetComponent<BasePanel>();
 
         newPanel.transform.SetParent(CanvasObj(newPanel.CanvasRenderMode).transform, false);
-        _register.Add(panelName, newPanel);
-
+        if (isUnique) _uniqueDict.Add(panelName, newPanel);
+        else
+        {
+            if (!_multiDict.TryGetValue(panelName, out var q))
+            {
+                q = new Queue<BasePanel>();
+                _multiDict.Add(panelName, q);
+            }
+            q.Enqueue(newPanel);
+        }
         newPanel.Open();
         return newPanel;
     }
 
     /// <summary>
-    /// 关闭并注销一个无层级面板
+    /// 关闭并注销一个无层级面板（或同名的最旧的面板）
+    /// <param name="all"> 是否清理全部同名面板
     /// </summary>
-    public void Hide(string panelName)
+    public void Hide(string panelName, bool all = false)
     {
-        if (_register.TryGetValue(panelName, out var panel))
+        if (_uniqueDict.TryGetValue(panelName, out var panel))
         {
+            _uniqueDict.Remove(panelName);
             panel.Close(() =>
             {
                 PoolManager.Release(panel.gameObject);
-                _register.Remove(panelName);
+
             });
+            return;
+        }
+
+        if (_multiDict.TryGetValue(panelName, out var q))
+        {
+            if (all)
+            {
+                while (q.TryDequeue(out var p))
+                {
+                    var target = p;  // 闭包安全引用
+                    target.Close(() => PoolManager.Release(target.gameObject));
+                }
+                _multiDict.Remove(panelName);
+            }
+            else
+            {
+                if (q.TryDequeue(out var oldPanel))
+                {
+                    oldPanel.Close(() =>
+                    {
+                        PoolManager.Release(oldPanel.gameObject);
+                    });
+                }
+                if (q.Count == 0) _multiDict.Remove(panelName);
+            }
         }
     }
 
