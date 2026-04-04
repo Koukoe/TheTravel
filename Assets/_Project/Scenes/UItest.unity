@@ -877,6 +877,7 @@ GameObject:
   - component: {fileID: 1699512827}
   - component: {fileID: 1699512829}
   - component: {fileID: 1699512830}
+  - component: {fileID: 1699512831}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -957,10 +958,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6f7d517f0be2204ca2a01e9452b4d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sys2dCanvasObj: {fileID: 0}
-  sys3dCanvasObj: {fileID: 0}
-  gameCameraCanvasObj: {fileID: 0}
-  gameWorldCanvasObj: {fileID: 0}
+  sys2dCanvasObj: {fileID: 1905458628}
+  sys3dCanvasObj: {fileID: 640673803}
+  gameCameraCanvasObj: {fileID: 661922376}
+  gameWorldCanvasObj: {fileID: 2031947422}
   _singleList: []
   isTransitioning: 0
   isQueueProcessing: 0
@@ -976,6 +977,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b1ddf2cf1f02e547a62691bd84403e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1699512831
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699512823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfbc112084cb7c94f83c359f35f9bc60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blurVolume: {fileID: 295950961}
 --- !u!1 &1886605398
 GameObject:
   m_ObjectHideFlags: 0
