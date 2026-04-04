@@ -2,10 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ArchivesPanel : MenuPanel
 {
-    [SerializeField] private Button defaultBtn;
+    [SerializeField] private List<Button> arcBtn;
     [SerializeField] private Button backBtn;
 
     protected override void Awake()
@@ -19,5 +20,5 @@ public class ArchivesPanel : MenuPanel
 
     }
 
-    protected override GameObject DefaultFocused() => backBtn != null ? backBtn.gameObject : null;
+    protected override GameObject DefaultFocused() => arcBtn.Count > 0 ? arcBtn[0].gameObject : null;
 }

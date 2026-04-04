@@ -189,6 +189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -214,32 +215,55 @@ MonoBehaviour:
     delay: 0.228
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.228
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0
 --- !u!1 &821460976620399294
 GameObject:
   m_ObjectHideFlags: 0
@@ -429,6 +453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -454,32 +479,55 @@ MonoBehaviour:
     delay: 0.168
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.168
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0
 --- !u!1 &880432581086619828
 GameObject:
   m_ObjectHideFlags: 0
@@ -627,6 +675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -829,6 +878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -854,32 +904,55 @@ MonoBehaviour:
     delay: 0
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0
 --- !u!1 &2972603116009321383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1027,6 +1100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -1187,6 +1261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -1347,6 +1422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -1507,6 +1583,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -1709,6 +1786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -1734,32 +1812,55 @@ MonoBehaviour:
     delay: 0.092
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.092
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0
 --- !u!1 &6495827221050735230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1907,6 +2008,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -2109,6 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -2134,32 +2237,55 @@ MonoBehaviour:
     delay: 0.3
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.3
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0
 --- !u!1 &8066575764521011398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2307,6 +2433,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -2509,6 +2636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -2534,32 +2662,55 @@ MonoBehaviour:
     delay: 0.272
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.272
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0
 --- !u!1 &8820292262734137057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2682,6 +2833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f505629da5bf7343abfb07b45fd2bc3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasRenderMode: 0
   delay: 0
   _listeners:
   - {fileID: 678294068449224630}
@@ -2691,6 +2843,7 @@ MonoBehaviour:
   - {fileID: 5095448180819357419}
   - {fileID: 8132762673319373340}
   - {fileID: 1935503752815750510}
+  clearFocused: 1
   saveBtn: {fileID: 8997380335770747363}
   settingsBtn: {fileID: 1184064476380251935}
   backBtn: {fileID: 8490067733586533676}
@@ -2883,6 +3036,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 23
@@ -2908,29 +3062,52 @@ MonoBehaviour:
     delay: 0.296
     offset: {x: -200, y: 0}
   resumeConfig:
-    ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    duration: 0.5
-    delay: 0.296
-    offset: {x: -200, y: 0}
-  suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  suspendConfig:
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    duration: 0
+    delay: 0
+    offset: {x: 0, y: 0}
+  - ease:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
     duration: 0
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
   targetPos: {x: 0, y: 0}
+  style: 0

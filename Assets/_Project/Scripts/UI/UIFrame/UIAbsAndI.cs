@@ -9,6 +9,14 @@ public abstract class UIListener : MonoBehaviour
     public abstract void Suspend(Action onFinished);
 
     public abstract void Abort();
+
+    protected int _suspendStyle = 0;
+    protected virtual int StyleListCount => 1;
+    public virtual int SuspendStyle
+    {
+        get => _suspendStyle;
+        set => _suspendStyle = Mathf.Clamp(value, 0, StyleListCount - 1);
+    }
 }
 
 public interface IUIAppearanceSource

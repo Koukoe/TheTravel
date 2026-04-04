@@ -878,6 +878,7 @@ GameObject:
   - component: {fileID: 1699512829}
   - component: {fileID: 1699512830}
   - component: {fileID: 1699512831}
+  - component: {fileID: 1699512832}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -990,6 +991,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   blurVolume: {fileID: 295950961}
+--- !u!114 &1699512832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1699512823}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1e836aef06629a45a3c7d0f0b7f1c71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioPrefabName: AudioSource
+  sfxGroup: {fileID: 0}
+  bgmGroup: {fileID: 0}
+  ambGroup: {fileID: 0}
+  voiceGroup: {fileID: 0}
+  sfxSounds: []
+  bgmSounds: []
+  ambSounds: []
+  voiceSounds: []
 --- !u!1 &1886605398
 GameObject:
   m_ObjectHideFlags: 0

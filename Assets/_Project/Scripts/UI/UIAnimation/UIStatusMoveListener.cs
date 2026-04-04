@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System;
+using System.Collections.Generic;
 
 public class UIStatusMoveListener : UIListener, IUIAppearanceSource
 {
@@ -18,8 +19,10 @@ public class UIStatusMoveListener : UIListener, IUIAppearanceSource
 
     public MoveConfig openConfig;
     public MoveConfig closeConfig;
-    public MoveConfig resumeConfig;
-    public MoveConfig suspendConfig;
+    public List<MoveConfig> resumeConfig = new List<MoveConfig> { new MoveConfig() };
+    public List<MoveConfig> suspendConfig = new List<MoveConfig> { new MoveConfig() };
+
+    protected override int StyleListCount => Math.Min(resumeConfig.Count, suspendConfig.Count);
 
     public bool useHideLogicForSuspend = true;
 
@@ -41,9 +44,9 @@ public class UIStatusMoveListener : UIListener, IUIAppearanceSource
     }
 
     public override void Open() => StartMove(targetPos + openConfig.offset, targetPos, openConfig, true, false);
-    public override void Resume() => StartMove(targetPos + resumeConfig.offset, targetPos, resumeConfig, useHideLogicForSuspend, false);
+    public override void Resume() => StartMove(targetPos + resumeConfig[_suspendStyle].offset, targetPos, resumeConfig[_suspendStyle], useHideLogicForSuspend, false);
     public override void Close(Action onFinished) => StartMove(targetPos, targetPos + closeConfig.offset, closeConfig, false, true, onFinished);
-    public override void Suspend(Action onFinished) => StartMove(targetPos, targetPos + suspendConfig.offset, suspendConfig, false, useHideLogicForSuspend, onFinished);
+    public override void Suspend(Action onFinished) => StartMove(targetPos, targetPos + suspendConfig[_suspendStyle].offset, suspendConfig[_suspendStyle], false, useHideLogicForSuspend, onFinished);
 
     public override void Abort()
     {

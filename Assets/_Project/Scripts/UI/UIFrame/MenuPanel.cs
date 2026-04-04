@@ -82,5 +82,11 @@ public abstract class MenuPanel : BasePanel
         UIManager.Instance.Pop();
     }
 
+    private void changeStyle(int s)
+    {
+        foreach (var listener in _listeners)
+            if (listener != null) listener.SuspendStyle = s;
+    }
+
     private void OnCancelPressed(InputAction.CallbackContext context) => OnBackClicked();
 }
