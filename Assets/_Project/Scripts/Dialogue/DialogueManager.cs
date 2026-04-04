@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
 
     [System.Serializable]
+    // 这些本来是为了头像的但是现在不需要头像所以大概是不需要了，不过没关系因为这个不是必填
     public class CharacterProfile
     {
         // 角色ID，需与JSON中的character字段一致
@@ -16,10 +18,12 @@ public class DialogueManager : MonoBehaviour
         public string charName;
     }
 
-    [Header("对话数据")]
-    [SerializeField] private TextAsset dialogueJson;
+    // 对话数据不再直接写在这里，而是通过挂载了DialogueOnObj的物体传入
+    // [Header("对话数据")]
+    // [SerializeField] private TextAsset dialogueJson;
 
     [Header("角色配置")]
+    // 嗯对这个也是不必要的但是好像可以在这里填玩家的名字之类的吧，先不注释掉了
     [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
 
     [Header("设置")]
@@ -36,6 +40,9 @@ public class DialogueManager : MonoBehaviour
     // 运行时从 DialoguePanel 子物体自动获取
     private TMP_Text nameText;
     private TMP_Text contentText;
+
+    // 运行时加载的对话数据来源
+    private TextAsset dialogueJson;
 
     private const string DialoguePanelName = "DialoguePanel";
     private const string DialogueTextNodeName = "DialogueText";
@@ -64,6 +71,15 @@ public class DialogueManager : MonoBehaviour
         {
             DialogueStart();
         }
+    }
+
+    // 用于从外部传入新的对话数据并开始对话
+    public void StartWith(TextAsset json)
+    {
+        if (json == null) return;
+        dialogueJson = json;
+        DialogueLoad();
+        DialogueStart();
     }
 
     // 构建角色字典，方便通过角色ID快速查找配置
