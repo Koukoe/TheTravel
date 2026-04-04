@@ -5,6 +5,8 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static DialogueManager Instance { get; private set; }
+
     [System.Serializable]
     public class CharacterProfile
     {
@@ -20,14 +22,6 @@ public class DialogueManager : MonoBehaviour
     [Header("角色配置")]
     [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
 
-    [Header("UI 绑定")]
-    // 对话面板物体
-    [SerializeField] GameObject dialoguePanel;
-    // 显示名字的文本组件
-    [SerializeField] private TMP_Text nameText;
-    // 显示对话正文的文本组件
-    [SerializeField] private TMP_Text contentText;
-
     [Header("设置")]
     // 是否在脚本启动时自动开始对话
     [SerializeField] private bool playOnStart = false;
@@ -38,6 +32,26 @@ public class DialogueManager : MonoBehaviour
     private int currentIndex = -1;
     // 角色ID到配置信息的映射字典
     private Dictionary<string, CharacterProfile> characterMap = new Dictionary<string, CharacterProfile>();
+
+    // 运行时从 DialoguePanel 子物体自动获取
+    private TMP_Text nameText;
+    private TMP_Text contentText;
+
+    private const string DialoguePanelName = "DialoguePanel";
+    private const string DialogueTextNodeName = "DialogueText";
+    private const string TalkerNameNodeName = "TalkerName";
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -106,18 +120,25 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (dialoguePanel == null)
+        var panel = UIManager.Instance.Show(DialoguePanelName, true);
+        if (panel == null)
         {
-            Debug.LogError("未绑定对话面板对象。");
+            Debug.LogError("打开 DialoguePanel 失败，请检查 UIManager/PoolManager 配置。");
             return;
         }
-        dialoguePanel.SetActive(true);
+
+        ResolveTextRefs(panel.transform);
+        if (nameText == null || contentText == null)
+        {
+            Debug.LogError("未能在 DialoguePanel 下找到 TalkerName/DialogueText 文本组件。");
+            return;
+        }
 
         currentIndex = 0;
         ShowCurrent();
     }
 
-    // 播放下一句对话，对话未开始或已结束则重新开始
+    // 播放下一句对话
     public void DialogueNext()
     {
         if (database == null || database.dialogues == null)
@@ -125,11 +146,12 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        if (currentIndex < 0)
-        {
-            DialogueStart();
-            return;
-        }
+        // 对话未开始则开始对话(已弃用)
+        // if (currentIndex < 0)
+        // {
+        //     DialogueStart();
+        //     return;
+        // }
 
         currentIndex++;
 
@@ -150,12 +172,7 @@ public class DialogueManager : MonoBehaviour
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
 
-        if (dialoguePanel == null)
-        {
-            Debug.LogError("未绑定对话面板对象。");
-            return;
-        }
-        dialoguePanel.SetActive(false);
+        UIManager.Instance.Hide(DialoguePanelName);
     }
 
     // 显示当前索引的内容
@@ -203,5 +220,31 @@ public class DialogueManager : MonoBehaviour
     private void ClearCharacterUI()
     {
         if (nameText != null) nameText.text = string.Empty;
+    }
+
+    private void ResolveTextRefs(Transform root)
+    {
+        if (root == null) return;
+
+        nameText = FindTextByNodeName(root, TalkerNameNodeName);
+        contentText = FindTextByNodeName(root, DialogueTextNodeName);
+    }
+
+    private TMP_Text FindTextByNodeName(Transform root, string nodeName)
+    {
+        var texts = root.GetComponentsInChildren<TMP_Text>(true);
+        for (int i = 0; i < texts.Length; i++)
+        {
+            if (texts[i] != null && texts[i].gameObject.name == nodeName)
+            {
+                return texts[i];
+            }
+        }
+        return null;
+    }
+
+    private void OnDestroy()
+    {
+        if (Instance == this) Instance = null;
     }
 }
