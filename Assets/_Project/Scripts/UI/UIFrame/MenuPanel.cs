@@ -18,12 +18,6 @@ public abstract class MenuPanel : BasePanel
         InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
-    public override void OnClose()
-    {
-        base.OnClose();
-        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
-    }
-
     public override void OnResume()
     {
         base.OnResume();
@@ -32,15 +26,10 @@ public abstract class MenuPanel : BasePanel
         InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
-    public override void OnSuspend()
-    {
-        base.OnSuspend();
-        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
-    }
-
     public override void Close(Action onAllFinished = null)
     {
         if (clearFocused) lastFocused = null;
+        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
         ReleaseFocus();
         base.Close(onAllFinished);
     }
@@ -54,7 +43,7 @@ public abstract class MenuPanel : BasePanel
 
             if (current != null && current.transform.IsChildOf(transform)) lastFocused = current;
         }
-
+        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
         ReleaseFocus();
         base.Suspend(onAllFinished);
     }
@@ -82,7 +71,7 @@ public abstract class MenuPanel : BasePanel
         UIManager.Instance.Pop();
     }
 
-    private void changeStyle(int s)
+    protected void changeStyle(int s)
     {
         foreach (var listener in _listeners)
             if (listener != null) listener.SuspendStyle = s;

@@ -25,10 +25,7 @@ public abstract class BasePanel : MonoBehaviour
         gameObject.SetActive(true);
 
         foreach (var listener in _listeners)
-        {
-            var mono = listener as MonoBehaviour;
-            if (mono != null && mono.gameObject.activeInHierarchy) listener.Open();
-        }
+            if (listener != null && listener.isActiveAndEnabled) listener.Open();
 
         _delayRoutine = StartCoroutine(ExcuteAfterDelay(() =>
         {
@@ -45,10 +42,7 @@ public abstract class BasePanel : MonoBehaviour
         _isTransitioning = true;
 
         foreach (var listener in _listeners)
-        {
-            var mono = listener as MonoBehaviour;
-            if (mono != null && mono.gameObject.activeInHierarchy) listener.Resume();
-        }
+            if (listener != null && listener.isActiveAndEnabled) listener.Resume();
 
         _delayRoutine = StartCoroutine(ExcuteAfterDelay(() =>
         {
@@ -108,8 +102,7 @@ public abstract class BasePanel : MonoBehaviour
 
         foreach (var listener in _listeners)
         {
-            var mono = listener as MonoBehaviour;
-            if (mono == null || !mono.gameObject.activeInHierarchy)
+            if (listener == null || !listener.isActiveAndEnabled)
             {
                 onItemDone();
                 continue;
@@ -144,10 +137,7 @@ public abstract class BasePanel : MonoBehaviour
         if (cleanListeners)
         {
             foreach (var listener in _listeners)
-            {
-                var mono = listener as MonoBehaviour;
-                if (mono != null && mono.gameObject.activeInHierarchy) listener.Abort(); // 强制停止
-            }
+                if (listener != null) listener.Abort(); // 强制停止
         }
 
         _isTransitioning = false;

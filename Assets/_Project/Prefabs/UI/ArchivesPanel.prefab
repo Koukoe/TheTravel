@@ -1247,16 +1247,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e19bee50e77484caae909f0f10cf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasRenderMode: 1
+  canvasRenderMode: 2
   delay: 0
-  _listeners:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  _listeners: []
   clearFocused: 1
   graphicsBtn: {fileID: 789431742610370000}
   audioBtn: {fileID: 0}

@@ -148,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 5
@@ -173,7 +174,7 @@ MonoBehaviour:
     delay: 0
     offset: {x: -75, y: 0}
   resumeConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
@@ -185,7 +186,7 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
@@ -347,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -542,6 +544,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b02f1c514679224b8b73ca1851532ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   scaleEase:
     type: 0
     curve:
@@ -744,11 +747,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fd551cb89882ed4ea3bdfbb41b2c569, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canvasRenderMode: 0
   delay: 0
   _listeners:
   - {fileID: 7467603023268582976}
   - {fileID: 4213589297530196929}
   - {fileID: 331582717384146336}
+  clearFocused: 1
   defaultBtn: {fileID: 789431742610370000}
   backBtn: {fileID: 3814565143263063109}
 --- !u!1 &3292436277235000237
@@ -963,6 +968,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 5
@@ -988,7 +994,7 @@ MonoBehaviour:
     delay: 0.2
     offset: {x: -75, y: 0}
   resumeConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
@@ -1000,7 +1006,7 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
@@ -1162,6 +1168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e97481d603fbe942953a4fce7e5531d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isProvider: 0
   openConfig:
     ease:
       type: 5
@@ -1187,7 +1194,7 @@ MonoBehaviour:
     delay: 0.1
     offset: {x: -75, y: 0}
   resumeConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2
@@ -1199,7 +1206,7 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   suspendConfig:
-    ease:
+  - ease:
       type: 0
       curve:
         serializedVersion: 2

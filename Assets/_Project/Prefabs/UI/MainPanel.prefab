@@ -216,39 +216,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.228
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.228
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.228
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -261,9 +261,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 2703634460583628458}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &821460976620399294
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,39 +479,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.168
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.168
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.168
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -525,9 +524,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 1394881009267178459}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &880432581086619828
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,39 +903,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-    duration: 0
+    duration: 0.5
     delay: 0
-    offset: {x: 0, y: 0}
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-    duration: 0
+    duration: 0.5
     delay: 0
-    offset: {x: 0, y: 0}
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
     delay: 0
-    offset: {x: 0, y: 0}
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -950,9 +948,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 5452229607728861910}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &2972603116009321383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1813,39 +1810,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.092
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.092
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.092
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -1858,9 +1855,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 2711385848698215470}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &6495827221050735230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2238,39 +2234,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.3
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.3
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.3
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -2283,9 +2279,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 4701885948192677125}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &8066575764521011398
 GameObject:
   m_ObjectHideFlags: 0
@@ -2663,39 +2658,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.272
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.272
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.272
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -2708,9 +2703,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 3131842735155148402}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &8820292262734137057
 GameObject:
   m_ObjectHideFlags: 0
@@ -2845,6 +2839,7 @@ MonoBehaviour:
   - {fileID: 1935503752815750510}
   clearFocused: 1
   saveBtn: {fileID: 8997380335770747363}
+  loadBtn: {fileID: 8934029956320794968}
   settingsBtn: {fileID: 1184064476380251935}
   backBtn: {fileID: 8490067733586533676}
 --- !u!1 &9100329419255403148
@@ -3063,39 +3058,39 @@ MonoBehaviour:
     offset: {x: -200, y: 0}
   resumeConfig:
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.296
+    offset: {x: -200, y: 0}
   - ease:
-      type: 0
+      type: 23
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.296
+    offset: {x: -200, y: 0}
   suspendConfig:
   - ease:
-      type: 0
+      type: 22
       curve:
         serializedVersion: 2
         m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0
-    delay: 0
-    offset: {x: 0, y: 0}
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0.296
+    offset: {x: -200, y: 0}
   - ease:
       type: 0
       curve:
@@ -3108,6 +3103,5 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 1
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 6010461643461243043}
   targetPos: {x: 0, y: 0}
-  style: 0

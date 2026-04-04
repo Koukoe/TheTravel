@@ -520,9 +520,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 7585226420563248760}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &1590856804387310272
 GameObject:
   m_ObjectHideFlags: 0
@@ -882,9 +881,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 7056313101961415012}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &2129640575176215517
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,9 +1543,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 1992851793932895658}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &5156429154874279557
 GameObject:
   m_ObjectHideFlags: 0
@@ -1746,9 +1743,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 4824340371905621945}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &5879121826837618431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1947,9 +1943,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 952709811287670676}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &5931220240370808967
 GameObject:
   m_ObjectHideFlags: 0
@@ -2309,9 +2304,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 3722877975142506321}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &6950476901939853609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,9 +2504,8 @@ MonoBehaviour:
     delay: 0
     offset: {x: 0, y: 0}
   useHideLogicForSuspend: 0
-  rectTransform: {fileID: 0}
+  rectTransform: {fileID: 3610645171376238893}
   targetPos: {x: 0, y: 0}
-  style: 0
 --- !u!1 &7024097527382228542
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ using System.Runtime.CompilerServices;
 public class MainPanel : MenuPanel
 {
     [SerializeField] private Button saveBtn;
+    [SerializeField] private Button loadBtn;
     [SerializeField] private Button settingsBtn;
     [SerializeField] private Button backBtn;
 
@@ -14,15 +15,25 @@ public class MainPanel : MenuPanel
         base.Awake();
 
         // 绑定按钮监听事件
+        saveBtn?.onClick.AddListener(() => OnArchivesClicked());
+        loadBtn?.onClick.AddListener(() => OnArchivesClicked(false));
         settingsBtn?.onClick.AddListener(OnSettingsClicked);
         backBtn?.onClick.AddListener(OnBackClicked);
     }
 
     protected override GameObject DefaultFocused() => saveBtn != null ? saveBtn.gameObject : null;
 
+    private void OnArchivesClicked(bool isSave = true)
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+        changeStyle(0);
+        if (UIManager.Instance.Push("ArchivesPanel") is ArchivesPanel p) p.Init();
+    }
+
     private void OnSettingsClicked()
     {
         if (UIManager.Instance.IsTransitioning) return;
+        changeStyle(1);
         UIManager.Instance.Push("SettingsPanel");
     }
 
