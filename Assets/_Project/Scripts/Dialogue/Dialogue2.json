@@ -2,23 +2,23 @@
     "dialogues": [
         {
             "id": "1",
-            "character": "NPC_001",
-            "content": "这是\n第一句话"
+            "character": "你2好",
+            "content": "这是对话2"
         },
         {
             "id": "2",
             "character": "NPC_002",
-            "content": "这是第二句话"
+            "content": "这是2第二句话"
         },
         {
             "id": "3",
             "character": "NPC_003",
-            "content": "这是第三句话"
+            "content": "这是2第三句话"
         },
         {
             "id": "4",
             "character": "4号NPC",
-            "content": "这是有点不一样的第四句话"
+            "content": "这是2有点不一样的第四句话"
         }
     ]
 }
