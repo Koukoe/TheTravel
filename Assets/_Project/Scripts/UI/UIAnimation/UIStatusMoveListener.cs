@@ -47,13 +47,13 @@ public class UIStatusMoveListener : UIListener, IUIAppearanceSource
     public override void Resume()
     {
         MoveConfig config = (_suspendStyle == -1) ? new MoveConfig() : resumeConfig[_suspendStyle];
-        StartMove(targetPos, targetPos, config, useHideLogicForSuspend, false);
+        StartMove(targetPos + config.offset, targetPos, config, useHideLogicForSuspend, false);
     }
     public override void Close(Action onFinished) => StartMove(targetPos, targetPos + closeConfig.offset, closeConfig, false, true, onFinished);
     public override void Suspend(Action onFinished)
     {
         MoveConfig config = (_suspendStyle == -1) ? new MoveConfig() : suspendConfig[_suspendStyle];
-        StartMove(targetPos, targetPos, config, false, useHideLogicForSuspend, onFinished);
+        StartMove(targetPos, targetPos + config.offset, config, false, useHideLogicForSuspend, onFinished);
     }
     public override void Abort()
     {
