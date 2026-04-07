@@ -35,14 +35,14 @@ public class MainPanel : MenuPanel
     private void OnSettingsClicked()
     {
         if (UIManager.Instance.IsTransitioning) return;
-        changeStyle(-1);
+        changeStyle(1);
         UIManager.Instance.Push("SettingsPanel");
     }
 
     private void OnAboutClicked()
     {
         if (UIManager.Instance.IsTransitioning) return;
-        changeStyle(-1);
+        changeStyle(1);
         UIManager.Instance.Push("AboutPanel");
     }
 
