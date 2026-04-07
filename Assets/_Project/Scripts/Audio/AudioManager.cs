@@ -121,4 +121,11 @@ public class AudioManager : MonoBehaviour
         if (obj != null) PoolManager.Release(obj);
     }
     #endregion
+
+
+    public void SetGroupVolume(string paramName, float volume)
+    {
+        float dB = Mathf.Log10(Mathf.Max(0.0001f, volume)) * 20f;
+        sfxGroup.audioMixer.SetFloat(paramName, dB);
+    }
 }

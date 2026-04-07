@@ -24,10 +24,10 @@ public class DataSetting
 
     public float sensitivity;
 
-    public float masterVolume = 0.75f;
-    public float musicVolume = 0.75f;
-    public float sfxVolume = 0.75f;
-    public float ambVolume = 0.75f;
+    public int masterVolumeIndex = 2;
+    public int musicVolumeIndex = 2;
+    public int sfxVolumeIndex = 2;
+    public int ambVolumeIndex = 2;
 
     public int resolutionIndex = 0;  // 分辨率索引
     public bool isFullScreen = true;

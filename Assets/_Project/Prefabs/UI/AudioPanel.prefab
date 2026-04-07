@@ -668,7 +668,7 @@ GameObject:
   - component: {fileID: 7356518951105130979}
   - component: {fileID: 4142013328007940084}
   - component: {fileID: 8380502530804277797}
-  - component: {fileID: 7653291709919217904}
+  - component: {fileID: 7935619282005551453}
   m_Layer: 5
   m_Name: AudioPanel
   m_TagString: Untagged
@@ -735,7 +735,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &7653291709919217904
+--- !u!114 &7935619282005551453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -744,18 +744,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2841149510771220449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1fd551cb89882ed4ea3bdfbb41b2c569, type: 3}
+  m_Script: {fileID: 11500000, guid: 10f4df329a307154b97f3f635571b826, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRenderMode: 0
   delay: 0
-  _listeners:
-  - {fileID: 7467603023268582976}
-  - {fileID: 4213589297530196929}
-  - {fileID: 331582717384146336}
+  _listeners: []
   clearFocused: 1
-  defaultBtn: {fileID: 789431742610370000}
-  backBtn: {fileID: 3814565143263063109}
+  defaultBtn: {fileID: 0}
+  backBtn: {fileID: 0}
+  masterVolToggle: {fileID: 0}
 --- !u!1 &3292436277235000237
 GameObject:
   m_ObjectHideFlags: 0

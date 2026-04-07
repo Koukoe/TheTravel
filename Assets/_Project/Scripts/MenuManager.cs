@@ -52,6 +52,13 @@ public class MenuManager : MonoBehaviour
 
     public void ApplySettings(DataSetting d)
     {
-        //d.masterVolume;
+        var a = AudioManager.Instance;
+        a.SetGroupVolume("MasterVol", d.masterVolumeIndex / 4f);
+        a.SetGroupVolume("MusicVol", d.musicVolumeIndex / 4f);
+        a.SetGroupVolume("SFXVol", d.sfxVolumeIndex / 4f);
+        a.SetGroupVolume("AmbVol", d.ambVolumeIndex / 4f);
+
+
+
     }
 }
