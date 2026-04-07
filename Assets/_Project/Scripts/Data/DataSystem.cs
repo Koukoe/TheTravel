@@ -96,7 +96,6 @@ public static class DataArchivesSystem
 public static class DataSettingSystem
 {
     private static DataSetting _current;
-    private static DataSetting _temp;
 
     /// <summary>
     /// 保存设置数据 ( _ -> F )
@@ -121,14 +120,23 @@ public static class DataSettingSystem
     }
 
     /// <summary>
-    /// 获取当前设置数据 ( _ -> M )
+    /// 深拷贝一份当前设置数据 ( _ -> M )
     /// </summary>
-    public static DataSetting Get() => _current;
+    public static DataSetting Get()
+    {
+        string json = JsonUtility.ToJson(_current);
+        return JsonUtility.FromJson<DataSetting>(json);
+    }
 
     /// <summary>
     /// 设定当前设置数据 ( M -> _ )
     /// </summary>
-    public static void Set(DataSetting d) => _current = d;
+    public static void Set(DataSetting d)
+    {
+        if (d == null) return;
+        string json = JsonUtility.ToJson(d);
+        _current = JsonUtility.FromJson<DataSetting>(json);
+    }
 
     /// <summary>
     /// 恢复默认设置数据 ( _ & M )

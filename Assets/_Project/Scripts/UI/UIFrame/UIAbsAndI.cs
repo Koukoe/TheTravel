@@ -10,12 +10,12 @@ public abstract class UIListener : MonoBehaviour
 
     public abstract void Abort();
 
-    protected int _suspendStyle = 0;
-    protected virtual int StyleListCount => 1;
+    protected int _suspendStyle = -1;
+    protected virtual int StyleListCount => 0;
     public virtual int SuspendStyle
     {
         get => _suspendStyle;
-        set => _suspendStyle = Mathf.Clamp(value, 0, StyleListCount - 1);
+        set => _suspendStyle = Mathf.Clamp(value, -1, StyleListCount - 1);
     }
 }
 

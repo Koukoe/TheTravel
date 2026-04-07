@@ -58,13 +58,7 @@ public class UIOptionToggle : MonoBehaviour, ISelectHandler, IDeselectHandler, I
         }
     }
 
-    void OnEnable()
-    {
-        UpdateDisplay();
-    }
+    void OnEnable() => isSelected = false;
 
-    void OnDisable()
-    {
-        isSelected = false;
-    }
+    void OnDisable() => isSelected = false;
 }
