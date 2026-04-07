@@ -940,6 +940,21 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: AboutPanel
+    prefab: {fileID: 2841149510771220449, guid: 943c86369b1148e4b936f383d37cbfa9,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
+  - name: GraphicsPanel
+    prefab: {fileID: 2841149510771220449, guid: 675a966ac87472d42822550503540a40,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
+  - name: ControlPanel
+    prefab: {fileID: 2841149510771220449, guid: 0ad44c5133522f74fa22ed169bcffde9,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
 --- !u!114 &1699512827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1258,7 +1273,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!223 &2031947425
 Canvas:
   m_ObjectHideFlags: 0
