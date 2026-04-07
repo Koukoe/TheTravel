@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19e19bee50e77484caae909f0f10cf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasRenderMode: 2
+  canvasRenderMode: 1
   delay: 0
   _listeners: []
   clearFocused: 1
