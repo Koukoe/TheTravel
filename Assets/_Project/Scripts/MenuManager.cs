@@ -49,4 +49,9 @@ public class MenuManager : MonoBehaviour
         UIManager.Instance.Push("MainPanel");
         InputManager.Instance.EnableUIInput();
     }
+
+    public void ApplySettings(DataSetting d)
+    {
+        //d.masterVolume;
+    }
 }

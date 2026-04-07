@@ -41,10 +41,14 @@ public class SettingsPanel : MenuPanel
 
         applyBtn?.onClick.AddListener(() =>
         {
+            var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+            panel.Setup(onConfirm: OnApplyClicked, title: "", content: "");
         });
 
         defaultBtn?.onClick.AddListener(() =>
         {
+            var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+            panel.Setup(onConfirm: OnDefaultClicked, title: "", content: "");
         });
     }
 
@@ -70,9 +74,8 @@ public class SettingsPanel : MenuPanel
     {
         DataSettingSystem.Set(_temp);
         DataSettingSystem.Save();
-        Debug.Log("设置已应用并保存。");
-
-        // 这里调用方法来刷新当前的设置效果
+        MenuManager.Instance.ApplySettings(_temp);
+        Debug.Log("设置已应用并保存");
     }
 
     protected override GameObject DefaultFocused() => graphicsBtn != null ? graphicsBtn.gameObject : null;

@@ -99,6 +99,13 @@ public class UIManager : MonoBehaviour
         return basePanel;
     }
 
+    public T Push<T>(string path) where T : BasePanel
+    {
+        BasePanel panel = Push(path);
+        // 强制转换
+        return panel as T;
+    }
+
     /// <summary>
     /// 关闭栈当前顶层面板，恢复上一个面板
     /// </summary>
