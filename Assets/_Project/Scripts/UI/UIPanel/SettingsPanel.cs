@@ -19,6 +19,7 @@ public class SettingsPanel : MenuPanel
 
         graphicsBtn?.onClick.AddListener(() =>
         {
+            UIManager.Instance.Push("GraphicsPanel");
         });
 
         audioBtn?.onClick.AddListener(() =>
@@ -32,6 +33,7 @@ public class SettingsPanel : MenuPanel
 
         controlBtn?.onClick.AddListener(() =>
         {
+            UIManager.Instance.Push("ControlPanel");
         });
 
         applyBtn?.onClick.AddListener(() =>

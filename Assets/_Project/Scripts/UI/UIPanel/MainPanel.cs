@@ -8,6 +8,7 @@ public class MainPanel : MenuPanel
     [SerializeField] private Button saveBtn;
     [SerializeField] private Button loadBtn;
     [SerializeField] private Button settingsBtn;
+    [SerializeField] private Button aboutBtn;
     [SerializeField] private Button backBtn;
 
     protected override void Awake()
@@ -18,6 +19,7 @@ public class MainPanel : MenuPanel
         saveBtn?.onClick.AddListener(() => OnArchivesClicked());
         loadBtn?.onClick.AddListener(() => OnArchivesClicked(false));
         settingsBtn?.onClick.AddListener(OnSettingsClicked);
+        aboutBtn?.onClick.AddListener(OnAboutClicked);
         backBtn?.onClick.AddListener(OnBackClicked);
     }
 
@@ -35,6 +37,13 @@ public class MainPanel : MenuPanel
         if (UIManager.Instance.IsTransitioning) return;
         changeStyle(1);
         UIManager.Instance.Push("SettingsPanel");
+    }
+
+    private void OnAboutClicked()
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+        changeStyle(1);
+        UIManager.Instance.Push("AboutPanel");
     }
 
     protected override void OnBackClicked()

@@ -96,6 +96,7 @@ public static class DataArchivesSystem
 public static class DataSettingSystem
 {
     private static DataSetting _current;
+    private static DataSetting _temp;
 
     /// <summary>
     /// 保存设置数据 ( _ -> F )
