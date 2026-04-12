@@ -1,9 +1,34 @@
 fileFormatVersion: 2
-guid: db70c3d131b282b4ebd0de5ae8b43d73
+guid: 66fd2638c8fc1114f8d6918f9a829a7a
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deng
+    second: {fileID: 2100000, guid: 0d50041a0a42bd945a752a3088c4fdfa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: deng2
+    second: {fileID: 2100000, guid: 5c7af0b71098fca4c9e3964a481d3447, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tashen
+    second: {fileID: 2100000, guid: 98ab7af530d4a26419c620d04b5c7644, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wuding
+    second: {fileID: 2100000, guid: ee4fba8c29fb54648961076d6e35ec59, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zhuzi
+    second: {fileID: 2100000, guid: a7346ed138204da46acd9c297ef315f0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
