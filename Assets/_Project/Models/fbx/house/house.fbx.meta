@@ -1,54 +1,9 @@
 fileFormatVersion: 2
-guid: def4541117ebebf4299a289d758b67b2
+guid: 31a2880c91d3ccb4b8f6a407203789a3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: body
-    second: {fileID: 2100000, guid: ee88ef7e8f654a5449efa69f1199d7d8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: ceil
-    second: {fileID: 2100000, guid: 047d8379edd277546b6a9315f5c66d8a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: door
-    second: {fileID: 2100000, guid: b42d565dadaef5d4ca9d234922806393, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: doorframe
-    second: {fileID: 2100000, guid: 5f9ee0cc89b6d194dbde13e4db67fcf0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: doorhandle
-    second: {fileID: 2100000, guid: 91d8f4b2afb77b84c9819d02497348aa, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: glass
-    second: {fileID: 2100000, guid: 3e7db59813e582e4a8c6a7bf701a36a8, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: tower
-    second: {fileID: 2100000, guid: 7bb4de533d14a6948a3b7b0b8136a4ca, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: windowframe
-    second: {fileID: 2100000, guid: 362c5476d17b69c47a1353b8551fa3e7, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: "\u949F"
-    second: {fileID: 2100000, guid: 88e234b80ad6466459e34ac14e65c153, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
