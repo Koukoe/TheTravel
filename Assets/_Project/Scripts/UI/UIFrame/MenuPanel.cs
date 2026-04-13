@@ -13,8 +13,8 @@ public abstract class MenuPanel : BasePanel
     public override void OnOpen()
     {
         base.OnOpen();
-        if (clearFocused) { SetFocus(lastFocused ?? DefaultFocused()); }
-        else { SetFocus(DefaultFocused()); }
+        if (clearFocused) { SetFocus(DefaultFocused()); }
+        else { SetFocus(lastFocused ?? DefaultFocused()); }
         InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
@@ -29,6 +29,12 @@ public abstract class MenuPanel : BasePanel
     public override void Close(Action onAllFinished = null)
     {
         if (clearFocused) lastFocused = null;
+        else if (EventSystem.current != null)
+        {
+            GameObject current = EventSystem.current.currentSelectedGameObject;
+
+            if (current != null && current.transform.IsChildOf(transform)) lastFocused = current;
+        }
         InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
         ReleaseFocus();
         base.Close(onAllFinished);
