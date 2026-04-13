@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: b6df76ed3bd68af48b107ebc7db56976
+guid: b720381c67205ab45b72e8425d455e41
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,13 +7,18 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: frame
-    second: {fileID: 2100000, guid: 2c517626169d18e41a4ae445c9514324, type: 2}
+      name: doorframe
+    second: {fileID: 2100000, guid: f8557960f28c01448a8a8d3be37015f5, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: glass
-    second: {fileID: 2100000, guid: 7f65a3e3d855f3b4ea0e0ec18b642514, type: 2}
+      name: doormain
+    second: {fileID: 2100000, guid: 4e6d91c9c8297064cb8161cec46b4d55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handle
+    second: {fileID: 2100000, guid: 3d85d64105e59164b94d7b499bb97641, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
