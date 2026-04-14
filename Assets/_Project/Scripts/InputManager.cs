@@ -39,27 +39,40 @@ public class InputManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 切换玩家输入模式。
+    /// 玩家操作：移动、交互
     /// </summary>
     public void EnablePlayerInput()
     {
         _controls.UI.Disable();
+        _controls.Dialogue.Disable();
         _controls.All.Disable();
         _controls.Player.Enable();
     }
 
     /// <summary>
-    /// 切换UI输入模式。
+    /// 面板操作：取消 
     /// </summary>
-    public void EnableUIInput()
+    public void EnableUIInput()  // 其他操作在Eventsystem里，只是没必要再分一个
     {
         _controls.Player.Disable();
+        _controls.Dialogue.Disable();
         _controls.All.Disable();
         _controls.UI.Enable();
     }
 
     /// <summary>
-    /// 切换All输入模式。
+    /// 对话操作
+    /// </summary>
+    public void EnableDialogueInput()
+    {
+        _controls.Player.Disable();
+        _controls.UI.Disable();
+        _controls.All.Disable();
+        _controls.Dialogue.Enable();
+    }
+
+    /// <summary>
+    /// AnyKey
     /// </summary>
     public void EnableAllInput()
     {
@@ -73,5 +86,6 @@ public class InputManager : MonoBehaviour
 
     public GameInput.PlayerActions PlayerActions => _controls.Player;
     public GameInput.UIActions UIActions => _controls.UI;
+    public GameInput.DialogueActions DialogueActions => _controls.Dialogue;
     public GameInput.AllActions AllActions => _controls.All;
 }
