@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
 
+[DefaultExecutionOrder(-10)]
 public class PoolManager : MonoBehaviour
 {
     [Serializable]

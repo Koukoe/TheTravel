@@ -65,7 +65,7 @@ public class UIManager : MonoBehaviour
         if (isTransitioning && closingPanel != null && closingPanel.name.Contains(panelName))
         {
             BasePanel recoveredPanel = closingPanel;
-            recoveredPanel.Abort(); // 停止当前的 Close 协程
+            recoveredPanel.Abort();  // 停止当前的 Close 协程
             closingPanel = null;    // 清除离场标记
 
             recoveredPanel.transform.SetAsLastSibling();
@@ -119,7 +119,7 @@ public class UIManager : MonoBehaviour
 
         topPanel.Close(() =>
         {
-            Debug.Log($"[UI] Close回调触发. 当前关闭的Panel: {topPanel.name}, 标记的closingPanel: {(closingPanel != null ? closingPanel.name : "null")}");
+            Debug.Log($"当前关闭的Panel: {topPanel.name}, 标记的closingPanel: {(closingPanel != null ? closingPanel.name : "null")}");
             if (closingPanel == topPanel)
             {
                 PoolManager.Release(topPanel.gameObject);

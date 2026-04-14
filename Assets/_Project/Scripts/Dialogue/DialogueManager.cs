@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
@@ -26,14 +27,18 @@ public class DialogueManager : MonoBehaviour
     // 嗯对这个也是不必要的但是好像可以在这里填玩家的名字之类的吧，先不注释掉了
     [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
 
-    [Header("设置")]
-    // 是否在脚本启动时自动开始对话
-    [SerializeField] private bool playOnStart = false;
+    // [Header("设置")]
+    // 是否在脚本启动时自动开始对话, 对话数据需要从物体传入所以这个没用了
+    // [SerializeField] private bool playOnStart = false;
 
     // 解析后的完整数据库
     private DialogueDatabase database;
     // 当前播放到的对话索引
     private int currentIndex = -1;
+    // 当前播放到的对话ID
+    private string currentDialogueId = string.Empty;
+    // 运行时对话ID索引
+    private Dictionary<string, int> dialogueIndexById = new Dictionary<string, int>();
     // 角色ID到配置信息的映射字典
     private Dictionary<string, CharacterProfile> characterMap = new Dictionary<string, CharacterProfile>();
 
@@ -45,8 +50,10 @@ public class DialogueManager : MonoBehaviour
     private TextAsset dialogueJson;
 
     private const string DialoguePanelName = "DialoguePanel";
+    private const string DialogueOptionsPanelName = "DialogueOptionsPanel";
     private const string DialogueTextNodeName = "DialogueText";
     private const string TalkerNameNodeName = "TalkerName";
+    private const string EndToken = "END";
 
     private void Awake()
     {
@@ -67,10 +74,10 @@ public class DialogueManager : MonoBehaviour
         // 加载并解析 JSON
         DialogueLoad();
 
-        if (playOnStart)
-        {
-            DialogueStart();
-        }
+        // if (playOnStart)
+        // {
+        //     DialogueStart();
+        // }
     }
 
     // 用于从外部传入新的对话数据并开始对话
@@ -115,7 +122,7 @@ public class DialogueManager : MonoBehaviour
     {
         if (dialogueJson == null)
         {
-            Debug.LogError("未指定对话JSON文件。");
+            Debug.LogError("未指定对话JSON文件");
             return;
         }
 
@@ -123,7 +130,108 @@ public class DialogueManager : MonoBehaviour
 
         if (database == null || database.dialogues == null)
         {
-            Debug.LogError("JSON解析失败, 请检查格式或字段名是否匹配。");
+            Debug.LogError("JSON解析失败, 请检查格式或字段名是否匹配");
+            return;
+        }
+
+        NormalizeEndTokens();
+        BuildDialogueIndex();
+    }
+
+    // 将"End", "end", "END", 甚至是" eNd"之类的统一为 EndToken
+    private void NormalizeEndTokens()
+    {
+        if (database == null || database.dialogues == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < database.dialogues.Count; i++)
+        {
+            DialogueEntry entry = database.dialogues[i];
+            if (entry == null)
+            {
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(entry.id))
+            {
+                entry.id = entry.id.Trim();
+            }
+
+            if (!string.IsNullOrWhiteSpace(entry.nextId))
+            {
+                entry.nextId = entry.nextId.Trim();
+            }
+
+            if (IsEndToken(entry.nextId))
+            {
+                entry.nextId = EndToken;
+            }
+
+            if (entry.options == null)
+            {
+                continue;
+            }
+
+            for (int j = 0; j < entry.options.Count; j++)
+            {
+                DialogueOption option = entry.options[j];
+                if (option == null)
+                {
+                    continue;
+                }
+
+                if (!string.IsNullOrWhiteSpace(option.nextId))
+                {
+                    option.nextId = option.nextId.Trim();
+                }
+
+                if (IsEndToken(option.nextId))
+                {
+                    option.nextId = EndToken;
+                }
+            }
+        }
+    }
+
+    private bool IsEndToken(string value)
+    {
+        return !string.IsNullOrWhiteSpace(value) &&
+               string.Equals(value.Trim(), EndToken, StringComparison.OrdinalIgnoreCase);
+    }
+
+    private void BuildDialogueIndex()
+    {
+        dialogueIndexById.Clear();
+
+        if (database == null || database.dialogues == null)
+        {
+            return;
+        }
+
+        for (int i = 0; i < database.dialogues.Count; i++)
+        {
+            DialogueEntry entry = database.dialogues[i];
+            if (entry == null)
+            {
+                continue;
+            }
+
+            if (string.IsNullOrWhiteSpace(entry.id))
+            {
+                Debug.LogWarning($"第 {i} 条对话缺少 id, 无法被 nextId 精确跳转");
+                continue;
+            }
+
+            if (!dialogueIndexById.ContainsKey(entry.id))
+            {
+                dialogueIndexById.Add(entry.id, i);
+            }
+            else
+            {
+                Debug.LogWarning($"对话ID重复: {entry.id}，将使用首次出现的条目");
+            }
         }
     }
 
@@ -132,25 +240,26 @@ public class DialogueManager : MonoBehaviour
     {
         if (database == null || database.dialogues == null || database.dialogues.Count == 0)
         {
-            Debug.LogWarning("对话数据为空，无法开始。");
+            Debug.LogWarning("对话数据为空，无法开始");
             return;
         }
 
         var panel = UIManager.Instance.Show(DialoguePanelName, true);
         if (panel == null)
         {
-            Debug.LogError("打开 DialoguePanel 失败，请检查 UIManager/PoolManager 配置。");
+            Debug.LogError("打开 DialoguePanel 失败，请检查 UIManager/PoolManager 配置");
             return;
         }
 
         ResolveTextRefs(panel.transform);
         if (nameText == null || contentText == null)
         {
-            Debug.LogError("未能在 DialoguePanel 下找到 TalkerName/DialogueText 文本组件。");
+            Debug.LogError("未能在 DialoguePanel 下找到 TalkerName/DialogueText 文本组件");
             return;
         }
 
         currentIndex = 0;
+        currentDialogueId = GetDialogueIdByIndex(currentIndex);
         ShowCurrent();
     }
 
@@ -162,32 +271,166 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        // 对话未开始则开始对话(已弃用)
-        // if (currentIndex < 0)
-        // {
-        //     DialogueStart();
-        //     return;
-        // }
+        DialogueEntry currentEntry = GetCurrentEntry();
+        if (currentEntry == null)
+        {
+            return;
+        }
 
-        currentIndex++;
+        // 存在选项时，等待外部UI调用 SelectOption
+        if (currentEntry.options != null && currentEntry.options.Count > 0)
+        {
+            return;
+        }
 
-        if (currentIndex >= database.dialogues.Count)
+        AdvanceByNextId(currentEntry.nextId);
+    }
+
+    // 由选项按钮调用，按选项索引进入分支
+    public void SelectOption(int optionIndex)
+    {
+        DialogueEntry currentEntry = GetCurrentEntry();
+        if (currentEntry == null)
+        {
+            return;
+        }
+
+        if (currentEntry.options == null || currentEntry.options.Count == 0)
+        {
+            Debug.LogWarning("当前对话没有可选项, 请先调用 DialogueNext 或检查数据");
+            return;
+        }
+
+        if (optionIndex < 0 || optionIndex >= currentEntry.options.Count)
+        {
+            Debug.LogWarning($"无效选项索引: {optionIndex}");
+            return;
+        }
+
+        DialogueOption option = currentEntry.options[optionIndex];
+        if (option == null)
+        {
+            Debug.LogWarning("选项数据为空, 将尝试按顺序继续");
+            AdvanceSequentially();
+            return;
+        }
+
+        AdvanceByNextId(option.nextId);
+    }
+
+    public List<DialogueOption> GetCurrentOptions()
+    {
+        DialogueEntry entry = GetCurrentEntry();
+        if (entry == null || entry.options == null || entry.options.Count == 0)
+        {
+            return new List<DialogueOption>();
+        }
+
+        return entry.options;
+    }
+
+    public bool HasCurrentOptions()
+    {
+        DialogueEntry entry = GetCurrentEntry();
+        return entry != null && entry.options != null && entry.options.Count > 0;
+    }
+
+    private void AdvanceByNextId(string nextId)
+    {
+        if (IsEndToken(nextId))
         {
             DialogueEnd();
             return;
         }
 
+        if (string.IsNullOrWhiteSpace(nextId))
+        {
+            AdvanceSequentially();
+            return;
+        }
+
+        if (TryJumpTo(nextId.Trim()))
+        {
+            return;
+        }
+
+        Debug.LogWarning($"未找到 nextId 对应的对话: {nextId}，对话将结束");
+        DialogueEnd();
+    }
+
+    private void AdvanceSequentially()
+    {
+        int nextIndex = currentIndex + 1;
+        if (database == null || database.dialogues == null || nextIndex >= database.dialogues.Count)
+        {
+            DialogueEnd();
+            return;
+        }
+
+        currentIndex = nextIndex;
+        currentDialogueId = GetDialogueIdByIndex(currentIndex);
         ShowCurrent();
+    }
+
+    private bool TryJumpTo(string targetId)
+    {
+        if (string.IsNullOrWhiteSpace(targetId))
+        {
+            return false;
+        }
+
+        if (!dialogueIndexById.TryGetValue(targetId, out int targetIndex))
+        {
+            return false;
+        }
+
+        currentIndex = targetIndex;
+        currentDialogueId = targetId;
+        ShowCurrent();
+        return true;
+    }
+
+    private DialogueEntry GetCurrentEntry()
+    {
+        if (database == null || database.dialogues == null)
+        {
+            return null;
+        }
+
+        if (currentIndex < 0 || currentIndex >= database.dialogues.Count)
+        {
+            return null;
+        }
+
+        return database.dialogues[currentIndex];
+    }
+
+    private string GetDialogueIdByIndex(int index)
+    {
+        if (database == null || database.dialogues == null || index < 0 || index >= database.dialogues.Count)
+        {
+            return string.Empty;
+        }
+
+        DialogueEntry entry = database.dialogues[index];
+        if (entry == null || string.IsNullOrWhiteSpace(entry.id))
+        {
+            return string.Empty;
+        }
+
+        return entry.id;
     }
 
     // 结束对话并清空显示
     public void DialogueEnd()
     {
         currentIndex = -1;
+        currentDialogueId = string.Empty;
 
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
 
+        UIManager.Instance.Hide(DialogueOptionsPanelName);
         UIManager.Instance.Hide(DialoguePanelName);
     }
 
@@ -200,6 +443,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueEntry entry = database.dialogues[currentIndex];
+        currentDialogueId = GetDialogueIdByIndex(currentIndex);
 
         // 更新文本内容
         if (contentText != null)
@@ -209,6 +453,24 @@ public class DialogueManager : MonoBehaviour
 
         // 更新角色信息
         UpdateUIWithCharacter(entry.character);
+
+        RefreshOptionsPanel(entry);
+    }
+
+    private void RefreshOptionsPanel(DialogueEntry entry)
+    {
+        bool hasOptions = entry != null && entry.options != null && entry.options.Count > 0;
+        if (!hasOptions)
+        {
+            UIManager.Instance.Hide(DialogueOptionsPanelName);
+            return;
+        }
+
+        BasePanel panel = UIManager.Instance.Show(DialogueOptionsPanelName, true);
+        if (panel is DialogueOptionsPanel optionsPanel)
+        {
+            optionsPanel.RefreshOptions();
+        }
     }
 
     // 根据角色ID更新UI上的名字
@@ -228,7 +490,7 @@ public class DialogueManager : MonoBehaviour
         {
             // 如果没找到配置，则直接显示 ID
             if (nameText != null) nameText.text = charID;
-            Debug.LogWarning($"未找到角色 ID 为 {charID} 的配置。");
+            Debug.LogWarning($"未找到角色 ID 为 {charID} 的配置");
         }
     }
 

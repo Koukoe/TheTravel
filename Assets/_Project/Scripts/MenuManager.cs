@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(1)]
 public class MenuManager : MonoBehaviour
 {
     public static MenuManager Instance { get; private set; }
@@ -17,9 +18,10 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
+        InputManager.Instance.PlayerActions.Menu.performed += Menu;
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.PlayerActions.Menu.performed += Menu;
+
         }
     }
 
@@ -27,7 +29,7 @@ public class MenuManager : MonoBehaviour
     {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.PlayerActions.Menu.performed += Menu;
+            InputManager.Instance.PlayerActions.Menu.performed -= Menu;
         }
     }
 

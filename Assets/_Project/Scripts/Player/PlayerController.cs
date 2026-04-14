@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Vector2 inputVector = InputManager.Instance.GetMove();
-        Vector3 movement = new Vector3(inputVector.x, inputVector.y, 0);
+        Vector3 movement = new Vector3(inputVector.x, 0, inputVector.y);
 
         transform.position += movement * moveSpeed * Time.deltaTime;
     }

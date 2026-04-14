@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+[DefaultExecutionOrder(-1)]
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }

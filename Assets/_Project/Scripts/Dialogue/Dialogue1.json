@@ -8,7 +8,17 @@
         {
             "id": "2",
             "character": "NPC_002",
-            "content": "这是第二句话"
+            "content": "这是第二句话",
+            "options": [
+                {
+                    "content": "到3",
+                    "nextId": "3"
+                },
+                {
+                    "content": "到4",
+                    "nextId": "4"
+                }
+            ]
         },
         {
             "id": "3",
