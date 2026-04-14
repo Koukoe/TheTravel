@@ -361,8 +361,8 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 2703634460583628458}
   targetPos: {x: 0, y: 0}
 --- !u!1 &821460976620399294
@@ -624,8 +624,8 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 1394881009267178459}
   targetPos: {x: 0, y: 0}
 --- !u!1 &880432581086619828
@@ -1048,8 +1048,8 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 5452229607728861910}
   targetPos: {x: 0, y: 0}
 --- !u!1 &2171662433818965525
@@ -2465,8 +2465,8 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 2711385848698215470}
   targetPos: {x: 0, y: 0}
 --- !u!1 &6495827221050735230
@@ -2991,8 +2991,8 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 4701885948192677125}
   targetPos: {x: 0, y: 0}
 --- !u!1 &8066575764521011398
@@ -3415,8 +3415,8 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 3131842735155148402}
   targetPos: {x: 0, y: 0}
 --- !u!1 &8820292262734137057
@@ -3816,7 +3816,7 @@ MonoBehaviour:
         m_RotationOrder: 0
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
-  useHideLogicForSuspend: 1
+    offset: {x: -514, y: 0}
+  useHideLogicForSuspend: 0
   rectTransform: {fileID: 6010461643461243043}
   targetPos: {x: 0, y: 0}

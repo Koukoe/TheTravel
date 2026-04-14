@@ -28,7 +28,7 @@ public class MainPanel : MenuPanel
     private void OnArchivesClicked(bool isSave = true)
     {
         if (UIManager.Instance.IsTransitioning) return;
-        changeStyle(0);
+        changeStyle(-1);
         if (UIManager.Instance.Push("ArchivesPanel") is ArchivesPanel p) p.Init();
     }
 
