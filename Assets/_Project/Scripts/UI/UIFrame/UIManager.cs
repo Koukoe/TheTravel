@@ -267,7 +267,10 @@ public class UIManager : MonoBehaviour
     /// </summary>
     public void ClearList()
     {
-        foreach (var p in _singleList) PoolManager.Release(p.gameObject);
+        foreach (var p in _singleList)
+        {
+            if (p != null) PoolManager.Release(p.gameObject);
+        }
         _singleList.Clear();
     }
 }
