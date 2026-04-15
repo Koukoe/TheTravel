@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7499761113525253447}
   m_Layer: 0
-  m_Name: "\u65B9\u5F62\u5C16\u9876\u623F\u5B50"
+  m_Name: "\u65B9\u5F62\u5C16\u9876\u623F\u5B50 2"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,6 +280,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e8ffe65ce6856444b9e0e1fc6d90c4e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 968ea9dd303c59848820292d08084d35, type: 2}
+    - target: {fileID: -7511558181221131132, guid: e8ffe65ce6856444b9e0e1fc6d90c4e1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 075732c6fabe2ee48a1bcbe4c7d47580, type: 2}
     - target: {fileID: 919132149155446097, guid: e8ffe65ce6856444b9e0e1fc6d90c4e1,
         type: 3}
       propertyPath: m_Name
