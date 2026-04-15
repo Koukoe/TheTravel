@@ -5,55 +5,34 @@ using System.Collections;
 using System;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler, IUIAppearanceSource
+public abstract class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler, IUIAppearanceSource
 {
     [SerializeField] private bool isProvider = false;
     public bool IsProvider => isProvider;
-
-    [Header("Selected")]
-    public EaseParam scaleEase;
-    public float duration = 0.2f;
-    public float selectScale = 1.4f;
 
     [Header("Disabled")]
     [Range(0, 1)] public float disabledAlpha = 0.6f;
     [SerializeField] private Selectable selectable;
     [SerializeField] private CanvasGroup canvasGroup;
-
-    private Vector3 currentScaleMult = Vector3.one;
     private float currentAlphaMult = 1f;
 
-    public Vector3 PosOffset => Vector3.zero;
-    public Vector3 AngleOffset => Vector3.zero;
-    public Vector3 ScaleMult => currentScaleMult;
+    public virtual Vector3 PosOffset => Vector3.zero;
+    public virtual Vector3 AngleOffset => Vector3.zero;
+    public virtual Vector3 ScaleMult => Vector3.one;
     public float AlphaMult => currentAlphaMult;
-
-    private Vector3 initialScale;
-    private Coroutine scaleRoutine;
 
     void Awake()
     {
         if (selectable == null) selectable = GetComponent<Selectable>();
         if (canvasGroup == null) canvasGroup = GetComponent<CanvasGroup>();
-
-        Init();
     }
-    void Init()
+    void Start() => Init();
+
+    public virtual void Init()
     {
-        initialScale = Vector3.one;
-
-        // 初始化数据状态
-        currentScaleMult = initialScale;
         currentAlphaMult = 1f;
-
-        if (!isProvider)
-        {
-            transform.localScale = initialScale;
-        }
-
         SyncInteractable();
     }
-
 
     public void SetInteractable(bool state)
     {
@@ -82,59 +61,18 @@ public class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler, IU
                 else EventSystem.current.SetSelectedGameObject(null);
             }
 
-            if (scaleRoutine != null) StopCoroutine(scaleRoutine);
-
-            // 复位数据并根据模式决定是否驱动组件
-            currentScaleMult = initialScale;
-            if (!isProvider) transform.localScale = initialScale;
+            ResetAppearance();
         }
     }
 
-    public void OnSelect(BaseEventData eventData)
+    public virtual void OnSelect(BaseEventData eventData)
     {
         if (selectable != null && !selectable.interactable) return;
-
-        if (scaleRoutine != null) StopCoroutine(scaleRoutine);
-        scaleRoutine = StartCoroutine(AnimateScale(initialScale * selectScale));
     }
 
-    public void OnDeselect(BaseEventData eventData)
-    {
-        if (scaleRoutine != null) StopCoroutine(scaleRoutine);
-        scaleRoutine = StartCoroutine(AnimateScale(initialScale));
-    }
+    public virtual void OnDeselect(BaseEventData eventData) { }
 
-    private IEnumerator AnimateScale(Vector3 target)
-    {
-        float t = 0;
-        // Provider 模式，从变量读取当前进度而非组件
-        Vector3 start = isProvider ? currentScaleMult : transform.localScale;
+    protected abstract void ResetAppearance();
 
-        while (t < duration)
-        {
-            t += Time.unscaledDeltaTime;
-
-            currentScaleMult = scaleEase.Lerp(start, target, t / duration);
-
-            if (!isProvider) transform.localScale = currentScaleMult;
-            yield return null;
-        }
-
-        currentScaleMult = target;
-        if (!isProvider)
-        {
-            transform.localScale = target;
-        }
-    }
-
-    private void OnDisable()
-    {
-        if (scaleRoutine != null) StopCoroutine(scaleRoutine);
-
-        currentScaleMult = initialScale;
-        if (!isProvider)
-        {
-            transform.localScale = initialScale;  // 强制复位
-        }
-    }
+    protected virtual void OnDisable() { ResetAppearance(); }
 }

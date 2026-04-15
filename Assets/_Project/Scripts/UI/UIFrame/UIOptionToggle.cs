@@ -14,12 +14,19 @@ public class UIOptionToggle : MonoBehaviour, ISelectHandler, IDeselectHandler, I
     public UnityEvent<int> onValueChanged;  // 广播档位
 
     [SerializeField] private int currentIndex = 0;
-    private bool isSelected = false;
+    protected bool isSelected = false;
+
+    // 动态初始化
+    public virtual void Initialize(string[] newOptions, int startIndex = 0)
+    {
+        options = newOptions;
+        SetIndex(startIndex, false);
+    }
 
     public void SetIndex(int index, bool triggerEvent = false)
     {
         currentIndex = Mathf.Clamp(index, 0, options.Length - 1);
-        UpdateDisplay();
+        UpdateDisplay(true);
         if (triggerEvent) onValueChanged?.Invoke(currentIndex);
     }
 
@@ -41,8 +48,8 @@ public class UIOptionToggle : MonoBehaviour, ISelectHandler, IDeselectHandler, I
 
             if (currentIndex != lastIndex)
             {
-                UpdateDisplay();
-                onValueChanged?.Invoke(currentIndex); // 触发通知
+                UpdateDisplay(false);
+                onValueChanged?.Invoke(currentIndex);  // 触发通知
             }
 
             // 告诉 EventSystem 不要将左右键信号传给别的组件
@@ -50,7 +57,7 @@ public class UIOptionToggle : MonoBehaviour, ISelectHandler, IDeselectHandler, I
         }
     }
 
-    private void UpdateDisplay()
+    protected virtual void UpdateDisplay(bool init = true)
     {
         if (valueText != null && options.Length > 0)
         {
@@ -58,7 +65,7 @@ public class UIOptionToggle : MonoBehaviour, ISelectHandler, IDeselectHandler, I
         }
     }
 
-    void OnEnable() => isSelected = false;
+    protected virtual void OnEnable() => isSelected = false;
 
-    void OnDisable() => isSelected = false;
+    protected virtual void OnDisable() => isSelected = false;
 }
