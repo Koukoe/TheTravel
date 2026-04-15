@@ -1779,10 +1779,10 @@ MonoBehaviour:
   - {fileID: 789431742610370000}
   backBtn: {fileID: 0}
   titleText: {fileID: 0}
-  yGap: 225
+  yGap: 250
   zIncrement: 125
-  unselectedAlpha: 0.5
-  hideAlpha: 0.25
+  unselectedAlpha: 0.4
+  hideAlpha: 0.2
   smoothTime: 0.15
   slotSources:
   - {fileID: 7204698337414604347}

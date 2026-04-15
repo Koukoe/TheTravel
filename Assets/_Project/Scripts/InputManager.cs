@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -43,6 +44,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void EnablePlayerInput()
     {
+        UnityEngine.Debug.Log("切换至 Player Map");
         _controls.UI.Disable();
         _controls.Dialogue.Disable();
         _controls.All.Disable();
@@ -54,6 +56,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void EnableUIInput()  // 其他操作在Eventsystem里，只是没必要再分一个
     {
+        UnityEngine.Debug.Log("切换至 UI Map");
         _controls.Player.Disable();
         _controls.Dialogue.Disable();
         _controls.All.Disable();
@@ -65,6 +68,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void EnableDialogueInput()
     {
+        UnityEngine.Debug.Log("切换至 Dialogue Map");
         _controls.Player.Disable();
         _controls.UI.Disable();
         _controls.All.Disable();
@@ -76,8 +80,10 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void EnableAllInput()
     {
+        UnityEngine.Debug.Log("切换至 All Map");
         _controls.Player.Disable();
         _controls.UI.Disable();
+        _controls.Dialogue.Disable();
         _controls.All.Enable();
     }
 

@@ -4,12 +4,12 @@ using System.Collections;
 
 public class UIButtonStateScale : UIButtonState
 {
-    [Header("Selected Animation")]
+    [Header("Selected")]
     public EaseParam scaleEase;
     public float duration = 0.2f;
     public float selectScale = 1.4f;
 
-    private Vector3 initialScale;
+    private Vector3 initialScale = Vector3.one;
     private Vector3 currentScaleMult = Vector3.one;
     private Coroutine scaleRoutine;
 
