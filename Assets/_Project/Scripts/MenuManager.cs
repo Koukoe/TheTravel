@@ -18,6 +18,7 @@ public class MenuManager : MonoBehaviour
 
     private void OnEnable()
     {
+        Debug.Log("订阅 Menu");
         InputManager.Instance.PlayerActions.Menu.performed += Menu;
         if (InputManager.Instance != null)
         {

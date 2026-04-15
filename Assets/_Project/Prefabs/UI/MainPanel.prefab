@@ -776,6 +776,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 1184064476380251935}
+  canvasGroup: {fileID: 3453800767926326135}
   scaleEase:
     type: 0
     curve:
@@ -786,9 +789,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 1184064476380251935}
-  canvasGroup: {fileID: 3453800767926326135}
 --- !u!1 &1156796449177038663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,6 +1302,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 8490067733586533676}
+  canvasGroup: {fileID: 691291924693827505}
   scaleEase:
     type: 0
     curve:
@@ -1312,9 +1315,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 8490067733586533676}
-  canvasGroup: {fileID: 691291924693827505}
 --- !u!1 &3227372901129307380
 GameObject:
   m_ObjectHideFlags: 0
@@ -1565,6 +1565,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 1146654716431113376}
+  canvasGroup: {fileID: 5397484324159718214}
   scaleEase:
     type: 0
     curve:
@@ -1575,9 +1578,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 1146654716431113376}
-  canvasGroup: {fileID: 5397484324159718214}
 --- !u!1 &4007919496707568324
 GameObject:
   m_ObjectHideFlags: 0
@@ -1828,6 +1828,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 0}
+  canvasGroup: {fileID: 3453800767926326135}
   scaleEase:
     type: 0
     curve:
@@ -1838,9 +1841,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 0}
-  canvasGroup: {fileID: 3453800767926326135}
 --- !u!1 &5063533378496394175
 GameObject:
   m_ObjectHideFlags: 0
@@ -1989,6 +1989,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 1816409058856658999}
+  canvasGroup: {fileID: 3216494843202908881}
   scaleEase:
     type: 0
     curve:
@@ -1999,9 +2002,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 1816409058856658999}
-  canvasGroup: {fileID: 3216494843202908881}
 --- !u!1 &5770791797603292497
 GameObject:
   m_ObjectHideFlags: 0
@@ -2617,6 +2617,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 8934029956320794968}
+  canvasGroup: {fileID: 5875562041433275238}
   scaleEase:
     type: 0
     curve:
@@ -2627,9 +2630,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 8934029956320794968}
-  canvasGroup: {fileID: 5875562041433275238}
 --- !u!1 &7429149203796617598
 GameObject:
   m_ObjectHideFlags: 0
@@ -3143,6 +3143,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 8997380335770747363}
+  canvasGroup: {fileID: 3160108899499456853}
   scaleEase:
     type: 0
     curve:
@@ -3153,9 +3156,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 8997380335770747363}
-  canvasGroup: {fileID: 3160108899499456853}
 --- !u!1 &8188819860734084560
 GameObject:
   m_ObjectHideFlags: 0
@@ -3555,7 +3555,7 @@ MonoBehaviour:
   saveBtn: {fileID: 8997380335770747363}
   loadBtn: {fileID: 8934029956320794968}
   settingsBtn: {fileID: 1184064476380251935}
-  aboutBtn: {fileID: 0}
+  aboutBtn: {fileID: 1816409058856658999}
   backBtn: {fileID: 8490067733586533676}
 --- !u!1 &9100329419255403148
 GameObject:
