@@ -68,6 +68,8 @@ public class DialogueOptionsPanel : MenuPanel
             runtimeButtons.Add(button);
         }
 
+        ConfigureButtonNavigation();
+
         if (runtimeButtons.Count == 0)
         {
             focusedOptionIndex = 0;
@@ -108,6 +110,11 @@ public class DialogueOptionsPanel : MenuPanel
 
         if (!current.transform.IsChildOf(transform))
         {
+            // 栈面板关闭后，如果焦点不在对话选项面板，则拉回到上次选中项
+            if (UIManager.Instance != null && UIManager.Instance.Count == 0)
+            {
+                TryRestoreFocus();
+            }
             return;
         }
 
@@ -126,6 +133,36 @@ public class DialogueOptionsPanel : MenuPanel
         if (index >= 0)
         {
             focusedOptionIndex = index;
+        }
+    }
+
+    // 配置选项按钮的导航，防止焦点越界以及可以循环比较酷
+    private void ConfigureButtonNavigation()
+    {
+        int count = runtimeButtons.Count;
+        if (count == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < count; i++)
+        {
+            Button current = runtimeButtons[i];
+            if (current == null)
+            {
+                continue;
+            }
+
+            Button up = runtimeButtons[(i - 1 + count) % count];
+            Button down = runtimeButtons[(i + 1) % count];
+
+            Navigation nav = current.navigation;
+            nav.mode = Navigation.Mode.Explicit;
+            nav.selectOnUp = up;
+            nav.selectOnDown = down;
+            nav.selectOnLeft = null;
+            nav.selectOnRight = null;
+            current.navigation = nav;
         }
     }
 
