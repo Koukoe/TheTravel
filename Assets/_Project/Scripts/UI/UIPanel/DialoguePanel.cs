@@ -5,13 +5,15 @@ using UnityEditor;
 
 public class DialoguePanel : BasePanel
 {
+    private bool sawStackPanelWhileDialogueActive = false;  // 用于解决对话中打开其他面板后输入变化导致无法继续对话的问题
+
     public override void OnOpen()
     {
         base.OnOpen();
         // 绑定输入
         InputManager.Instance.DialogueActions.Submit.performed += Next;
 
-        // 为什么MenuManager写的是只有玩家输入才能打开MainMenu...
+        // 为什么MenuManager写的是只有玩家输入才能打开MainPanel...
         InputManager.Instance.DialogueActions.Cancel.performed += Menu;
 
         // 切换至对话输入模式，禁用玩家移动操作
@@ -22,6 +24,8 @@ public class DialoguePanel : BasePanel
         {
             EventSystem.current.SetSelectedGameObject(null);
         }
+
+        sawStackPanelWhileDialogueActive = false;
     }
 
     public override void OnClose()
@@ -32,6 +36,30 @@ public class DialoguePanel : BasePanel
 
         // 恢复玩家输入模式
         InputManager.Instance.EnablePlayerInput();
+        sawStackPanelWhileDialogueActive = false;
+    }
+
+    // 用于解决对话中打开其他面板后输入变化导致无法继续对话的问题
+    private void LateUpdate()
+    {
+        if (!gameObject.activeInHierarchy || UIManager.Instance == null)
+        {
+            return;
+        }
+
+        bool hasStackPanel = UIManager.Instance.Count > 0;
+        if (hasStackPanel)
+        {
+            sawStackPanelWhileDialogueActive = true;
+            return;
+        }
+
+        // 栈面板(如MainPanel)关闭后，恢复对话输入图，保证对话可继续
+        if (sawStackPanelWhileDialogueActive)
+        {
+            InputManager.Instance.EnableDialogueInput();
+            sawStackPanelWhileDialogueActive = false;
+        }
     }
 
     private void Next(InputAction.CallbackContext context)
@@ -46,7 +74,7 @@ public class DialoguePanel : BasePanel
 
     }
 
-    // 为什么MenuManager写的是只有玩家输入才能打开MainMenu...
+    // 为什么MenuManager写的是只有玩家输入才能打开MainPanel...
     public void Menu(InputAction.CallbackContext context)
     {
         // 对话选项按钮没被模糊，有点搞，，，
