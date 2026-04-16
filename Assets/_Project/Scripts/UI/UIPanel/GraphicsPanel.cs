@@ -7,7 +7,7 @@ public class GraphicsPanel : SettingSubPanel
 
     public override void RefreshUI()
     {
-        // 全屏：Temp.isFullScreen 本身就是 0/1 的 int，直接作为索引
+        // 全屏索引（0 或 1）
         fullscreenToggle.SetIndex(Temp.isFullScreen, false);
         // 分辨率索引
         resolutionToggle.SetIndex(Temp.resolutionIndex, false);
