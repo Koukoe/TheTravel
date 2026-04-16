@@ -29,21 +29,28 @@ public class DataSetting
     public int sfxVolumeIndex = 2;
     public int ambVolumeIndex = 2;
 
-    public int resolutionIndex = 0;  // 分辨率索引
-    public bool isFullScreen = true;
+    public int resolutionIndex = 1;  // 分辨率索引
+    public int isFullScreen = 1;
     public int qualityLevel = 2;
     public bool vSync = true;
 
     public DataSetting()
     {
-        SystemLanguage sysLang = UnityEngine.Application.systemLanguage;
+        // SystemLanguage sysLang = UnityEngine.Application.systemLanguage;
 
-        if (sysLang == SystemLanguage.Chinese || sysLang == SystemLanguage.ChineseSimplified)
-            language = "zh-CN";
-        else if (sysLang == SystemLanguage.ChineseTraditional)
-            language = "zh-TW";
-        else
-            language = "en-US";
+        // if (sysLang == SystemLanguage.Chinese || sysLang == SystemLanguage.ChineseSimplified)
+        //     language = "zh-CN";
+        // else if (sysLang == SystemLanguage.ChineseTraditional)
+        //     language = "zh-TW";
+        // else
+        //     language = "en-US";
+        Resolution current = Screen.currentResolution;
+        masterVolumeIndex = 2;
+        musicVolumeIndex = 2;
+        sfxVolumeIndex = 2;
+        ambVolumeIndex = 2;
+        resolutionIndex = 1; // 默认 1080p
+        isFullScreen = 1;
     }
 }
 
