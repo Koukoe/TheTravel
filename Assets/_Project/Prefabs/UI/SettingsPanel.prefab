@@ -148,6 +148,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 7719718300809153739}
+  canvasGroup: {fileID: 4386237056232546719}
   scaleEase:
     type: 0
     curve:
@@ -158,9 +161,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 7719718300809153739}
-  canvasGroup: {fileID: 4386237056232546719}
 --- !u!1 &1188359478564359038
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,6 +309,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 789431742610370000}
+  canvasGroup: {fileID: 4316763645012169959}
   scaleEase:
     type: 0
     curve:
@@ -319,9 +322,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 789431742610370000}
-  canvasGroup: {fileID: 4316763645012169959}
 --- !u!1 &1582537874056343431
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,6 +670,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 3814565143263063109}
+  canvasGroup: {fileID: 5799829610930010210}
   scaleEase:
     type: 0
     curve:
@@ -680,9 +683,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 3814565143263063109}
-  canvasGroup: {fileID: 5799829610930010210}
 --- !u!1 &1651774908946692700
 GameObject:
   m_ObjectHideFlags: 0
@@ -977,7 +977,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 7422237640992592351}
+    m_SelectOnUp: {fileID: 2296195309930043256}
     m_SelectOnDown: {fileID: 7719718300809153739}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -1031,6 +1031,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 6807727594359856693}
+  canvasGroup: {fileID: 3949424636248726726}
   scaleEase:
     type: 0
     curve:
@@ -1041,9 +1044,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 6807727594359856693}
-  canvasGroup: {fileID: 3949424636248726726}
 --- !u!1 &2737831773830969329
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,6 +1192,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 3419736207631967208}
+  canvasGroup: {fileID: 7667583353273828317}
   scaleEase:
     type: 0
     curve:
@@ -1202,9 +1205,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 3419736207631967208}
-  canvasGroup: {fileID: 7667583353273828317}
 --- !u!1 &2841149510771220449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2040,7 +2040,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 789431742610370000}
-    m_SelectOnDown: {fileID: 7422237640992592351}
+    m_SelectOnDown: {fileID: 6807727594359856693}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 0
@@ -2093,6 +2093,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 2296195309930043256}
+  canvasGroup: {fileID: 5707599231923559577}
   scaleEase:
     type: 0
     curve:
@@ -2103,9 +2106,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 2296195309930043256}
-  canvasGroup: {fileID: 5707599231923559577}
 --- !u!1 &6543147083680196204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2624,7 +2624,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 8393790908641737851}
   m_OnClick:
     m_PersistentCalls:
@@ -2654,6 +2654,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 7422237640992592351}
+  canvasGroup: {fileID: 6695271946997743646}
   scaleEase:
     type: 0
     curve:
@@ -2664,6 +2667,3 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 7422237640992592351}
-  canvasGroup: {fileID: 6695271946997743646}

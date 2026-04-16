@@ -13,7 +13,6 @@ public class SettingsPanel : MenuPanel
 
     private static DataSetting _temp;
     public static DataSetting Temp => _temp;
-
     protected override void Awake()
     {
         base.Awake();

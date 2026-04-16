@@ -150,6 +150,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 5308914165417367971}
+  canvasGroup: {fileID: 7686261962696820808}
   scaleEase:
     type: 0
     curve:
@@ -160,9 +163,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 5308914165417367971}
-  canvasGroup: {fileID: 7686261962696820808}
 --- !u!114 &5786372045950052030
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -177,19 +177,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 4470784646330721853}
   options:
-  - "1920\xD71080"
-  - "2560 \xD7 1440"
-  - "3840 \xD7 2160"
+  - 1280 x 720
+  - 1920 x 1080
+  - 2560 x 1440
+  - 3840 x 2160
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2841149510771220449}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 8442810299222952392}
+        m_TargetAssemblyTypeName: GraphicsPanel, Assembly-CSharp
+        m_MethodName: OnResolutionChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -546,6 +547,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 789431742610370000}
+  canvasGroup: {fileID: 4316763645012169959}
   scaleEase:
     type: 0
     curve:
@@ -556,9 +560,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 789431742610370000}
-  canvasGroup: {fileID: 4316763645012169959}
 --- !u!114 &3751455400231372642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -573,24 +574,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   valueText: {fileID: 2072414438911271422}
   options:
-  - "\u5168\u5C4F"
   - "\u7A97\u53E3\u5316"
+  - "\u5168\u5C4F"
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2841149510771220449}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 8442810299222952392}
+        m_TargetAssemblyTypeName: GraphicsPanel, Assembly-CSharp
+        m_MethodName: OnFullscreenChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  currentIndex: 1
+  currentIndex: 4
 --- !u!1 &1590856804387310272
 GameObject:
   m_ObjectHideFlags: 0
@@ -739,6 +740,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 3814565143263063109}
+  canvasGroup: {fileID: 5799829610930010210}
   scaleEase:
     type: 0
     curve:
@@ -749,9 +753,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 3814565143263063109}
-  canvasGroup: {fileID: 5799829610930010210}
 --- !u!1 &2841149510771220449
 GameObject:
   m_ObjectHideFlags: 0
@@ -764,6 +765,7 @@ GameObject:
   - component: {fileID: 4142013328007940084}
   - component: {fileID: 8380502530804277797}
   - component: {fileID: 97257818198251456}
+  - component: {fileID: 8442810299222952392}
   m_Layer: 5
   m_Name: GraphicsPanel
   m_TagString: Untagged
@@ -858,6 +860,26 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &8442810299222952392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2841149510771220449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39d54face82eaad46b021d16e2ebebd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasRenderMode: 0
+  delay: 0
+  _listeners: []
+  clearFocused: 1
+  defaultBtn: {fileID: 789431742610370000}
+  backBtn: {fileID: 3814565143263063109}
+  fullscreenToggle: {fileID: 3751455400231372642}
+  resolutionToggle: {fileID: 5786372045950052030}
 --- !u!1 &3137582411439984441
 GameObject:
   m_ObjectHideFlags: 0
@@ -1924,7 +1946,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 1920x1080
+  m_text: 1920 x 1080
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28c2001092e906844a7130417ef136bb, type: 2}
   m_sharedMaterial: {fileID: 1092750428647962576, guid: 28c2001092e906844a7130417ef136bb,
@@ -2208,6 +2230,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 675296101563590118}
+  canvasGroup: {fileID: 6848844632019405085}
   scaleEase:
     type: 0
     curve:
@@ -2218,9 +2243,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 675296101563590118}
-  canvasGroup: {fileID: 6848844632019405085}
 --- !u!114 &5024224926178204472
 MonoBehaviour:
   m_ObjectHideFlags: 0
