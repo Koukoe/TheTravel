@@ -3,7 +3,37 @@ guid: d439b90a1b691ab4c98806e95107a3dd
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gan.001
+    second: {fileID: 2100000, guid: 22137ce7381d4e0448ff56d5d1ffa77c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: gan2
+    second: {fileID: 2100000, guid: 696824e1d4e7459438186b8fd2ccb72d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lvse.001
+    second: {fileID: 2100000, guid: b6dcc4d69f662b746913067f93e216a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pan
+    second: {fileID: 2100000, guid: 696824e1d4e7459438186b8fd2ccb72d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: pen.001
+    second: {fileID: 2100000, guid: 696824e1d4e7459438186b8fd2ccb72d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u5E95\u5EA7"
+    second: {fileID: 2100000, guid: 696824e1d4e7459438186b8fd2ccb72d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
