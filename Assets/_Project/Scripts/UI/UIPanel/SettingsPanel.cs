@@ -13,15 +13,6 @@ public class SettingsPanel : MenuPanel
 
     private static DataSetting _temp;
     public static DataSetting Temp => _temp;
-    
-    private readonly (int width, int height)[] resolutionPresets = new (int, int)[]
-    {
-        (1280, 720),
-        (1920, 1080),
-        (2560, 1440),
-        (3840, 2160)
-    };//分辨率预设列表（宽, 高）
-
     protected override void Awake()
     {
         base.Awake();
