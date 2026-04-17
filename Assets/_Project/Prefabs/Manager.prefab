@@ -91,6 +91,11 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: MainBrokenPanel
+    prefab: {fileID: 8820292262734137057, guid: e880c1b69a4df6341bbad70a9d7d0b49,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
 --- !u!114 &427507558724491852
 MonoBehaviour:
   m_ObjectHideFlags: 0

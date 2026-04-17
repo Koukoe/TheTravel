@@ -556,6 +556,32 @@ PrefabInstance:
       propertyPath: gameCameraCanvasObj
       value: 
       objectReference: {fileID: 661922376}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[8].name
+      value: MainBrokenPanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[8].prefab
+      value: 
+      objectReference: {fileID: 8820292262734137057, guid: e880c1b69a4df6341bbad70a9d7d0b49,
+        type: 3}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[8].maxSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[8].prewarmCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

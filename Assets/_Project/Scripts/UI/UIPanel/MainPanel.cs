@@ -23,7 +23,7 @@ public class MainPanel : MenuPanel
         backBtn?.onClick.AddListener(OnBackClicked);
     }
 
-    protected override GameObject DefaultFocused() => saveBtn != null ? saveBtn.gameObject : null;
+    protected override GameObject DefaultFocused() => saveBtn != null && saveBtn.interactable ? saveBtn.gameObject : loadBtn.gameObject;
 
     private void OnArchivesClicked(bool isSave = true)
     {
