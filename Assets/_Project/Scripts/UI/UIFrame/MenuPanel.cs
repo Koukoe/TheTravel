@@ -15,7 +15,6 @@ public abstract class MenuPanel : BasePanel
         base.OnOpen();
         if (clearFocused) { SetFocus(DefaultFocused()); }
         else { SetFocus(lastFocused ?? DefaultFocused()); }
-        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
     public override void OnResume()
@@ -23,7 +22,6 @@ public abstract class MenuPanel : BasePanel
         base.OnResume();
         // 没有则选默认
         SetFocus(lastFocused ?? DefaultFocused());
-        InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
     }
 
     public override void Close(Action onAllFinished = null)
@@ -35,7 +33,6 @@ public abstract class MenuPanel : BasePanel
 
             if (current != null && current.transform.IsChildOf(transform)) lastFocused = current;
         }
-        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
         ReleaseFocus();
         base.Close(onAllFinished);
     }
@@ -49,7 +46,6 @@ public abstract class MenuPanel : BasePanel
 
             if (current != null && current.transform.IsChildOf(transform)) lastFocused = current;
         }
-        InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
         ReleaseFocus();
         base.Suspend(onAllFinished);
     }
@@ -69,13 +65,4 @@ public abstract class MenuPanel : BasePanel
         if (EventSystem.current != null)
             EventSystem.current.SetSelectedGameObject(null);
     }
-
-    protected virtual void OnBackClicked()
-    {
-        if (UIManager.Instance.IsTransitioning) return;
-
-        UIManager.Instance.Pop();
-    }
-
-    private void OnCancelPressed(InputAction.CallbackContext context) => OnBackClicked();
 }

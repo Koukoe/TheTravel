@@ -53,6 +53,17 @@ public class UIManager : MonoBehaviour
         else { Destroy(gameObject); }
     }
 
+    private void OnEnable() => InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;
+    private void OnDisable()
+    {
+        if (InputManager.Instance != null) InputManager.Instance.UIActions.Cancel.performed -= OnCancelPressed;
+    }
+
+    private void OnCancelPressed(UnityEngine.InputSystem.InputAction.CallbackContext context)
+    {
+        if (isTransitioning) return;
+        Peek()?.OnBackClicked();
+    }
 
     public BasePanel Peek() => _singleStack.Count > 0 ? _singleStack.Peek() : null;
     public int Count => _singleStack.Count;
@@ -132,6 +143,7 @@ public class UIManager : MonoBehaviour
                 else
                 {
                     isTransitioning = false;
+                    InputManager.Instance.SwitchPlayerMode(true);
                 }
             }
         });
@@ -153,6 +165,7 @@ public class UIManager : MonoBehaviour
             PoolManager.Release(panel.gameObject);
         }
         isTransitioning = false;
+        InputManager.Instance.SwitchPlayerMode(true);
     }
 
 

@@ -8,6 +8,9 @@ public abstract class BasePanel : MonoBehaviour
     [SerializeField] private CanvasRender canvasRenderMode = CanvasRender.SYS2D;
     public CanvasRender CanvasRenderMode => canvasRenderMode;
 
+    [SerializeField] private bool isCancelClosable = false;
+    public bool IsCancelClosable => isCancelClosable;
+
     public float delay = 0f;
 
     private bool _isTransitioning = false;
@@ -86,6 +89,12 @@ public abstract class BasePanel : MonoBehaviour
     {
         foreach (var listener in _listeners)
             if (listener != null) listener.SuspendStyle = s;
+    }
+
+    public virtual void OnBackClicked()  // Stack 用
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+        if (isCancelClosable) UIManager.Instance.Pop();
     }
 
     private void ExecuteWithCallback(Action<UIListener, Action> actionRef, Action on)

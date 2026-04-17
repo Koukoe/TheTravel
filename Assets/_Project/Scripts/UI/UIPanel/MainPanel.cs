@@ -47,10 +47,9 @@ public class MainPanel : MenuPanel
         Debug.Log("About Clicked");
     }
 
-    protected override void OnBackClicked()
+    public override void OnBackClicked()
     {
         base.OnBackClicked();
         EffectManager.Instance.SetBackgroundBlur(false);
-        InputManager.Instance.SwitchPlayerMode(true);
     }
 }
