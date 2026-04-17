@@ -39,7 +39,7 @@ public class ConfirmPanel : MenuPanel
         _onCancel = onCancel;
     }
 
-    protected override GameObject DefaultFocused() => confirmBtn != null ? confirmBtn.gameObject : null;
+    protected override GameObject DefaultFocused() => cancelBtn != null ? cancelBtn.gameObject : null;
 
     public override void Close(Action onAllFinished = null)
     {

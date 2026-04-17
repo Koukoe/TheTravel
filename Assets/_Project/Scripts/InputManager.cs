@@ -40,6 +40,7 @@ public class InputManager : MonoBehaviour
         _controls.PlayerDia.Disable();
         _controls.All.Disable();
         if (isSys) { SetPlayerStaticMode(false); }
+        else { SetPlayerStaticMode(true); }
         _controls.UI.Enable();
     }
 

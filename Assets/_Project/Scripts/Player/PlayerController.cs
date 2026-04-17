@@ -16,11 +16,13 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         InputManager.Instance.PlayerDynamicActions.Interact.performed += Interact;
+        InputManager.Instance.PlayerStaticActions.Book.performed += Book;
     }
 
     private void OnDisable()
     {
         InputManager.Instance.PlayerDynamicActions.Interact.performed -= Interact;
+        InputManager.Instance.PlayerStaticActions.Book.performed -= Book;
     }
 
     void Update()
@@ -32,4 +34,15 @@ public class PlayerController : MonoBehaviour
     }
 
     private void Interact(InputAction.CallbackContext context) { }
+
+    private void Book(InputAction.CallbackContext context)
+    {
+        if (InputManager.Instance.UIActions.enabled) { UIManager.Instance.Pop(); }
+        else
+        {
+            UIManager.Instance.Push("BookPanel");
+            InputManager.Instance.SwitchUIMode(false);
+        }
+
+    }
 }
