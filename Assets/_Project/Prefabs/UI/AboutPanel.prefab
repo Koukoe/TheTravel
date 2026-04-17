@@ -414,6 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRenderMode: 0
+  isCancelClosable: 1
   delay: 0
   _listeners: []
   clearFocused: 1

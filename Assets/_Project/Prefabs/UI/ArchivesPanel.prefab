@@ -1755,6 +1755,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRenderMode: 1
+  isCancelClosable: 1
   delay: 0
   _listeners:
   - {fileID: 4050823358228035260}

@@ -19,7 +19,7 @@ public static class GameStatic
         if (!DataGlobalSystem.Get().hasEnteredGame)
         {
             // 打开新的游戏
-            InputManager.Instance.EnableAllInput();
+            InputManager.Instance.SwitchAllMode();
             UIManager.Instance.Push("StartPanel");
         }
     }

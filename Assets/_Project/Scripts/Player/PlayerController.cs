@@ -15,12 +15,12 @@ public class PlayerController : MonoBehaviour
 
     private void OnEnable()
     {
-        InputManager.Instance.PlayerActions.Interact.performed += Interact;
+        InputManager.Instance.PlayerDynamicActions.Interact.performed += Interact;
     }
 
     private void OnDisable()
     {
-        InputManager.Instance.PlayerActions.Interact.performed -= Interact;
+        InputManager.Instance.PlayerDynamicActions.Interact.performed -= Interact;
     }
 
     void Update()
