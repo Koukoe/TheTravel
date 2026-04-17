@@ -22,3 +22,5 @@ GameObject obj = PoolManager.Global.Get("对象名称");
 GameObject obj = PoolManager.Scene.Get("对象名称");
 
 PoolManager.Release(obj);
+
+WhiteTown的喷泉涟漪效果可以通过直接调用FountainWaterRipple.CreateRipple()方法来实现
