@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6614503743746714112}
   - component: {fileID: 2072414438911271422}
   - component: {fileID: 4213589297530196929}
+  - component: {fileID: 4548241940539289640}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -66,7 +67,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 5.0
+  m_text: 1.0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 28c2001092e906844a7130417ef136bb, type: 2}
   m_sharedMaterial: {fileID: 1092750428647962576, guid: 28c2001092e906844a7130417ef136bb,
@@ -151,7 +152,7 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -159,11 +160,11 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.05
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -171,8 +172,8 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.05
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -200,6 +201,18 @@ MonoBehaviour:
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 2770899447339455744}
   targetPos: {x: 0, y: 0}
+--- !u!225 &4548241940539289640
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1090086067731769644}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1188359478564359038
 GameObject:
   m_ObjectHideFlags: 0
@@ -350,6 +363,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 789431742610370000}
+  canvasGroup: {fileID: 4316763645012169959}
   scaleEase:
     type: 0
     curve:
@@ -360,9 +376,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 789431742610370000}
-  canvasGroup: {fileID: 4316763645012169959}
 --- !u!114 &3751455400231372642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -382,31 +395,16 @@ MonoBehaviour:
   - 1.5
   - 2.0
   - 2.5
-  - 3.0
-  - 3.5
-  - 4.0
-  - 4.5
-  - 5.0
-  - 5.5
-  - 6.0
-  - 6.5
-  - 7.0
-  - 7.5
-  - 8.0
-  - 8.5
-  - 9.0
-  - 9.5
-  - 10.0
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2841149510771220449}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
+      - m_Target: {fileID: 2309962699553968157}
+        m_TargetAssemblyTypeName: ControlPanel, Assembly-CSharp
+        m_MethodName: OnSensitivityChanged
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -561,6 +559,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 0
+  disabledAlpha: 0.6
+  selectable: {fileID: 3814565143263063109}
+  canvasGroup: {fileID: 5799829610930010210}
   scaleEase:
     type: 0
     curve:
@@ -571,9 +572,6 @@ MonoBehaviour:
       m_RotationOrder: 4
   duration: 0.2
   selectScale: 1.4
-  disabledAlpha: 0.6
-  selectable: {fileID: 3814565143263063109}
-  canvasGroup: {fileID: 5799829610930010210}
 --- !u!1 &2841149510771220449
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +584,7 @@ GameObject:
   - component: {fileID: 4142013328007940084}
   - component: {fileID: 8380502530804277797}
   - component: {fileID: 97257818198251456}
+  - component: {fileID: 2309962699553968157}
   m_Layer: 5
   m_Name: ControlPanel
   m_TagString: Untagged
@@ -678,6 +677,28 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &2309962699553968157
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2841149510771220449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e996cf9217983474b8959fa660730a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  canvasRenderMode: 0
+  delay: 0
+  _listeners:
+  - {fileID: 7467603023268582976}
+  - {fileID: 4213589297530196929}
+  - {fileID: 331582717384146336}
+  clearFocused: 1
+  defaultBtn: {fileID: 789431742610370000}
+  backBtn: {fileID: 3814565143263063109}
+  sensitivityToggle: {fileID: 3751455400231372642}
 --- !u!1 &4168403805027360541
 GameObject:
   m_ObjectHideFlags: 0
@@ -829,7 +850,7 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -837,11 +858,11 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.1
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -850,7 +871,7 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0
-    offset: {x: -150, y: 0}
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -1029,7 +1050,7 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -1038,10 +1059,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0
-    offset: {x: -150, y: 0}
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -1049,8 +1070,8 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.1
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0

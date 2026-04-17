@@ -22,7 +22,7 @@ public class DataSetting
 {
     public string language;
 
-    public float sensitivity;
+    public int sensitivityIndex = 2; 
 
     public int masterVolumeIndex = 2;
     public int musicVolumeIndex = 2;

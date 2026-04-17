@@ -36,6 +36,7 @@ public class SettingsPanel : MenuPanel
         controlBtn?.onClick.AddListener(() =>
         {
             UIManager.Instance.Push("ControlPanel");
+            Debug.Log("Control Clicked");
         });
 
         applyBtn?.onClick.AddListener(() =>

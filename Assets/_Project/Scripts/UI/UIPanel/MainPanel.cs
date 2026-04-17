@@ -44,6 +44,7 @@ public class MainPanel : MenuPanel
         if (UIManager.Instance.IsTransitioning) return;
         changeStyle(1);
         UIManager.Instance.Push("AboutPanel");
+        Debug.Log("About Clicked");
     }
 
     protected override void OnBackClicked()

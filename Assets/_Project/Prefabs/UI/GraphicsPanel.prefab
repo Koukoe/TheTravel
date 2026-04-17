@@ -348,7 +348,7 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -356,11 +356,11 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.05
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -368,8 +368,8 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.25
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -874,7 +874,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasRenderMode: 0
   delay: 0
-  _listeners: []
+  _listeners:
+  - {fileID: 7467603023268582976}
+  - {fileID: 4213589297530196929}
+  - {fileID: 2575083807493248538}
+  - {fileID: 2607475600322529289}
+  - {fileID: 8975157015066244406}
+  - {fileID: 1468834876818485525}
+  - {fileID: 331582717384146336}
   clearFocused: 1
   defaultBtn: {fileID: 789431742610370000}
   backBtn: {fileID: 3814565143263063109}
@@ -1031,28 +1038,28 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.3
+    delay: 0.25
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.3
+    delay: 0.05
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -1231,28 +1238,28 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.2
+    delay: 0.3
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
+    duration: 0.2
     delay: 0
-    offset: {x: -150, y: 0}
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -1431,28 +1438,28 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.3
+    delay: 0.2
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.3
+    delay: 0.1
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -1631,28 +1638,28 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.4
+    delay: 0.1
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.4
+    delay: 0.2
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -1831,7 +1838,7 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -1840,10 +1847,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0
-    offset: {x: -150, y: 0}
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -1851,8 +1858,8 @@ MonoBehaviour:
         m_PostInfinity: 2
         m_RotationOrder: 4
     duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    delay: 0.3
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
@@ -2031,28 +2038,28 @@ MonoBehaviour:
   isProvider: 0
   openConfig:
     ease:
-      type: 17
+      type: 8
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.4
+    delay: 0.15
+    offset: {x: 0, y: -300}
   closeConfig:
     ease:
-      type: 16
+      type: 7
       curve:
         serializedVersion: 2
         m_Curve: []
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-    duration: 0.5
-    delay: 0
-    offset: {x: -150, y: 0}
+    duration: 0.4
+    delay: 0.15
+    offset: {x: 0, y: -300}
   resumeConfig:
   - ease:
       type: 0
