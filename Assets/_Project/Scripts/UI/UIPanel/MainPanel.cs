@@ -51,6 +51,6 @@ public class MainPanel : MenuPanel
     {
         base.OnBackClicked();
         EffectManager.Instance.SetBackgroundBlur(false);
-        InputManager.Instance.EnablePlayerInput();
+        InputManager.Instance.SwitchPlayerMode(true);
     }
 }

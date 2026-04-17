@@ -22,6 +22,6 @@ public class StartPanel : BasePanel
         if (UIManager.Instance.IsTransitioning) return;
 
         UIManager.Instance.Pop();
-        InputManager.Instance.EnablePlayerInput();
+        InputManager.Instance.SwitchPlayerMode(true);
     }
 }

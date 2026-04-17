@@ -44,6 +44,8 @@ public abstract class BasePanel : MonoBehaviour
         foreach (var listener in _listeners)
             if (listener != null && listener.isActiveAndEnabled) listener.Resume();
 
+        // changeStyle(-1);  暂且没用
+
         _delayRoutine = StartCoroutine(ExcuteAfterDelay(() =>
         {
             _isTransitioning = false;
@@ -78,6 +80,12 @@ public abstract class BasePanel : MonoBehaviour
             OnSuspend();
             onAllFinished?.Invoke();
         });
+    }
+
+    protected void changeStyle(int s)
+    {
+        foreach (var listener in _listeners)
+            if (listener != null) listener.SuspendStyle = s;
     }
 
     private void ExecuteWithCallback(Action<UIListener, Action> actionRef, Action on)

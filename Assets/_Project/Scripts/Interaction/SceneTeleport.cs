@@ -50,7 +50,7 @@ public class SceneTeleport : MonoBehaviour
         // 确保清理订阅，防止内存泄漏
         if (isSubscribed && interactHandler != null)
         {
-            InputManager.Instance.PlayerActions.Interact.performed -= interactHandler;
+            InputManager.Instance.PlayerDynamicActions.Interact.performed -= interactHandler;
         }
     }
 
@@ -85,7 +85,7 @@ public class SceneTeleport : MonoBehaviour
         if (isSubscribed) return;
 
         interactHandler = ctx => PerformTeleport();
-        InputManager.Instance.PlayerActions.Interact.performed += interactHandler;
+        InputManager.Instance.PlayerDynamicActions.Interact.performed += interactHandler;
         isSubscribed = true;
     }
 
@@ -93,7 +93,7 @@ public class SceneTeleport : MonoBehaviour
     {
         if (!isSubscribed || interactHandler == null) return;
 
-        InputManager.Instance.PlayerActions.Interact.performed -= interactHandler;
+        InputManager.Instance.PlayerDynamicActions.Interact.performed -= interactHandler;
         isSubscribed = false;
     }
 
