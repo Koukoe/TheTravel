@@ -908,7 +908,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueJson: {fileID: 4900000, guid: 89d66d402b013bb4eb7684f4a1a66f85, type: 3}
+  dialogueJsonList:
+  - {fileID: 4900000, guid: 89d66d402b013bb4eb7684f4a1a66f85, type: 3}
+  dialogueIndex: 0
 --- !u!114 &1405556098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1061,7 +1063,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueJson: {fileID: 4900000, guid: 10359b69d24f68f449ec4ab50d7bf052, type: 3}
+  dialogueJsonList:
+  - {fileID: 4900000, guid: 10359b69d24f68f449ec4ab50d7bf052, type: 3}
+  - {fileID: 4900000, guid: 89d66d402b013bb4eb7684f4a1a66f85, type: 3}
+  dialogueIndex: 0
 --- !u!114 &1847021912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1555,7 +1560,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueJson: {fileID: 4900000, guid: 20bab65ef42a7b745a3f09094ceb29fb, type: 3}
+  dialogueJsonList:
+  - {fileID: 4900000, guid: 20bab65ef42a7b745a3f09094ceb29fb, type: 3}
+  - {fileID: 4900000, guid: 10359b69d24f68f449ec4ab50d7bf052, type: 3}
+  - {fileID: 4900000, guid: 89d66d402b013bb4eb7684f4a1a66f85, type: 3}
+  dialogueIndex: 0
 --- !u!1 &2030902347 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1583908107981469599, guid: c5240a486a22d12449e3f8de7ad4c734,

@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
 
     // 运行时加载的对话数据来源
     private TextAsset dialogueJson;
+    // 当前对话来源物体
+    private DialogueOnObj activeDialogueSource;
 
     private const string DialoguePanelName = "DialoguePanel";
     private const string DialogueOptionsPanelName = "DialogueOptionsPanel";
@@ -83,8 +85,14 @@ public class DialogueManager : MonoBehaviour
     // 用于从外部传入新的对话数据并开始对话
     public void StartWith(TextAsset json)
     {
+        StartWith(json, null);
+    }
+
+    public void StartWith(TextAsset json, DialogueOnObj source)
+    {
         if (json == null) return;
         dialogueJson = json;
+        activeDialogueSource = source;
         DialogueLoad();
         DialogueStart();
     }
@@ -320,7 +328,43 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        ApplyOptionEffects(option.effects);
         AdvanceByNextId(option.nextId);
+    }
+
+    private void ApplyOptionEffects(List<DialogueEffect> effects)
+    {
+        if (effects == null || effects.Count == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            DialogueEffect effect = effects[i];
+            if (effect == null)
+            {
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(effect.SetDialogueIndex))
+            {
+                if (activeDialogueSource == null)
+                {
+                    Debug.LogWarning("当前对话没有来源物体, 无法设置对话索引");
+                    continue;
+                }
+
+                if (!int.TryParse(effect.SetDialogueIndex.Trim(), out int nextDialogueIndex))
+                {
+                    Debug.LogWarning($"SetDialogueIndex 参数不是有效整数: {effect.SetDialogueIndex}");
+                    continue;
+                }
+
+                activeDialogueSource.SetDialogueIndex(nextDialogueIndex);
+                continue;
+            }
+        }
     }
 
     public List<DialogueOption> GetCurrentOptions()
@@ -431,6 +475,7 @@ public class DialogueManager : MonoBehaviour
     {
         currentIndex = -1;
         currentDialogueId = string.Empty;
+        activeDialogueSource = null;
 
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
