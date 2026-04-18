@@ -7,7 +7,7 @@ using TMPro;
 
 public class DialogueOptionsPanel : MenuPanel
 {
-    private const string TemplateNodeName = "DlgOptBtn";
+    private const string TemplateNodeName = "DialogueOptionButtonTemplate";
 
     private Button templateButton;
     private readonly List<Button> runtimeButtons = new List<Button>();
@@ -61,7 +61,7 @@ public class DialogueOptionsPanel : MenuPanel
             }
 
             Button button = Instantiate(templateButton, templateButton.transform.parent);
-            button.gameObject.name = $"DlgOptBtn_{i}";
+            button.gameObject.name = $"DialogueOptionButton_{i}";
             button.gameObject.SetActive(true);
 
             TMP_Text text = button.GetComponentInChildren<TMP_Text>(true);
@@ -148,7 +148,7 @@ public class DialogueOptionsPanel : MenuPanel
         templateButton = templateNode.GetComponent<Button>();
         if (templateButton == null)
         {
-            Debug.LogError("DlgOptBtn 模板缺少 Button 组件");
+            Debug.LogError("DialogueOptionButtonTemplate 模板缺少 Button 组件");
             return;
         }
 

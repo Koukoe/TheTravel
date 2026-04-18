@@ -51,8 +51,8 @@ public class DialogueManager : MonoBehaviour
 
     private const string DialoguePanelName = "DialoguePanel";
     private const string DialogueOptionsPanelName = "DialogueOptionsPanel";
-    private const string DialogueTextNodeName = "DialogueText";
-    private const string TalkerNameNodeName = "TalkerName";
+    private const string DialogueContentTextNodeName = "DialogueContentText";
+    private const string DialogueNameTextNodeName = "DialogueNameText";
     private const string EndToken = "END";
 
     private void Awake()
@@ -72,7 +72,7 @@ public class DialogueManager : MonoBehaviour
         // 初始化角色映射表
         BuildCharacterMap();
         // 加载并解析 JSON
-        DialogueLoad();
+        // DialogueLoad();
 
         // if (playOnStart)
         // {
@@ -259,7 +259,7 @@ public class DialogueManager : MonoBehaviour
         ResolveTextRefs(panel.transform);
         if (nameText == null || contentText == null)
         {
-            Debug.LogError("未能在 DialoguePanel 下找到 TalkerName/DialogueText 文本组件");
+            Debug.LogError("未能在 DialoguePanel 下找到 DialogueNameText/DialogueContentText 文本组件");
             return;
         }
 
@@ -524,8 +524,8 @@ public class DialogueManager : MonoBehaviour
     {
         if (root == null) return;
 
-        nameText = FindTextByNodeName(root, TalkerNameNodeName);
-        contentText = FindTextByNodeName(root, DialogueTextNodeName);
+        nameText = FindTextByNodeName(root, DialogueNameTextNodeName);
+        contentText = FindTextByNodeName(root, DialogueContentTextNodeName);
     }
 
     private TMP_Text FindTextByNodeName(Transform root, string nodeName)

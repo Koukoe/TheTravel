@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1667000549858139191}
   - component: {fileID: 7082368892615607372}
   m_Layer: 5
-  m_Name: TalkerName
+  m_Name: DialogueNameText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ GameObject:
   - component: {fileID: 7072455264362935496}
   - component: {fileID: 4346708526496568421}
   m_Layer: 5
-  m_Name: DialogueText
+  m_Name: DialogueContentText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -361,5 +361,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRenderMode: 2
+  isCancelClosable: 0
   delay: 0
   _listeners: []

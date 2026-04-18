@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 411386278857460675}
   - component: {fileID: 7550814944245599480}
   m_Layer: 0
-  m_Name: DlgOptBtn
+  m_Name: DialogueOptionButtonTemplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
