@@ -12,8 +12,26 @@
         },
         {
             "id": "3",
-            "character": "NPC_003",
-            "content": "这是2第三句话"
+            "character": "3号NPC",
+            "content": "下次的对话json被改为什么",
+            "options": [
+                {
+                    "content": "Dilaogue1",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "0"
+                        }
+                    ]
+                },
+                {
+                    "content": "Dilaogue2",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "1"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id": "4",

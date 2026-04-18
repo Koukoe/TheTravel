@@ -96,6 +96,11 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: ConfirmPanel
+    prefab: {fileID: 2841149510771220449, guid: db3e267ce0fe33442b26dc0766456bc4,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
 --- !u!114 &427507558724491852
 MonoBehaviour:
   m_ObjectHideFlags: 0

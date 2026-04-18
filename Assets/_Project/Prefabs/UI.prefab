@@ -212,7 +212,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4266904980378140617}
   - component: {fileID: 2916973369736164367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BlurVolume
   m_TagString: Untagged
   m_Icon: {fileID: 0}

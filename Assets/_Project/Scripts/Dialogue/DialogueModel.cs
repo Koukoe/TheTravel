@@ -17,10 +17,17 @@ public class DialogueOption
     public string content;
     // 选项对应的下一句对话 ID，为空表示按照顺序继续，"END" 表示对话结束
     public string nextId;
+    // 选项效果列表, 用列表是因为以后可能会有别的效果
+    public List<DialogueEffect> effects = new List<DialogueEffect>();
+}
 
-    // TODO
-    // 选项
-    // public string eventId;
+// 选项效果
+[Serializable]
+public class DialogueEffect
+{
+    // 将对话来源物体的 dialogueIndex 设置为指定值
+    // 写法: { "SetDialogueIndex": "2" }
+    public string SetDialogueIndex;
 }
 
 // 单条对话条目
