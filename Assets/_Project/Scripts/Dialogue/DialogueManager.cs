@@ -27,6 +27,9 @@ public class DialogueManager : MonoBehaviour
     // 嗯对这个也是不必要的但是好像可以在这里填玩家的名字之类的吧，先不注释掉了
     [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
 
+    [Header("文本播放速度")]
+    [SerializeField, Min(0f)] private float typewriterCharInterval = 0.05f;
+
     // [Header("设置")]
     // 是否在脚本启动时自动开始对话, 对话数据需要从物体传入所以这个没用了
     // [SerializeField] private bool playOnStart = false;
@@ -52,6 +55,9 @@ public class DialogueManager : MonoBehaviour
     private DialogueOnObj activeDialogueSource;
     private Coroutine closePanelsRoutine;
     private Coroutine startDialogueRoutine;
+    private Coroutine typingRoutine;
+    private string currentFullContent = string.Empty;
+    private bool isTypingContent = false;
 
     private const string DialoguePanelName = "DialoguePanel";
     private const string DialogueOptionsPanelName = "DialogueOptionsPanel";
@@ -325,6 +331,12 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        if (isTypingContent)
+        {
+            CompleteCurrentContentInstantly();
+            return;
+        }
+
         DialogueEntry currentEntry = GetCurrentEntry();
         if (currentEntry == null)
         {
@@ -425,6 +437,16 @@ public class DialogueManager : MonoBehaviour
         return entry != null && entry.options != null && entry.options.Count > 0;
     }
 
+    public void SetTypewriterCharInterval(float interval)
+    {
+        typewriterCharInterval = Mathf.Max(0f, interval);
+    }
+
+    public float GetTypewriterCharInterval()
+    {
+        return typewriterCharInterval;
+    }
+
     private void AdvanceByNextId(string nextId)
     {
         if (IsEndToken(nextId))
@@ -517,9 +539,17 @@ public class DialogueManager : MonoBehaviour
         currentIndex = -1;
         currentDialogueId = string.Empty;
         activeDialogueSource = null;
+        currentFullContent = string.Empty;
+        isTypingContent = false;
 
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
+
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
 
         if (closePanelsRoutine != null)
         {
@@ -565,15 +595,98 @@ public class DialogueManager : MonoBehaviour
 
         DialogueEntry entry = database.dialogues[currentIndex];
         currentDialogueId = GetDialogueIdByIndex(currentIndex);
+        currentFullContent = entry != null ? entry.content : string.Empty;
 
-        // 更新文本内容
+        if (UIManager.Instance != null && UIManager.Instance.Peek() is DialogueOptionsPanel)
+        {
+            UIManager.Instance.Pop();
+        }
+
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        isTypingContent = true;
+
         if (contentText != null)
         {
-            contentText.text = entry.content;
+            contentText.text = string.Empty;
         }
 
         // 更新角色信息
         UpdateUIWithCharacter(entry.character);
+
+        typingRoutine = StartCoroutine(TypeCurrentContent(entry));
+    }
+
+    private IEnumerator TypeCurrentContent(DialogueEntry entry)
+    {
+        if (contentText == null)
+        {
+            isTypingContent = false;
+            typingRoutine = null;
+            ShowOptionsAfterTyping(entry);
+            yield break;
+        }
+
+        if (string.IsNullOrEmpty(currentFullContent))
+        {
+            contentText.text = string.Empty;
+            isTypingContent = false;
+            typingRoutine = null;
+            ShowOptionsAfterTyping(entry);
+            yield break;
+        }
+
+        for (int i = 0; i < currentFullContent.Length; i++)
+        {
+            contentText.text += currentFullContent[i];
+
+            if (typewriterCharInterval > 0f)
+            {
+                yield return new WaitForSeconds(typewriterCharInterval);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        isTypingContent = false;
+        typingRoutine = null;
+        ShowOptionsAfterTyping(entry);
+    }
+
+    private void CompleteCurrentContentInstantly()
+    {
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        if (contentText != null)
+        {
+            contentText.text = currentFullContent;
+        }
+
+        isTypingContent = false;
+
+        DialogueEntry entry = GetCurrentEntry();
+        if (entry != null)
+        {
+            ShowOptionsAfterTyping(entry);
+        }
+    }
+
+    private void ShowOptionsAfterTyping(DialogueEntry entry)
+    {
+        if (entry == null)
+        {
+            return;
+        }
 
         RefreshOptionsPanel(entry);
     }
@@ -652,6 +765,12 @@ public class DialogueManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
         if (Instance == this) Instance = null;
     }
 }

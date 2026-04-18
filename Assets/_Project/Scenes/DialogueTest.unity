@@ -523,7 +523,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1592536910445248481, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2060166330}
+      addedObject: {fileID: 2060166338}
   m_SourcePrefab: {fileID: 100100000, guid: deabcb973bdd1b84ba87ca93c9696dda, type: 3}
 --- !u!1 &611694358 stripped
 GameObject:
@@ -1577,7 +1577,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 510570523}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2060166330
+--- !u!114 &2060166338
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1590,6 +1590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   characters: []
+  typewriterCharInterval: 0.05
 --- !u!20 &2113425036 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4841702424587807249, guid: 5b47b98cc82fe1549878fc163e22274b,
