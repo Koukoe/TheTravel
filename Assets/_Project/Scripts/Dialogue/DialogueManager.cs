@@ -244,7 +244,12 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        var panel = UIManager.Instance.Show(DialoguePanelName, true);
+        BasePanel panel = UIManager.Instance.Peek();
+        if (!(panel is DialoguePanel))
+        {
+            panel = UIManager.Instance.Push(DialoguePanelName);
+        }
+
         if (panel == null)
         {
             Debug.LogError("打开 DialoguePanel 失败，请检查 UIManager/PoolManager 配置");
@@ -430,8 +435,15 @@ public class DialogueManager : MonoBehaviour
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
 
-        UIManager.Instance.Hide(DialogueOptionsPanelName);
-        UIManager.Instance.Hide(DialoguePanelName);
+        if (UIManager.Instance.Peek() is DialogueOptionsPanel)
+        {
+            UIManager.Instance.Pop();
+        }
+
+        if (UIManager.Instance.Peek() is DialoguePanel)
+        {
+            UIManager.Instance.Pop();
+        }
     }
 
     // 显示当前索引的内容
@@ -462,11 +474,19 @@ public class DialogueManager : MonoBehaviour
         bool hasOptions = entry != null && entry.options != null && entry.options.Count > 0;
         if (!hasOptions)
         {
-            UIManager.Instance.Hide(DialogueOptionsPanelName);
+            if (UIManager.Instance.Peek() is DialogueOptionsPanel)
+            {
+                UIManager.Instance.Pop();
+            }
             return;
         }
 
-        BasePanel panel = UIManager.Instance.Show(DialogueOptionsPanelName, true);
+        BasePanel panel = UIManager.Instance.Peek();
+        if (!(panel is DialogueOptionsPanel))
+        {
+            panel = UIManager.Instance.Push(DialogueOptionsPanelName);
+        }
+
         if (panel is DialogueOptionsPanel optionsPanel)
         {
             optionsPanel.RefreshOptions();
