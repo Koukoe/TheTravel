@@ -50,6 +50,8 @@ public class DialogueManager : MonoBehaviour
     private TextAsset dialogueJson;
     // 当前对话来源物体
     private DialogueOnObj activeDialogueSource;
+    private Coroutine closePanelsRoutine;
+    private Coroutine startDialogueRoutine;
 
     private const string DialoguePanelName = "DialoguePanel";
     private const string DialogueOptionsPanelName = "DialogueOptionsPanel";
@@ -252,6 +254,24 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        if (startDialogueRoutine != null)
+        {
+            StopCoroutine(startDialogueRoutine);
+            startDialogueRoutine = null;
+        }
+
+        startDialogueRoutine = StartCoroutine(StartDialogueWithCleanup());
+    }
+
+    private IEnumerator StartDialogueWithCleanup()
+    {
+        while (UIManager.Instance != null && UIManager.Instance.IsTransitioning)
+        {
+            yield return null;
+        }
+
+        yield return CleanupResidualDialoguePanels();
+
         BasePanel panel = UIManager.Instance.Peek();
         if (!(panel is DialoguePanel))
         {
@@ -261,19 +281,40 @@ public class DialogueManager : MonoBehaviour
         if (panel == null)
         {
             Debug.LogError("打开 DialoguePanel 失败，请检查 UIManager/PoolManager 配置");
-            return;
+            startDialogueRoutine = null;
+            yield break;
         }
 
         ResolveTextRefs(panel.transform);
         if (nameText == null || contentText == null)
         {
             Debug.LogError("未能在 DialoguePanel 下找到 DialogueNameText/DialogueContentText 文本组件");
-            return;
+            startDialogueRoutine = null;
+            yield break;
         }
 
         currentIndex = 0;
         currentDialogueId = GetDialogueIdByIndex(currentIndex);
         ShowCurrent();
+        startDialogueRoutine = null;
+    }
+
+    private IEnumerator CleanupResidualDialoguePanels()
+    {
+        if (UIManager.Instance == null)
+        {
+            yield break;
+        }
+
+        while (UIManager.Instance.Peek() is DialogueOptionsPanel || UIManager.Instance.Peek() is DialoguePanel)
+        {
+            UIManager.Instance.Pop();
+
+            while (UIManager.Instance.IsTransitioning)
+            {
+                yield return null;
+            }
+        }
     }
 
     // 播放下一句对话
@@ -480,15 +521,38 @@ public class DialogueManager : MonoBehaviour
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
 
+        if (closePanelsRoutine != null)
+        {
+            StopCoroutine(closePanelsRoutine);
+            closePanelsRoutine = null;
+        }
+
+        closePanelsRoutine = StartCoroutine(CloseDialoguePanelsFromStack());
+    }
+
+    private IEnumerator CloseDialoguePanelsFromStack()
+    {
+        if (UIManager.Instance == null)
+        {
+            yield break;
+        }
+
         if (UIManager.Instance.Peek() is DialogueOptionsPanel)
         {
             UIManager.Instance.Pop();
+        }
+
+        while (UIManager.Instance.IsTransitioning)
+        {
+            yield return null;
         }
 
         if (UIManager.Instance.Peek() is DialoguePanel)
         {
             UIManager.Instance.Pop();
         }
+
+        closePanelsRoutine = null;
     }
 
     // 显示当前索引的内容
