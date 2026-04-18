@@ -67,8 +67,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Talker's name Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 33a7a91154836784ea920bd75b0e1417, type: 2}
-  m_sharedMaterial: {fileID: 4078519472341241625, guid: 33a7a91154836784ea920bd75b0e1417,
+  m_fontAsset: {fileID: 11400000, guid: c771e74b6aa095b45bc5674b41007757, type: 2}
+  m_sharedMaterial: {fileID: -5283053758413213972, guid: c771e74b6aa095b45bc5674b41007757,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -202,8 +202,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Dialogue Text
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 28c2001092e906844a7130417ef136bb, type: 2}
-  m_sharedMaterial: {fileID: 1092750428647962576, guid: 28c2001092e906844a7130417ef136bb,
+  m_fontAsset: {fileID: 11400000, guid: c771e74b6aa095b45bc5674b41007757, type: 2}
+  m_sharedMaterial: {fileID: -5283053758413213972, guid: c771e74b6aa095b45bc5674b41007757,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -331,7 +331,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.19607843}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
