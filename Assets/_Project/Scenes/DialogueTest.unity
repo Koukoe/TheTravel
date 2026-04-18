@@ -1064,9 +1064,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueJsonList:
+  - {fileID: 4900000, guid: 20bab65ef42a7b745a3f09094ceb29fb, type: 3}
   - {fileID: 4900000, guid: 10359b69d24f68f449ec4ab50d7bf052, type: 3}
-  - {fileID: 4900000, guid: 89d66d402b013bb4eb7684f4a1a66f85, type: 3}
-  dialogueIndex: 0
+  dialogueIndex: 1
 --- !u!114 &1847021912
 MonoBehaviour:
   m_ObjectHideFlags: 0

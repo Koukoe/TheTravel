@@ -84,7 +84,7 @@ public class DialogueOptionsPanel : MenuPanel
         }
         else
         {
-            focusedOptionIndex = Mathf.Clamp(focusedOptionIndex, 0, runtimeButtons.Count - 1);
+            focusedOptionIndex = 0;
         }
 
         BeginSelectFirstOption();
