@@ -122,7 +122,7 @@ public class SceneTeleport : MonoBehaviour
         // 跨场景传送
         if (sceneTeleLogic != null)
         {
-            GameSceneManager.Instance.ActivatePreloadedScene(TargetScene, sceneTeleLogic);
+            GameSceneManager.Instance.PreloadMain(TargetScene);
         }
         else
         {

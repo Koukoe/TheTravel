@@ -1,41 +1,30 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cysharp.Threading.Tasks;
+using System;
 
-#region --- 基础定义 (可以根据需要拆分) ---
-
-/// <summary>
-/// 场景逻辑基类：所有具体关卡的逻辑（如 Level1Logic）都要继承它
-/// </summary>
-public abstract class SceneBase
+public abstract class SceneBase : MonoBehaviour
 {
-    // 进入场景时触发：用于生成玩家、初始化JSON对话、播放BGM
     public abstract void EnterScene();
-
-    // 离开场景时触发：用于保存关卡分数、清理弹幕、停止音乐
     public abstract void ExitScene();
 }
 
-#endregion
-
-/// <summary>
-/// 核心场景管理器：支持异步、叠加、预加载及逻辑绑定
-/// </summary>
 public class GameSceneManager : MonoBehaviour
 {
-    // 单例访问点
     public static GameSceneManager Instance { get; private set; }
 
-    // 存储场景名与逻辑类的映射表
-    private Dictionary<string, SceneBase> sceneDict = new Dictionary<string, SceneBase>();
+    private SceneBase currentMainLogic;
 
-    // 存储预加载任务的句柄
-    private Dictionary<string, AsyncOperation> preloadTasks = new Dictionary<string, AsyncOperation>();
+    // 预加载任务字典
+    private readonly Dictionary<string, UniTask> mainPreLoadTasks = new Dictionary<string, UniTask>();
+    private readonly Dictionary<string, UniTask> additivePreLoadTasks = new Dictionary<string, UniTask>();
+
+    // 状态锁
+    public bool IsLoading { get; private set; }
 
     private void Awake()
     {
-        // 确保全局只有一个管理器，且切换场景时不销毁
         if (Instance == null)
         {
             Instance = this;
@@ -47,111 +36,138 @@ public class GameSceneManager : MonoBehaviour
         }
     }
 
-    // ================= [ 核心调用方法 ] =================
-
     /// <summary>
-    /// 【最常用】异步加载场景
+    /// 预加载主场景
     /// </summary>
-    /// <param name="sceneName">场景名称</param>
-    /// <param name="nextLogic">该场景对应的逻辑类实例（灵魂参数）</param>
-    /// <param name="mode">加载模式：Single(替换当前) 或 Additive(叠加到当前)</param>
-    public void LoadSceneAsync(string sceneName, SceneBase nextLogic = null, LoadSceneMode mode = LoadSceneMode.Single)
+    public void PreloadMain(string sceneName)
     {
-        // 绑定逻辑到字典
-        if (nextLogic != null) sceneDict[sceneName] = nextLogic;
+        if (mainPreLoadTasks.ContainsKey(sceneName)) return;  // 不重复预加载
 
-        StartCoroutine(LoadCoroutine(sceneName, mode));
+        // UniTask 字典存是任务行为，不需要 allowSceneActivation = false
+        // LoadMain 调用时如果没加载完会继续等待预加载，而不是再加载
+        var task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single).ToUniTask();
+        mainPreLoadTasks.Add(sceneName, task);
     }
 
     /// <summary>
-    /// 【优化用】预加载场景（加载到90%停住，不跳转）
+    /// 加载主场景
+    /// <paramref name="progress"/> 进度执行的委托
     /// </summary>
-    public void PreloadScene(string sceneName)
+    public async UniTask LoadMain(string sceneName, IProgress<float> progress = null)
     {
-        if (preloadTasks.ContainsKey(sceneName)) return;
+        if (IsLoading) return;
+        IsLoading = true;
 
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName);
-        op.allowSceneActivation = false; // 关键：禁止自动跳转
-        preloadTasks.Add(sceneName, op);
-        Debug.Log($"[预加载] 场景 {sceneName} 已开始在后台准备...");
-    }
-
-    /// <summary>
-    /// 【优化用】瞬间激活已经预加载好的场景
-    /// </summary>
-    public void ActivatePreloadedScene(string sceneName, SceneBase nextLogic = null)
-    {
-        if (preloadTasks.TryGetValue(sceneName, out AsyncOperation op))
+        try
         {
-            if (nextLogic != null) sceneDict[sceneName] = nextLogic;
-            StartCoroutine(ActivateCoroutine(sceneName, op));
+            // 执行当前场景的退出逻辑
+            currentMainLogic?.ExitScene();
+            currentMainLogic = null;
+
+            if (mainPreLoadTasks.TryGetValue(sceneName, out var task))
+            {
+                mainPreLoadTasks.Remove(sceneName);
+                await task;
+            }
+            else
+            {
+                // 没有预加载，开启新异步任务
+                await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single)
+                    .ToUniTask(progress, cancellationToken: this.GetCancellationTokenOnDestroy());
+            }
+
+            // 清空所有主场景预加载
+            mainPreLoadTasks.Clear();
+
+            InitNewMain(sceneName);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"加载主场景 {sceneName} 失败: {e.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    /// <summary>
+    /// 预加载叠加场景
+    /// </summary>
+    public void PreloadAdditive(string sceneName)
+    {
+        if (additivePreLoadTasks.ContainsKey(sceneName)) return;
+        var task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive).ToUniTask();
+        additivePreLoadTasks.Add(sceneName, task);
+    }
+
+    /// <summary>
+    /// 加载叠加场景
+    /// </summary>
+    public async UniTask LoadAdditive(string sceneName, IProgress<float> progress = null)
+    {
+        if (additivePreLoadTasks.TryGetValue(sceneName, out var task))
+        {
+            additivePreLoadTasks.Remove(sceneName);
+            await task;
         }
         else
         {
-            Debug.LogWarning($"场景 {sceneName} 尚未预加载，将执行普通异步加载。");
-            LoadSceneAsync(sceneName, nextLogic);
+            await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive)
+                .ToUniTask(progress, cancellationToken: this.GetCancellationTokenOnDestroy());
         }
+
+        InitAdditive(sceneName);
     }
 
     /// <summary>
-    /// 【功能用】卸载叠加场景（Additive模式专用）
+    /// 卸载叠加场景
     /// </summary>
-    public void UnloadScene(string sceneName)
+    public async UniTask UnloadAdditive(string sceneName)
     {
-        if (sceneDict.TryGetValue(sceneName, out SceneBase logic))
+        Scene s = SceneManager.GetSceneByName(sceneName);
+        if (s.isLoaded)
         {
-            logic.ExitScene(); // 卸载前清理逻辑
-        }
-        SceneManager.UnloadSceneAsync(sceneName);
-    }
-
-    // ================= [ 内部逻辑处理 ] =================
-
-    private IEnumerator LoadCoroutine(string sceneName, LoadSceneMode mode)
-    {
-        // 1. 如果是替换模式，通知当前场景“交代后事”
-        if (mode == LoadSceneMode.Single) HandleExit();
-
-        AsyncOperation op = SceneManager.LoadSceneAsync(sceneName, mode);
-
-        // 2. 加载循环：可在此处对接UI进度条
-        while (!op.isDone)
-        {
-            float progress = Mathf.Clamp01(op.progress / 0.9f);
-            // Debug.Log($"正在载入 {sceneName}: {progress * 100}%");
-            yield return null;
-        }
-
-        // 3. 加载完成，通知新场景“开始工作”
-        HandleEnter(sceneName);
-    }
-
-    private IEnumerator ActivateCoroutine(string sceneName, AsyncOperation op)
-    {
-        HandleExit();
-
-        op.allowSceneActivation = true; // 允许Unity跳转场景
-
-        while (!op.isDone) yield return null;
-
-        HandleEnter(sceneName);
-        preloadTasks.Remove(sceneName);
-    }
-
-    private void HandleExit()
-    {
-        string currentName = SceneManager.GetActiveScene().name;
-        if (sceneDict.TryGetValue(currentName, out SceneBase logic))
-        {
-            logic.ExitScene();
+            SceneBase logic = FindLogicInScene(s);
+            logic?.ExitScene();
+            await SceneManager.UnloadSceneAsync(s).ToUniTask();
         }
     }
 
-    private void HandleEnter(string sceneName)
+
+    private void InitNewMain(string sceneName)
     {
-        if (sceneDict.TryGetValue(sceneName, out SceneBase logic))
+        Scene s = SceneManager.GetSceneByName(sceneName);
+        currentMainLogic = FindLogicInScene(s);
+        currentMainLogic?.EnterScene();
+    }
+
+    private void InitAdditive(string sceneName)
+    {
+        Scene s = SceneManager.GetSceneByName(sceneName);
+        SceneBase logic = FindLogicInScene(s);
+        logic?.EnterScene();
+    }
+
+    private SceneBase FindLogicInScene(Scene scene)
+    {
+        var roots = scene.GetRootGameObjects();
+
+        // 精准寻找
+        foreach (var root in roots)
         {
-            logic.EnterScene();
+            if (root.name == "Scene" && root.TryGetComponent<SceneBase>(out var logic))  // 优先寻找名字为 Scene 的根节点物体
+                return logic;
         }
+
+        // 模糊寻找（提供容错）
+        foreach (var root in roots)
+        {
+            if (root.TryGetComponent<SceneBase>(out var logic))
+                return logic;
+        }
+
+        Debug.LogWarning($"场景 {scene.name} 未找到 SceneBase 逻辑脚本。");
+        return null;
     }
 }
