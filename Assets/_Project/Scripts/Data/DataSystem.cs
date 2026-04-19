@@ -6,23 +6,23 @@ using System;
 public static class DataArchivesSystem
 {
     private const int MAX_SLOTS = 9;
-    private static List<DataArchives> _archives = new();
+    private static List<DataArchive> _archives = new();
 
     /// <summary>
-    /// 加载数据文件 ( F -> _ )
+    /// 从文件加载所有槽位的存档数据 ( F -> _ )
     /// </summary>
     public static void LoadAll()
     {
         _archives.Clear();
         for (int i = 0; i < MAX_SLOTS; i++)
         {
-            DataArchives data = DataPersistence.LoadData<DataArchives>($"slot_{i}.dat");
+            DataArchive data = DataPersistence.LoadData<DataArchive>($"slot_{i}.dat");
             _archives.Add(data);
         }
     }
 
     /// <summary>
-    /// 保存/覆盖指定索引槽位的数据 ( M -> _ -> F )
+    /// 保存指定槽位的数据到文件 ( _ -> F )
     /// </summary>
     public static void Save(int index)
     {
@@ -32,7 +32,7 @@ public static class DataArchivesSystem
     }
 
     /// <summary>
-    /// 检查指定索引的槽位是否已经有数据 ( _ -> M )
+    /// 检查指定槽位是否已被占用 ( _ -> M )
     /// </summary>
     public static bool IsSlotOccupied(int index)
     {
@@ -41,7 +41,7 @@ public static class DataArchivesSystem
     }
 
     /// <summary>
-    /// 删除指定索引槽位的数据 ( _ & F )
+    /// 删除指定槽位的存档数据（内存和文件） ( _ & F )
     /// </summary>
     public static void Delete(int index)
     {
@@ -49,29 +49,25 @@ public static class DataArchivesSystem
         string fileName = $"slot_{index}.dat";
 
         DataPersistence.DeleteData(fileName);
-        _archives[index] = new DataArchives();
+        _archives[index] = new DataArchive();
 
         Debug.Log($"[Archives] 槽位 {index} 已重置为默认状态");
     }
 
     /// <summary>
-    /// 获取指定槽位的数据 ( _ -> M )
+    /// 获取指定槽位存档数据的深拷贝 ( _ -> M )
     /// </summary>
-    public static DataArchives Get(int index)
+    public static DataArchive Get(int index)
     {
         if (index < 0 || index >= _archives.Count) return null;
-        return _archives[index];
+        string json = JsonUtility.ToJson(_archives[index]);
+        return JsonUtility.FromJson<DataArchive>(json);
     }
 
     /// <summary>
-    /// 获取所有存档数据 ( _ -> M )
+    /// 获取最新保存的存档数据（深拷贝） ( _ -> M )
     /// </summary>
-    public static List<DataArchives> GetAll() => _archives;
-
-    /// <summary>
-    /// 获取时间戳最晚的存档数据 ( _ -> M )
-    /// </summary>
-    public static DataArchives GetLatest()
+    public static DataArchive GetLatest()
     {
         int latestIndex = -1;
         DateTime latestTime = DateTime.MinValue;
@@ -91,6 +87,17 @@ public static class DataArchivesSystem
         }
         return Get(latestIndex);
     }
+
+    /// <summary>
+    /// 设置指定槽位的存档数据并自动保存到文件 ( M -> _ & F )
+    /// </summary>
+    public static void Set(int index, DataArchive d)
+    {
+        if (index < 0 || index >= _archives.Count || d == null) return;
+        string json = JsonUtility.ToJson(d);
+        _archives[index] = JsonUtility.FromJson<DataArchive>(json);
+        Save(index);
+    }
 }
 
 public static class DataSettingSystem
@@ -98,7 +105,7 @@ public static class DataSettingSystem
     private static DataSetting _current;
 
     /// <summary>
-    /// 保存设置数据 ( _ -> F )
+    /// 保存当前设置数据到文件 ( _ -> F )
     /// </summary>
     public static void Save()
     {
@@ -106,7 +113,7 @@ public static class DataSettingSystem
     }
 
     /// <summary>
-    /// 加载设置数据并同步 ( F -> _ )
+    /// 从文件加载设置数据 ( F -> _ )
     /// </summary>
     public static void Load()
     {
@@ -120,7 +127,7 @@ public static class DataSettingSystem
     }
 
     /// <summary>
-    /// 深拷贝一份当前设置数据 ( _ -> M )
+    /// 获取当前设置数据的深拷贝 ( _ -> M )
     /// </summary>
     public static DataSetting Get()
     {
@@ -129,17 +136,18 @@ public static class DataSettingSystem
     }
 
     /// <summary>
-    /// 设定当前设置数据 ( M -> _ )
+    /// 设置当前设置数据并自动保存到文件 ( M -> _ & F )
     /// </summary>
     public static void Set(DataSetting d)
     {
         if (d == null) return;
         string json = JsonUtility.ToJson(d);
         _current = JsonUtility.FromJson<DataSetting>(json);
+        Save();
     }
 
     /// <summary>
-    /// 恢复默认设置数据 ( _ & M )
+    /// 恢复默认设置数据并自动保存到文件 ( _ & F )
     /// </summary>
     public static void Reset()
     {
@@ -154,7 +162,7 @@ public static class DataGlobalSystem
     private static DataGlobal _current;
 
     /// <summary>
-    /// 保存全局数据 ( _ -> F )
+    /// 保存全局数据到文件 ( _ -> F )
     /// </summary>
     public static void Save()
     {
@@ -162,7 +170,7 @@ public static class DataGlobalSystem
     }
 
     /// <summary>
-    /// 加载全局数据 (F -> _ )
+    /// 从文件加载全局数据 ( F -> _ )
     /// </summary>
     public static DataGlobal Load()
     {
@@ -177,12 +185,23 @@ public static class DataGlobalSystem
     }
 
     /// <summary>
-    /// 获取当前全局数据 ( _ -> M )
+    /// 获取当前全局数据的深拷贝 ( _ -> M )
     /// </summary>
-    public static DataGlobal Get() => _current;
+    public static DataGlobal Get()
+    {
+        if (_current == null) return null;
+        string json = JsonUtility.ToJson(_current);
+        return JsonUtility.FromJson<DataGlobal>(json);
+    }
 
     /// <summary>
-    /// 设定当前全局数据 ( M -> _ )
+    /// 设置当前全局数据并自动保存到文件 ( M -> _ & F )
     /// </summary>
-    public static void Set(DataGlobal d) => _current = d;
+    public static void Set(DataGlobal d)
+    {
+        if (d == null) return;
+        string json = JsonUtility.ToJson(d);
+        _current = JsonUtility.FromJson<DataGlobal>(json);
+        Save();
+    }
 }
