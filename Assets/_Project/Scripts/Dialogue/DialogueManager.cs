@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,6 +40,7 @@ public class DialogueManager : MonoBehaviour
     private TextAsset dialogueJson;
     // 当前对话来源物体
     private DialogueOnObj activeDialogueSource;
+    private Coroutine retryPendingOptionsRoutine;
     private DialogueTypewriter typewriter;
     private DialogueUIController uiController;
     private DialoguePresenter presenter;
@@ -133,6 +135,43 @@ public class DialogueManager : MonoBehaviour
         }
 
         uiController?.OpenDialoguePanelWithCleanup(OnDialoguePanelReady);
+    }
+
+    public void SuspendDialogueFlow()
+    {
+        typewriter?.Pause();
+    }
+
+    public void ResumeDialogueFlow()
+    {
+        if (typewriter != null && typewriter.IsPaused)
+        {
+            typewriter.Resume();
+        }
+
+        SchedulePendingOptionsRetry();
+    }
+
+    private void SchedulePendingOptionsRetry()
+    {
+        if (retryPendingOptionsRoutine != null)
+        {
+            StopCoroutine(retryPendingOptionsRoutine);
+            retryPendingOptionsRoutine = null;
+        }
+
+        retryPendingOptionsRoutine = StartCoroutine(RetryPendingOptionsWhenUIReady());
+    }
+
+    private IEnumerator RetryPendingOptionsWhenUIReady()
+    {
+        while (UIManager.Instance != null && UIManager.Instance.IsTransitioning)
+        {
+            yield return null;
+        }
+
+        presenter?.TryPresentPendingOptions();
+        retryPendingOptionsRoutine = null;
     }
 
     private void OnDialoguePanelReady(BasePanel panel)
@@ -298,6 +337,12 @@ public class DialogueManager : MonoBehaviour
 
         typewriter?.Stop();
         uiController?.CloseDialoguePanels();
+
+        if (retryPendingOptionsRoutine != null)
+        {
+            StopCoroutine(retryPendingOptionsRoutine);
+            retryPendingOptionsRoutine = null;
+        }
     }
 
     // 显示当前索引的内容
@@ -330,6 +375,12 @@ public class DialogueManager : MonoBehaviour
     {
         typewriter?.Stop();
         uiController?.StopAll();
+
+        if (retryPendingOptionsRoutine != null)
+        {
+            StopCoroutine(retryPendingOptionsRoutine);
+            retryPendingOptionsRoutine = null;
+        }
 
         if (Instance == this) Instance = null;
     }

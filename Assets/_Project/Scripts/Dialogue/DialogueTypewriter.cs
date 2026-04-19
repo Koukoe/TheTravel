@@ -11,8 +11,10 @@ public class DialogueTypewriter
     private string fullContent = string.Empty;
     private float charInterval = 0.03f;
     private Action onTypingCompleted;
+    private int nextCharIndex;
 
     public bool IsTyping { get; private set; }
+    public bool IsPaused { get; private set; }
 
     public DialogueTypewriter(MonoBehaviour coroutineHost)
     {
@@ -31,6 +33,8 @@ public class DialogueTypewriter
 
         fullContent = content ?? string.Empty;
         onTypingCompleted = onCompleted;
+        nextCharIndex = 0;
+        IsPaused = false;
 
         if (targetText == null)
         {
@@ -48,6 +52,35 @@ public class DialogueTypewriter
         }
 
         targetText.text = string.Empty;
+        IsTyping = true;
+        typingRoutine = host.StartCoroutine(TypeRoutine());
+    }
+
+    public void Pause()
+    {
+        if (!IsTyping)
+        {
+            return;
+        }
+
+        if (typingRoutine != null)
+        {
+            host.StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        IsTyping = false;
+        IsPaused = true;
+    }
+
+    public void Resume()
+    {
+        if (!IsPaused)
+        {
+            return;
+        }
+
+        IsPaused = false;
         IsTyping = true;
         typingRoutine = host.StartCoroutine(TypeRoutine());
     }
@@ -71,6 +104,8 @@ public class DialogueTypewriter
         }
 
         IsTyping = false;
+        IsPaused = false;
+        nextCharIndex = fullContent.Length;
         InvokeCompleted();
     }
 
@@ -83,16 +118,25 @@ public class DialogueTypewriter
         }
 
         IsTyping = false;
+        IsPaused = false;
+        nextCharIndex = 0;
         onTypingCompleted = null;
     }
 
     private IEnumerator TypeRoutine()
     {
-        for (int i = 0; i < fullContent.Length; i++)
+        for (int i = nextCharIndex; i < fullContent.Length; i++)
         {
             if (targetText != null)
             {
                 targetText.text += fullContent[i];
+            }
+
+            nextCharIndex = i + 1;
+
+            if (nextCharIndex >= fullContent.Length)
+            {
+                break;
             }
 
             if (charInterval > 0f)
@@ -107,6 +151,8 @@ public class DialogueTypewriter
 
         typingRoutine = null;
         IsTyping = false;
+        IsPaused = false;
+        nextCharIndex = fullContent.Length;
         InvokeCompleted();
     }
 

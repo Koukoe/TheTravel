@@ -27,8 +27,15 @@ public class DialoguePanel : BasePanel
     public override void OnResume()
     {
         base.OnResume();
+        DialogueManager.Instance.ResumeDialogueFlow();
         // 从其他面板恢复时切回对话输入
         InputManager.Instance.SwitchPlayerMode(false);
+    }
+
+    public override void OnSuspend()
+    {
+        base.OnSuspend();
+        DialogueManager.Instance.SuspendDialogueFlow();
     }
 
     public override void OnClose()

@@ -10,6 +10,7 @@ public class DialoguePresenter
 
     private TMP_Text nameText;
     private TMP_Text contentText;
+    private DialogueEntry pendingOptionsEntry;
 
     public DialoguePresenter(DialogueTypewriter typewriter, DialogueUIController uiController, Func<string, string> resolveCharacterName)
     {
@@ -41,6 +42,7 @@ public class DialoguePresenter
 
         uiController?.HideOptionsPanelIfOpened();
         UpdateName(entry.character);
+        pendingOptionsEntry = null;
 
         string content = entry.content ?? string.Empty;
         if (typewriter != null)
@@ -69,6 +71,21 @@ public class DialoguePresenter
         {
             nameText.text = string.Empty;
         }
+
+        pendingOptionsEntry = null;
+    }
+
+    public void TryPresentPendingOptions()
+    {
+        if (pendingOptionsEntry == null)
+        {
+            return;
+        }
+
+        if (TryRefreshOptions(pendingOptionsEntry))
+        {
+            pendingOptionsEntry = null;
+        }
     }
 
     private void ShowOptionsAfterTyping(DialogueEntry entry)
@@ -78,7 +95,15 @@ public class DialoguePresenter
             return;
         }
 
-        uiController?.RefreshOptionsPanel(entry);
+        if (!TryRefreshOptions(entry))
+        {
+            pendingOptionsEntry = entry;
+        }
+    }
+
+    private bool TryRefreshOptions(DialogueEntry entry)
+    {
+        return uiController != null && uiController.RefreshOptionsPanel(entry);
     }
 
     private void UpdateName(string charID)
