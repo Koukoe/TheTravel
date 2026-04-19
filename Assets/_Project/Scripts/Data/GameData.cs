@@ -5,11 +5,13 @@ using UnityEngine;
 // 使用类便于 json 储存
 
 [Serializable]
-public class DataArchives
+public class DataArchive
 {
     public string saveTime;
+    public string currentScene;
+    public string currentPosition;
 
-    public DataArchives()
+    public DataArchive()
     {
         saveTime = "----/--/--";
     }
@@ -22,7 +24,7 @@ public class DataSetting
 {
     public string language;
 
-    public int sensitivityIndex = 2; 
+    public int sensitivityIndex = 2;
 
     public int masterVolumeIndex = 2;
     public int musicVolumeIndex = 2;

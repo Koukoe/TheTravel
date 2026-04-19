@@ -4,45 +4,27 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 
-public class SceneTeleLogic : SceneBase
-{
-    public override void EnterScene()
-    {
-        Transform player = GameObjectsDefination.Instance.player.transform;
-        if (player != null)
-        {
-            float x = PlayerPrefs.GetFloat("SceneTeleportX", 0);
-            float y = PlayerPrefs.GetFloat("SceneTeleportY", 0);
-            float z = PlayerPrefs.GetFloat("SceneTeleportZ", 0);
-            player.position = new Vector3(x, y, z);
-        }
-    }
-
-    public override void ExitScene()
-    {
-        // 场景退出时的清理逻辑（如果有需要）
-        // 不要抛出异常
-    }
-}
-
 public class SceneTeleport : MonoBehaviour
 {
     public TeleportType teleportType = TeleportType.Portal;
     public Transform teleportTarget;
     public string TargetScene;
+    Transform player;
 
-    private SceneTeleLogic sceneTeleLogic;
+    private SceneBase sceneTeleLogic;
     private System.Action<InputAction.CallbackContext> interactHandler;
     private bool isSubscribed = false;
 
     void Start()
     {
         // 获取组件，如果不存在则添加
-        sceneTeleLogic = GetComponent<SceneTeleLogic>();
+        sceneTeleLogic = GetComponent<RealScene>();
         if (sceneTeleLogic == null && !string.IsNullOrEmpty(TargetScene))
         {
             Debug.LogWarning($"SceneTeleLogic component missing on {gameObject.name}");
         }
+
+        player = GameObjectsDefination.Instance.player.transform;
     }
 
     private void OnDestroy()
@@ -97,21 +79,20 @@ public class SceneTeleport : MonoBehaviour
         isSubscribed = false;
     }
 
-    private void PerformTeleport()
+    private async void PerformTeleport()
     {
-        // 存储目标位置
-        if (teleportTarget != null)
-        {
-            PlayerPrefs.SetFloat("SceneTeleportX", teleportTarget.position.x);
-            PlayerPrefs.SetFloat("SceneTeleportY", teleportTarget.position.y);
-            PlayerPrefs.SetFloat("SceneTeleportZ", teleportTarget.position.z);
-            PlayerPrefs.Save();
-        }
+        // // 存储目标位置
+        // if (teleportTarget != null)
+        // {
+        //     PlayerPrefs.SetFloat("SceneTeleportX", teleportTarget.position.x);
+        //     PlayerPrefs.SetFloat("SceneTeleportY", teleportTarget.position.y);
+        //     PlayerPrefs.SetFloat("SceneTeleportZ", teleportTarget.position.z);
+        //     PlayerPrefs.Save();
+        // }
 
         // 同一场景内传送（不切换场景）
         if (string.IsNullOrEmpty(TargetScene))
         {
-            Transform player = GameObject.FindGameObjectWithTag("Player")?.transform;
             if (player != null && teleportTarget != null)
             {
                 player.position = teleportTarget.position;
@@ -122,7 +103,7 @@ public class SceneTeleport : MonoBehaviour
         // 跨场景传送
         if (sceneTeleLogic != null)
         {
-            GameSceneManager.Instance.PreloadMain(TargetScene);
+            await GameSceneManager.Instance.LoadMain(TargetScene);
         }
         else
         {
