@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class RealScene : SceneBase
 {
-    Transform player;
+    private static Transform player;
 
     [SerializeField] private Transform defaultSpawnPoint;
     private static Vector3? pendingPosition;
 
-    void Awake()
+    static RealScene()
     {
         player = GameObjectsDefination.Instance.player.transform;
     }

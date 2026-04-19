@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class PortScene : RealScene
 {
-    static bool fromSea;
+    private bool fromSea;
 
-    static string bgmName;
+    private string bgmName;
+    private string townName;
 
     public override void EnterScene()
     {
@@ -14,10 +15,12 @@ public class PortScene : RealScene
         {
             // 这里写船进港的动画
             AudioManager.Instance.PlayBGM(bgmName, 1f);  // 播放对应小镇 BGM
+            GameSceneManager.Instance.PreloadMain(townName);
         }
         else
         {
             base.EnterScene();  // 把默认的位置设置在从小镇出来的位置
+            GameSceneManager.Instance.PreloadMain("");  // 填海场景的名字
         }
     }
 
