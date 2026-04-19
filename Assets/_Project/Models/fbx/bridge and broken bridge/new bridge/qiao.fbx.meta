@@ -1,9 +1,29 @@
 fileFormatVersion: 2
-guid: 61e158da3b29cf54a815c830b6cb89c9
+guid: 10ce8009a71367844bdb55af11669be3
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: langan
+    second: {fileID: 2100000, guid: 21f9a5ab2bbb62547873a4fb696c6fa2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: qiaomian
+    second: {fileID: 2100000, guid: 642792c4685713a46afd1ccf3ba76eac, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zhuzi
+    second: {fileID: 2100000, guid: 8c6c136b4a2fa6343bfe4cb6eba70ed2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zhuzi2
+    second: {fileID: 2100000, guid: 435884187187c59499fceaeef6dbc294, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

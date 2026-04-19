@@ -27,6 +27,9 @@ public class DialogueManager : MonoBehaviour
     // 嗯对这个也是不必要的但是好像可以在这里填玩家的名字之类的吧，先不注释掉了
     [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
 
+    [Header("文本播放速度")]
+    [SerializeField, Min(0f)] private float typewriterCharInterval = 0.05f;
+
     // [Header("设置")]
     // 是否在脚本启动时自动开始对话, 对话数据需要从物体传入所以这个没用了
     // [SerializeField] private bool playOnStart = false;
@@ -48,11 +51,18 @@ public class DialogueManager : MonoBehaviour
 
     // 运行时加载的对话数据来源
     private TextAsset dialogueJson;
+    // 当前对话来源物体
+    private DialogueOnObj activeDialogueSource;
+    private Coroutine closePanelsRoutine;
+    private Coroutine startDialogueRoutine;
+    private Coroutine typingRoutine;
+    private string currentFullContent = string.Empty;
+    private bool isTypingContent = false;
 
     private const string DialoguePanelName = "DialoguePanel";
     private const string DialogueOptionsPanelName = "DialogueOptionsPanel";
-    private const string DialogueTextNodeName = "DialogueText";
-    private const string TalkerNameNodeName = "TalkerName";
+    private const string DialogueContentTextNodeName = "DialogueContentText";
+    private const string DialogueNameTextNodeName = "DialogueNameText";
     private const string EndToken = "END";
 
     private void Awake()
@@ -72,7 +82,7 @@ public class DialogueManager : MonoBehaviour
         // 初始化角色映射表
         BuildCharacterMap();
         // 加载并解析 JSON
-        DialogueLoad();
+        // DialogueLoad();
 
         // if (playOnStart)
         // {
@@ -83,8 +93,14 @@ public class DialogueManager : MonoBehaviour
     // 用于从外部传入新的对话数据并开始对话
     public void StartWith(TextAsset json)
     {
+        StartWith(json, null);
+    }
+
+    public void StartWith(TextAsset json, DialogueOnObj source)
+    {
         if (json == null) return;
         dialogueJson = json;
+        activeDialogueSource = source;
         DialogueLoad();
         DialogueStart();
     }
@@ -244,23 +260,67 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        var panel = UIManager.Instance.Show(DialoguePanelName, true);
+        if (startDialogueRoutine != null)
+        {
+            StopCoroutine(startDialogueRoutine);
+            startDialogueRoutine = null;
+        }
+
+        startDialogueRoutine = StartCoroutine(StartDialogueWithCleanup());
+    }
+
+    private IEnumerator StartDialogueWithCleanup()
+    {
+        while (UIManager.Instance != null && UIManager.Instance.IsTransitioning)
+        {
+            yield return null;
+        }
+
+        yield return CleanupResidualDialoguePanels();
+
+        BasePanel panel = UIManager.Instance.Peek();
+        if (!(panel is DialoguePanel))
+        {
+            panel = UIManager.Instance.Push(DialoguePanelName);
+        }
+
         if (panel == null)
         {
             Debug.LogError("打开 DialoguePanel 失败，请检查 UIManager/PoolManager 配置");
-            return;
+            startDialogueRoutine = null;
+            yield break;
         }
 
         ResolveTextRefs(panel.transform);
         if (nameText == null || contentText == null)
         {
-            Debug.LogError("未能在 DialoguePanel 下找到 TalkerName/DialogueText 文本组件");
-            return;
+            Debug.LogError("未能在 DialoguePanel 下找到 DialogueNameText/DialogueContentText 文本组件");
+            startDialogueRoutine = null;
+            yield break;
         }
 
         currentIndex = 0;
         currentDialogueId = GetDialogueIdByIndex(currentIndex);
         ShowCurrent();
+        startDialogueRoutine = null;
+    }
+
+    private IEnumerator CleanupResidualDialoguePanels()
+    {
+        if (UIManager.Instance == null)
+        {
+            yield break;
+        }
+
+        while (UIManager.Instance.Peek() is DialogueOptionsPanel || UIManager.Instance.Peek() is DialoguePanel)
+        {
+            UIManager.Instance.Pop();
+
+            while (UIManager.Instance.IsTransitioning)
+            {
+                yield return null;
+            }
+        }
     }
 
     // 播放下一句对话
@@ -268,6 +328,12 @@ public class DialogueManager : MonoBehaviour
     {
         if (database == null || database.dialogues == null)
         {
+            return;
+        }
+
+        if (isTypingContent)
+        {
+            CompleteCurrentContentInstantly();
             return;
         }
 
@@ -315,7 +381,43 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        ApplyOptionEffects(option.effects);
         AdvanceByNextId(option.nextId);
+    }
+
+    private void ApplyOptionEffects(List<DialogueEffect> effects)
+    {
+        if (effects == null || effects.Count == 0)
+        {
+            return;
+        }
+
+        for (int i = 0; i < effects.Count; i++)
+        {
+            DialogueEffect effect = effects[i];
+            if (effect == null)
+            {
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(effect.SetDialogueIndex))
+            {
+                if (activeDialogueSource == null)
+                {
+                    Debug.LogWarning("当前对话没有来源物体, 无法设置对话索引");
+                    continue;
+                }
+
+                if (!int.TryParse(effect.SetDialogueIndex.Trim(), out int nextDialogueIndex))
+                {
+                    Debug.LogWarning($"SetDialogueIndex 参数不是有效整数: {effect.SetDialogueIndex}");
+                    continue;
+                }
+
+                activeDialogueSource.SetDialogueIndex(nextDialogueIndex);
+                continue;
+            }
+        }
     }
 
     public List<DialogueOption> GetCurrentOptions()
@@ -333,6 +435,16 @@ public class DialogueManager : MonoBehaviour
     {
         DialogueEntry entry = GetCurrentEntry();
         return entry != null && entry.options != null && entry.options.Count > 0;
+    }
+
+    public void SetTypewriterCharInterval(float interval)
+    {
+        typewriterCharInterval = Mathf.Max(0f, interval);
+    }
+
+    public float GetTypewriterCharInterval()
+    {
+        return typewriterCharInterval;
     }
 
     private void AdvanceByNextId(string nextId)
@@ -426,12 +538,51 @@ public class DialogueManager : MonoBehaviour
     {
         currentIndex = -1;
         currentDialogueId = string.Empty;
+        activeDialogueSource = null;
+        currentFullContent = string.Empty;
+        isTypingContent = false;
 
         if (contentText != null) contentText.text = string.Empty;
         if (nameText != null) nameText.text = string.Empty;
 
-        UIManager.Instance.Hide(DialogueOptionsPanelName);
-        UIManager.Instance.Hide(DialoguePanelName);
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        if (closePanelsRoutine != null)
+        {
+            StopCoroutine(closePanelsRoutine);
+            closePanelsRoutine = null;
+        }
+
+        closePanelsRoutine = StartCoroutine(CloseDialoguePanelsFromStack());
+    }
+
+    private IEnumerator CloseDialoguePanelsFromStack()
+    {
+        if (UIManager.Instance == null)
+        {
+            yield break;
+        }
+
+        if (UIManager.Instance.Peek() is DialogueOptionsPanel)
+        {
+            UIManager.Instance.Pop();
+        }
+
+        while (UIManager.Instance.IsTransitioning)
+        {
+            yield return null;
+        }
+
+        if (UIManager.Instance.Peek() is DialoguePanel)
+        {
+            UIManager.Instance.Pop();
+        }
+
+        closePanelsRoutine = null;
     }
 
     // 显示当前索引的内容
@@ -444,15 +595,98 @@ public class DialogueManager : MonoBehaviour
 
         DialogueEntry entry = database.dialogues[currentIndex];
         currentDialogueId = GetDialogueIdByIndex(currentIndex);
+        currentFullContent = entry != null ? entry.content : string.Empty;
 
-        // 更新文本内容
+        if (UIManager.Instance != null && UIManager.Instance.Peek() is DialogueOptionsPanel)
+        {
+            UIManager.Instance.Pop();
+        }
+
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        isTypingContent = true;
+
         if (contentText != null)
         {
-            contentText.text = entry.content;
+            contentText.text = string.Empty;
         }
 
         // 更新角色信息
         UpdateUIWithCharacter(entry.character);
+
+        typingRoutine = StartCoroutine(TypeCurrentContent(entry));
+    }
+
+    private IEnumerator TypeCurrentContent(DialogueEntry entry)
+    {
+        if (contentText == null)
+        {
+            isTypingContent = false;
+            typingRoutine = null;
+            ShowOptionsAfterTyping(entry);
+            yield break;
+        }
+
+        if (string.IsNullOrEmpty(currentFullContent))
+        {
+            contentText.text = string.Empty;
+            isTypingContent = false;
+            typingRoutine = null;
+            ShowOptionsAfterTyping(entry);
+            yield break;
+        }
+
+        for (int i = 0; i < currentFullContent.Length; i++)
+        {
+            contentText.text += currentFullContent[i];
+
+            if (typewriterCharInterval > 0f)
+            {
+                yield return new WaitForSeconds(typewriterCharInterval);
+            }
+            else
+            {
+                yield return null;
+            }
+        }
+
+        isTypingContent = false;
+        typingRoutine = null;
+        ShowOptionsAfterTyping(entry);
+    }
+
+    private void CompleteCurrentContentInstantly()
+    {
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
+        if (contentText != null)
+        {
+            contentText.text = currentFullContent;
+        }
+
+        isTypingContent = false;
+
+        DialogueEntry entry = GetCurrentEntry();
+        if (entry != null)
+        {
+            ShowOptionsAfterTyping(entry);
+        }
+    }
+
+    private void ShowOptionsAfterTyping(DialogueEntry entry)
+    {
+        if (entry == null)
+        {
+            return;
+        }
 
         RefreshOptionsPanel(entry);
     }
@@ -462,11 +696,19 @@ public class DialogueManager : MonoBehaviour
         bool hasOptions = entry != null && entry.options != null && entry.options.Count > 0;
         if (!hasOptions)
         {
-            UIManager.Instance.Hide(DialogueOptionsPanelName);
+            if (UIManager.Instance.Peek() is DialogueOptionsPanel)
+            {
+                UIManager.Instance.Pop();
+            }
             return;
         }
 
-        BasePanel panel = UIManager.Instance.Show(DialogueOptionsPanelName, true);
+        BasePanel panel = UIManager.Instance.Peek();
+        if (!(panel is DialogueOptionsPanel))
+        {
+            panel = UIManager.Instance.Push(DialogueOptionsPanelName);
+        }
+
         if (panel is DialogueOptionsPanel optionsPanel)
         {
             optionsPanel.RefreshOptions();
@@ -504,8 +746,8 @@ public class DialogueManager : MonoBehaviour
     {
         if (root == null) return;
 
-        nameText = FindTextByNodeName(root, TalkerNameNodeName);
-        contentText = FindTextByNodeName(root, DialogueTextNodeName);
+        nameText = FindTextByNodeName(root, DialogueNameTextNodeName);
+        contentText = FindTextByNodeName(root, DialogueContentTextNodeName);
     }
 
     private TMP_Text FindTextByNodeName(Transform root, string nodeName)
@@ -523,6 +765,12 @@ public class DialogueManager : MonoBehaviour
 
     private void OnDestroy()
     {
+        if (typingRoutine != null)
+        {
+            StopCoroutine(typingRoutine);
+            typingRoutine = null;
+        }
+
         if (Instance == this) Instance = null;
     }
 }

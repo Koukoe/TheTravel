@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using UnityEngine.InputSystem;
 using TMPro;
 
 public class DialogueOptionsPanel : MenuPanel
 {
-    private const string TemplateNodeName = "DlgOptBtn";
+    private const string TemplateNodeName = "DialogueOptionButtonTemplate";
 
     private Button templateButton;
     private readonly List<Button> runtimeButtons = new List<Button>();
@@ -18,8 +17,17 @@ public class DialogueOptionsPanel : MenuPanel
     public override void OnOpen()
     {
         base.OnOpen();
+        // 进入选项时保持对话输入
+        InputManager.Instance.SwitchPlayerMode(false);
         ResolveTemplate();
         RefreshOptions();
+    }
+
+    public override void OnResume()
+    {
+        base.OnResume();
+        // 从其他面板恢复时保持对话输入
+        InputManager.Instance.SwitchPlayerMode(false);
     }
 
     public override void OnClose()
@@ -53,7 +61,7 @@ public class DialogueOptionsPanel : MenuPanel
             }
 
             Button button = Instantiate(templateButton, templateButton.transform.parent);
-            button.gameObject.name = $"DlgOptBtn_{i}";
+            button.gameObject.name = $"DialogueOptionButton_{i}";
             button.gameObject.SetActive(true);
 
             TMP_Text text = button.GetComponentInChildren<TMP_Text>(true);
@@ -76,7 +84,7 @@ public class DialogueOptionsPanel : MenuPanel
         }
         else
         {
-            focusedOptionIndex = Mathf.Clamp(focusedOptionIndex, 0, runtimeButtons.Count - 1);
+            focusedOptionIndex = 0;
         }
 
         BeginSelectFirstOption();
@@ -91,49 +99,6 @@ public class DialogueOptionsPanel : MenuPanel
 
         focusedOptionIndex = optionIndex;
         DialogueManager.Instance.SelectOption(optionIndex);
-    }
-
-    // 用来恢复焦点, 比如打开别的面板再切回来的时候
-    private void LateUpdate()
-    {
-        if (!gameObject.activeInHierarchy || EventSystem.current == null || runtimeButtons.Count == 0)
-        {
-            return;
-        }
-
-        GameObject current = EventSystem.current.currentSelectedGameObject;
-        if (current == null)
-        {
-            TryRestoreFocus();
-            return;
-        }
-
-        if (!current.transform.IsChildOf(transform))
-        {
-            // 栈面板关闭后，如果焦点不在对话选项面板，则拉回到上次选中项
-            if (UIManager.Instance != null && UIManager.Instance.Count == 0)
-            {
-                TryRestoreFocus();
-            }
-            return;
-        }
-
-        Button selectedButton = current.GetComponent<Button>();
-        if (selectedButton == null)
-        {
-            selectedButton = current.GetComponentInParent<Button>();
-        }
-
-        if (selectedButton == null)
-        {
-            return;
-        }
-
-        int index = runtimeButtons.IndexOf(selectedButton);
-        if (index >= 0)
-        {
-            focusedOptionIndex = index;
-        }
     }
 
     // 配置选项按钮的导航，防止焦点越界以及可以循环比较酷
@@ -183,7 +148,7 @@ public class DialogueOptionsPanel : MenuPanel
         templateButton = templateNode.GetComponent<Button>();
         if (templateButton == null)
         {
-            Debug.LogError("DlgOptBtn 模板缺少 Button 组件");
+            Debug.LogError("DialogueOptionButtonTemplate 模板缺少 Button 组件");
             return;
         }
 
@@ -227,16 +192,6 @@ public class DialogueOptionsPanel : MenuPanel
         }
 
         EventSystem.current.SetSelectedGameObject(target.gameObject);
-    }
-
-    private void TryRestoreFocus()
-    {
-        if (UIManager.Instance.IsTransitioning)
-        {
-            return;
-        }
-
-        SelectFirstOption();
     }
 
     protected override GameObject DefaultFocused()
