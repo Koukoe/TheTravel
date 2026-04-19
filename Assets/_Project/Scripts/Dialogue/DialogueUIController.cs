@@ -39,13 +39,18 @@ public class DialogueUIController
         closeRoutine = host.StartCoroutine(CloseDialoguePanelsRoutine());
     }
 
-    public void RefreshOptionsPanel(DialogueEntry entry)
+    public bool RefreshOptionsPanel(DialogueEntry entry)
     {
         bool hasOptions = entry != null && entry.options != null && entry.options.Count > 0;
         if (!hasOptions)
         {
             HideOptionsPanelIfOpened();
-            return;
+            return true;
+        }
+
+        if (UIManager.Instance == null || UIManager.Instance.IsTransitioning)
+        {
+            return false;
         }
 
         BasePanel panel = UIManager.Instance.Peek();
@@ -57,7 +62,10 @@ public class DialogueUIController
         if (panel is DialogueOptionsPanel optionsPanel)
         {
             optionsPanel.RefreshOptions();
+            return true;
         }
+
+        return false;
     }
 
     public void HideOptionsPanelIfOpened()

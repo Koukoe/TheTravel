@@ -25,6 +25,17 @@ public class MainPanel : MenuPanel
 
     protected override GameObject DefaultFocused() => saveBtn != null && saveBtn.interactable ? saveBtn.gameObject : loadBtn.gameObject;
 
+    public override void OnOpen()
+    {
+        base.OnOpen();
+    }
+
+    public override void OnClose()
+    {
+        base.OnClose();
+        EffectManager.Instance.SetBackgroundBlur(false);
+    }
+
     private void OnArchivesClicked(bool isSave = true)
     {
         if (UIManager.Instance.IsTransitioning) return;
