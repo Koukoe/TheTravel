@@ -15,12 +15,7 @@ public class MenuManager : MonoBehaviour
     float[] sensitivityValues = { 0.5f, 1.0f, 1.5f, 2.0f, 2.5f };
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else { Destroy(gameObject); }
+        Instance = this;
     }
 
     private void OnEnable()

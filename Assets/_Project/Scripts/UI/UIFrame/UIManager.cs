@@ -43,14 +43,9 @@ public class UIManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            // if (canvasObj == null)
-            //     canvasObj = GameObject.FindObjectOfType<Canvas>()?.gameObject; 三个还是自己拖吧
-        }
-        else { Destroy(gameObject); }
+        Instance = this;
+        // if (canvasObj == null)
+        //     canvasObj = GameObject.FindObjectOfType<Canvas>()?.gameObject; 三个还是自己拖吧
     }
 
     private void OnEnable() => InputManager.Instance.UIActions.Cancel.performed += OnCancelPressed;

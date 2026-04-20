@@ -12,7 +12,8 @@ public class CameraMove : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        cam = GetComponent<Camera>();
+        if (cam == null)
+            cam = GetComponent<Camera>();
         camPos = transform;
         if (target == null)
         {
