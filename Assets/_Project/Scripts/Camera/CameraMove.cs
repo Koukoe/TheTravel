@@ -35,35 +35,15 @@ public class CameraMove : MonoBehaviour
     {
         if (target == null) return camPos.position;
 
-        // 水平方向（相机看向的反方向，忽略 Y 轴）
+        // 水平方向（相机后方）
         Vector3 horizontalDir = -camPos.forward;
         horizontalDir.y = 0;
-
-        if (horizontalDir.magnitude < 0.001f)
-        {
-            // 相机垂直向下时，使用默认方向
-            horizontalDir = Vector3.back;
-        }
+        if (horizontalDir.magnitude < 0.001f) horizontalDir = Vector3.back;
         horizontalDir.Normalize();
 
-        // 计算水平距离
-        float forwardY = Mathf.Clamp(camPos.forward.y, -0.99f, 0.99f);  // 防止超出范围
-        float sinPitch = forwardY;
-        float cosPitch = Mathf.Sqrt(1 - sinPitch * sinPitch);
-
-        float horizontalDistance;
-        if (Mathf.Abs(sinPitch) < 0.001f)
-        {
-            // 相机接近水平时，使用较大的水平距离
-            horizontalDistance = 100f;
-        }
-        else
-        {
-            // 水平距离 = 高度 / tanθ = 高度 × cosθ / sinθ
-            horizontalDistance = CamY * cosPitch / sinPitch;
-        }
-
-        // 限制最大水平距离，避免相机飞太远
+        // 俯角（取正值）
+        float pitchRad = Mathf.Asin(Mathf.Clamp(-camPos.forward.y, 0.01f, 0.99f));
+        float horizontalDistance = CamY / Mathf.Tan(pitchRad);
         horizontalDistance = Mathf.Min(horizontalDistance, 50f);
 
         return target.position + horizontalDir * horizontalDistance + Vector3.up * CamY;
@@ -74,9 +54,6 @@ public class CameraMove : MonoBehaviour
         Vector3 targetPosition = calPos();
         Vector3 smoothPos = Vector3.Lerp(camPos.position, targetPosition, smoothSpeed);
         camPos.position = smoothPos;
-
-        // 让相机看向玩家
-        camPos.LookAt(target);
     }
 
     void LateUpdate()
