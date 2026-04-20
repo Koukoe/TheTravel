@@ -49,18 +49,11 @@ public class DialogueManager : MonoBehaviour
     private const string DialogueNameTextNodeName = "DialogueNameText";
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            flowState = new DialogueFlowState();
-            typewriter = new DialogueTypewriter(this);
-            uiController = new DialogueUIController(this);
-            presenter = new DialoguePresenter(typewriter, uiController, ResolveCharacterName);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
+        flowState = new DialogueFlowState();
+        typewriter = new DialogueTypewriter(this);
+        uiController = new DialogueUIController(this);
+        presenter = new DialoguePresenter(typewriter, uiController, ResolveCharacterName);
     }
 
     private void Start()

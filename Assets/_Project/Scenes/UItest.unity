@@ -512,6 +512,21 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5868402088633455480, guid: 5b47b98cc82fe1549878fc163e22274b,
+        type: 3}
+      propertyPath: m_Cameras.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5868402088633455480, guid: 5b47b98cc82fe1549878fc163e22274b,
+        type: 3}
+      propertyPath: m_Cameras.Array.data[0]
+      value: 
+      objectReference: {fileID: 1641992217987455975}
+    - target: {fileID: 5868402088633455480, guid: 5b47b98cc82fe1549878fc163e22274b,
+        type: 3}
+      propertyPath: m_Cameras.Array.data[1]
+      value: 
+      objectReference: {fileID: 1641992217987455974}
     - target: {fileID: 8583283907253542838, guid: 5b47b98cc82fe1549878fc163e22274b,
         type: 3}
       propertyPath: target
@@ -629,6 +644,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5240a486a22d12449e3f8de7ad4c734, type: 3}
+--- !u!20 &1641992217987455974 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 3695447003073340680, guid: c5240a486a22d12449e3f8de7ad4c734,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641992217987455973}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1641992217987455975 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 9106451141894039720, guid: c5240a486a22d12449e3f8de7ad4c734,
+    type: 3}
+  m_PrefabInstance: {fileID: 1641992217987455973}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &4095819991449561222 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 4134283878781934809, guid: 5b47b98cc82fe1549878fc163e22274b,

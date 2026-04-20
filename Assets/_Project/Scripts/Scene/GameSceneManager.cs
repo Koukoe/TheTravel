@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading;
 
 public abstract class SceneBase : MonoBehaviour
 {
@@ -17,23 +18,15 @@ public class GameSceneManager : MonoBehaviour
     private SceneBase currentMainLogic;
 
     // 预加载任务字典
-    private readonly Dictionary<string, UniTask> mainPreLoadTasks = new Dictionary<string, UniTask>();
-    private readonly Dictionary<string, UniTask> additivePreLoadTasks = new Dictionary<string, UniTask>();
+    private readonly Dictionary<string, (UniTask task, CancellationTokenSource cts)> mainPreLoadTasks = new();
+    private readonly Dictionary<string, (UniTask task, CancellationTokenSource cts)> additivePreLoadTasks = new();
 
     // 状态锁
     public bool IsLoading { get; private set; }
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        Instance = this;
     }
 
     /// <summary>
@@ -45,8 +38,35 @@ public class GameSceneManager : MonoBehaviour
 
         // UniTask 字典存是任务行为，不需要 allowSceneActivation = false
         // LoadMain 调用时如果没加载完会继续等待预加载，而不是再加载
-        var task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single).ToUniTask();
-        mainPreLoadTasks.Add(sceneName, task);
+        var cts = new CancellationTokenSource();
+        var task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single).ToUniTask(cancellationToken: cts.Token);
+        mainPreLoadTasks.Add(sceneName, (task, cts));  // 传入元组
+    }
+
+    /// <summary>
+    /// 取消预加载主场景
+    /// </summary>
+    public void CancelPreloadMain(string sceneName)
+    {
+        if (mainPreLoadTasks.TryGetValue(sceneName, out var pair))
+        {
+            pair.cts.Cancel();  // 取消 Task
+            pair.cts.Dispose();  // 释放资源
+            mainPreLoadTasks.Remove(sceneName);
+        }
+    }
+
+    /// <summary>
+    /// 取消所有预加载主场景
+    /// </summary>
+    public void CancelAllPreloadMain()
+    {
+        foreach (var pair in mainPreLoadTasks.Values)
+        {
+            pair.cts.Cancel();
+            pair.cts.Dispose();
+        }
+        mainPreLoadTasks.Clear();
     }
 
     /// <summary>
@@ -64,10 +84,11 @@ public class GameSceneManager : MonoBehaviour
             currentMainLogic?.ExitScene();
             currentMainLogic = null;
 
-            if (mainPreLoadTasks.TryGetValue(sceneName, out var task))
+            if (mainPreLoadTasks.TryGetValue(sceneName, out var pair))
             {
                 mainPreLoadTasks.Remove(sceneName);
-                await task;
+                pair.cts.Dispose();
+                await pair.task;
             }
             else
             {
@@ -77,7 +98,7 @@ public class GameSceneManager : MonoBehaviour
             }
 
             // 清空所有主场景预加载
-            mainPreLoadTasks.Clear();
+            // CancelAllPreloadMain();
 
             InitNewMain(sceneName);
         }
@@ -97,8 +118,37 @@ public class GameSceneManager : MonoBehaviour
     public void PreloadAdditive(string sceneName)
     {
         if (additivePreLoadTasks.ContainsKey(sceneName)) return;
-        var task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive).ToUniTask();
-        additivePreLoadTasks.Add(sceneName, task);
+
+        var cts = new CancellationTokenSource();
+        var task = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive)
+            .ToUniTask(cancellationToken: cts.Token);
+        additivePreLoadTasks.Add(sceneName, (task, cts));
+    }
+
+    /// <summary>
+    /// 取消预加载叠加场景
+    /// </summary>
+    public void CancelPreloadAdditive(string sceneName)
+    {
+        if (additivePreLoadTasks.TryGetValue(sceneName, out var pair))
+        {
+            pair.cts.Cancel();
+            pair.cts.Dispose();
+            additivePreLoadTasks.Remove(sceneName);
+        }
+    }
+
+    /// <summary>
+    /// 取消所有预加载叠加场景
+    /// </summary>
+    public void CancelAllPreloadAdditive()
+    {
+        foreach (var pair in additivePreLoadTasks.Values)
+        {
+            pair.cts.Cancel();
+            pair.cts.Dispose();
+        }
+        additivePreLoadTasks.Clear();
     }
 
     /// <summary>
@@ -106,18 +156,26 @@ public class GameSceneManager : MonoBehaviour
     /// </summary>
     public async UniTask LoadAdditive(string sceneName, IProgress<float> progress = null)
     {
-        if (additivePreLoadTasks.TryGetValue(sceneName, out var task))
+        try
         {
-            additivePreLoadTasks.Remove(sceneName);
-            await task;
-        }
-        else
-        {
-            await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive)
-                .ToUniTask(progress, cancellationToken: this.GetCancellationTokenOnDestroy());
-        }
+            if (additivePreLoadTasks.TryGetValue(sceneName, out var pair))
+            {
+                additivePreLoadTasks.Remove(sceneName);
+                pair.cts.Dispose();
+                await pair.task;
+            }
+            else
+            {
+                await SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive)
+                    .ToUniTask(progress, cancellationToken: this.GetCancellationTokenOnDestroy());
+            }
 
-        InitAdditive(sceneName);
+            InitAdditive(sceneName);
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"加载叠加场景 {sceneName} 失败: {e.Message}");
+        }
     }
 
     /// <summary>

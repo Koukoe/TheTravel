@@ -17,6 +17,8 @@ public class RealScene : SceneBase
 
     public override void EnterScene()
     {
+        CameraLink.Instance.LinkToMainCamera();
+
         if (pendingPosition.HasValue)
         {
             // 传送到指定点
