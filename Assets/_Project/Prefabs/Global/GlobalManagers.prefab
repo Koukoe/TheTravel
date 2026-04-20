@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 1476234881127536692}
   - component: {fileID: 1142211331766588265}
   - component: {fileID: 7047051930128365585}
+  - component: {fileID: 5880995726439545188}
+  - component: {fileID: 6869052967667697323}
   m_Layer: 0
   m_Name: GlobalManagers
   m_TagString: Untagged
@@ -187,3 +189,29 @@ MonoBehaviour:
   bgmSounds: []
   ambSounds: []
   voiceSounds: []
+--- !u!114 &5880995726439545188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592536910445248481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99256bfe9ec57a94eb965be8c73f8c62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6869052967667697323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592536910445248481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6563736e76ef1f542beeaed4f298a86c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characters: []
+  typewriterCharInterval: 0.05
