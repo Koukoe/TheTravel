@@ -3,7 +3,12 @@
         {
             "id": "1",
             "character": "NPC_001",
-            "content": "这是\n第一句话"
+            "content": "这是\n第一句话",
+            "effects": [
+                {
+                    "PlayActionAndResume": "npc_wave_01"
+                }
+            ]
         },
         {
             "id": "2",

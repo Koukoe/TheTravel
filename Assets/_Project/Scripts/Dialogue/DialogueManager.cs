@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
@@ -248,8 +249,25 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        bool blocked = DialogueEffectExecutor.TryApplyBlockingEffects(
+            option.effects,
+            activeDialogueSource,
+            PlayActionAndResume,
+            () => AdvanceByNextId(option.nextId));
+
+        if (blocked)
+        {
+            return;
+        }
+
         DialogueEffectExecutor.ApplyEffects(option.effects, activeDialogueSource);
         AdvanceByNextId(option.nextId);
+    }
+
+    private void PlayActionAndResume(string actionId, Action onCompleted)
+    {
+        Debug.LogWarning($"PlayActionAndResume 还未接入角色动作系统, actionId={actionId}，当前先直接继续对话");
+        onCompleted?.Invoke();
     }
 
     public List<DialogueOption> GetCurrentOptions()
@@ -341,9 +359,30 @@ public class DialogueManager : MonoBehaviour
     // 显示当前索引的内容
     private void ShowCurrent(DialogueEntry entry)
     {
+        ShowCurrent(entry, true);
+    }
+
+    private void ShowCurrent(DialogueEntry entry, bool executeEntryEffects)
+    {
         if (entry == null)
         {
             return;
+        }
+
+        if (executeEntryEffects)
+        {
+            bool blocked = DialogueEffectExecutor.TryApplyBlockingEffects(
+                entry.effects,
+                activeDialogueSource,
+                PlayActionAndResume,
+                () => ShowCurrent(entry, false));
+
+            if (blocked)
+            {
+                return;
+            }
+
+            DialogueEffectExecutor.ApplyEffects(entry.effects, activeDialogueSource);
         }
 
         presenter?.ShowEntry(entry, typewriterCharInterval);
