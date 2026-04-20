@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4134283878781934809}
   - component: {fileID: 4978083652996127390}
   - component: {fileID: 5868402088633455480}
+  - component: {fileID: 2487864052837558426}
   - component: {fileID: 8583283907253542838}
   m_Layer: 0
   m_Name: Main Camera
@@ -28,7 +29,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2701102420527870106}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -110,7 +111,9 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras: []
+  m_Cameras:
+  - {fileID: 0}
+  - {fileID: 0}
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -138,6 +141,21 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &2487864052837558426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2701102420527870106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94115043b437d7a4f9f54bfc07c229fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraInitPos: {x: 0, y: 10, z: 0}
+  cam: {fileID: 4134283878781934809}
+  trans: {fileID: 4250986594625255979}
 --- !u!114 &8583283907253542838
 MonoBehaviour:
   m_ObjectHideFlags: 0
