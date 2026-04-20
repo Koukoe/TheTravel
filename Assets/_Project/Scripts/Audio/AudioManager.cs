@@ -30,14 +30,9 @@ public class AudioManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-            InitDicts();
-            InitLogicalChannels();
-        }
-        else { Destroy(gameObject); }
+        Instance = this;
+        InitDicts();
+        InitLogicalChannels();
     }
 
     private void InitDicts()
