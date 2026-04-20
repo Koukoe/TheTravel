@@ -3,7 +3,67 @@ guid: c4fee397ddcf5924596e9cffdee9301d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: body
+    second: {fileID: 2100000, guid: c8b223a1072f4434582be4d6f41f6bd4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: chip
+    second: {fileID: 2100000, guid: d86bb3b44899cd7489e4249ed0c8e0a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: eyes
+    second: {fileID: 2100000, guid: 8fa40e6c5f4b939419d6747210bab2c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: head
+    second: {fileID: 2100000, guid: 047fc3776f7682045a9bd415f4edaf50, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: leg
+    second: {fileID: 2100000, guid: dc60db0f3ff230946855b7bc1445be44, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: neck
+    second: {fileID: 2100000, guid: bcb78cb9dd2267f49aad83f86fd3f4e5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tail
+    second: {fileID: 2100000, guid: d4ade7da080450f438d51611fe309e78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: top
+    second: {fileID: 2100000, guid: c3ddc2c620ed88241909d8d56fa6488c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: wings
+    second: {fileID: 2100000, guid: fcd4efc3f3dc8214ba4ff7d49cdce905, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u5E73\u53F0"
+    second: {fileID: 2100000, guid: 98f9a7dfa2d3f9448bd019dd98d83148, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u68CD\u5B50"
+    second: {fileID: 2100000, guid: cbd68a4738fb97f44a35c6fa5f0d9cae, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u724C\u5B50"
+    second: {fileID: 2100000, guid: c2da452cf56e47b4caf423ccac9def34, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
