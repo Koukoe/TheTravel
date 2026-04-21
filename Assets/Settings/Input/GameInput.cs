@@ -109,6 +109,24 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Look"",
+                    ""type"": ""Value"",
+                    ""id"": ""21f4c079-26cf-47c1-92bd-15e09a64fd64"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Zoom"",
+                    ""type"": ""Value"",
+                    ""id"": ""9db722ea-4cb9-484e-bfea-63b9792e4f74"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -216,7 +234,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""id"": ""a60dc7cd-7dee-4db0-bcdf-8ac4a469a561"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": ""StickDeadzone(min=0.125,max=0.925)"",
+                    ""processors"": ""StickDeadzone"",
                     ""groups"": """",
                     ""action"": ""Move"",
                     ""isComposite"": false,
@@ -263,6 +281,39 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a24c33b3-31ac-4e26-8d3a-2ad57d804711"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""33ee40a4-0581-4a58-96c3-272ddf08644e"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone,ScaleVector2(x=20,y=20)"",
+                    ""groups"": """",
+                    ""action"": ""Look"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b864acc0-50ab-4e65-abd9-dfa3c2013c21"",
+                    ""path"": ""<Mouse>/scroll"",
+                    ""interactions"": """",
+                    ""processors"": ""ScaleVector2"",
+                    ""groups"": """",
+                    ""action"": ""Zoom"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1038,6 +1089,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_PlayerDyn = asset.FindActionMap("PlayerDyn", throwIfNotFound: true);
         m_PlayerDyn_Move = m_PlayerDyn.FindAction("Move", throwIfNotFound: true);
         m_PlayerDyn_Interact = m_PlayerDyn.FindAction("Interact", throwIfNotFound: true);
+        m_PlayerDyn_Look = m_PlayerDyn.FindAction("Look", throwIfNotFound: true);
+        m_PlayerDyn_Zoom = m_PlayerDyn.FindAction("Zoom", throwIfNotFound: true);
         // PlayerSta
         m_PlayerSta = asset.FindActionMap("PlayerSta", throwIfNotFound: true);
         m_PlayerSta_Menu = m_PlayerSta.FindAction("Menu", throwIfNotFound: true);
@@ -1146,6 +1199,8 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private List<IPlayerDynActions> m_PlayerDynActionsCallbackInterfaces = new List<IPlayerDynActions>();
     private readonly InputAction m_PlayerDyn_Move;
     private readonly InputAction m_PlayerDyn_Interact;
+    private readonly InputAction m_PlayerDyn_Look;
+    private readonly InputAction m_PlayerDyn_Zoom;
     /// <summary>
     /// Provides access to input actions defined in input action map "PlayerDyn".
     /// </summary>
@@ -1165,6 +1220,14 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "PlayerDyn/Interact".
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_PlayerDyn_Interact;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerDyn/Look".
+        /// </summary>
+        public InputAction @Look => m_Wrapper.m_PlayerDyn_Look;
+        /// <summary>
+        /// Provides access to the underlying input action "PlayerDyn/Zoom".
+        /// </summary>
+        public InputAction @Zoom => m_Wrapper.m_PlayerDyn_Zoom;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1197,6 +1260,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Look.started += instance.OnLook;
+            @Look.performed += instance.OnLook;
+            @Look.canceled += instance.OnLook;
+            @Zoom.started += instance.OnZoom;
+            @Zoom.performed += instance.OnZoom;
+            @Zoom.canceled += instance.OnZoom;
         }
 
         /// <summary>
@@ -1214,6 +1283,12 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Look.started -= instance.OnLook;
+            @Look.performed -= instance.OnLook;
+            @Look.canceled -= instance.OnLook;
+            @Zoom.started -= instance.OnZoom;
+            @Zoom.performed -= instance.OnZoom;
+            @Zoom.canceled -= instance.OnZoom;
         }
 
         /// <summary>
@@ -1762,6 +1837,20 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Look" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnLook(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Zoom" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnZoom(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "PlayerSta" which allows adding and removing callbacks.
