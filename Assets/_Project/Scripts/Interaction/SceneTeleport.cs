@@ -24,7 +24,7 @@ public class SceneTeleport : MonoBehaviour
             Debug.LogWarning($"SceneTeleLogic component missing on {gameObject.name}");
         }
 
-        player = GameObjectsDefination.Instance.player.transform;
+        player = PlayerController.Instance.transform;
     }
 
     private void OnDestroy()

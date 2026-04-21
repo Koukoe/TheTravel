@@ -12,7 +12,7 @@ public class RealScene : SceneBase
 
     static RealScene()
     {
-        player = GameObjectsDefination.Instance.player.transform;
+        player = PlayerController.Instance.transform;
     }
 
     public override void EnterScene()

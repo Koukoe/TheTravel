@@ -7,6 +7,13 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
+    [Range(0.01f, 1f)] public float mouseLookSensitivity = 0.1f;
+    [Range(10f, 500f)] public float gamepadLookSensitivity = 200f;
+    [Range(1f, 3f)] public float gamepadLookCurve = 2.0f;  // 手柄二次曲线
+
+    public float mouseZoomSensitivity = 0.05f;
+    public float gamepadZoomSensitivity = 10f;
+
     private GameInput _controls;
 
     private void Awake()
@@ -93,8 +100,43 @@ public class InputManager : MonoBehaviour
         }
     }
 
-    // 获取移动向量
+    // Update 获取数值
     public Vector2 GetMove() => _controls.PlayerDyn.Move.ReadValue<Vector2>();
+
+    public Vector2 GetLook()
+    {
+        Vector2 rawLook = _controls.PlayerDyn.Look.ReadValue<Vector2>();
+
+        // 检测手柄操作
+        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+        {
+            // 处理手柄曲线
+            rawLook.x = Mathf.Sign(rawLook.x) * Mathf.Pow(Mathf.Abs(rawLook.x), gamepadLookCurve);
+            rawLook.y = Mathf.Sign(rawLook.y) * Mathf.Pow(Mathf.Abs(rawLook.y), gamepadLookCurve);
+
+            // 乘以感度并补偿时间
+            return rawLook * (gamepadLookSensitivity * Time.deltaTime);
+        }
+        else
+        {
+            // 鼠标直接应用感度
+            return rawLook * mouseLookSensitivity;
+        }
+    }
+
+    public float GetZoom()
+    {
+        float rawZoom = _controls.PlayerDyn.Zoom.ReadValue<float>();
+
+        if (Gamepad.current != null && Gamepad.current.wasUpdatedThisFrame)
+        {
+            return rawZoom * gamepadZoomSensitivity * Time.deltaTime;
+        }
+        else
+        {
+            return rawZoom * mouseZoomSensitivity;
+        }
+    }
 
     public GameInput.PlayerDynActions PlayerDynamicActions => _controls.PlayerDyn;
     public GameInput.PlayerDiaActions PlayerDialogueActions => _controls.PlayerDia;
