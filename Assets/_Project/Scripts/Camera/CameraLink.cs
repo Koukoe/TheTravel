@@ -40,6 +40,7 @@ public class CameraLink : MonoBehaviour
             }
             if (gameWorldCanvas != null)
                 gameWorldCanvas.worldCamera = mainCam;
+            PlayerController.mainCam = mainCam;
         }
     }
 }

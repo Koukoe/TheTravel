@@ -63,7 +63,7 @@ public class AudioManager : MonoBehaviour
         go.name = sourceName;
         go.transform.SetParent(transform);
         AudioSource src = go.GetComponent<AudioSource>();
-        src.spatialBlend = 0f; // 保持你原来的 2D 设置
+        src.spatialBlend = 0f;  // 2D
         return src;
     }
 
