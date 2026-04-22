@@ -10,6 +10,7 @@ public class SeaScene : RealScene
     {
         base.EnterScene();
         // 检测是否第一次在场景里，决定是否播放 BGM
+        Playermove.Instance.OnSea = true;
     }
 
     public override void ExitScene()

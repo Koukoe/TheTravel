@@ -10,6 +10,7 @@ public class ShipScene : RealScene
     public override void EnterScene()
     {
         base.EnterScene();
+        Playermove.Instance.OnSea = false;
     }
 
     public override void ExitScene()

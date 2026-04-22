@@ -11,8 +11,8 @@ public class PlayerController : MonoBehaviour
     public InteractionDetector detector;
     public static PlayerController Instance { get; private set; }
 
+    public bool moveEnable = true;
     public static Camera mainCam;
-    private bool shipMove;  // 先放着
 
     private void Awake()
     {
@@ -32,12 +32,14 @@ public class PlayerController : MonoBehaviour
     {
         InputManager.Instance.PlayerDynamicActions.Interact.performed += Interact;
         InputManager.Instance.PlayerStaticActions.Book.performed += Book;
+        moveEnable = true;
     }
 
     private void OnDisable()
     {
         InputManager.Instance.PlayerDynamicActions.Interact.performed -= Interact;
         InputManager.Instance.PlayerStaticActions.Book.performed -= Book;
+        moveEnable = false;
     }
 
     private void Interact(InputAction.CallbackContext context)
@@ -57,5 +59,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (moveEnable) Playermove.Instance.Move();
     }
 }
