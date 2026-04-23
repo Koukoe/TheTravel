@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "captain_2_01",
+      "character": "captain",
+      "content": "这把在陆地上走得东倒西歪的老骨头，终于又踏上甲板了......",
+      "nextId": "captain_2_02"
+    },
+    {
+      "id": "captain_2_02",
+      "character": "captain",
+      "content": "还是那股熟悉的、被海水泡过的烂木头味！",
+      "nextId": "end"
+    }
+  ]
+}

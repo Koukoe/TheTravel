@@ -1,0 +1,73 @@
+{
+  "dialogues": [
+    {
+      "id": "captain_1_01",
+      "character": "captain",
+      "content": "年轻人！",
+      "nextId": "captain_1_02"
+    },
+    {
+      "id": "captain_1_02",
+      "character": "protagonist",
+      "content": "有何贵干？",
+      "nextId": "captain_1_03"
+    },
+    {
+      "id": "captain_1_03",
+      "character": "captain",
+      "content": "如你所见，年轻人。我曾是这一带最好的船长！我曾经驾船穿过了波尼克之眼，在海上和最凶猛的大白鲨搏斗过！我的这条���腿就是拜它所赐！",
+      "nextId": "captain_1_04"
+    },
+    {
+      "id": "captain_1_04",
+      "character": "protagonist",
+      "content": "嗯哼，这与我有什么干系呢？",
+      "nextId": "captain_1_05"
+    },
+    {
+      "id": "captain_1_05",
+      "character": "captain",
+      "content": "年轻人，我有一事相求！我的老伙计早已沉入海底，陷入永久的长眠了。那些来往的水手们都不愿意带上我这把老骨头，可一个船员的心是像这大海一般永远无法平息的！",
+      "nextId": "captain_1_06"
+    },
+    {
+      "id": "captain_1_06",
+      "character": "protagonist",
+      "content": "所以你这把老骨头是想让我带上你一起出海咯？",
+      "nextId": "captain_1_07"
+    },
+    {
+      "id": "captain_1_07",
+      "character": "captain",
+      "content": "年轻人，我一眼就看出你有悟性！不错，我想拜托你捎我一程。不远，只要带我到圣波尼克岛就好！我有一个不得不去拜访的老朋友住在那里。",
+      "nextId": "captain_1_08"
+    },
+    {
+      "id": "captain_1_08",
+      "character": "captain",
+      "content": "我老威廉是懂得感恩的人，只要你带我到了圣波尼克岛，我就把我珍藏多年的威士忌分给你，这年头，酒可不多见！",
+      "nextId": "captain_1_09"
+    },
+    {
+      "id": "captain_1_09",
+      "character": "protagonist",
+      "content": "（轻笑）好啊，多你个老家伙也没差。",
+      "nextId": "captain_1_10"
+    },
+    {
+      "id": "captain_1_10",
+      "character": "captain",
+      "content": "不赖，我很久没见过你这么爽快的年轻人了。",
+      "nextId": "captain_1_11"
+    },
+    {
+      "id": "captain_1_11",
+      "character": "captain",
+      "content": "不介意的话，我就先去你的船上候着了！",
+      "effects": [
+        {"MoveNpc": {"npc": "captain", "to": "ship_deck"}}
+      ],
+      "nextId": "end"
+    }
+  ]
+}

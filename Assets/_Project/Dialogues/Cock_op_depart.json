@@ -1,0 +1,64 @@
+{
+  "dialogues": [
+    {
+      "id": "cock_depart_01",
+      "character": "cock",
+      "content": "准备出发了吗？",
+      "options": [
+        {
+          "content": "是。",
+          "nextId": "cock_depart_02"
+        },
+        {
+          "content": "不，再等等。",
+          "nextId": "cock_depart_wait"
+        }
+      ]
+    },
+    {
+      "id": "cock_depart_02",
+      "character": "cock",
+      "content": "要去哪里？",
+      "options": [
+        {
+          "content": "科洛雷斯岛",
+          "nextId": "go_colores",
+          "condition": { "event": "map_colores_obtained" }
+        },
+        {
+          "content": "圣波尼克岛",
+          "nextId": "go_white",
+          "condition": null
+        },
+        {
+          "content": "暂时不出发",
+          "nextId": "cock_depart_wait"
+        }
+      ]
+    },
+    {
+      "id": "go_colores",
+      "character": "cock",
+      "content": "", 
+      "effects": [
+        { "TriggerEvent": "sail_departure", "targetIsland": "colores" }
+      ],
+      "nextId": "end"
+    },
+    {
+      "id": "go_white",
+      "character": "cock",
+      "content": "",
+      "effects": [
+        { "TriggerEvent": "sail_departure", "targetIsland": "white" }
+      ],
+      "nextId": "end"
+    },
+    {
+      "id": "cock_depart_wait",
+      "character": "cock",
+      "content": "好，你还可以再准备准备。",
+      "nextId": "end"
+    }
+  ]
+}
