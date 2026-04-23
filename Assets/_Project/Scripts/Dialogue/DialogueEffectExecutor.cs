@@ -58,6 +58,12 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 跳过 blocking effects（由 TryApplyBlockingEffects 处理）
+            if (!string.IsNullOrWhiteSpace(effect.PlayActionAndResume))
+            {
+                continue;
+            }
+
             if (!string.IsNullOrWhiteSpace(effect.SetDialogueIndex))
             {
                 if (dialogueSource == null)
@@ -76,7 +82,68 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            if (!string.IsNullOrWhiteSpace(effect.PlayBgm))
+            {
+                if (AudioManager.Instance == null)
+                {
+                    Debug.LogWarning("AudioManager 未初始化, 无法播放 BGM");
+                    continue;
+                }
+
+                float fade = ParseFadeOrDefault(effect.PlayBgmFade, 1.0f, "PlayBgmFade");
+                AudioManager.Instance.PlayBGM(effect.PlayBgm.Trim(), fade);
+                continue;
+            }
+
+            bool hasStopBgm = !string.IsNullOrWhiteSpace(effect.StopBgmTarget) ||
+                              !string.IsNullOrWhiteSpace(effect.StopBgmFade);
+            if (hasStopBgm)
+            {
+                if (AudioManager.Instance == null)
+                {
+                    Debug.LogWarning("AudioManager 未初始化, 无法停止 BGM");
+                    continue;
+                }
+
+                StopTarget target = ParseStopTargetOrDefault(effect.StopBgmTarget, StopTarget.All);
+                float fade = ParseFadeOrDefault(effect.StopBgmFade, 1.0f, "StopBgmFade");
+                AudioManager.Instance.StopBGM(target, fade);
+                continue;
+            }
+
             Debug.LogWarning("检测到未配置字段的对话效果");
         }
+    }
+
+    private static StopTarget ParseStopTargetOrDefault(string rawValue, StopTarget defaultValue)
+    {
+        if (string.IsNullOrWhiteSpace(rawValue))
+        {
+            return defaultValue;
+        }
+
+        if (Enum.TryParse(rawValue.Trim(), true, out StopTarget target))
+        {
+            return target;
+        }
+
+        Debug.LogWarning($"StopBgmTarget 非法: {rawValue}, 将使用默认值 {defaultValue}");
+        return defaultValue;
+    }
+
+    private static float ParseFadeOrDefault(string rawValue, float defaultValue, string fieldName)
+    {
+        if (string.IsNullOrWhiteSpace(rawValue))
+        {
+            return defaultValue;
+        }
+
+        if (float.TryParse(rawValue.Trim(), out float fade))
+        {
+            return fade;
+        }
+
+        Debug.LogWarning($"{fieldName} 非法: {rawValue}, 将使用默认值 {defaultValue}");
+        return defaultValue;
     }
 }

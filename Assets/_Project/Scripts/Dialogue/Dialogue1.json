@@ -7,6 +7,10 @@
             "effects": [
                 {
                     "PlayActionAndResume": "npc_wave_01"
+                },
+                {
+                    "PlayBgm": "bgmID",
+                    "PlayBgmFade": "1.0"
                 }
             ]
         },

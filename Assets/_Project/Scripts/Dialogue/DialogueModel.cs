@@ -32,6 +32,17 @@ public class DialogueEffect
     // 对话中途隐藏对话框并播放角色动作，动作完成后恢复对话
     // 写法: { "PlayActionAndResume": "npc_wave_01" }
     public string PlayActionAndResume;
+
+    // 播放 BGM
+    // 写法: { "PlayBgm": "bgm_id", "PlayBgmFade": "1.0" }
+    public string PlayBgm;
+    public string PlayBgmFade;
+
+    // 停止 BGM
+    // 写法: { "StopBgmTarget": "All", "StopBgmFade": "1.0" }
+    // StopBgmTarget 可选值: Oldest / Latest / All
+    public string StopBgmTarget;
+    public string StopBgmFade;
 }
 
 // 单条对话条目

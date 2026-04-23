@@ -371,6 +371,10 @@ public class DialogueManager : MonoBehaviour
 
         if (executeEntryEffects)
         {
+            // 先应用所有 immediate effects
+            DialogueEffectExecutor.ApplyEffects(entry.effects, activeDialogueSource);
+
+            // 再处理 blocking effects
             bool blocked = DialogueEffectExecutor.TryApplyBlockingEffects(
                 entry.effects,
                 activeDialogueSource,
@@ -381,8 +385,6 @@ public class DialogueManager : MonoBehaviour
             {
                 return;
             }
-
-            DialogueEffectExecutor.ApplyEffects(entry.effects, activeDialogueSource);
         }
 
         presenter?.ShowEntry(entry, typewriterCharInterval);
