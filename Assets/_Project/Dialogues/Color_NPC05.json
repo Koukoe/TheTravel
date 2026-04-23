@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "Color_NPC05_1_01",
+      "character": "Color_NPC05",
+      "content": "渔民们时常能捞上来一些旧世界的东西，不过大家都不知道那些东西是用来干什么的呢。",
+      "nextId": "Color_NPC05_1_02"
+    },
+    {
+      "id": "Color_NPC05_1_02",
+      "character": "protagonist",
+      "content": "嗯......",
+      "nextId": "end"
+    }
+  ]
+}

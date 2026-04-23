@@ -1,0 +1,39 @@
+{
+  "dialogues": [
+    {
+      "id": "opening01",
+      "character": "cock",
+      "content": "咕————",
+      "nextId": "opening02"
+    },
+    {
+      "id": "opening02",
+      "character": "cock",
+      "content": "还不启航吗？还不启航吗？",
+      "nextId": "opening03"
+    },
+    {
+      "id": "opening03",
+      "character": "protagonist",
+      "content": "不要催我，我只想看着海发会呆。",
+      "nextId": "opening04"
+    },
+    {
+      "id": "opening04",
+      "character": "cock",
+      "content": "你已经发了够久的呆了！够久了！快去掌舵！去掌舵！",
+      "nextId": "opening05"
+    },
+    {
+      "id": "opening05",
+      "character": "protagonist",
+      "content": "好吧好吧，我知道了。",
+      "effects": [
+        {
+          "SetDialogueIndex": "opening2"
+        }
+      ],
+      "nextId": "end"
+    }
+  ]
+}
