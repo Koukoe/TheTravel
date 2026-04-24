@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "Color_NPC03_2_01",
+      "character": "Color_NPC03",
+      "content": "（正安详地熟睡中）",
+      "nextId": "Color_NPC03_2_02"
+    },
+    {
+      "id": "Color_NPC03_2_02",
+      "character": "protagonist",
+      "content": "（还是不要打扰好了...）",
+      "nextId": "end"
+    }
+  ]
+}

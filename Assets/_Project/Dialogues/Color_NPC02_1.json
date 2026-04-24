@@ -1,0 +1,43 @@
+{
+  "dialogues": [
+    {
+      "id": "Color_NPC02_1_01",
+      "character": "Color_NPC02",
+      "content": "......",
+      "nextId": "Color_NPC02_1_02"
+    },
+    {
+      "id": "Color_NPC02_1_02",
+      "character": "protagonist",
+      "content": "你在做什么？",
+      "nextId": "Color_NPC02_1_03"
+    },
+    {
+      "id": "Color_NPC02_1_03",
+      "character": "Color_NPC02",
+      "content": "在看海。",
+      "nextId": "Color_NPC02_1_04"
+    },
+    {
+      "id": "Color_NPC02_1_04",
+      "character": "protagonist",
+      "content": "海有什么好看的？",
+      "nextId": "Color_NPC02_1_05"
+    },
+    {
+      "id": "Color_NPC02_1_05",
+      "character": "Color_NPC02",
+      "content": "......",
+      "nextId": "Color_NPC02_1_06"
+    },
+    {
+      "id": "Color_NPC02_1_06",
+      "character": "protagonist",
+      "content": "（还是不打扰他了）",
+      "effects": [
+        { "SetDialogueIndex": "Color_NPC02_2" }
+      ],
+      "nextId": "end"
+    }
+  ]
+}

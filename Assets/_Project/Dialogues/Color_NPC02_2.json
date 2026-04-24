@@ -1,0 +1,19 @@
+{
+  "dialogues": [
+    {
+      "id": "Color_NPC02_2_01",
+      "character": "protagonist",
+      "content": "......",
+      "nextId": "Color_NPC02_2_02"
+    },
+    {
+      "id": "Color_NPC02_2_02",
+      "character": "Color_NPC02",
+      "content": "......",
+      "effects": [
+        { "SetDialogueIndex": "Color_NPC02_3" }
+      ],
+      "nextId": "end"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "dialogues": [
+    {
+      "id": "Color_NPC01_2_01",
+      "character": "Color_NPC01",
+      "content": "回来了？我们岛上的风景还不错吧？要不要来条鱼？",
+      "nextId": "Color_NPC01_2_02"
+    },
+    {
+      "id": "Color_NPC01_2_02",
+      "character": "protagonist",
+      "content": "嗯...不需要。",
+      "nextId": "Color_NPC01_2_03"
+    },
+    {
+      "id": "Color_NPC01_2_03",
+      "character": "Color_NPC01",
+      "content": "什么时候想买了随时来！",
+      "effects": [
+        { "SetDialogueIndex": "Color_NPC01_3" }
+      ],
+      "nextId": "end"
+    }
+  ]
+}
