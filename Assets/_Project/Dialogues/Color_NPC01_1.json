@@ -29,7 +29,9 @@
       "character": "protagonist",
       "content": "不用了，谢谢。",
       "effects": [
-        { "SetDialogueIndex": "Color_NPC01_2" }
+        {
+          "SetDialogueIndex": "1"
+        }
       ],
       "nextId": "end"
     }

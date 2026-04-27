@@ -18,10 +18,20 @@
             "id": "2",
             "character": "NPC_002",
             "content": "这是第二句话",
+            "effects": [
+                {
+                    "PlaySfx": "sfxID"
+                }
+            ],
             "options": [
                 {
-                    "content": "到5",
-                    "nextId": "5"
+                    "content": "到纯白小镇",
+                    "nextId": "end",
+                    "effects": [
+                        {
+                            "GotoScene": "WhiteTown"
+                        }
+                    ]
                 },
                 {
                     "content": "到3",

@@ -59,7 +59,9 @@
       "character": "Color_NPC03",
       "content": "心善的小姑娘，谢谢你。愿波尼克保佑你！",
       "effects": [
-        { "SetDialogueIndex": "Color_NPC03_2" }
+        {
+          "SetDialogueIndex": "1"
+        }
       ],
       "nextId": "end"
     }

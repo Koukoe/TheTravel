@@ -10,7 +10,7 @@
 | 已实现     | 设置对话文件索引 | {"SetDialogueIndex": "索引数字"}                         | 下次对话使用的对话文件索引             |
 | 未测试     | 播放音乐         | { "PlayBgm": "bgm_id", "PlayBgmFade": "1.0" }            | 播放/切歌                              |
 | 未测试     | 停止音乐         | { "StopBgmTarget": "All", "StopBgmFade": "1.0" }         | 停止音乐                               |
-|            | 切换场景         | {"GotoScene": "sceneID"}                                 | 传送到新场景/地图                      |
+| 能切过去   | 切换场景         | {"GotoScene": "sceneID"}                                 | 传送到新场景/地图                      |
 |            | 触发剧情事件     | {"TriggerEvent": "eventID", ...}                         | 触发一个故事/离港等主流程事件          |
-|            | 播放音效（SFX）  | {"PlaySfx": "sfxID"}                                     | 播放短音效，如“船铃”                   |
+| 未测试     | 播放音效（SFX）  | {"PlaySfx": "sfxID"}                                     | 播放短音效，如“船铃”                   |
 |            | 播放动画/过场    | {"PlayCutscene": "cutsceneID"}                           | 播放离港等剧情动画，动画名需与资源统一 |

@@ -35,7 +35,9 @@
       "character": "protagonist",
       "content": "（还是不打扰他了）",
       "effects": [
-        { "SetDialogueIndex": "Color_NPC02_2" }
+        {
+          "SetDialogueIndex": "1"
+        }
       ],
       "nextId": "end"
     }

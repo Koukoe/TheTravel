@@ -36,8 +36,6 @@ public static class DialogueEffectExecutor
                 playActionAndResume(actionId, onCompleted);
                 return true;
             }
-
-            Debug.LogWarning("检测到未配置字段的对话效果");
         }
 
         return false;
@@ -82,6 +80,19 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            if (!string.IsNullOrWhiteSpace(effect.GotoScene))
+            {
+                if (GameSceneManager.Instance == null)
+                {
+                    Debug.LogWarning("GameSceneManager 未初始化, 无法跳转场景");
+                    continue;
+                }
+
+                string sceneName = effect.GotoScene.Trim();
+                _ = GameSceneManager.Instance.LoadMain(sceneName);
+                return;
+            }
+
             if (!string.IsNullOrWhiteSpace(effect.PlayBgm))
             {
                 if (AudioManager.Instance == null)
@@ -92,6 +103,18 @@ public static class DialogueEffectExecutor
 
                 float fade = ParseFadeOrDefault(effect.PlayBgmFade, 1.0f, "PlayBgmFade");
                 AudioManager.Instance.PlayBGM(effect.PlayBgm.Trim(), fade);
+                continue;
+            }
+
+            if (!string.IsNullOrWhiteSpace(effect.PlaySfx))
+            {
+                if (AudioManager.Instance == null)
+                {
+                    Debug.LogWarning("AudioManager 未初始化, 无法播放 SFX");
+                    continue;
+                }
+
+                AudioManager.Instance.PlaySFX(effect.PlaySfx.Trim());
                 continue;
             }
 

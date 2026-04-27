@@ -29,6 +29,10 @@ public class DialogueEffect
     // 写法: { "SetDialogueIndex": "2" }
     public string SetDialogueIndex;
 
+    // 跳转主场景 (要把场景配置在 Build Settings 中)
+    // 写法: { "GotoScene": "SceneName" }
+    public string GotoScene;
+
     // 对话中途隐藏对话框并播放角色动作，动作完成后恢复对话
     // 写法: { "PlayActionAndResume": "npc_wave_01" }
     public string PlayActionAndResume;
@@ -37,6 +41,10 @@ public class DialogueEffect
     // 写法: { "PlayBgm": "bgm_id", "PlayBgmFade": "1.0" }
     public string PlayBgm;
     public string PlayBgmFade;
+
+    // 播放 SFX
+    // 写法: { "PlaySfx": "sfx_id" }
+    public string PlaySfx;
 
     // 停止 BGM
     // 写法: { "StopBgmTarget": "All", "StopBgmFade": "1.0" }

@@ -35,8 +35,12 @@
       "character": "narrator",
       "content": "获得道具“大眼鱼”",
       "effects": [
-        { "GetItem": "item01" },
-        { "SetDialogueIndex": "Color_NPC01_4" }
+        {
+          "GetItem": "item01"
+        },
+        {
+          "SetDialogueIndex": "3"
+        }
       ],
       "nextId": "end"
     }

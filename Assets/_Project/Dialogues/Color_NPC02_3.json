@@ -29,7 +29,9 @@
       "character": "protagonist",
       "content": "嗯...",
       "effects": [
-        { "SetDialogueIndex": "Color_NPC02_4" }
+        {
+          "SetDialogueIndex": "3"
+        }
       ],
       "nextId": "end"
     }

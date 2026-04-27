@@ -17,7 +17,9 @@
       "character": "Color_NPC01",
       "content": "什么时候想买了随时来！",
       "effects": [
-        { "SetDialogueIndex": "Color_NPC01_3" }
+        {
+          "SetDialogueIndex": "2"
+        }
       ],
       "nextId": "end"
     }

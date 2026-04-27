@@ -11,7 +11,9 @@
       "character": "Color_NPC02",
       "content": "......",
       "effects": [
-        { "SetDialogueIndex": "Color_NPC02_3" }
+        {
+          "SetDialogueIndex": "2"
+        }
       ],
       "nextId": "end"
     }
