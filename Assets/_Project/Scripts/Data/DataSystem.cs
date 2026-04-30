@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Newtonsoft.Json;
 
 public static class DataArchivesSystem
 {
@@ -60,8 +61,8 @@ public static class DataArchivesSystem
     public static DataArchive Get(int index)
     {
         if (index < 0 || index >= _archives.Count) return null;
-        string json = JsonUtility.ToJson(_archives[index]);
-        return JsonUtility.FromJson<DataArchive>(json);
+        string json = JsonConvert.SerializeObject(_archives[index], DataPersistence.Settings);
+        return JsonConvert.DeserializeObject<DataArchive>(json, DataPersistence.Settings);
     }
 
     /// <summary>
@@ -94,8 +95,8 @@ public static class DataArchivesSystem
     public static void Set(int index, DataArchive d)
     {
         if (index < 0 || index >= _archives.Count || d == null) return;
-        string json = JsonUtility.ToJson(d);
-        _archives[index] = JsonUtility.FromJson<DataArchive>(json);
+        string json = JsonConvert.SerializeObject(d, DataPersistence.Settings);
+        _archives[index] = JsonConvert.DeserializeObject<DataArchive>(json, DataPersistence.Settings);
         Save(index);
     }
 }
@@ -131,8 +132,8 @@ public static class DataSettingSystem
     /// </summary>
     public static DataSetting Get()
     {
-        string json = JsonUtility.ToJson(_current);
-        return JsonUtility.FromJson<DataSetting>(json);
+        string json = JsonConvert.SerializeObject(_current, DataPersistence.Settings);
+        return JsonConvert.DeserializeObject<DataSetting>(json, DataPersistence.Settings);
     }
 
     /// <summary>
@@ -141,8 +142,8 @@ public static class DataSettingSystem
     public static void Set(DataSetting d)
     {
         if (d == null) return;
-        string json = JsonUtility.ToJson(d);
-        _current = JsonUtility.FromJson<DataSetting>(json);
+        string json = JsonConvert.SerializeObject(d, DataPersistence.Settings);
+        _current = JsonConvert.DeserializeObject<DataSetting>(json, DataPersistence.Settings);
         Save();
     }
 
@@ -190,8 +191,8 @@ public static class DataGlobalSystem
     public static DataGlobal Get()
     {
         if (_current == null) return null;
-        string json = JsonUtility.ToJson(_current);
-        return JsonUtility.FromJson<DataGlobal>(json);
+        string json = JsonConvert.SerializeObject(_current, DataPersistence.Settings);
+        return JsonConvert.DeserializeObject<DataGlobal>(json, DataPersistence.Settings);
     }
 
     /// <summary>
@@ -200,8 +201,8 @@ public static class DataGlobalSystem
     public static void Set(DataGlobal d)
     {
         if (d == null) return;
-        string json = JsonUtility.ToJson(d);
-        _current = JsonUtility.FromJson<DataGlobal>(json);
+        string json = JsonConvert.SerializeObject(d, DataPersistence.Settings);
+        _current = JsonConvert.DeserializeObject<DataGlobal>(json, DataPersistence.Settings);
         Save();
     }
 }

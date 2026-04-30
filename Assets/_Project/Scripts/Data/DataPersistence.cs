@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
+using Newtonsoft.Json;
 
 
 public static class DataPath
@@ -33,9 +34,16 @@ public static class DataPath
 
 public static class DataPersistence
 {
+    public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+    {
+        TypeNameHandling = TypeNameHandling.Auto,
+        Formatting = Formatting.Indented,
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+    };
+
     public static void SaveData<T>(string fileName, T data)
     {
-        string j = JsonUtility.ToJson(data, true);
+        string j = JsonConvert.SerializeObject(data, Settings);
         string p = Path.Combine(DataPath.GetRoot(), fileName);
 
         File.WriteAllText(p, j);
@@ -52,8 +60,16 @@ public static class DataPersistence
         }
 
         string j = File.ReadAllText(p);
-        T data = JsonUtility.FromJson<T>(j);
-        return data;
+        try
+        {
+            T data = JsonConvert.DeserializeObject<T>(j, Settings);
+            return data ?? new T();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError($"[DataSystem] 数据解析失败: {fileName}\n{e.Message}");
+            return new T();
+        }
     }
 
     public static void DeleteData(string fileName)

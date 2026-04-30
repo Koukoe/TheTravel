@@ -16,11 +16,13 @@ public static class GameStatic
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     public static void GameEntry()
     {
+        if (MenuManager.Instance != null)
+        {
+            MenuManager.Instance.ApplySettings(DataSettingSystem.Get());
+        }
         if (!DataGlobalSystem.Get().hasEnteredGame)
         {
-            // 打开新的游戏
-            InputManager.Instance.SwitchAllMode();
-            UIManager.Instance.Push("StartPanel");
+            MenuManager.Instance.NewGame();
         }
     }
 

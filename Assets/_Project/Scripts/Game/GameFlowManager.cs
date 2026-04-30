@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class GameFlowManager : MonoBehaviour
 {
-    DataArchive currntGameData;
-    void Start()
+    public static GameFlowManager Instance { get; private set; }
+    private void Awake()
     {
-
+        Instance = this;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    public DataArchive PlayingData { get; private set; }
 
+    public void NewGame()
+    {
+        PlayingData = new DataArchive();
+    }
+    public void LoadGame(int slotIndex)
+    {
+        PlayingData = DataArchivesSystem.Get(slotIndex);
+
+        if (GameSceneManager.Instance != null)
+        {
+            GameSceneManager.Instance.LoadMain(PlayingData.currentScene);  // 异步
+        }
+
+        //...
+    }
+
+
+    /// <summary>
+    /// 存档点触发
+    /// </summary>
+    public void OnCheckPoint(int slotIndex)
+    {
+        DataArchivesSystem.Set(slotIndex, PlayingData);
     }
 }

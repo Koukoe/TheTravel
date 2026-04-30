@@ -41,9 +41,7 @@ public class MenuManager : MonoBehaviour
 
     public void NewGame()
     {
-        // 先清理现在状态
-
-
+        GameFlowManager.Instance.NewGame();
         InputManager.Instance.SwitchAllMode();
         UIManager.Instance.Push("StartPanel");
     }
