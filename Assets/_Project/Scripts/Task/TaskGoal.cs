@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class TaskGoal : MonoBehaviour
 {
+    TaskGoalType taskGoalType;
     private bool isDone;
+    string targetId;
 
     public bool IsDone
     {
@@ -19,4 +21,11 @@ public class TaskGoal : MonoBehaviour
             }
         }
     }
+}
+
+public enum TaskGoalType
+{
+    TRIGGER,
+    NORMALITEM,
+    BOOKITEM
 }

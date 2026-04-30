@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading;
 using UnityEngine;
 
 public class TaskNode : MonoBehaviour
@@ -60,8 +61,9 @@ public class TaskNode : MonoBehaviour
         {
             effect.ApplyEffect();
         }
-        StartCoroutine(CheckTaskFinished());
-        yield return new WaitUntil(() => isTaskFinished == true);
+
+        yield return StartCoroutine(CheckTaskFinished());
+
         foreach (var effect in taskEffects)
         {
             effect.RevertEffect();
