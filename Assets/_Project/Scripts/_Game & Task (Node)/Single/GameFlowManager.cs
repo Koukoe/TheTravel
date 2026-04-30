@@ -18,6 +18,14 @@ public class GameFlowManager : MonoBehaviour
     }
     public void LoadGame(int slotIndex)
     {
+        var data = DataArchivesSystem.Get(slotIndex);
+        if (data == null)
+        {
+            Debug.LogError("存档为空！");
+            return;
+        }
+
+        PlayingData = data;
         PlayingData = DataArchivesSystem.Get(slotIndex);
 
         if (GameSceneManager.Instance != null)

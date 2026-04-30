@@ -63,23 +63,15 @@ public class PoolManager : MonoBehaviour
             if (configs[i].prewarmCount > 0) Prewarm(configs[i].name, configs[i].prewarmCount);
     }
 
-    /// <summary>
-    /// 根据 Name 从池中获取一个对象。
-    /// 如果对应的池子尚未建立，则会自动根据配置表初始化。
-    /// </summary>
-    /// <param name="n">在 Inspector 清单中定义的唯一标识符名字</param>
-    /// /// <param name="isNewInstance">返回是否第一次创建，可以不输入</param>
-    /// <returns>返回一个激活的对象实例；若未注册则返回 null</returns>
-    public GameObject Get(string n, out bool isNewInstance)
+    private IObjectPool<GameObject> GetOrCreatePool(GameObject prefab, PoolSettings? conf = null)
     {
-        isNewInstance = false;
-        if (!_lib.TryGetValue(n, out var conf)) return null;
-
-        // 确保池子存在
-        if (!_pools.TryGetValue(conf.prefab, out var pool))
+        if (!_pools.TryGetValue(prefab, out var pool))
         {
+            int prewarm = conf?.prewarmCount ?? 2;
+            int max = conf?.maxSize ?? 32;
+
             pool = new ObjectPool<GameObject>(
-                createFunc: () => Instantiate(conf.prefab, transform),
+                createFunc: () => Instantiate(prefab, transform),
                 actionOnGet: obj => obj.SetActive(true),
                 actionOnRelease: obj => obj.SetActive(false),
                 actionOnDestroy: obj =>
@@ -88,23 +80,66 @@ public class PoolManager : MonoBehaviour
                     Destroy(obj);
                 },
                 collectionCheck: false,
-                defaultCapacity: conf.prewarmCount > 0 ? conf.prewarmCount : 8,
-                maxSize: conf.maxSize > 0 ? conf.maxSize : 128
+                defaultCapacity: prewarm,
+                maxSize: max
             );
-            _pools.Add(conf.prefab, pool);
+            _pools.Add(prefab, pool);
         }
+        return pool;
+    }
 
-        // 从池中取出对象
+    private GameObject CoreGet(IObjectPool<GameObject> pool, out bool isNewInstance)
+    {
         var inst = pool.Get();
-
-        if (_instanceMap.TryAdd(inst, pool)) isNewInstance = true;
+        isNewInstance = _instanceMap.TryAdd(inst, pool);
         return inst;
     }
 
-    public GameObject Get(string n)
+    /// <summary>
+    /// 根据 Name 从池中获取一个对象。
+    /// 如果对应的池子尚未建立，则会自动根据配置表初始化。
+    /// </summary>
+    /// <param name="n">在 Inspector 清单中定义的唯一标识符名字</param>
+    /// <param name="isNewInstance">输出参数：返回该对象是否是本次新实例化的（第一次创建）</param>
+    /// <returns>返回一个激活的对象实例；若未在配置表中注册则返回 null</returns>
+    public GameObject Get(string n, out bool isNewInstance)
     {
-        return Get(n, out _);
+        if (_lib.TryGetValue(n, out var conf))
+        {
+            var pool = GetOrCreatePool(conf.prefab, conf);
+            return CoreGet(pool, out isNewInstance);
+        }
+        isNewInstance = false;
+        return null;
     }
+
+    /// <summary>
+    /// 直接根据 Prefab 从池中获取一个对象。
+    /// 如果该 Prefab 对应的池子不存在，则创建一个默认配置的池子。
+    /// </summary>
+    /// <param name="prefab">原始 Prefab 引用</param>
+    /// <param name="isNewInstance">输出参数：返回该对象是否是本次新实例化的（第一次创建）</param>
+    /// <returns>返回一个激活的对象实例；若 Prefab 为空则返回 null</returns>
+    public GameObject Get(GameObject prefab, out bool isNewInstance)
+    {
+        if (prefab != null)
+        {
+            var pool = GetOrCreatePool(prefab);
+            return CoreGet(pool, out isNewInstance);
+        }
+        isNewInstance = false;
+        return null;
+    }
+
+    /// <summary>
+    /// 根据 Name 获取对象的便捷重载。
+    /// </summary>
+    public GameObject Get(string n) => Get(n, out _);
+
+    /// <summary>
+    /// 根据 Prefab 获取对象的便捷重载。
+    /// </summary>
+    public GameObject Get(GameObject prefab) => Get(prefab, out _);
 
     /// <summary>
     /// 自动识别并归还对象到对应的池子（优先匹配场景池）。

@@ -38,7 +38,9 @@ public static class DataPersistence
     {
         TypeNameHandling = TypeNameHandling.Auto,
         Formatting = Formatting.Indented,
-        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+        ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+
+        Converters = new List<JsonConverter> { new Vector3Converter() }
     };
 
     public static void SaveData<T>(string fileName, T data)

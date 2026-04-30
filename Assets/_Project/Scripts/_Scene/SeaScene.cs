@@ -1,10 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class SeaScene : RealScene
+[Serializable]
+public class SeaSceneState : RealSceneState
 {
-    static List<string> bgmList;
+    public List<string> bgmList = new List<string>();
+}
+
+public class SeaScene : RealScene<SeaSceneState>
+{
 
     public override void EnterScene()
     {

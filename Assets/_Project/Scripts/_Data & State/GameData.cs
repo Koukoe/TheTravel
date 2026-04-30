@@ -10,11 +10,32 @@ public class DataArchive
 {
     public string saveTime;
     public string currentScene;
-    public string currentPosition;
+    public Dictionary<string, BaseState> states;
 
     public DataArchive()
     {
         saveTime = "----/--/--";
+        currentScene = "";  // 海
+        states = new Dictionary<string, BaseState>();
+    }
+
+
+    /// <summary>
+    /// 统一获取状态的方法
+    /// </summary>
+    public T GetState<T>(string id) where T : BaseState, new()
+    {
+        if (states.TryGetValue(id, out BaseState state))
+        {
+            if (state is T target) return target;
+            states.Remove(id);
+            Debug.LogWarning($"Key {id} 类型转换失败，覆盖新实例");
+        }
+
+        T newState = new T();
+        newState.Init(id);
+        states[id] = newState;
+        return newState;
     }
 }
 
