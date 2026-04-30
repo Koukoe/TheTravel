@@ -96,7 +96,11 @@ public class Playermove : MonoBehaviour
             PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, PlayerRotateSpeed);
         }
 
-        PlayerRigidbody.velocity = input * speed;
+        // PlayerRigidbody.velocity = input * speed;
+        Vector3 Velocity = PlayerRigidbody.velocity;
+        Velocity.x = (input * speed).x;
+        Velocity.z = (input * speed).z;
+        PlayerRigidbody.velocity = Velocity;
     }
 
     private void ShipMove()
