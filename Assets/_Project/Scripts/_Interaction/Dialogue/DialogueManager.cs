@@ -70,12 +70,20 @@ public class DialogueManager : MonoBehaviour
         // }
     }
 
-    // 用于从外部传入新的对话数据并开始对话
+    /// <summary>
+    /// 使用指定对话文本并开始对话流程
+    /// </summary>
+    /// <param name="json">对话 JSON 资源</param>
     public void StartWith(TextAsset json)
     {
         StartWith(json, null);
     }
 
+    /// <summary>
+    /// 使用指定对话文本和来源物体开始对话流程
+    /// </summary>
+    /// <param name="json">对话 JSON 资源</param>
+    /// <param name="source">对话来源物体，用于读取和写回对话索引</param>
     public void StartWith(TextAsset json, DialogueOnObj source)
     {
         if (json == null) return;
@@ -83,6 +91,57 @@ public class DialogueManager : MonoBehaviour
         activeDialogueSource = source;
         DialogueLoad();
         DialogueStart();
+    }
+
+    /// <summary>
+    /// 获取指定对话 GUID 当前保存的索引
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <param name="fallbackIndex">未找到存档时返回的默认索引</param>
+    /// <returns>当前保存的对话索引；若未命中则返回 <paramref name="fallbackIndex"/></returns>
+    public int GetDialogueIndex(string dialogueGuid, int fallbackIndex = 0)
+    {
+        if (string.IsNullOrWhiteSpace(dialogueGuid))
+        {
+            Debug.LogWarning("GetDialogueIndex 未指定 dialogueGuid, 将返回默认索引");
+            return fallbackIndex;
+        }
+
+        if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
+        {
+            Debug.LogWarning($"GetDialogueIndex 存档未就绪: {dialogueGuid}, 将返回默认索引");
+            return fallbackIndex;
+        }
+
+        DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        return state != null ? state.dialogueIndex : fallbackIndex;
+    }
+
+    /// <summary>
+    /// 设置指定对话 GUID 的索引
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <param name="index">要写入的索引值，会被钳制为非负数</param>
+    public void SetDialogueIndex(string dialogueGuid, int index)
+    {
+        if (string.IsNullOrWhiteSpace(dialogueGuid))
+        {
+            return;
+        }
+
+        if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
+        {
+            Debug.LogWarning($"无法设置对话索引, 存档未就绪: {dialogueGuid}");
+            return;
+        }
+
+        DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        if (state == null)
+        {
+            return;
+        }
+
+        state.dialogueIndex = Mathf.Max(0, index);
     }
 
     // 构建角色字典，方便通过角色ID快速查找配置
@@ -146,6 +205,9 @@ public class DialogueManager : MonoBehaviour
         SchedulePendingOptionsRetry();
     }
 
+    /// <summary>
+    /// 安排一次延迟重试，用于在 UI 转场完成后继续显示选项
+    /// </summary>
     private void SchedulePendingOptionsRetry()
     {
         if (retryPendingOptionsRoutine != null)
@@ -157,6 +219,9 @@ public class DialogueManager : MonoBehaviour
         retryPendingOptionsRoutine = StartCoroutine(RetryPendingOptionsWhenUIReady());
     }
 
+    /// <summary>
+    /// 等待 UI 转场结束后，再尝试把当前待显示的选项补出来
+    /// </summary>
     private IEnumerator RetryPendingOptionsWhenUIReady()
     {
         while (UIManager.Instance != null && UIManager.Instance.IsTransitioning)
@@ -168,6 +233,9 @@ public class DialogueManager : MonoBehaviour
         retryPendingOptionsRoutine = null;
     }
 
+    /// <summary>
+    /// 对话面板打开后回调，用于绑定 UI 并显示首句
+    /// </summary>
     private void OnDialoguePanelReady(BasePanel panel)
     {
         if (panel == null)
@@ -191,7 +259,9 @@ public class DialogueManager : MonoBehaviour
         ShowCurrent(firstEntry);
     }
 
-    // 播放下一句对话
+    /// <summary>
+    /// 推进到下一句对话；若当前正在打字则先补完当前句
+    /// </summary>
     public void DialogueNext()
     {
         if (flowState == null || !flowState.HasLoadedData)
@@ -220,7 +290,10 @@ public class DialogueManager : MonoBehaviour
         AdvanceByNextId(currentEntry.nextId);
     }
 
-    // 由选项按钮调用，按选项索引进入分支
+    /// <summary>
+    /// 由选项按钮调用，按选项索引进入分支
+    /// </summary>
+    /// <param name="optionIndex">选项索引，从 0 开始</param>
     public void SelectOption(int optionIndex)
     {
         DialogueEntry currentEntry = flowState != null ? flowState.GetCurrentEntry() : null;
@@ -264,6 +337,11 @@ public class DialogueManager : MonoBehaviour
         AdvanceByNextId(option.nextId);
     }
 
+    /// <summary>
+    /// 占位的动作驱动回调，后续接入角色动作系统时替换实现
+    /// </summary>
+    /// <param name="actionId">动作标识</param>
+    /// <param name="onCompleted">动作结束后的继续回调</param>
     private void PlayActionAndResume(string actionId, Action onCompleted)
     {
         Debug.LogWarning($"PlayActionAndResume 还未接入角色动作系统, actionId={actionId}，当前先直接继续对话");
@@ -287,6 +365,10 @@ public class DialogueManager : MonoBehaviour
         return entry != null && entry.options != null && entry.options.Count > 0;
     }
 
+    /// <summary>
+    /// 设置打字机每个字符的显示间隔
+    /// </summary>
+    /// <param name="interval">字符间隔，最小为 0</param>
     public void SetTypewriterCharInterval(float interval)
     {
         typewriterCharInterval = Mathf.Max(0f, interval);

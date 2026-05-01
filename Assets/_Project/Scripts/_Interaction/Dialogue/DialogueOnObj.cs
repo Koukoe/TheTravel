@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class DialogueOnObj : MonoBehaviour
 {
-    [SerializeField] private List<TextAsset> dialogueJsonList = new List<TextAsset>();
-    [SerializeField] private int dialogueIndex = 0;
+    [SerializeField]
+    [Tooltip("用于识别对话进度的唯一 ID。设置后, 索引会通过 DialogueManager 对应的 DialogueState 管理")]
+    private string dialogueGuid = string.Empty;
 
+    [SerializeField] private List<TextAsset> dialogueJsonList = new List<TextAsset>();
+    [SerializeField]
+    [Tooltip("默认对话索引。首次进入或没有存档时使用；有 dialogueGuid 时，运行时进度会同步到 DialogueState")]
+    private int dialogueIndex = 0;
+
+    public string DialogueGuid => dialogueGuid;
     public IReadOnlyList<TextAsset> DialogueJsonList => dialogueJsonList;
-    public int DialogueIndex => dialogueIndex;
+    public int DialogueIndex => GetEffectiveDialogueIndex();
 
     /// <summary>
     /// 触发当前索引对应的对话
@@ -29,45 +36,26 @@ public class DialogueOnObj : MonoBehaviour
     /// 设置当前物体的对话索引
     /// <paramref name="index"/> 超出范围时会自动钳制
     /// </summary>
-    /// <param name="index">目标索引 超出范围时会自动钳制</param>
+    /// <param name="index">目标索引</param>
     public void SetDialogueIndex(int index)
     {
-        if (dialogueJsonList == null || dialogueJsonList.Count == 0)
-        {
-            dialogueIndex = 0;
-            return;
-        }
+        int normalizedIndex = NormalizeIndex(index);
+        dialogueIndex = normalizedIndex;
 
-        dialogueIndex = Mathf.Clamp(index, 0, dialogueJsonList.Count - 1);
+        if (!string.IsNullOrWhiteSpace(dialogueGuid) && DialogueManager.Instance != null)
+        {
+            DialogueManager.Instance.SetDialogueIndex(dialogueGuid, normalizedIndex);
+        }
     }
 
     /// <summary>
     /// 基于当前索引做偏移变更
     /// <paramref name="delta"/> 为正数时向后推进 为负数时向前回退
     /// </summary>
-    /// <param name="delta">正数向后推进 负数向前回退</param>
+    /// <param name="delta">偏移量</param>
     public void ChangeDialogueIndex(int delta)
     {
         SetDialogueIndex(dialogueIndex + delta);
-    }
-
-    /// <summary>
-    /// 获取用于存档的对话索引
-    /// </summary>
-    /// <returns>当前生效的对话索引</returns>
-    public int GetDialogueIndexForSave()
-    {
-        return dialogueIndex;
-    }
-
-    /// <summary>
-    /// 从存档恢复对话索引
-    /// <paramref name="index"/> 表示存档中的索引值
-    /// </summary>
-    /// <param name="index">存档中的对话索引值</param>
-    public void LoadDialogueIndexFromSave(int index)
-    {
-        SetDialogueIndex(index);
     }
 
     /// <summary>
@@ -81,7 +69,42 @@ public class DialogueOnObj : MonoBehaviour
             return null;
         }
 
-        SetDialogueIndex(dialogueIndex);
-        return dialogueJsonList[dialogueIndex];
+        int currentIndex = NormalizeIndex(GetEffectiveDialogueIndex());
+        if (currentIndex != dialogueIndex)
+        {
+            dialogueIndex = currentIndex;
+        }
+
+        return dialogueJsonList[currentIndex];
+    }
+
+    /// <summary>
+    /// 获取当前有效的对话索引。优先通过 DialogueManager 获取存档中的索引；如果未指定 dialogueGuid 或存档未就绪，则返回默认索引
+    /// </summary> <returns>当前有效的对话索引</returns>
+    private int GetEffectiveDialogueIndex()
+    {
+        if (!string.IsNullOrWhiteSpace(dialogueGuid) && DialogueManager.Instance != null)
+        {
+            Debug.Log($"获取 {name} 的对话索引: {dialogueGuid} -> {dialogueIndex}");
+            return DialogueManager.Instance.GetDialogueIndex(dialogueGuid, dialogueIndex);
+        }
+
+        Debug.Log($"获取 {name} 的对话索引: 使用默认索引 {dialogueIndex}");
+        return dialogueIndex;
+    }
+
+    /// <summary>
+    /// 将索引钳制在有效范围内，避免越界访问 dialogueJsonList
+    /// </summary>
+    /// <param name="index">对话json索引</param>
+    /// <returns>钳制后的有效索引</returns>
+    private int NormalizeIndex(int index)
+    {
+        if (dialogueJsonList == null || dialogueJsonList.Count == 0)
+        {
+            return 0;
+        }
+
+        return Mathf.Clamp(index, 0, dialogueJsonList.Count - 1);
     }
 }

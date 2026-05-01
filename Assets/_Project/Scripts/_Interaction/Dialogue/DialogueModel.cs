@@ -29,6 +29,10 @@ public class DialogueEffect
     // 写法: { "SetDialogueIndex": "2" }
     public string SetDialogueIndex;
 
+    // 当 SetDialogueIndex 需要指定目标时使用；为空则默认作用于当前对话来源物体
+    // 写法: { "SetDialogueIndex": "2", "SDItarget": "npc_001" }
+    public string SDItarget;
+
     // 跳转主场景 (要把场景配置在 Build Settings 中)
     // 写法: { "GotoScene": "SceneName" }
     public string GotoScene;

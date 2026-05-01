@@ -869,7 +869,7 @@ GameObject:
   - component: {fileID: 1405556098}
   - component: {fileID: 1405556097}
   m_Layer: 0
-  m_Name: Dialogue3Btn
+  m_Name: DialogueBtn3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -907,6 +907,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueGuid: DialogueBtn3
   dialogueJsonList:
   - {fileID: 4900000, guid: 89d66d402b013bb4eb7684f4a1a66f85, type: 3}
   dialogueIndex: 0
@@ -1024,7 +1025,7 @@ GameObject:
   - component: {fileID: 1847021912}
   - component: {fileID: 1847021911}
   m_Layer: 0
-  m_Name: Dialogue2Btn
+  m_Name: DialogueBtn2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1062,6 +1063,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueGuid: DialogueBtn2
   dialogueJsonList:
   - {fileID: 4900000, guid: 20bab65ef42a7b745a3f09094ceb29fb, type: 3}
   - {fileID: 4900000, guid: 10359b69d24f68f449ec4ab50d7bf052, type: 3}
@@ -1427,7 +1429,7 @@ GameObject:
   - component: {fileID: 1984936632}
   - component: {fileID: 1984936635}
   m_Layer: 0
-  m_Name: Dialogue1Btn
+  m_Name: DialogueBtn1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1559,6 +1561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dialogueGuid: DialogueBtn1
   dialogueJsonList:
   - {fileID: 4900000, guid: 20bab65ef42a7b745a3f09094ceb29fb, type: 3}
   - {fileID: 4900000, guid: 10359b69d24f68f449ec4ab50d7bf052, type: 3}
