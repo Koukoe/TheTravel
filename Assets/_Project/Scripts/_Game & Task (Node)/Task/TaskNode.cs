@@ -33,6 +33,7 @@ public class TaskNode : MonoBehaviour
         get { return In; }
         set
         {
+            TaskManager.Instance.SaveTaskNode(taskId);
             In = value;
             Debug.Log(taskName + " " + taskId + "In: " + In);
 
@@ -52,6 +53,7 @@ public class TaskNode : MonoBehaviour
 
     void TaskInit()
     {
+        if (isTaskFinished) return;
         StartCoroutine(StartTask());
     }
 

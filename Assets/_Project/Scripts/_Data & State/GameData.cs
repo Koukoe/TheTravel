@@ -12,6 +12,8 @@ public class DataArchive
     public string currentScene;
     public Dictionary<string, BaseState> states;
 
+    public Dictionary<string, (int, bool)> TaskNodesDic;
+
     public DataArchive()
     {
         saveTime = "----/--/--";

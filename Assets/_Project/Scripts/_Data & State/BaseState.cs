@@ -37,7 +37,7 @@ public class ActorState : BaseState
 
 /// <summary> 环境/交互物状态（门、机关） </summary>
 [Serializable]
-public abstract class InteractionState : BaseState
+public class InteractionState : BaseState
 {
     public bool isTriggered;
     public int stateIndex;
@@ -52,7 +52,7 @@ public abstract class InteractionState : BaseState
 
 /// <summary> 物品/道具状态（图鉴） </summary>
 [Serializable]
-public abstract class ItemState : BaseState
+public class ItemState : BaseState
 {
     public bool isPicked;
     public override void Init(string id)

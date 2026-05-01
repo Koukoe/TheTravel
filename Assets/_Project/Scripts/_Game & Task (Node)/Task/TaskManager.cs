@@ -80,4 +80,76 @@ public class TaskManager : MonoBehaviour
         }
         yield break;
     }
+
+    /// <summary>
+    /// 保存所有任务节点到存档
+    /// </summary>
+    public void SaveAllTaskNodes()
+    {
+        foreach (var task in tasks)
+        {
+            SaveTaskNode(task.Key);
+        }
+        Debug.Log("所有任务节点已保存");
+    }
+
+    /// <summary>
+    /// 从存档中加载所有任务节点
+    /// </summary>
+    public void LoadAllTaskNodes()
+    {
+        foreach (var task in tasks)
+        {
+            try
+            {
+                LoadTaskNode(task.Key);
+            }
+            catch
+            {
+                Debug.Log("未找到对应节点存档" + task.Key);
+            }
+
+        }
+    }
+
+    public void SaveTaskNode(string ID)
+    {
+        TaskNode taskNode = GetTask(ID);
+        if (taskNode == null)
+        {
+            Debug.LogError("TaskNode not found: " + ID);
+            return;
+        }
+        if (GameFlowManager.Instance.PlayingData.TaskNodesDic.ContainsKey(ID))
+        {
+            GameFlowManager.Instance.PlayingData.TaskNodesDic[ID] = (taskNode.Inn, taskNode.isTaskFinished);
+            Debug.Log("已更新任务存档" + ID);
+        }
+        else
+        {
+            GameFlowManager.Instance.PlayingData.TaskNodesDic.Add(ID, (taskNode.Inn, taskNode.isTaskFinished));
+            Debug.Log("未找到对应节点存档，已自动创建" + ID);
+        }
+    }
+
+    public void LoadTaskNode(string ID)
+    {
+        TaskNode taskNode = GetTask(ID);
+        if (taskNode == null)
+        {
+            Debug.LogError("TaskNode not found: " + ID);
+            return;
+        }
+        if (GameFlowManager.Instance.PlayingData.TaskNodesDic.ContainsKey(ID))
+        {
+            taskNode.isTaskFinished = GameFlowManager.Instance.PlayingData.TaskNodesDic[ID].Item2;
+            taskNode.Inn = GameFlowManager.Instance.PlayingData.TaskNodesDic[ID].Item1;
+            Debug.Log("已加载任务存档" + ID);
+        }
+        else
+        {
+            Debug.Log("未找到对应节点存档" + ID);
+            throw new System.Exception("未找到对应节点存档" + ID);
+        }
+    }
 }
