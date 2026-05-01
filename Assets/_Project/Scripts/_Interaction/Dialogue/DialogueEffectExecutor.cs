@@ -23,6 +23,7 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 暂停对话并执行指定动作, 动作完成后继续对话
             if (!string.IsNullOrWhiteSpace(effect.PlayActionAndResume))
             {
                 string actionId = effect.PlayActionAndResume.Trim();
@@ -62,24 +63,44 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 设置对话索引
             if (!string.IsNullOrWhiteSpace(effect.SetDialogueIndex))
             {
-                if (dialogueSource == null)
-                {
-                    Debug.LogWarning("当前对话没有来源物体, 无法设置对话索引");
-                    continue;
-                }
-
                 if (!int.TryParse(effect.SetDialogueIndex.Trim(), out int nextDialogueIndex))
                 {
                     Debug.LogWarning($"SetDialogueIndex 参数不是有效整数: {effect.SetDialogueIndex}");
                     continue;
                 }
 
-                dialogueSource.SetDialogueIndex(nextDialogueIndex);
+                if (dialogueSource != null && string.IsNullOrWhiteSpace(effect.SDItarget))
+                {
+                    // 如果没有显式 SDItarget，则优先通过来源物体设置索引。
+                    // DialogueOnObj.SetDialogueIndex 会在有 dialogueGuid 时同步写入 DataArchive。
+                    dialogueSource.SetDialogueIndex(nextDialogueIndex);
+                    continue;
+                }
+
+                string targetDialogueId = !string.IsNullOrWhiteSpace(effect.SDItarget)
+                    ? effect.SDItarget.Trim()
+                    : dialogueSource != null ? dialogueSource.DialogueGuid : string.Empty;
+
+                if (string.IsNullOrWhiteSpace(targetDialogueId))
+                {
+                    Debug.LogWarning("SetDialogueIndex 未指定目标对话 ID, 且当前对话来源也没有可用的 DialogueGuid");
+                    continue;
+                }
+
+                if (DialogueManager.Instance == null)
+                {
+                    Debug.LogWarning("DialogueManager 未初始化, 无法设置对话索引");
+                    continue;
+                }
+
+                DialogueManager.Instance.SetDialogueIndex(targetDialogueId, nextDialogueIndex);
                 continue;
             }
 
+            // 跳转场景
             if (!string.IsNullOrWhiteSpace(effect.GotoScene))
             {
                 if (GameSceneManager.Instance == null)
@@ -93,6 +114,8 @@ public static class DialogueEffectExecutor
                 return;
             }
 
+
+            // 播放BGM
             if (!string.IsNullOrWhiteSpace(effect.PlayBgm))
             {
                 if (AudioManager.Instance == null)
@@ -106,6 +129,7 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 播放SFX
             if (!string.IsNullOrWhiteSpace(effect.PlaySfx))
             {
                 if (AudioManager.Instance == null)
@@ -118,6 +142,7 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 停止BGM
             bool hasStopBgm = !string.IsNullOrWhiteSpace(effect.StopBgmTarget) ||
                               !string.IsNullOrWhiteSpace(effect.StopBgmFade);
             if (hasStopBgm)

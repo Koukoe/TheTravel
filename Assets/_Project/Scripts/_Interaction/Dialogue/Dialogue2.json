@@ -8,7 +8,27 @@
         {
             "id": "2",
             "character": "NPC_002",
-            "content": "这是2第二句话"
+            "content": "DilaogueBtn2的对话索引被改为?",
+            "options": [
+                {
+                    "content": "0",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "0",
+                            "SDItarget": "DialogueBtn2"
+                        }
+                    ]
+                },
+                {
+                    "content": "1",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "1",
+                            "SDItarget": "DialogueBtn2"
+                        }
+                    ]
+                }
+            ]
         },
         {
             "id": "3",
