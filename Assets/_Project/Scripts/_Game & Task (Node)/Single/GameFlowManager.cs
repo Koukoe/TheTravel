@@ -15,6 +15,8 @@ public class GameFlowManager : MonoBehaviour
     public void NewGame()
     {
         PlayingData = new DataArchive();
+
+        // ... 布置背景
     }
     public void LoadGame(int slotIndex)
     {
@@ -27,14 +29,22 @@ public class GameFlowManager : MonoBehaviour
 
         PlayingData = data;
         PlayingData = DataArchivesSystem.Get(slotIndex);
+        TaskManager.Instance.LoadAllTaskNodes();
 
         if (GameSceneManager.Instance != null)
         {
             GameSceneManager.Instance.LoadMain(PlayingData.currentScene);  // 异步
         }
 
-        //...
+        // ...
     }
+
+    public void SaveGame(int slotIndex)
+    {
+        TaskManager.Instance.SaveAllTaskNodes();  // 保险
+        DataArchivesSystem.Set(slotIndex, PlayingData);
+    }
+
 
 
     /// <summary>

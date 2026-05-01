@@ -26,10 +26,18 @@ public class ArchivesPanel : MenuPanel
         for (int i = 0; i < arcsBtn.Count; i++)
         {
             int index = i;
-            arcsBtn[i].onClick.AddListener(OnSlotClicked);
+            arcsBtn[i].onClick.AddListener(() => OnSlotClicked(index));
         }
 
         backBtn?.onClick.AddListener(OnBackClicked);
+
+        for (int i = 0; i < slotSources.Count; i++)
+        {
+            if (DataArchivesSystem.IsSlotOccupied(i))
+            {
+                // 切换对应截图、显示对应信息之类的
+            }
+        }
     }
 
     public void Init(bool isSave = true)
@@ -73,16 +81,36 @@ public class ArchivesPanel : MenuPanel
         }
     }
 
-    private void OnSlotClicked() => OnConfirm(lastSelectedIndex);
-
-    private void OnConfirm(int id)
+    private void OnSlotClicked(int i)
     {
-        if (isSaveMode) SaveGame(id);
-        else LoadGame(id);
+        if (isSaveMode)
+        {
+            if (DataArchivesSystem.IsSlotOccupied(i))
+            {
+                var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+                panel.Setup(onConfirm: () => SaveGame(i), title: "", content: "");
+            }
+            else { SaveGame(i); }
+        }
+        else if (DataArchivesSystem.IsSlotOccupied(i))
+        {
+            var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+            panel.Setup(onConfirm: () => LoadGame(i), title: "", content: "");
+        }
     }
 
-    private void SaveGame(int id) => Debug.Log($"保存到档位 {id}");
-    private void LoadGame(int id) => Debug.Log($"读取档位 {id}");
+    private void SaveGame(int id)
+    {
+        Debug.Log($"保存到档位 {id}");
+        GameFlowManager.Instance.SaveGame(id);
+
+        // 切换对应截图、显示对应信息之类的
+    }
+    private void LoadGame(int id)
+    {
+        Debug.Log($"读取档位 {id}");
+        GameFlowManager.Instance.LoadGame(id);
+    }
 
     protected override GameObject DefaultFocused() => arcsBtn.Count > 0 ? arcsBtn[0].gameObject : null;
 }

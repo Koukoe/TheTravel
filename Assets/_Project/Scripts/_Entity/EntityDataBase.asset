@@ -12,4 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65042a0e96b6e3d48a66765f9cd60f90, type: 3}
   m_Name: EntityDataBase
   m_EditorClassIdentifier: 
-  allEntities: []
+  allEntities:
+  - guid: 
+    defaultName: 
+    prefab: {fileID: 0}
+    defaultPosition: {x: 0, y: 0, z: 0}
+    defaultRotation: {x: 0, y: 0, z: 0}

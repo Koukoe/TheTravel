@@ -17,6 +17,8 @@ GameObject:
   - component: {fileID: 7047051930128365585}
   - component: {fileID: 5880995726439545188}
   - component: {fileID: 6869052967667697323}
+  - component: {fileID: 3051477433425473167}
+  - component: {fileID: 5138782921258128533}
   m_Layer: 0
   m_Name: GlobalManagers
   m_TagString: Untagged
@@ -120,6 +122,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc64303ceab70e44791a4e6e2ab40a3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mouseLookSensitivity: 0.1
+  gamepadLookSensitivity: 200
+  gamepadLookCurve: 2
+  mouseZoomSensitivity: 0.05
+  gamepadZoomSensitivity: 10
 --- !u!114 &3442376294747017421
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,3 +222,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characters: []
   typewriterCharInterval: 0.05
+--- !u!114 &3051477433425473167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592536910445248481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0144b2290e09deb48b94337ea3cb0da4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5138782921258128533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1592536910445248481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06b96ff9728754f449f70e54b2bb974c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
