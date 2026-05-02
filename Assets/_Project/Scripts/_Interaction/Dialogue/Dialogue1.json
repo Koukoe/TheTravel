@@ -75,7 +75,21 @@
         {
             "id": "5",
             "character": "NPC_005",
-            "content": "这是第五句话"
+            "content": "这是第五句话",
+            "effects": [
+                {
+                    "SetDialogueIndex": "0",
+                    "SDItarget": "captain"
+                },
+                {
+                    "SetDialogueIndex": "1",
+                    "SDItarget": "cock"
+                },
+                {
+                    "SetDialogueIndex": "6",
+                    "SDItarget": "nina"
+                }
+            ]
         }
     ]
 }
