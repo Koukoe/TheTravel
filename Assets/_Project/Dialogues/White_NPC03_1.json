@@ -1,0 +1,64 @@
+{
+  "dialogues": [
+    {
+      "id": "White_NPC03_1_01",
+      "character": "protagonist",
+      "content": "你好。",
+      "nextId": "White_NPC03_1_02"
+    },
+    {
+      "id": "White_NPC03_1_02",
+      "character": "White_NPC03",
+      "content": "你好，陌生人。有什么可以效劳的吗？",
+      "nextId": "White_NPC03_1_03"
+    },
+    {
+      "id": "White_NPC03_1_03",
+      "character": "protagonist",
+      "content": "可能有些冒犯，不过我想知道，长眠在您旁边的土地里的，是您的亲友吗？",
+      "nextId": "White_NPC03_1_04"
+    },
+    {
+      "id": "White_NPC03_1_04",
+      "character": "White_NPC03",
+      "content": "啊，安东尼他啊，之前是我的邻居。",
+      "nextId": "White_NPC03_1_05"
+    },
+    {
+      "id": "White_NPC03_1_05",
+      "character": "White_NPC03",
+      "content": "他是个热情的人，镇子上的人都认识他。前几天下了暴雨，他为了救掉到河里的小莉娜跳了下去，结果自己溺死了。",
+      "nextId": "White_NPC03_1_06"
+    },
+    {
+      "id": "White_NPC03_1_06",
+      "character": "protagonist",
+      "content": "这......我很抱歉，想必说起这件事让您伤心了。",
+      "nextId": "White_NPC03_1_07"
+    },
+    {
+      "id": "White_NPC03_1_07",
+      "character": "White_NPC03",
+      "content": "不必自责，波尼克曾说过：“每一具沉入海底的身体，都会成为珊瑚。你不曾消失，你只是换了一种方式存在。”",
+      "nextId": "White_NPC03_1_08"
+    },
+    {
+      "id": "White_NPC03_1_08",
+      "character": "White_NPC03",
+      "content": "安东尼他走得有意义，他肯定不希望镇子上的人为了他整日哭哭啼啼的。",
+      "nextId": "White_NPC03_1_09"
+    },
+    {
+      "id": "White_NPC03_1_09",
+      "character": "White_NPC03",
+      "content": "现在他和他最爱的柠檬树在一起，想必他也没有遗憾了。",
+      "nextId": "White_NPC03_1_10"
+    },
+    {
+      "id": "White_NPC03_1_10",
+      "character": "protagonist",
+      "content": "愿他安息。",
+      "nextId": "end"
+    }
+  ]
+}
