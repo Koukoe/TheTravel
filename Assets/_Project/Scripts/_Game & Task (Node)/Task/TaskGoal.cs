@@ -115,5 +115,6 @@ public enum TaskGoalType
 {
     TRIGGER,
     ITEM,
-    ACTOR
+    ACTOR,
+    DIALOGUE
 }
