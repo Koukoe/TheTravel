@@ -1,0 +1,57 @@
+{
+  "dialogues": [
+    {
+      "id": "StoneTablet_1_01",
+      "character": "narrator",
+      "content": "第六诫：“海不喧哗，却能淹没一切喧嚣。争吵的人，听不到潮汐的指引。”",
+      "nextId": "StoneTablet_1_02"
+    },
+    {
+      "id": "StoneTablet_1_02",
+      "character": "protagonist",
+      "content": "这句话.......是什么意思？",
+      "nextId": "StoneTablet_1_03"
+    },
+    {
+      "id": "StoneTablet_1_03",
+      "character": "protagonist",
+      "content": "这石碑上，有个海螺？",
+      "nextId": "StoneTablet_1_04"
+    },
+    {
+      "id": "StoneTablet_1_04",
+      "character": "protagonist",
+      "content": "呃嗯嗯——（尝试拔下来）",
+      "nextId": "StoneTablet_1_05"
+    },
+    {
+      "id": "StoneTablet_1_05",
+      "character": "protagonist",
+      "content": "竟然和这个石碑黏在一起了吗？明明看起来就像随手放上去的......",
+      "nextId": "StoneTablet_1_06"
+    },
+    {
+      "id": "StoneTablet_1_06",
+      "character": "protagonist",
+      "content": "好像有声音？（凑近）",
+      "nextId": "StoneTablet_1_07"
+    },
+    {
+      "id": "StoneTablet_1_07",
+      "character": "narrator",
+      "content": "（海螺中传出一段旋律）",
+      "effects": [
+        {
+          "PlaySfx": "shell_melody_01"
+        }
+      ],
+      "nextId": "StoneTablet_1_08"
+    },
+    {
+      "id": "StoneTablet_1_08",
+      "character": "protagonist",
+      "content": "要是能复现这段旋律，说不定会发生什么......",
+      "nextId": "end"
+    }
+  ]
+}

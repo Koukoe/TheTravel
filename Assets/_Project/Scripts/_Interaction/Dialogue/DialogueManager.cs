@@ -1,29 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
 
-    [System.Serializable]
-    // 这些本来是为了头像的但是现在不需要头像所以大概是不需要了，不过没关系因为这个不是必填
-    public class CharacterProfile
-    {
-        // 角色ID，需与JSON中的character字段一致
-        public string charID;
-        // 显示在UI上的名字
-        public string charName;
-    }
-
     // 对话数据不再直接写在这里，而是通过挂载了DialogueOnObj的物体传入
     // [Header("对话数据")]
     // [SerializeField] private TextAsset dialogueJson;
 
     [Header("角色配置")]
-    // 嗯对这个也是不必要的但是好像可以在这里填玩家的名字之类的吧，先不注释掉了
-    [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
+    [SerializeField] private TextAsset characterMapJson;
 
     [Header("文本播放速度")]
     [SerializeField, Min(0f)] private float typewriterCharInterval = 0.05f;
@@ -34,8 +24,8 @@ public class DialogueManager : MonoBehaviour
 
     // 运行时对话流程状态（索引、跳转、END判定、数据读取）
     private DialogueFlowState flowState;
-    // 角色ID到配置信息的映射字典
-    private Dictionary<string, CharacterProfile> characterMap = new Dictionary<string, CharacterProfile>();
+    // 角色ID到显示名的映射字典
+    private Dictionary<string, string> characterMap = new Dictionary<string, string>();
 
     // 运行时加载的对话数据来源
     private TextAsset dialogueJson;
@@ -149,25 +139,43 @@ public class DialogueManager : MonoBehaviour
     {
         characterMap.Clear();
 
-        if (characters == null)
+        if (characterMapJson == null)
         {
+            Debug.LogWarning("未配置 character_map.json");
             return;
         }
 
-        foreach (var profile in characters)
+        Dictionary<string, string> map = null;
+        try
         {
-            if (profile == null || string.IsNullOrEmpty(profile.charID))
+            map = JsonConvert.DeserializeObject<Dictionary<string, string>>(characterMapJson.text);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"读取 character_map.json 失败: {ex.Message}");
+            return;
+        }
+
+        if (map == null || map.Count == 0)
+        {
+            Debug.LogWarning("character_map.json 内容为空");
+            return;
+        }
+
+        foreach (var pair in map)
+        {
+            if (string.IsNullOrWhiteSpace(pair.Key))
             {
                 continue;
             }
 
-            if (!characterMap.ContainsKey(profile.charID))
+            if (!characterMap.ContainsKey(pair.Key))
             {
-                characterMap.Add(profile.charID, profile);
+                characterMap.Add(pair.Key, pair.Value ?? string.Empty);
             }
             else
             {
-                Debug.LogWarning($"角色ID重复: {profile.charID}");
+                Debug.LogWarning($"角色ID重复: {pair.Key}");
             }
         }
     }
@@ -479,9 +487,9 @@ public class DialogueManager : MonoBehaviour
             return string.Empty;
         }
 
-        if (characterMap.TryGetValue(charID, out CharacterProfile profile) && profile != null)
+        if (characterMap.TryGetValue(charID, out string name))
         {
-            return profile.charName;
+            return name;
         }
 
         return null;

@@ -2,7 +2,7 @@
     "dialogues": [
         {
             "id": "1",
-            "character": "NPC_001",
+            "character": "cock",
             "content": "这是\n第一句话",
             "effects": [
                 {
@@ -16,7 +16,7 @@
         },
         {
             "id": "2",
-            "character": "NPC_002",
+            "character": "captain",
             "content": "这是第二句话",
             "effects": [
                 {
@@ -26,7 +26,6 @@
             "options": [
                 {
                     "content": "到纯白小镇",
-                    "nextId": "end",
                     "effects": [
                         {
                             "GotoScene": "WhiteTown"

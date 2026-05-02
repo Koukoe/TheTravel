@@ -110,6 +110,16 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: DialoguePanel
+    prefab: {fileID: 8047823479940727007, guid: ea7e27d99e7e090429281555f59af7eb,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
+  - name: DialogueOptionsPanel
+    prefab: {fileID: 7118825749587901232, guid: fd076a9a6824603458329cc42a86feb2,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
 --- !u!114 &427507558724491852
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -220,7 +230,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6563736e76ef1f542beeaed4f298a86c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characters: []
+  characterMapJson: {fileID: 4900000, guid: c49a003be85f4074a837b8555787e64f, type: 3}
   typewriterCharInterval: 0.05
 --- !u!114 &3051477433425473167
 MonoBehaviour:

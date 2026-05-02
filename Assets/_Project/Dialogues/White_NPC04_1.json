@@ -1,0 +1,87 @@
+{
+  "dialogues": [
+    {
+      "id": "White_NPC04_1_01",
+      "character": "protagonist",
+      "content": "很精致的喷泉呢。",
+      "nextId": "White_NPC04_1_02"
+    },
+    {
+      "id": "White_NPC04_1_02",
+      "character": "White_NPC04",
+      "content": "是啊，传说这喷泉里有着波尼克的神力，所以不少人来到这里，都会往喷泉里丢枚硬币许愿呢。",
+      "nextId": "White_NPC04_1_03"
+    },
+    {
+      "id": "White_NPC04_1_03",
+      "character": "White_NPC04",
+      "content": "年轻人，你想试试看吗？",
+      "options": [
+        {
+          "content": "好啊",
+          "nextId": "White_NPC04_a_01"
+        },
+        {
+          "content": "算了吧",
+          "nextId": "White_NPC04_b_01"
+        }
+      ]
+    },
+
+    {
+      "id": "White_NPC04_a_01",
+      "character": "narrator",
+      "content": "（丢下了一枚硬币）",
+      "nextId": "White_NPC04_a_02"
+    },
+    {
+      "id": "White_NPC04_a_02",
+      "character": "protagonist",
+      "content": "嗯......希望明天能吃到好吃的饭菜！",
+      "nextId": "White_NPC04_a_03"
+    },
+    {
+      "id": "White_NPC04_a_03",
+      "character": "narrator",
+      "content": "（水面剧烈震动）",
+      "nextId": "White_NPC04_a_04"
+    },
+    {
+      "id": "White_NPC04_a_04",
+      "character": "protagonist",
+      "content": "哇——！",
+      "nextId": "White_NPC04_a_05"
+    },
+    {
+      "id": "White_NPC04_a_05",
+      "character": "White_NPC04",
+      "content": "哦呵呵~这就是这座喷泉的神奇之处呢。波尼克会听见你的声音。",
+      "nextId": "White_NPC04_a_06"
+    },
+    {
+      "id": "White_NPC04_a_06",
+      "character": "protagonist",
+      "content": "这真是我从没见过的景象啊......",
+      "nextId": "end"
+    },
+
+    {
+      "id": "White_NPC04_b_01",
+      "character": "protagonist",
+      "content": "算了吧，我可不是个小孩子了。这种哄小孩的故事听听就得了。",
+      "nextId": "White_NPC04_b_02"
+    },
+    {
+      "id": "White_NPC04_b_02",
+      "character": "White_NPC04",
+      "content": "不愿意的话也没关系，这座喷泉就在这里等着你。",
+      "nextId": "White_NPC04_b_03"
+    },
+    {
+      "id": "White_NPC04_b_03",
+      "character": "White_NPC04",
+      "content": "波尼克会一直听着你的声音。",
+      "nextId": "end"
+    }
+  ]
+}
