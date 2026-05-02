@@ -125,7 +125,7 @@ public class DialogueManager : MonoBehaviour
 
         if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
         {
-            Debug.LogWarning($"GetDialogueIndexCompleted 存档未就绪: {dialogueGuid}");
+            Debug.LogWarning($"IsDialogueIndexCompleted 存档未就绪: {dialogueGuid}");
             return false;
         }
 
@@ -182,7 +182,14 @@ public class DialogueManager : MonoBehaviour
     /// <returns>已完成返回 true，否则 false</returns>
     public bool IsCurrentDialogueCompleted(string dialogueGuid)
     {
-        int currentIndex = GetDialogueIndex(dialogueGuid, 0);
+        // 找不到就返回666, 正常来说大概是不会到这个索引
+        int currentIndex = GetDialogueIndex(dialogueGuid, 666);
+        if (currentIndex == 666)
+        {
+            Debug.LogWarning($"IsCurrentDialogueCompleted 无法获取当前对话索引, 将返回 false: {dialogueGuid}");
+            return false;
+        }
+
         return IsDialogueIndexCompleted(dialogueGuid, currentIndex);
     }
 
