@@ -24,5 +24,6 @@ public class SeaScene : RealScene<SeaSceneState>
         base.ExitScene();
         // 停止 BGM
         // 设置 pendingPosition
+        Playermove.Instance.OnSea = false;
     }
 }

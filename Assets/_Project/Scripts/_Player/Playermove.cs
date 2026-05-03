@@ -16,6 +16,10 @@ public class Playermove : MonoBehaviour
     public GameObject playerModel;
 
     public Camera cam;
+    public SphereCollider dectector;
+
+    public List<Collider> seaOffColliders = new List<Collider>();
+    public List<Collider> seaOnColliders = new List<Collider>();
     [SerializeField] private Animator _animator;
 
     [Header("移动参数")]
@@ -25,7 +29,7 @@ public class Playermove : MonoBehaviour
     public float PlayerRotateSpeed = 1f;
     public float ShipRotateSpeed = 1f;
 
-    private bool Onsea = false;
+    [SerializeField] private bool Onsea = false;
 
     public bool OnSea
     {
@@ -77,7 +81,7 @@ public class Playermove : MonoBehaviour
     {
         Vector2 inputVector = InputManager.Instance.GetMove();
 
-        Debug.Log(inputVector.x + "," + inputVector.y);
+        // Debug.Log(inputVector.x + "," + inputVector.y);
         if (inputVector == Vector2.zero) return Vector3.zero;
 
         Vector3 Camforward = CamTransform.forward;
@@ -144,12 +148,32 @@ public class Playermove : MonoBehaviour
     {
         if (Onsea)
         {
+            dectector.radius = 50f;
+            foreach (var collidor in seaOffColliders)
+            {
+                collidor.enabled = false;
+            }
+            foreach (var collidor in seaOnColliders)
+            {
+                collidor.enabled = true;
+            }
+
             playerModel.SetActive(false);
             PlayerRigidbody.useGravity = false;
             PlayerRigidbody.constraints &= ~RigidbodyConstraints.FreezePositionY;
         }
         else
         {
+            dectector.radius = 2.5f;
+            foreach (var collidor in seaOffColliders)
+            {
+                collidor.enabled = true;
+            }
+            foreach (var collidor in seaOnColliders)
+            {
+                collidor.enabled = false;
+            }
+
             playerModel.SetActive(true);
             PlayerRigidbody.useGravity = true;
             PlayerRigidbody.constraints |= RigidbodyConstraints.FreezePositionY;

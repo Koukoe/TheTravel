@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
 public class SceneTeleport : MonoBehaviour
 {
@@ -27,13 +28,11 @@ public class SceneTeleport : MonoBehaviour
         player = PlayerController.Instance.transform;
     }
 
-    private void OnDestroy()
+
+    public async Task DoorTP()
     {
-        // 确保清理订阅，防止内存泄漏
-        if (isSubscribed && interactHandler != null)
-        {
-            InputManager.Instance.PlayerDynamicActions.Interact.performed -= interactHandler;
-        }
+        await GameSceneManager.Instance.LoadMain(TargetScene);
+        Debug.Log("Teleporting to " + TargetScene);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -45,51 +44,15 @@ public class SceneTeleport : MonoBehaviour
         {
             PerformTeleport();
         }
-        else if (teleportType == TeleportType.Door)
-        {
-            SubscribeToInteract();
-        }
     }
 
     private void OnCollisionExit(Collision collision)
     {
         if (!collision.gameObject.CompareTag("Player")) return;
-
-
-        if (teleportType == TeleportType.Door)
-        {
-            UnsubscribeFromInteract();
-        }
-    }
-
-    private void SubscribeToInteract()
-    {
-        if (isSubscribed) return;
-
-        interactHandler = ctx => PerformTeleport();
-        InputManager.Instance.PlayerDynamicActions.Interact.performed += interactHandler;
-        isSubscribed = true;
-    }
-
-    private void UnsubscribeFromInteract()
-    {
-        if (!isSubscribed || interactHandler == null) return;
-
-        InputManager.Instance.PlayerDynamicActions.Interact.performed -= interactHandler;
-        isSubscribed = false;
     }
 
     private async void PerformTeleport()
     {
-        // // 存储目标位置
-        // if (teleportTarget != null)
-        // {
-        //     PlayerPrefs.SetFloat("SceneTeleportX", teleportTarget.position.x);
-        //     PlayerPrefs.SetFloat("SceneTeleportY", teleportTarget.position.y);
-        //     PlayerPrefs.SetFloat("SceneTeleportZ", teleportTarget.position.z);
-        //     PlayerPrefs.Save();
-        // }
-
         // 同一场景内传送（不切换场景）
         if (string.IsNullOrEmpty(TargetScene))
         {
