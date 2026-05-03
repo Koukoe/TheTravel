@@ -270,6 +270,11 @@ PrefabInstance:
       objectReference: {fileID: 123038304}
     - target: {fileID: 1838346570009627158, guid: 0520016d4adca604cb07430311fbc4ba,
         type: 3}
+      propertyPath: ShipRotateSpeed
+      value: 0.37
+      objectReference: {fileID: 0}
+    - target: {fileID: 1838346570009627158, guid: 0520016d4adca604cb07430311fbc4ba,
+        type: 3}
       propertyPath: PlayerRotateSpeed
       value: 5.26
       objectReference: {fileID: 0}

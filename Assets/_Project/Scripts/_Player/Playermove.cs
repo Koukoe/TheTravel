@@ -121,7 +121,7 @@ public class Playermove : MonoBehaviour
         if (input != Vector3.zero)
         {
             targetRotation = Quaternion.LookRotation(input);
-            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, PlayerRotateSpeed);
+            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, ShipRotateSpeed);
         }
 
         shipTransform.position = PlayerTransform.position;
