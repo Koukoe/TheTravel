@@ -21,7 +21,7 @@ public class DialogueOption
     public List<DialogueEffect> effects = new List<DialogueEffect>();
 }
 
-// 选项效果
+// 效果
 [Serializable]
 public class DialogueEffect
 {

@@ -36,7 +36,7 @@
       "content": "获得道具“大眼鱼”",
       "effects": [
         {
-          "GetItem": "item01"
+          "GetItem": "item_fish_bigeye"
         },
         {
           "SetDialogueIndex": "3"

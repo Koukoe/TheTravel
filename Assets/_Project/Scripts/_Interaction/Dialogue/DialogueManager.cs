@@ -1,29 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using Newtonsoft.Json;
 using UnityEngine;
 
 public class DialogueManager : MonoBehaviour
 {
     public static DialogueManager Instance { get; private set; }
 
-    [System.Serializable]
-    // 这些本来是为了头像的但是现在不需要头像所以大概是不需要了，不过没关系因为这个不是必填
-    public class CharacterProfile
-    {
-        // 角色ID，需与JSON中的character字段一致
-        public string charID;
-        // 显示在UI上的名字
-        public string charName;
-    }
-
     // 对话数据不再直接写在这里，而是通过挂载了DialogueOnObj的物体传入
     // [Header("对话数据")]
     // [SerializeField] private TextAsset dialogueJson;
 
     [Header("角色配置")]
-    // 嗯对这个也是不必要的但是好像可以在这里填玩家的名字之类的吧，先不注释掉了
-    [SerializeField] private List<CharacterProfile> characters = new List<CharacterProfile>();
+    [SerializeField] private TextAsset characterMapJson;
 
     [Header("文本播放速度")]
     [SerializeField, Min(0f)] private float typewriterCharInterval = 0.05f;
@@ -34,13 +24,15 @@ public class DialogueManager : MonoBehaviour
 
     // 运行时对话流程状态（索引、跳转、END判定、数据读取）
     private DialogueFlowState flowState;
-    // 角色ID到配置信息的映射字典
-    private Dictionary<string, CharacterProfile> characterMap = new Dictionary<string, CharacterProfile>();
+    // 角色ID到显示名的映射字典
+    private Dictionary<string, string> characterMap = new Dictionary<string, string>();
 
     // 运行时加载的对话数据来源
     private TextAsset dialogueJson;
     // 当前对话来源物体
     private DialogueOnObj activeDialogueSource;
+    // 本次对话开始时对应的来源索引，用于结束时正确记录完成状态
+    private int activeDialogueStartIndex = 0;
     private Coroutine retryPendingOptionsRoutine;
     private DialogueTypewriter typewriter;
     private DialogueUIController uiController;
@@ -89,6 +81,7 @@ public class DialogueManager : MonoBehaviour
         if (json == null) return;
         dialogueJson = json;
         activeDialogueSource = source;
+        activeDialogueStartIndex = source != null ? source.DialogueIndex : 0;
         DialogueLoad();
         DialogueStart();
     }
@@ -115,6 +108,89 @@ public class DialogueManager : MonoBehaviour
 
         DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
         return state != null ? state.dialogueIndex : fallbackIndex;
+    }
+
+    /// <summary>
+    /// 查询指定对话 GUID 的索引是否已完成
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <param name="index">对话索引</param>
+    /// <returns>已完成返回 true，否则 false</returns>
+    public bool IsDialogueIndexCompleted(string dialogueGuid, int index)
+    {
+        if (string.IsNullOrWhiteSpace(dialogueGuid))
+        {
+            return false;
+        }
+
+        if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
+        {
+            Debug.LogWarning($"IsDialogueIndexCompleted 存档未就绪: {dialogueGuid}");
+            return false;
+        }
+
+        DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        if (state == null || state.completedDialogueIndices == null || state.completedDialogueIndices.Count == 0)
+        {
+            return false;
+        }
+
+        int normalizedIndex = Mathf.Max(0, index);
+        return state.completedDialogueIndices.Contains(normalizedIndex);
+    }
+
+    /// <summary>
+    /// 标记指定对话 GUID 的索引为已完成
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <param name="index">对话索引</param>
+    public void MarkDialogueIndexCompleted(string dialogueGuid, int index)
+    {
+        if (string.IsNullOrWhiteSpace(dialogueGuid))
+        {
+            return;
+        }
+
+        if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
+        {
+            Debug.LogWarning($"无法设置对话完成状态, 存档未就绪: {dialogueGuid}");
+            return;
+        }
+
+        DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        if (state == null)
+        {
+            return;
+        }
+
+        if (state.completedDialogueIndices == null)
+        {
+            state.completedDialogueIndices = new List<int>();
+        }
+
+        int normalizedIndex = Mathf.Max(0, index);
+        if (!state.completedDialogueIndices.Contains(normalizedIndex))
+        {
+            state.completedDialogueIndices.Add(normalizedIndex);
+        }
+    }
+
+    /// <summary>
+    /// 查询指定对话 GUID 当前保存的索引是否已完成
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <returns>已完成返回 true，否则 false</returns>
+    public bool IsCurrentDialogueCompleted(string dialogueGuid)
+    {
+        // 找不到就返回666, 正常来说大概是不会到这个索引
+        int currentIndex = GetDialogueIndex(dialogueGuid, 666);
+        if (currentIndex == 666)
+        {
+            Debug.LogWarning($"IsCurrentDialogueCompleted 无法获取当前对话索引, 将返回 false: {dialogueGuid}");
+            return false;
+        }
+
+        return IsDialogueIndexCompleted(dialogueGuid, currentIndex);
     }
 
     /// <summary>
@@ -149,25 +225,43 @@ public class DialogueManager : MonoBehaviour
     {
         characterMap.Clear();
 
-        if (characters == null)
+        if (characterMapJson == null)
         {
+            Debug.LogWarning("未配置 character_map.json");
             return;
         }
 
-        foreach (var profile in characters)
+        Dictionary<string, string> map = null;
+        try
         {
-            if (profile == null || string.IsNullOrEmpty(profile.charID))
+            map = JsonConvert.DeserializeObject<Dictionary<string, string>>(characterMapJson.text);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogWarning($"读取 character_map.json 失败: {ex.Message}");
+            return;
+        }
+
+        if (map == null || map.Count == 0)
+        {
+            Debug.LogWarning("character_map.json 内容为空");
+            return;
+        }
+
+        foreach (var pair in map)
+        {
+            if (string.IsNullOrWhiteSpace(pair.Key))
             {
                 continue;
             }
 
-            if (!characterMap.ContainsKey(profile.charID))
+            if (!characterMap.ContainsKey(pair.Key))
             {
-                characterMap.Add(profile.charID, profile);
+                characterMap.Add(pair.Key, pair.Value ?? string.Empty);
             }
             else
             {
-                Debug.LogWarning($"角色ID重复: {profile.charID}");
+                Debug.LogWarning($"角色ID重复: {pair.Key}");
             }
         }
     }
@@ -425,7 +519,14 @@ public class DialogueManager : MonoBehaviour
     public void DialogueEnd()
     {
         flowState?.ClearRuntime();
+
+        if (activeDialogueSource != null && !string.IsNullOrWhiteSpace(activeDialogueSource.DialogueGuid))
+        {
+            MarkDialogueIndexCompleted(activeDialogueSource.DialogueGuid, activeDialogueStartIndex);
+        }
+
         activeDialogueSource = null;
+        activeDialogueStartIndex = 0;
         presenter?.Clear();
 
         typewriter?.Stop();
@@ -479,9 +580,9 @@ public class DialogueManager : MonoBehaviour
             return string.Empty;
         }
 
-        if (characterMap.TryGetValue(charID, out CharacterProfile profile) && profile != null)
+        if (characterMap.TryGetValue(charID, out string name))
         {
-            return profile.charName;
+            return name;
         }
 
         return null;

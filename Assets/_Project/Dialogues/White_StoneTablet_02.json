@@ -1,0 +1,21 @@
+{
+  "dialogues": [
+    {
+      "id": "White_StoneTablet_02_01",
+      "character": "protagonist",
+      "content": "嚯嚯，现在这个海螺就能拿下来了呢。",
+      "nextId": "White_StoneTablet_02_02"
+    },
+    {
+      "id": "White_StoneTablet_02_02",
+      "character": "protagonist",
+      "content": "也许会派上用场，先收起来吧。",
+      "effects": [
+        {
+          "GetItem": "item_shell"
+        }
+      ],
+      "nextId": "end"
+    }
+  ]
+}
