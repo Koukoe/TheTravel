@@ -56,12 +56,37 @@ public class CameraMove : MonoBehaviour
         camPos.position = smoothPos;
     }
 
+    private void cameraFree(Vector2 mouseMove)
+    {
+
+    }
+
     void LateUpdate()
     {
         if (currentMode == CameraMode.Stay) return;
         if (currentMode == CameraMode.Follow)
         {
             cameraFollow();
+        }
+        if (currentMode == CameraMode.Free)
+        {
+            cameraFree(InputManager.Instance.GetLook());
+        }
+    }
+
+    public void changeSeaCam(bool isOnSea = false)
+    {
+        if (isOnSea)
+        {
+            currentMode = CameraMode.Free;
+            CamY = StaticDefination.CameraYSea;
+            Debug.Log("相机高度变为海上高度");
+        }
+        else
+        {
+            currentMode = CameraMode.Follow;
+            CamY = StaticDefination.CameraY;
+            Debug.Log("相机高度变为陆地高度");
         }
     }
 }
