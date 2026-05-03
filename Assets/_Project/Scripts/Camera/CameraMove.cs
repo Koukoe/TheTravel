@@ -115,11 +115,11 @@ public class CameraMove : MonoBehaviour
             Debug.Log("进入陆地模式：跟随视角");
         }
     }
+    public enum CameraMode
+    {
+        Follow,
+        Free,
+        Stay
+    }
 }
 
-public enum CameraMode
-{
-    Follow,
-    Free,
-    Stay
-}

@@ -36,6 +36,7 @@ public class Playermove : MonoBehaviour
         {
             Onsea = value;
             PlayerController.mainCam.GetComponent<CameraMove>().changeSeaCam(value);
+            PlayerController.mainCam.GetComponent<CameraMove>().currentMode = value ? CameraMove.CameraMode.Free : CameraMove.CameraMode.Follow;
             changeState();
         }
     }
