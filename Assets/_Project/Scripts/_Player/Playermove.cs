@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -12,6 +13,9 @@ public class Playermove : MonoBehaviour
     public Transform shipTransform;
     public GameObject ship;
 
+    public GameObject playerModel;
+
+    public Camera cam;
     [SerializeField] private Animator _animator;
 
     [Header("移动参数")]
@@ -29,6 +33,7 @@ public class Playermove : MonoBehaviour
         set
         {
             Onsea = value;
+            cam.GetComponent<CameraMove>().changeSeaCam(value);
             changeState();
         }
     }
@@ -45,9 +50,13 @@ public class Playermove : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+        if (cam == null)
+        {
+            cam = Camera.main;
+        }
         if (CamTransform == null)
         {
-            Camera cam = Camera.main;
+            cam = Camera.main;
             if (cam != null)
             {
                 CamTransform = cam.transform;
@@ -135,11 +144,13 @@ public class Playermove : MonoBehaviour
     {
         if (Onsea)
         {
+            playerModel.SetActive(false);
             PlayerRigidbody.useGravity = false;
             PlayerRigidbody.constraints &= ~RigidbodyConstraints.FreezePositionY;
         }
         else
         {
+            playerModel.SetActive(true);
             PlayerRigidbody.useGravity = true;
             PlayerRigidbody.constraints |= RigidbodyConstraints.FreezePositionY;
         }

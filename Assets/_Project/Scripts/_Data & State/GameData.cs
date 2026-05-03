@@ -70,13 +70,13 @@ public class DataSetting
         //     language = "zh-TW";
         // else
         //     language = "en-US";
-        Resolution current = Screen.currentResolution;
         masterVolumeIndex = 2;
         musicVolumeIndex = 2;
         sfxVolumeIndex = 2;
         ambVolumeIndex = 2;
         resolutionIndex = 1; // 默认 1080p
         isFullScreen = 1;
+        sensitivityIndex = 2;
     }
 }
 

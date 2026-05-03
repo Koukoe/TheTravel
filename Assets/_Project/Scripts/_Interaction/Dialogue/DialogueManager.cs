@@ -31,6 +31,8 @@ public class DialogueManager : MonoBehaviour
     private TextAsset dialogueJson;
     // 当前对话来源物体
     private DialogueOnObj activeDialogueSource;
+    // 本次对话开始时对应的来源索引，用于结束时正确记录完成状态
+    private int activeDialogueStartIndex = 0;
     private Coroutine retryPendingOptionsRoutine;
     private DialogueTypewriter typewriter;
     private DialogueUIController uiController;
@@ -79,6 +81,7 @@ public class DialogueManager : MonoBehaviour
         if (json == null) return;
         dialogueJson = json;
         activeDialogueSource = source;
+        activeDialogueStartIndex = source != null ? source.DialogueIndex : 0;
         DialogueLoad();
         DialogueStart();
     }
@@ -105,6 +108,89 @@ public class DialogueManager : MonoBehaviour
 
         DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
         return state != null ? state.dialogueIndex : fallbackIndex;
+    }
+
+    /// <summary>
+    /// 查询指定对话 GUID 的索引是否已完成
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <param name="index">对话索引</param>
+    /// <returns>已完成返回 true，否则 false</returns>
+    public bool IsDialogueIndexCompleted(string dialogueGuid, int index)
+    {
+        if (string.IsNullOrWhiteSpace(dialogueGuid))
+        {
+            return false;
+        }
+
+        if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
+        {
+            Debug.LogWarning($"IsDialogueIndexCompleted 存档未就绪: {dialogueGuid}");
+            return false;
+        }
+
+        DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        if (state == null || state.completedDialogueIndices == null || state.completedDialogueIndices.Count == 0)
+        {
+            return false;
+        }
+
+        int normalizedIndex = Mathf.Max(0, index);
+        return state.completedDialogueIndices.Contains(normalizedIndex);
+    }
+
+    /// <summary>
+    /// 标记指定对话 GUID 的索引为已完成
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <param name="index">对话索引</param>
+    public void MarkDialogueIndexCompleted(string dialogueGuid, int index)
+    {
+        if (string.IsNullOrWhiteSpace(dialogueGuid))
+        {
+            return;
+        }
+
+        if (GameFlowManager.Instance == null || GameFlowManager.Instance.PlayingData == null)
+        {
+            Debug.LogWarning($"无法设置对话完成状态, 存档未就绪: {dialogueGuid}");
+            return;
+        }
+
+        DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        if (state == null)
+        {
+            return;
+        }
+
+        if (state.completedDialogueIndices == null)
+        {
+            state.completedDialogueIndices = new List<int>();
+        }
+
+        int normalizedIndex = Mathf.Max(0, index);
+        if (!state.completedDialogueIndices.Contains(normalizedIndex))
+        {
+            state.completedDialogueIndices.Add(normalizedIndex);
+        }
+    }
+
+    /// <summary>
+    /// 查询指定对话 GUID 当前保存的索引是否已完成
+    /// </summary>
+    /// <param name="dialogueGuid">对话的唯一标识</param>
+    /// <returns>已完成返回 true，否则 false</returns>
+    public bool IsCurrentDialogueCompleted(string dialogueGuid)
+    {
+        // 找不到就返回666, 正常来说大概是不会到这个索引
+        int currentIndex = GetDialogueIndex(dialogueGuid, 666);
+        if (currentIndex == 666)
+        {
+            Debug.LogWarning($"IsCurrentDialogueCompleted 无法获取当前对话索引, 将返回 false: {dialogueGuid}");
+            return false;
+        }
+
+        return IsDialogueIndexCompleted(dialogueGuid, currentIndex);
     }
 
     /// <summary>
@@ -433,7 +519,14 @@ public class DialogueManager : MonoBehaviour
     public void DialogueEnd()
     {
         flowState?.ClearRuntime();
+
+        if (activeDialogueSource != null && !string.IsNullOrWhiteSpace(activeDialogueSource.DialogueGuid))
+        {
+            MarkDialogueIndexCompleted(activeDialogueSource.DialogueGuid, activeDialogueStartIndex);
+        }
+
         activeDialogueSource = null;
+        activeDialogueStartIndex = 0;
         presenter?.Clear();
 
         typewriter?.Stop();

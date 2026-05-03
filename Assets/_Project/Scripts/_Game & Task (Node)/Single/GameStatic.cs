@@ -1,5 +1,8 @@
 using UnityEngine;
 using System;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
+using System.Threading.Tasks;
 
 public static class GameStatic
 {
@@ -14,7 +17,7 @@ public static class GameStatic
     }
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
-    public static void GameEntry()
+    public static async Task GameEntry()
     {
         if (MenuManager.Instance != null)
         {
@@ -22,7 +25,12 @@ public static class GameStatic
         }
         if (!DataGlobalSystem.Get().hasEnteredGame)
         {
-            MenuManager.Instance.NewGame();
+            await GameFlowManager.Instance.NewGame();
+        }
+        else
+        {
+            await GameFlowManager.Instance.LoadGame(DataArchivesSystem.GetLatestIndex());
+            MenuManager.Instance.Menu();
         }
     }
 

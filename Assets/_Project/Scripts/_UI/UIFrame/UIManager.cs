@@ -37,8 +37,6 @@ public class UIManager : MonoBehaviour
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
 
-    [SerializeField] private bool isQueueProcessing = false;
-
     private BasePanel closingPanel = null;
 
     private void Awake()

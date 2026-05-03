@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Project/Scenes/coreScene.unity
+    guid: 0f641362e3bf6234384ab4d36f38872e
+  - enabled: 1
+    path: Assets/_Project/Scenes/Ocean/Ocean.unity
+    guid: 04c259f84ba1d834ea592482ef79e942
+  - enabled: 1
     path: Assets/_Project/Scenes/DialogueTest.unity
     guid: e6dc3ef0e58e69140a18e2e2e620ffb0
   - enabled: 1

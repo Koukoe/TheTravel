@@ -30,6 +30,12 @@ public class InputManager : MonoBehaviour
     private void OnDisable() => _controls?.Disable();
 
 
+    public void SetLookSensitivity(float s)
+    {
+        mouseZoomSensitivity = 0.05f * s;
+        gamepadZoomSensitivity = 10f * s;
+    }
+
     /// <summary>
     /// 切换为面板操作：取消
     /// <paramref name="isMenu"/> 是 Sys（菜单）面板，关闭PlayerSta；是 Game 面板，则无视

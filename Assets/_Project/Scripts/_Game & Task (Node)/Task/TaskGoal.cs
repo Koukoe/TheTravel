@@ -20,6 +20,10 @@ public class TaskGoal
     [Range(0, 360)]
     public float rotationTolerance = 0.1f;
 
+    [Header("查找对话")]
+    public string targetDialogueId = null;
+    [Header("对话索引")]
+    public int index = 0;
 
     BaseState targetState;
     private void checkGoal()
@@ -83,6 +87,20 @@ public class TaskGoal
                     Debug.Log(targetId + "检测失败");
                 }
                 break;
+            case TaskGoalType.DIALOGUE:
+                // Check if the DIALOGUE FINISHED
+                if (DialogueManager.Instance.IsDialogueIndexCompleted(targetDialogueId, index))
+                {
+                    IsDone = true;
+                    Debug.Log(targetDialogueId + " " + index + "检测成功");
+                }
+                else
+                {
+                    IsDone = false;
+                    Debug.Log(targetDialogueId + " " + index + "检测失败");
+                }
+                break;
+
         }
     }
 
@@ -115,5 +133,6 @@ public enum TaskGoalType
 {
     TRIGGER,
     ITEM,
-    ACTOR
+    ACTOR,
+    DIALOGUE
 }

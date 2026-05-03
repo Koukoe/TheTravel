@@ -503,7 +503,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameUICamera: {fileID: 9106451141894039720}
   sysUICamera: {fileID: 3695447003073340680}
-  gameWorldCanvas: {fileID: 3598732636930292138}
+  gameWorldCanvas: {fileID: 3072696902482160940}
 --- !u!1 &3283972238322515798
 GameObject:
   m_ObjectHideFlags: 0

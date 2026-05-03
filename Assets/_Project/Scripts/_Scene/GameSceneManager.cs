@@ -27,6 +27,7 @@ public class GameSceneManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        currentMainLogic = null;
     }
 
     /// <summary>
@@ -82,6 +83,7 @@ public class GameSceneManager : MonoBehaviour
         {
             // 执行当前场景的退出逻辑
             currentMainLogic?.ExitScene();
+            Debug.Log($"当前场景 {currentMainLogic} 退出成功捏");
             currentMainLogic = null;
 
             if (mainPreLoadTasks.TryGetValue(sceneName, out var pair))
@@ -97,10 +99,13 @@ public class GameSceneManager : MonoBehaviour
                     .ToUniTask(progress, cancellationToken: this.GetCancellationTokenOnDestroy());
             }
 
+            await UniTask.Yield();  // 等一帧
+
             // 清空所有主场景预加载
             // CancelAllPreloadMain();
 
             InitNewMain(sceneName);
+            Debug.Log($"加载主场景 {sceneName} 成功捏");
         }
         catch (Exception e)
         {

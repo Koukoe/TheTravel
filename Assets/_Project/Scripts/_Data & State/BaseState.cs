@@ -25,12 +25,14 @@ public class ActorState : BaseState
 {
     public Vector3? position = null;
     public Vector3? rotation = null;
+    public bool isVisible;
     public string scene;
 
     public override void Init(string id)
     {
         if (!string.IsNullOrEmpty(guid)) return;
         base.Init(id);
+        isVisible = true;
         scene = "";
     }
 }
