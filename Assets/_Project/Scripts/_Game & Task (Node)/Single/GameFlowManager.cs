@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class GameFlowManager : MonoBehaviour
 {
@@ -12,14 +13,20 @@ public class GameFlowManager : MonoBehaviour
 
     public DataArchive PlayingData { get; private set; }
 
-    public void NewGame()
+    public async UniTask NewGame()
     {
+        Debug.Log("是新游戏哦");
         PlayingData = new DataArchive();
 
         // ... 布置背景
+
+        InputManager.Instance.SwitchAllMode();
+        await GameSceneManager.Instance.LoadMain("Ocean");
+        UIManager.Instance.Push("StartPanel");
     }
-    public void LoadGame(int slotIndex)
+    public async UniTask LoadGame(int slotIndex)
     {
+        Debug.Log("不是新游戏哦");
         var data = DataArchivesSystem.Get(slotIndex);
         if (data == null)
         {
@@ -33,7 +40,7 @@ public class GameFlowManager : MonoBehaviour
 
         if (GameSceneManager.Instance != null)
         {
-            GameSceneManager.Instance.LoadMain(PlayingData.currentScene);  // 异步
+            await GameSceneManager.Instance.LoadMain(PlayingData.currentScene);
         }
 
         // ...

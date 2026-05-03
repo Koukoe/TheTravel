@@ -66,9 +66,9 @@ public static class DataArchivesSystem
     }
 
     /// <summary>
-    /// 获取最新保存的存档数据（深拷贝） ( _ -> M )
+    /// 获取最新保存的存档索引 ( _ -> M )
     /// </summary>
-    public static DataArchive GetLatest()
+    public static int GetLatestIndex()
     {
         int latestIndex = -1;
         DateTime latestTime = DateTime.MinValue;
@@ -86,7 +86,7 @@ public static class DataArchivesSystem
                 }
             }
         }
-        return Get(latestIndex);
+        return latestIndex;
     }
 
     /// <summary>

@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 
 public class ArchivesPanel : MenuPanel
 {
@@ -109,7 +110,7 @@ public class ArchivesPanel : MenuPanel
     private void LoadGame(int id)
     {
         Debug.Log($"读取档位 {id}");
-        GameFlowManager.Instance.LoadGame(id);
+        GameFlowManager.Instance.LoadGame(id).Forget();
     }
 
     protected override GameObject DefaultFocused() => arcsBtn.Count > 0 ? arcsBtn[0].gameObject : null;

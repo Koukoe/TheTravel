@@ -21,7 +21,7 @@ public class MenuManager : MonoBehaviour
     private void OnEnable()
     {
         Debug.Log("订阅 Menu");
-        InputManager.Instance.PlayerStaticActions.Menu.performed += Menu;
+        InputManager.Instance.PlayerStaticActions.Menu.performed += OnMenu;
         if (InputManager.Instance != null)
         {
 
@@ -32,21 +32,16 @@ public class MenuManager : MonoBehaviour
     {
         if (InputManager.Instance != null)
         {
-            InputManager.Instance.PlayerStaticActions.Menu.performed -= Menu;
+            InputManager.Instance.PlayerStaticActions.Menu.performed -= OnMenu;
         }
     }
 
     public void SetEnabled(bool value = true) => this.enabled = value;
 
 
-    public void NewGame()
-    {
-        GameFlowManager.Instance.NewGame();
-        InputManager.Instance.SwitchAllMode();
-        UIManager.Instance.Push("StartPanel");
-    }
+    public void OnMenu(InputAction.CallbackContext context) => Menu();
 
-    public void Menu(InputAction.CallbackContext context)
+    public void Menu()
     {
         EffectManager.Instance.SetBackgroundBlur(true);
         if (UIManager.Instance.IsTransitioning) return;

@@ -2,14 +2,17 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using System.Runtime.CompilerServices;
+using Cysharp.Threading.Tasks;
 
 public class MainPanel : MenuPanel
 {
     [SerializeField] private Button saveBtn;
     [SerializeField] private Button loadBtn;
+    [SerializeField] private Button newBtn;
     [SerializeField] private Button settingsBtn;
     [SerializeField] private Button aboutBtn;
     [SerializeField] private Button backBtn;
+    [SerializeField] private Button exitBtn;
 
     protected override void Awake()
     {
@@ -18,9 +21,11 @@ public class MainPanel : MenuPanel
         // 绑定按钮监听事件
         saveBtn?.onClick.AddListener(() => OnArchivesClicked());
         loadBtn?.onClick.AddListener(() => OnArchivesClicked(false));
+        exitBtn?.onClick.AddListener(OnNewGameClicked);
         settingsBtn?.onClick.AddListener(OnSettingsClicked);
         aboutBtn?.onClick.AddListener(OnAboutClicked);
         backBtn?.onClick.AddListener(OnBackClicked);
+        exitBtn?.onClick.AddListener(OnExitClicked);
     }
 
     protected override GameObject DefaultFocused() => saveBtn != null && saveBtn.interactable ? saveBtn.gameObject : loadBtn.gameObject;
@@ -62,5 +67,18 @@ public class MainPanel : MenuPanel
     {
         base.OnBackClicked();
         EffectManager.Instance.SetBackgroundBlur(false);
+    }
+
+    public void OnExitClicked()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+    public void OnNewGameClicked()
+    {
+        GameFlowManager.Instance.NewGame().Forget();
     }
 }

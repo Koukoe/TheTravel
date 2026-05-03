@@ -120,6 +120,11 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: AudioSource
+    prefab: {fileID: 1059796485455229261, guid: 3be0d169610ce6841b609cfc28f1bb2d,
+      type: 3}
+    prewarmCount: 2
+    maxSize: 4
 --- !u!114 &427507558724491852
 MonoBehaviour:
   m_ObjectHideFlags: 0

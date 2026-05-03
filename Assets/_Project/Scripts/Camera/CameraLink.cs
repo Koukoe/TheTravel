@@ -28,6 +28,7 @@ public class CameraLink : MonoBehaviour
         Camera mainCam = Camera.main;
         if (mainCam != null)
         {
+            Debug.Log("链接至 MainCamera");
             var cameraData = mainCam.GetUniversalAdditionalCameraData();
             if (cameraData == null) return;
             if (gameUICamera != null && !cameraData.cameraStack.Contains(gameUICamera))
