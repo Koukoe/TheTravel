@@ -17,6 +17,8 @@ public class SeaScene : RealScene<SeaSceneState>
         base.EnterScene();
         // 检测是否第一次在场景里，决定是否播放 BGM
         Playermove.Instance.OnSea = true;
+        Playermove.Instance.cam = Camera.main;
+        Playermove.Instance.CamTransform = Camera.main.transform;
     }
 
     public override void ExitScene()

@@ -99,6 +99,8 @@ public class GameSceneManager : MonoBehaviour
                     .ToUniTask(progress, cancellationToken: this.GetCancellationTokenOnDestroy());
             }
 
+            Debug.Log("这是一个临时Debug");
+
             await UniTask.Yield();  // 等一帧
 
             // 清空所有主场景预加载
