@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using UnityEngine;
 
 public static class DialogueEffectExecutor
@@ -100,6 +101,50 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 显示 NPC
+            if (!string.IsNullOrWhiteSpace(effect.ShowNpc))
+            {
+                string targetGuid = effect.ShowNpc.Trim();
+                ActorStateUtils.SetActorVisibility(targetGuid, true);
+                continue;
+            }
+
+            // 隐藏 NPC
+            if (!string.IsNullOrWhiteSpace(effect.HideNpc))
+            {
+                string targetGuid = effect.HideNpc.Trim();
+                ActorStateUtils.SetActorVisibility(targetGuid, false);
+                continue;
+            }
+
+            // 移动 NPC
+            if (!string.IsNullOrWhiteSpace(effect.MoveNpc))
+            {
+                if (!TryParseVector3(effect.MoveNpcPosition, out Vector3 targetPosition))
+                {
+                    Debug.LogWarning($"MoveNpcPosition 非法: {effect.MoveNpcPosition}");
+                    continue;
+                }
+
+                Vector3? targetRotation = null;
+                if (!string.IsNullOrWhiteSpace(effect.MoveNpcRotation))
+                {
+                    if (TryParseVector3(effect.MoveNpcRotation, out Vector3 parsedRotation))
+                    {
+                        targetRotation = parsedRotation;
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"MoveNpcRotation 非法: {effect.MoveNpcRotation}");
+                        continue;
+                    }
+                }
+
+                string targetGuid = effect.MoveNpc.Trim();
+                ActorStateUtils.SetActorTransform(targetGuid, targetPosition, targetRotation);
+                continue;
+            }
+
             // 跳转场景
             if (!string.IsNullOrWhiteSpace(effect.GotoScene))
             {
@@ -163,6 +208,8 @@ public static class DialogueEffectExecutor
         }
     }
 
+    // 辅助解析方法
+
     private static StopTarget ParseStopTargetOrDefault(string rawValue, StopTarget defaultValue)
     {
         if (string.IsNullOrWhiteSpace(rawValue))
@@ -193,5 +240,39 @@ public static class DialogueEffectExecutor
 
         Debug.LogWarning($"{fieldName} 非法: {rawValue}, 将使用默认值 {defaultValue}");
         return defaultValue;
+    }
+
+    private static bool TryParseVector3(string rawValue, out Vector3 value)
+    {
+        value = Vector3.zero;
+
+        if (string.IsNullOrWhiteSpace(rawValue))
+        {
+            return false;
+        }
+
+        string[] parts = rawValue.Split(',');
+        if (parts.Length != 3)
+        {
+            return false;
+        }
+
+        if (!float.TryParse(parts[0].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out float x))
+        {
+            return false;
+        }
+
+        if (!float.TryParse(parts[1].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out float y))
+        {
+            return false;
+        }
+
+        if (!float.TryParse(parts[2].Trim(), NumberStyles.Float, CultureInfo.InvariantCulture, out float z))
+        {
+            return false;
+        }
+
+        value = new Vector3(x, y, z);
+        return true;
     }
 }

@@ -1,24 +1,39 @@
 {
     "dialogues": [
         {
-            "id": "1",
-            "character": "你好3",
-            "content": "这是\n第一句话"
+            "id": "t1",
+            "character": "protagonist",
+            "content": "让NPC消失",
+            "effects": [
+                {
+                    "HideNpc": "test_npc_001"
+                }
+            ],
+            "nextId": "t2"
         },
         {
-            "id": "2",
-            "character": "NPC_002",
-            "content": "这是3第二句话"
+            "id": "t2",
+            "character": "protagonist",
+            "content": "让NPC出现",
+            "effects": [
+                {
+                    "ShowNpc": "test_npc_001"
+                }
+            ],
+            "nextId": "t3"
         },
         {
-            "id": "3",
-            "character": "NPC_003",
-            "content": "这是3第三句话"
-        },
-        {
-            "id": "4",
-            "character": "4号NPC",
-            "content": "这是3有点不一样的第四句话"
+            "id": "t3",
+            "character": "protagonist",
+            "content": "移动NPC",
+            "effects": [
+                {
+                    "MoveNpc": "test_npc_001",
+                    "MoveNpcPosition": "5,2,3",
+                    "MoveNpcRotation": "0,180,0"
+                }
+            ],
+            "nextId": "END"
         }
     ]
 }

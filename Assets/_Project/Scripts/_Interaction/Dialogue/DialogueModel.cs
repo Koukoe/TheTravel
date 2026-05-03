@@ -55,6 +55,17 @@ public class DialogueEffect
     // StopBgmTarget 可选值: Oldest / Latest / All
     public string StopBgmTarget;
     public string StopBgmFade;
+
+    // 显示 / 隐藏 NPC，值为 NPC 的 guid
+    // 写法: { "ShowNpc": "npc_guid" } 或 { "HideNpc": "npc_guid" }
+    public string ShowNpc;
+    public string HideNpc;
+
+    // 移动 NPC，MoveNpc 为目标 guid
+    // 写法: { "MoveNpc": "npc_guid", "MoveNpcPosition": "0,1,2", "MoveNpcRotation": "0,180,0" }
+    public string MoveNpc;
+    public string MoveNpcPosition;
+    public string MoveNpcRotation;
 }
 
 // 单条对话条目
