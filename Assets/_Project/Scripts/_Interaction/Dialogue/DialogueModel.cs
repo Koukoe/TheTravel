@@ -66,6 +66,11 @@ public class DialogueEffect
     public string MoveNpc;
     public string MoveNpcPosition;
     public string MoveNpcRotation;
+
+    // 获得 / 失去道具，值为道具 GUID
+    // 写法: { "GetItem": "item_guid" } 或 { "LoseItem": "item_guid" }
+    public string GetItem;
+    public string LoseItem;
 }
 
 // 单条对话条目
