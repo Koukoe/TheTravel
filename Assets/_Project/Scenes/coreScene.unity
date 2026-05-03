@@ -171,7 +171,18 @@ MonoBehaviour:
   nextNodesIds: []
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - taskGoalType: 0
+    isDone: 0
+    targetId: 
+    GoalTrigger: 0
+    GoalItem: 0
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
   nextNodes: []
   Out: 0
   isTaskFinished: 0

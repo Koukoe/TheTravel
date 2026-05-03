@@ -15,7 +15,6 @@ public class CameraMove : MonoBehaviour
     private float freeYaw = 0f;         // 水平角
     void Start()
     {
-
         if (target == null)
         {
             GameObject player = GameObject.FindWithTag("Player");

@@ -134,6 +134,7 @@ public class Playermove : MonoBehaviour
     {
         if (Onsea)
         {
+            Debug.Log("sea");
             dectector.radius = 50f;
             foreach (var collidor in seaOffColliders)
             {
@@ -146,10 +147,11 @@ public class Playermove : MonoBehaviour
 
             playerModel.SetActive(false);
             PlayerRigidbody.useGravity = false;
-            PlayerRigidbody.constraints &= ~RigidbodyConstraints.FreezePositionY;
+            PlayerRigidbody.constraints |= RigidbodyConstraints.FreezePositionY;
         }
         else
         {
+            Debug.Log("offsea");
             dectector.radius = 2.5f;
             foreach (var collidor in seaOffColliders)
             {
@@ -162,7 +164,7 @@ public class Playermove : MonoBehaviour
 
             playerModel.SetActive(true);
             PlayerRigidbody.useGravity = true;
-            PlayerRigidbody.constraints |= RigidbodyConstraints.FreezePositionY;
+            PlayerRigidbody.constraints &= ~RigidbodyConstraints.FreezePositionY;
         }
     }
 
