@@ -293,8 +293,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -303,10 +311,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.228
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -315,10 +332,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.228
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -327,9 +353,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.228
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -338,9 +373,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.228
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
       type: 22
       curve:
         serializedVersion: 2
@@ -348,10 +384,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.5
     delay: 0.228
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -359,12 +404,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 2703634460583628458}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!1 &821460976620399294
 GameObject:
   m_ObjectHideFlags: 0
@@ -556,8 +611,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -566,10 +629,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.168
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -578,10 +650,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.168
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -590,9 +671,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.168
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -601,9 +691,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.168
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
       type: 22
       curve:
         serializedVersion: 2
@@ -611,10 +702,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.5
     delay: 0.168
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -622,12 +722,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 1394881009267178459}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!1 &880432581086619828
 GameObject:
   m_ObjectHideFlags: 0
@@ -980,8 +1090,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -990,10 +1108,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -1002,9 +1129,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
       curve:
         serializedVersion: 2
@@ -1012,23 +1140,8 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
-    duration: 0.5
-    delay: 0
-    offset: {x: -200, y: 0}
-  - ease:
-      type: 23
-      curve:
-        serializedVersion: 2
-        m_Curve: []
-        m_PreInfinity: 0
-        m_PostInfinity: 0
-        m_RotationOrder: 0
-    duration: 0.5
-    delay: 0
-    offset: {x: -200, y: 0}
-  suspendConfig:
-  - ease:
-      type: 22
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -1037,8 +1150,50 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
+      type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 0
+        m_PostInfinity: 0
+        m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  suspendConfig:
+  - posEase:
+      type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    duration: 0.5
+    delay: 0
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -1046,12 +1201,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 5452229607728861910}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!1 &2171662433818965525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2397,8 +2562,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2407,10 +2580,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.092
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2419,10 +2601,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.092
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2431,9 +2622,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.092
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2442,9 +2642,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.092
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
       type: 22
       curve:
         serializedVersion: 2
@@ -2452,10 +2653,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.5
     delay: 0.092
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -2463,12 +2673,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 2711385848698215470}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!1 &6495827221050735230
 GameObject:
   m_ObjectHideFlags: 0
@@ -2923,8 +3143,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2933,10 +3161,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.3
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2945,10 +3182,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.3
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2957,9 +3203,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.3
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -2968,9 +3223,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.3
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
       type: 22
       curve:
         serializedVersion: 2
@@ -2978,10 +3234,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.5
     delay: 0.3
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -2989,12 +3254,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 4701885948192677125}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!1 &8066575764521011398
 GameObject:
   m_ObjectHideFlags: 0
@@ -3347,8 +3622,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3357,10 +3640,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.272
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3369,10 +3661,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.272
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3381,9 +3682,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.272
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3392,9 +3702,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.272
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
       type: 22
       curve:
         serializedVersion: 2
@@ -3402,10 +3713,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.5
     delay: 0.272
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -3413,12 +3733,22 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 3131842735155148402}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!1 &8820292262734137057
 GameObject:
   m_ObjectHideFlags: 0
@@ -3555,9 +3885,11 @@ MonoBehaviour:
   clearFocused: 1
   saveBtn: {fileID: 8997380335770747363}
   loadBtn: {fileID: 8934029956320794968}
+  newBtn: {fileID: 2064753782587913487}
   settingsBtn: {fileID: 1184064476380251935}
   aboutBtn: {fileID: 1816409058856658999}
   backBtn: {fileID: 8490067733586533676}
+  exitBtn: {fileID: 1146654716431113376}
 --- !u!1 &9100329419255403148
 GameObject:
   m_ObjectHideFlags: 0
@@ -3749,8 +4081,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 0
   openConfig:
-    ease:
+    posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3759,10 +4099,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.296
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 22
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3771,10 +4120,19 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.296
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3783,9 +4141,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.296
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 23
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
+      type: 0
       curve:
         serializedVersion: 2
         m_Curve: []
@@ -3794,9 +4161,10 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0.5
     delay: 0.296
-    offset: {x: -200, y: 0}
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
       type: 22
       curve:
         serializedVersion: 2
@@ -3804,10 +4172,19 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.5
     delay: 0.296
-    offset: {x: -200, y: 0}
-  - ease:
+    posOffset: {x: -200, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
+  - posEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -3815,9 +4192,19 @@ MonoBehaviour:
         m_PreInfinity: 0
         m_PostInfinity: 0
         m_RotationOrder: 0
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: -514, y: 0}
+    posOffset: {x: -514, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 0
   rectTransform: {fileID: 6010461643461243043}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}

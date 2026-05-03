@@ -74,7 +74,7 @@ public class MenuManager : MonoBehaviour
         // 应用鼠标灵敏度
         float[] sensitivityValues = { 0.5f, 1.0f, 1.5f, 2.0f, 2.5f };
         float sens = sensitivityValues[Mathf.Clamp(d.sensitivityIndex, 0, sensitivityValues.Length - 1)];
-        PlayerPrefs.SetFloat("MouseSensitivity", sens);
+        InputManager.Instance.SetLookSensitivity(sens);
 
         // 同步设置到 DataSettingSystem
         DataSettingSystem.Set(d);
