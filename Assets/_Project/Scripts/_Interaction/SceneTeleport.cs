@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 public class SceneTeleport : MonoBehaviour
 {
@@ -29,7 +29,7 @@ public class SceneTeleport : MonoBehaviour
     }
 
 
-    public async Task DoorTP()
+    public async UniTask DoorTP()
     {
         await GameSceneManager.Instance.LoadMain(TargetScene);
         Debug.Log("Teleporting to " + TargetScene);

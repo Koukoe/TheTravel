@@ -20,7 +20,5 @@ public class TownScene : EntityScene<TownSceneState>
 
         SpawnEntities();
 
-        Playermove.Instance.cam = Camera.main;
-        Playermove.Instance.CamTransform = Camera.main.transform;
     }
 }

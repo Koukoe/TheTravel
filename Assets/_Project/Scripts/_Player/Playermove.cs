@@ -7,7 +7,6 @@ using UnityEngine;
 public class Playermove : MonoBehaviour
 {
     public static Playermove Instance { get; private set; }
-    public Transform CamTransform;
     public Transform PlayerTransform;
     public Rigidbody PlayerRigidbody;
     public Transform shipTransform;
@@ -15,7 +14,6 @@ public class Playermove : MonoBehaviour
 
     public GameObject playerModel;
 
-    public Camera cam;
     public SphereCollider dectector;
 
     public List<Collider> seaOffColliders = new List<Collider>();
@@ -37,7 +35,7 @@ public class Playermove : MonoBehaviour
         set
         {
             Onsea = value;
-            cam.GetComponent<CameraMove>().changeSeaCam(value);
+            PlayerController.mainCam.GetComponent<CameraMove>().changeSeaCam(value);
             changeState();
         }
     }
@@ -53,19 +51,6 @@ public class Playermove : MonoBehaviour
         {
             Destroy(gameObject);
             return;
-        }
-        if (cam == null)
-        {
-            cam = Camera.main;
-        }
-        if (CamTransform == null)
-        {
-            cam = Camera.main;
-            if (cam != null)
-            {
-                CamTransform = cam.transform;
-            }
-            if (CamTransform == null) Debug.LogError("CamTransform is null");
         }
         if (PlayerTransform == null) PlayerTransform = GetComponent<Transform>();
         if (PlayerRigidbody == null) PlayerRigidbody = GetComponent<Rigidbody>();
@@ -84,8 +69,8 @@ public class Playermove : MonoBehaviour
         // Debug.Log(inputVector.x + "," + inputVector.y);
         if (inputVector == Vector2.zero) return Vector3.zero;
 
-        Vector3 Camforward = CamTransform.forward;
-        Vector3 Camright = CamTransform.right;
+        Vector3 Camforward = PlayerController.mainCam.transform.forward;
+        Vector3 Camright = PlayerController.mainCam.transform.right;
         Camforward.y = 0;
         Camright.y = 0;
         Camforward.Normalize();

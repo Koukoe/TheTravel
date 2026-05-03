@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class CameraMove : MonoBehaviour
 {
-    public Camera cam;
-    public Transform camPos;
     public Transform target;
     public CameraMode currentMode;
     public float smoothSpeed = 0.125f;
@@ -17,9 +15,6 @@ public class CameraMove : MonoBehaviour
     private float freeYaw = 0f;         // 水平角
     void Start()
     {
-        if (cam == null)
-            cam = GetComponent<Camera>();
-        camPos = transform;
 
         if (target == null)
         {
@@ -37,16 +32,16 @@ public class CameraMove : MonoBehaviour
 
     private Vector3 calPos()
     {
-        if (target == null) return camPos.position;
+        if (target == null) return PlayerController.mainCam.transform.position;
 
         // 水平方向（相机后方）
-        Vector3 horizontalDir = -camPos.forward;
+        Vector3 horizontalDir = -PlayerController.mainCam.transform.forward;
         horizontalDir.y = 0;
         if (horizontalDir.magnitude < 0.001f) horizontalDir = Vector3.back;
         horizontalDir.Normalize();
 
         // 俯角（取正值）
-        float pitchRad = Mathf.Asin(Mathf.Clamp(-camPos.forward.y, 0.01f, 0.99f));
+        float pitchRad = Mathf.Asin(Mathf.Clamp(-PlayerController.mainCam.transform.forward.y, 0.01f, 0.99f));
         float horizontalDistance = CamY / Mathf.Tan(pitchRad);
         horizontalDistance = Mathf.Min(horizontalDistance, 50f);
 
@@ -56,8 +51,8 @@ public class CameraMove : MonoBehaviour
     private void cameraFollow()
     {
         Vector3 targetPosition = calPos();
-        Vector3 smoothPos = Vector3.Lerp(camPos.position, targetPosition, smoothSpeed);
-        camPos.position = smoothPos;
+        Vector3 smoothPos = Vector3.Lerp(PlayerController.mainCam.transform.position, targetPosition, smoothSpeed);
+        PlayerController.mainCam.transform.position = smoothPos;
     }
 
     private void cameraFree(Vector2 mouseMove)
@@ -82,11 +77,11 @@ public class CameraMove : MonoBehaviour
         Vector3 targetPosition = target.position + offset;
 
         // 平滑移动
-        Vector3 smoothPos = Vector3.Lerp(camPos.position, targetPosition, smoothSpeed);
-        camPos.position = smoothPos;
+        Vector3 smoothPos = Vector3.Lerp(PlayerController.mainCam.transform.position, targetPosition, smoothSpeed);
+        PlayerController.mainCam.transform.position = smoothPos;
 
         // 让相机看向目标
-        camPos.LookAt(target);
+        PlayerController.mainCam.transform.LookAt(target);
     }
 
     void LateUpdate()
