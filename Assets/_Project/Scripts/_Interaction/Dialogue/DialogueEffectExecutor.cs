@@ -145,6 +145,20 @@ public static class DialogueEffectExecutor
                 continue;
             }
 
+            // 获得道具
+            if (!string.IsNullOrWhiteSpace(effect.GetItem))
+            {
+                ItemStateUtils.SetItemPicked(effect.GetItem.Trim(), true);
+                continue;
+            }
+
+            // 失去道具
+            if (!string.IsNullOrWhiteSpace(effect.LoseItem))
+            {
+                ItemStateUtils.SetItemPicked(effect.LoseItem.Trim(), false);
+                continue;
+            }
+
             // 跳转场景
             if (!string.IsNullOrWhiteSpace(effect.GotoScene))
             {
