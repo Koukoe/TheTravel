@@ -1,4 +1,4 @@
-# stone_puzzle 事件流程说明
+# white_puzzle_01_stone_puzzle 事件流程说明
 
 **实现目的**：玩家在石碑前按正确顺序敲击石头，完成解谜后触发石碑特效，并推进石碑对话阶段，使下次互动显示新对话（`White_StoneTablet_02.json`）。该事件由石头点击驱动，不通过对话 effects 触发。
 

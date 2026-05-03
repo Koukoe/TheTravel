@@ -65,7 +65,7 @@
       "character": "captain",
       "content": "不介意的话，我就先去你的船上候着了！",
       "effects": [
-        {"MoveNpc": {"npc": "captain", "to": "ship_deck"}}
+       { "MoveNpc": "captain", "MoveNpcPosition": "x,y,z", "MoveNpcRotation": "x,y,z" }
       ],
       "nextId": "end"
     }

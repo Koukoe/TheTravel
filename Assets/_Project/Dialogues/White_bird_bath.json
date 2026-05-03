@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "bird_bath_puzzle_1_01",
+      "character": "protagonist",
+      "content": "好华丽的杯子，是黄金做的吗？......不过和这干涸的鸟浴真不搭.....",
+      "nextId": "bird_bath_puzzle_1_02"
+    },
+    {
+      "id": "bird_bath_puzzle_1_02",
+      "character": "protagonist",
+      "content": "也许能去哪里弄点水来......？",
+      "nextId": "end"
+    }
+  ]
+}
