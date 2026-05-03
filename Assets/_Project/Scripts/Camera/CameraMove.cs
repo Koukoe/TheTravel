@@ -11,6 +11,10 @@ public class CameraMove : MonoBehaviour
     public float smoothSpeed = 0.125f;
     private float CamY = StaticDefination.CameraY;
 
+
+    // 自由视角专用变量
+    private float freePitch = 25f;      // 俯角
+    private float freeYaw = 0f;         // 水平角
     void Start()
     {
         if (cam == null)
@@ -58,7 +62,31 @@ public class CameraMove : MonoBehaviour
 
     private void cameraFree(Vector2 mouseMove)
     {
+        if (target == null) return;
 
+        // 直接使用 CamY 作为球半径（相机到目标的距离）
+        float distance = CamY;
+
+        // 更新角度
+        freeYaw += mouseMove.x;
+        freePitch -= mouseMove.y;
+
+        // 限制俯角范围：-90 到 90 度（半球面）
+        freePitch = Mathf.Clamp(freePitch, 20f, 70f);
+
+        // 球面坐标转直角坐标（半径为 CamY）
+        Quaternion rotation = Quaternion.Euler(freePitch, freeYaw, 0);
+        Vector3 offset = rotation * Vector3.back * distance;
+
+        // 相机位置 = 目标位置 + 偏移
+        Vector3 targetPosition = target.position + offset;
+
+        // 平滑移动
+        Vector3 smoothPos = Vector3.Lerp(camPos.position, targetPosition, smoothSpeed);
+        camPos.position = smoothPos;
+
+        // 让相机看向目标
+        camPos.LookAt(target);
     }
 
     void LateUpdate()
@@ -80,13 +108,16 @@ public class CameraMove : MonoBehaviour
         {
             currentMode = CameraMode.Free;
             CamY = StaticDefination.CameraYSea;
-            Debug.Log("相机高度变为海上高度");
+            // 重置角度，确保相机在玩家后方
+            freePitch = 25f;
+            freeYaw = 0f;
+            Debug.Log("进入海上模式：自由视角");
         }
         else
         {
             currentMode = CameraMode.Follow;
             CamY = StaticDefination.CameraY;
-            Debug.Log("相机高度变为陆地高度");
+            Debug.Log("进入陆地模式：跟随视角");
         }
     }
 }

@@ -19,5 +19,8 @@ public class TownScene : EntityScene<TownSceneState>
         Playermove.Instance.OnSea = false;
 
         SpawnEntities();
+
+        Playermove.Instance.cam = Camera.main;
+        Playermove.Instance.CamTransform = Camera.main.transform;
     }
 }
