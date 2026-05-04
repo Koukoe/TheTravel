@@ -10,6 +10,9 @@ public abstract class StaticStateEntity<T> : MonoBehaviour where T : BaseState, 
     protected virtual void Start()
     {
         _state = GameFlowManager.Instance.PlayingData.GetState<T>(guid);
+
+        if (_state != null) _state.OnDataChanged += OnStateBound;
+
         if (string.IsNullOrEmpty(_state.name))
         {
             if (!string.IsNullOrEmpty(defaultName))
@@ -17,6 +20,11 @@ public abstract class StaticStateEntity<T> : MonoBehaviour where T : BaseState, 
         }
 
         OnStateBound();
+    }
+
+    protected virtual void OnDestroy()
+    {
+        if (_state != null) _state.OnDataChanged -= OnStateBound;
     }
 
 
@@ -32,8 +40,12 @@ public abstract class PoolStateEntity<T> : MonoBehaviour where T : BaseState, ne
 
     public virtual void BindState(string guid)
     {
+        if (_state != null) _state.OnDataChanged -= OnStateBound;
+
         _guid = guid;
         _state = GameFlowManager.Instance.PlayingData.GetState<T>(_guid);
+
+        if (_state != null) _state.OnDataChanged += OnStateBound;
 
         if (_state is ActorState actor)
         {
@@ -105,6 +117,7 @@ public abstract class PoolStateEntity<T> : MonoBehaviour where T : BaseState, ne
     public virtual void ReturnToPool()
     {
         OnBeforeReturn();
+        if (_state != null) _state.OnDataChanged -= OnStateBound;
         PoolManager.Release(gameObject);
     }
 

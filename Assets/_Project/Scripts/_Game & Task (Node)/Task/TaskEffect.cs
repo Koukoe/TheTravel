@@ -37,10 +37,8 @@ public class TaskEffect
                 break;
         }
 
-        if (true)//如果物体在当前场景
-        {
-            //刷新此物体状态
-        }
+        // 刷新此物体在当前场景状态
+        state.ScenedNotifyChanged();
     }
 
     public void RevertEffect()
@@ -61,10 +59,8 @@ public class TaskEffect
                 break;
         }
 
-        if (true)//如果物体在当前场景
-        {
-            //刷新此物体状态
-        }
+        // 刷新此物体在当前场景状态
+        state.ScenedNotifyChanged();
     }
 }
 public enum EffectType

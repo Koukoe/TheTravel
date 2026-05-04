@@ -20,6 +20,10 @@ public abstract class BaseState
     protected void SetGUID(string id) => guid = id;
 
     public abstract BaseState Clone();
+
+    [NonSerialized] public Action OnDataChanged;  // 当前场景的变化委托，无需保存
+
+    public void ScenedNotifyChanged() => OnDataChanged?.Invoke();
 }
 
 /// <summary> 活体/角色状态（NPC） </summary>
