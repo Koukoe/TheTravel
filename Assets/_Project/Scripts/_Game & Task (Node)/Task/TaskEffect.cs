@@ -6,39 +6,40 @@ using UnityEngine;
 public class TaskEffect
 {
     public EffectType effectType;
-    public GameObject targetObject;
-    public Behaviour targetComponent;
-    public Vector3 targetPosition;
+    public string targetGUID;
+    public BaseState state;
+    public InteractionState targetInteractionState;
+    public ItemState targetItemState;
+    public ActorState targetActorState;
 
-    private Vector3 reservePosition;
+    private BaseState snapShotState;
     public void ApplyEffect()
     {
         switch (effectType)
         {
-            case EffectType.changePosition:
-                // Change the position of the target object
-                reservePosition = targetObject.transform.position;
-                targetObject.transform.position = targetPosition;
-                /*
-                朝向什么的时候看情况
-                */
+            case EffectType.INTERACTABLESTATE:
+                state = GameFlowManager.Instance.PlayingData.GetState<InteractionState>(targetGUID);
+
+                snapShotState = state.Clone();
+                state = targetInteractionState;
                 break;
-            case EffectType.enableObject:
-                // Enable the target object
-                targetObject.SetActive(true);
+            case EffectType.ITEMSTATE:
+                state = GameFlowManager.Instance.PlayingData.GetState<ItemState>(targetGUID);
+
+                snapShotState = state.Clone();
+                state = targetItemState;
                 break;
-            case EffectType.disableObject:
-                // Disable the target object
-                targetObject.SetActive(false);
+            case EffectType.ACTORSTATE:
+                state = GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetGUID);
+
+                snapShotState = state.Clone();
+                state = targetActorState;
                 break;
-            case EffectType.enableComponent:
-                // Enable the target component
-                targetComponent.enabled = true;
-                break;
-            case EffectType.disableComponent:
-                // Disable the target component
-                targetComponent.enabled = false;
-                break;
+        }
+
+        if (true)//如果物体在当前场景
+        {
+            //刷新此物体状态
         }
     }
 
@@ -46,34 +47,29 @@ public class TaskEffect
     {
         switch (effectType)
         {
-            case EffectType.changePosition:
-                // Revert the position of the target object
-                targetObject.transform.position = reservePosition;
+            case EffectType.INTERACTABLESTATE:
+                state = GameFlowManager.Instance.PlayingData.GetState<InteractionState>(targetGUID);
+                state = snapShotState as InteractionState;
                 break;
-            case EffectType.enableObject:
-                // Disable the target object
-                targetObject.SetActive(false);
+            case EffectType.ITEMSTATE:
+                state = GameFlowManager.Instance.PlayingData.GetState<ItemState>(targetGUID);
+                state = snapShotState as ItemState;
                 break;
-            case EffectType.disableObject:
-                // Enable the target object
-                targetObject.SetActive(true);
+            case EffectType.ACTORSTATE:
+                state = GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetGUID);
+                state = snapShotState as ActorState;
                 break;
-            case EffectType.enableComponent:
-                // Disable the target component
-                targetComponent.enabled = false;
-                break;
-            case EffectType.disableComponent:
-                // Enable the target component
-                targetComponent.enabled = true;
-                break;
+        }
+
+        if (true)//如果物体在当前场景
+        {
+            //刷新此物体状态
         }
     }
 }
 public enum EffectType
 {
-    changePosition,
-    enableObject,
-    disableObject,
-    enableComponent,
-    disableComponent,
+    INTERACTABLESTATE,
+    ITEMSTATE,
+    ACTORSTATE
 }

@@ -17,6 +17,9 @@ public abstract class BaseState
             Debug.LogError($"[State] 试图修改已存在的 GUID：{guid}为: {id}");
         }
     }
+    protected void SetGUID(string id) => guid = id;
+
+    public abstract BaseState Clone();
 }
 
 /// <summary> 活体/角色状态（NPC） </summary>
@@ -35,6 +38,20 @@ public class ActorState : BaseState
         isVisible = true;
         scene = "";
     }
+
+    public override BaseState Clone()
+    {
+        var clone = new ActorState()
+        {
+            name = name,
+            position = position,
+            rotation = rotation,
+            isVisible = isVisible,
+            scene = scene
+        };
+        clone.SetGUID(guid);
+        return clone;
+    }
 }
 
 /// <summary> 环境/交互物状态（门、机关） </summary>
@@ -50,6 +67,18 @@ public class InteractionState : BaseState
         isTriggered = false;
         stateIndex = 0;
     }
+
+    public override BaseState Clone()
+    {
+        var clone = new InteractionState()
+        {
+            name = name,
+            isTriggered = isTriggered,
+            stateIndex = stateIndex
+        };
+        clone.SetGUID(guid);
+        return clone;
+    }
 }
 
 /// <summary> 物品/道具状态（图鉴） </summary>
@@ -62,6 +91,17 @@ public class ItemState : BaseState
         if (!string.IsNullOrEmpty(guid)) return;
         base.Init(id);
         isPicked = false;
+    }
+
+    public override BaseState Clone()
+    {
+        var clone = new ItemState()
+        {
+            name = name,
+            isPicked = isPicked
+        };
+        clone.SetGUID(guid);
+        return clone;
     }
 }
 
@@ -80,5 +120,17 @@ public class RealSceneState : BaseState
         base.Init(id);
         targetPortalGuid = null;
         lastExitPosition = null;
+    }
+
+    public override BaseState Clone()
+    {
+        var clone = new RealSceneState()
+        {
+            name = name,
+            targetPortalGuid = targetPortalGuid,
+            lastExitPosition = lastExitPosition
+        };
+        clone.SetGUID(guid);
+        return clone;
     }
 }

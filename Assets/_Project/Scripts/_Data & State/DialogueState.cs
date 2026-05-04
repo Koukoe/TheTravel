@@ -14,4 +14,9 @@ public class DialogueState : BaseState
         dialogueIndex = 0;
         completedDialogueIndices.Clear();
     }
+
+    public override BaseState Clone()
+    {
+        throw new NotImplementedException();
+    }
 }
