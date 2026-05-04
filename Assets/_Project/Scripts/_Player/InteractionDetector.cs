@@ -24,6 +24,10 @@ public class InteractionDetector : MonoBehaviour
         {
             _candidates.Add(interactable);
         }
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.Show("InteractTip");
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -32,6 +36,10 @@ public class InteractionDetector : MonoBehaviour
         if (interactable != null)
         {
             _candidates.Remove(interactable);
+        }
+        if (UIManager.Instance != null)
+        {
+            UIManager.Instance.Hide("InteractTip");
         }
     }
 

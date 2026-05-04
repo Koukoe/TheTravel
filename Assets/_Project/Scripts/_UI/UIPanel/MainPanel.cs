@@ -71,14 +71,22 @@ public class MainPanel : MenuPanel
 
     public void OnExitClicked()
     {
+        var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+        panel.Setup(onConfirm: Quit, title: "", content: "");
+    }
+
+    public void Quit()
+    {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
 #else
         Application.Quit();
 #endif
     }
+
     public void OnNewGameClicked()
     {
-        GameFlowManager.Instance.NewGame().Forget();
+        var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+        panel.Setup(onConfirm: () => GameFlowManager.Instance.NewGame().Forget(), title: "", content: ""); ;
     }
 }
