@@ -106,6 +106,9 @@ public class Playermove : MonoBehaviour
     {
         Quaternion targetRotation;
         Vector3 input = GetMoveInput();
+        Vector3 camForward = PlayerController.mainCam.transform.forward; ;
+        camForward.y = 0;
+        input = camForward * input.magnitude;
         PlayerRigidbody.velocity = input * shipSpeed;
 
         if (input != Vector3.zero)
