@@ -1,0 +1,333 @@
+{
+  "dialogues": [
+    {
+      "id": "engineer_house_01",
+      "character": "captain",
+      "content": "利奥，很久不见了。",
+      "nextId": "engineer_house_02"
+    },
+    {
+      "id": "engineer_house_02",
+      "character": "engineer",
+      "content": "是啊，威尔。上次见面还是在我和玛丽亚的婚礼上。",
+      "nextId": "engineer_house_03"
+    },
+    {
+      "id": "engineer_house_03",
+      "character": "captain",
+      "content": "你肯定注意到了吧，“那个”。",
+      "nextId": "engineer_house_04"
+    },
+    {
+      "id": "engineer_house_04",
+      "character": "engineer",
+      "content": "当然了，“那个”的情况，现在看来已经刻不容缓了。",
+      "nextId": "engineer_house_05"
+    },
+    {
+      "id": "engineer_house_05",
+      "character": "maria",
+      "content": "亲爱的，你......终于又要出海了吗？",
+      "nextId": "engineer_house_06"
+    },
+    {
+      "id": "engineer_house_06",
+      "character": "engineer",
+      "content": "玛丽，这一天总会来到的，从那一天威尔和我亲手将权杖放上台座起，我就知道，迟早有一天我们得再次踏上这条路。",
+      "nextId": "engineer_house_07"
+    },
+    {
+      "id": "engineer_house_07",
+      "character": "captain",
+      "content": "大海已经蠢蠢欲动了，前些日子不是下起了罕见的暴雨吗？玛丽亚，安抚大海是利奥和我的职责，我们不得不去。",
+      "nextId": "engineer_house_08"
+    },
+    {
+      "id": "engineer_house_08",
+      "character": "maria",
+      "content": "我......知道了。",
+      "nextId": "engineer_house_09"
+    },
+    {
+      "id": "engineer_house_09",
+      "character": "maria",
+      "content": "亲爱的，就算你和威廉曾经是叱咤风云的双子星，可那些冒险的日子已经过去那么久，你可务必要小心......",
+      "nextId": "engineer_house_10"
+    },
+    {
+      "id": "engineer_house_10",
+      "character": "engineer",
+      "content": "我心里明白的，玛丽。你就放心吧，我肯定会安然无恙地回来的。",
+      "nextId": "engineer_house_11"
+    },
+    {
+      "id": "engineer_house_11",
+      "character": "protagonist",
+      "content": "嗯......咳咳！",
+      "nextId": "engineer_house_12"
+    },
+    {
+      "id": "engineer_house_12",
+      "character": "narrator",
+      "content": "老船长、工程师和玛丽亚一齐看向门口。",
+      "nextId": "engineer_house_13"
+    },
+    {
+      "id": "engineer_house_13",
+      "character": "protagonist",
+      "content": "很抱歉打断你们的谈话......",
+      "effects": [
+        {
+          "PlayActionAndResume": "protagonist_walk_to_center"
+        }
+      ],
+      "nextId": "engineer_house_14"
+    },
+    {
+      "id": "engineer_house_14",
+      "character": "protagonist",
+      "content": "失礼了，我的名字叫做莉薇娅。我刚才在门口无意听到你们的谈话，让我很好奇。",
+      "nextId": "engineer_house_15"
+    },
+    {
+      "id": "engineer_house_15",
+      "character": "protagonist",
+      "content": "请问你们话中提到的“权杖”是什么东西？听起来像是什么很厉害的东西。",
+      "nextId": "engineer_house_16"
+    },
+    {
+      "id": "engineer_house_16",
+      "character": "engineer",
+      "content": "幸会，我是莱昂纳多。这位是我的妻子，玛丽亚。",
+      "nextId": "engineer_house_17"
+    },
+    {
+      "id": "engineer_house_17",
+      "character": "captain",
+      "content": "我就不必多说了，老威廉就在这里！",
+      "nextId": "engineer_house_18"
+    },
+    {
+      "id": "engineer_house_18",
+      "character": "engineer",
+      "content": "看来二位认识。",
+      "nextId": "engineer_house_19"
+    },
+    {
+      "id": "engineer_house_19",
+      "character": "captain",
+      "content": "关于这权杖的故事说来话长，一切都要追溯到四十年前那次出海......",
+      "nextId": "engineer_house_20"
+    },
+    {
+      "id": "engineer_house_20",
+      "character": "captain",
+      "content": "那时候的大海可不像现在这样，风平浪静，就像那年酒馆里的奥莉薇娅一样温柔......",
+      "nextId": "engineer_house_21"
+    },
+    {
+      "id": "engineer_house_21",
+      "character": "captain",
+      "content": "相反地，海面时不时就会刮起猛烈的风暴，伴随着像刀子一样落下的雨点，每一次出海都是在与死神打赌......",
+      "nextId": "engineer_house_22"
+    },
+    {
+      "id": "engineer_house_22",
+      "character": "captain",
+      "content": "而利奥和我，则是当年大海上最优秀的两位水手。如果将大海比作一匹烈马，那我们就是能将这匹马稳稳骑在身下的人。",
+      "nextId": "engineer_house_23"
+    },
+    {
+      "id": "engineer_house_23",
+      "character": "captain",
+      "content": "那些年头在水手中流传着个传说，海神在治海之时，用的是一把蕴含祂神力的鲸骨权杖，这把权杖拥有控制天气与风暴的能力。拥有它，就能控制风暴为自己所用。",
+      "nextId": "engineer_house_24"
+    },
+    {
+      "id": "engineer_house_24",
+      "character": "captain",
+      "content": "机缘巧合之下，利奥和我得知了有关权杖下落的线索，于是我们一路追查，终于在海的北端，那片极冻之地找到了它......",
+      "nextId": "engineer_house_25"
+    },
+    {
+      "id": "engineer_house_25",
+      "character": "captain",
+      "content": "权杖藏匿在一座冰山内部的洞窟里，而想破解那个洞窟的谜题可并不容易！我们费尽力气才在最深处见到了它的真容。",
+      "nextId": "engineer_house_26"
+    },
+    {
+      "id": "engineer_house_26",
+      "character": "captain",
+      "content": "但这柄权杖的力量根本就不是凡人能掌控的，当然也可能只是因为我的力量太过弱小。当我想握住它时，一股神秘的巨大反冲力将我弹飞了出去。",
+      "nextId": "engineer_house_27"
+    },
+    {
+      "id": "engineer_house_27",
+      "character": "captain",
+      "content": "利奥和我一齐发力，才能勉强将权杖举起......",
+      "nextId": "engineer_house_28"
+    },
+    {
+      "id": "engineer_house_28",
+      "character": "captain",
+      "content": "我们颤抖着用权杖施下了安抚暴躁的大海的法术，随后就将权杖放上了它应在的那个台座上。",
+      "nextId": "engineer_house_29"
+    },
+    {
+      "id": "engineer_house_29",
+      "character": "captain",
+      "content": "从那以后，海面上就再也不见雷暴的踪影，出海航行要对抗的极端天气消失在了世上，取而代之的只是摇摇晃晃的甲板带来的眩晕。",
+      "nextId": "engineer_house_30"
+    },
+    {
+      "id": "engineer_house_30",
+      "character": "protagonist",
+      "content": "这么说你们开创了一个航海的黄金时代？不赖嘛。",
+      "nextId": "engineer_house_31"
+    },
+    {
+      "id": "engineer_house_31",
+      "character": "engineer",
+      "content": "但权杖似乎并没有那么听话，台座上的三处凹陷引起了我们的不安。",
+      "nextId": "engineer_house_32"
+    },
+    {
+      "id": "engineer_house_32",
+      "character": "captain",
+      "content": "那台座无法镇压住权杖的力量！我当时就预见到了，未来的某一天，风暴将会重回这片大海，黑暗将重新笼罩天空！",
+      "nextId": "engineer_house_33"
+    },
+    {
+      "id": "engineer_house_33",
+      "character": "engineer",
+      "content": "那三处凹陷的形状像是三颗宝石，我认为我们需要将那三颗宝石镶嵌上去才能保证安全。",
+      "nextId": "engineer_house_34"
+    },
+    {
+      "id": "engineer_house_34",
+      "character": "captain",
+      "content": "如果我的调查没有出错的话，那三颗宝石和权杖应该都在那洞窟里，可惜我们当年没有找到它们，就归隐家乡了。",
+      "nextId": "engineer_house_35"
+    },
+    {
+      "id": "engineer_house_35",
+      "character": "engineer",
+      "content": "我们曾抱着侥幸的心理，但事实没有让我们如愿。",
+      "nextId": "engineer_house_36"
+    },
+    {
+      "id": "engineer_house_36",
+      "character": "captain",
+      "content": "前些日子下起的暴雨让我们惊醒，权杖的力量即将要爆发了！因此，我们必须再次回到那里，去了结这个隐患。",
+      "nextId": "engineer_house_37"
+    },
+    {
+      "id": "engineer_house_37",
+      "character": "engineer",
+      "content": "事情大概就是这样。",
+      "nextId": "engineer_house_38"
+    },
+    {
+      "id": "engineer_house_38",
+      "character": "protagonist",
+      "content": "嗯......所以你们俩这是要去拯救世界咯？",
+      "nextId": "engineer_house_39"
+    },
+    {
+      "id": "engineer_house_39",
+      "character": "engineer",
+      "content": "如果你愿意这么理解的话，是的。",
+      "nextId": "engineer_house_40"
+    },
+    {
+      "id": "engineer_house_40",
+      "character": "protagonist",
+      "content": "不错嘛，带我一个怎么样？据我所知，你们现在急需一条船吧？如果不嫌弃的话，就请上我的船吧！",
+      "nextId": "engineer_house_41"
+    },
+    {
+      "id": "engineer_house_41",
+      "character": "engineer",
+      "content": "莉薇娅小姐，这可不是过家家般的游戏，看您的样子，想必您也是在海上长期航行的人，应该能理解这件事的危险性。",
+      "nextId": "engineer_house_42"
+    },
+    {
+      "id": "engineer_house_42",
+      "character": "protagonist",
+      "content": "莱昂纳多先生，请您放心吧，我在这世上不过是孤身寡人一个，如果是死在拯救世界的路上，那倒算是我的荣幸了。",
+      "nextId": "engineer_house_43"
+    },
+    {
+      "id": "engineer_house_43",
+      "character": "captain",
+      "content": "利奥，如果这年轻人硬要加入的话，就让她加入吧！我们年轻时不也是这样怀着满腔热情的嘛！",
+      "nextId": "engineer_house_44"
+    },
+    {
+      "id": "engineer_house_44",
+      "character": "engineer",
+      "content": "好吧。",
+      "nextId": "engineer_house_45"
+    },
+    {
+      "id": "engineer_house_45",
+      "character": "engineer",
+      "content": "莉薇娅小姐，对于您的帮助，我感激不尽。",
+      "nextId": "engineer_house_46"
+    },
+    {
+      "id": "engineer_house_46",
+      "character": "protagonist",
+      "content": "小事一桩罢了！",
+      "nextId": "engineer_house_47"
+    },
+    {
+      "id": "engineer_house_47",
+      "character": "engineer",
+      "content": "莉薇娅小姐，我很欣赏您这份乐观的精神。我想我们会成为很好的朋友。",
+      "nextId": "engineer_house_48"
+    },
+    {
+      "id": "engineer_house_48",
+      "character": "engineer",
+      "content": "我想闲话讲到这里也够了，是时候动身了。",
+      "nextId": "engineer_house_49"
+    },
+    {
+      "id": "engineer_house_49",
+      "character": "engineer",
+      "content": "玛丽亚，等我回来。",
+      "nextId": "engineer_house_50"
+    },
+    {
+      "id": "engineer_house_50",
+      "character": "maria",
+      "content": "亲爱的，我会的，就像曾经那千千万万次一样。",
+      "nextId": "engineer_house_51"
+    },
+    {
+      "id": "engineer_house_51",
+      "character": "captain",
+      "content": "年轻人，我们先到船上去了！如果你还有什么事情要处理的话，麻烦尽快，大海不会一直等待你！",
+      "nextId": "engineer_house_52"
+    },
+    {
+      "id": "engineer_house_52",
+      "character": "narrator",
+      "content": "老船长和工程师离开了房间。",
+      "effects": [
+        {
+          "MoveNpc": "captain",
+          "MoveNpcPosition": "ship_deck_x,ship_deck_y,ship_deck_z",
+          "MoveNpcRotation": "0,0,0"
+        },
+        {
+          "MoveNpc": "engineer",
+          "MoveNpcPosition": "ship_deck_x,ship_deck_y,ship_deck_z",
+          "MoveNpcRotation": "0,0,0"
+        }
+      ],
+      "nextId": "end"
+    }
+  ]
+}
