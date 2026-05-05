@@ -12,7 +12,7 @@ public class MenuManager : MonoBehaviour
         (2560, 1440),
         (3840, 2160)
     };
-    float[] sensitivityValues = { 0.5f, 1.0f, 1.5f, 2.0f, 2.5f };
+    float[] sensitivityValues = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f };
     private void Awake()
     {
         Instance = this;
@@ -72,7 +72,7 @@ public class MenuManager : MonoBehaviour
         QualitySettings.vSyncCount = d.vSync ? 1 : 0;
 
         // 应用鼠标灵敏度
-        float[] sensitivityValues = { 0.5f, 1.0f, 1.5f, 2.0f, 2.5f };
+        float[] sensitivityValues = { 1.0f, 2.0f, 3.0f, 4.0f, 5.0f };
         float sens = sensitivityValues[Mathf.Clamp(d.sensitivityIndex, 0, sensitivityValues.Length - 1)];
         InputManager.Instance.SetLookSensitivity(sens);
 
