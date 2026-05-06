@@ -1,0 +1,28 @@
+{
+  "dialogues": [
+    {
+      "id": "maria_1_01",
+      "character": "maria",
+      "content": "利奥，他又一次出发了......他是一个让人着迷的英雄......",
+      "nextId": "maria_1_02"
+    },
+    {
+      "id": "maria_1_02",
+      "character": "protagonist",
+      "content": "他们一定有过波澜壮阔的冒险吧，与海怪厮杀或是拯救别人的生命什么的？",
+      "nextId": "maria_1_03"
+    },
+    {
+      "id": "maria_1_03",
+      "character": "maria",
+      "content": "他俩的故事讲上三天三夜也讲不完，孩子，等你回来时想听的话，我可以一一讲给你听。",
+      "nextId": "maria_1_04"
+    },
+    {
+      "id": "maria_1_04",
+      "character": "maria",
+      "content": "时间不早了，愿你们的旅程一路顺风！",
+      "nextId": "end"
+    }
+  ]
+}

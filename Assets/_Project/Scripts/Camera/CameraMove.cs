@@ -8,7 +8,7 @@ public class CameraMove : MonoBehaviour
     public CameraMode currentMode;
     public float smoothSpeed = 0.125f;
     private float CamY = StaticDefination.CameraY;
-
+    private bool isSmoothActive = true;
 
     // 自由视角专用变量
     private float freePitch = 25f;      // 俯角
@@ -51,7 +51,7 @@ public class CameraMove : MonoBehaviour
     {
         Vector3 targetPosition = calPos();
         Vector3 smoothPos = Vector3.Lerp(PlayerController.mainCam.transform.position, targetPosition, smoothSpeed);
-        PlayerController.mainCam.transform.position = smoothPos;
+        PlayerController.mainCam.transform.position = isSmoothActive ? smoothPos : targetPosition;
     }
 
     private void cameraFree(Vector2 mouseMove)
@@ -113,7 +113,16 @@ public class CameraMove : MonoBehaviour
             CamY = StaticDefination.CameraY;
             Debug.Log("进入陆地模式：跟随视角");
         }
+        StartCoroutine(CameraSmooth());
     }
+
+    IEnumerator CameraSmooth()
+    {
+        isSmoothActive = false;
+        yield return new WaitForSeconds(0.5f);
+        isSmoothActive = true;
+    }
+
     public enum CameraMode
     {
         Follow,

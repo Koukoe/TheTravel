@@ -130,6 +130,11 @@ MonoBehaviour:
       type: 3}
     prewarmCount: 1
     maxSize: 1
+  - name: DialogueBubblePanel
+    prefab: {fileID: 2788164371376000870, guid: 9fe5260167bee424cbc1a14de0382f48,
+      type: 3}
+    prewarmCount: 1
+    maxSize: 1
 --- !u!114 &427507558724491852
 MonoBehaviour:
   m_ObjectHideFlags: 0

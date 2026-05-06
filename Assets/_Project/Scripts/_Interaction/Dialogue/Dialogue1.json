@@ -3,7 +3,7 @@
         {
             "id": "1",
             "character": "cock",
-            "content": "这是\n第一句话",
+            "content": "这是\n第<i>一句话</i>",
             "effects": [
                 {
                     "PlayActionAndResume": "npc_wave_01"

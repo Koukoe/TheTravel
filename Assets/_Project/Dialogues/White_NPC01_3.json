@@ -1,0 +1,28 @@
+{
+  "dialogues": [
+    {
+      "id": "White_NPC01_3_01",
+      "character": "White_NPC01",
+      "content": "啊啊...我看见了！那是我主的神迹！",
+      "nextId": "White_NPC01_3_02"
+    },
+    {
+      "id": "White_NPC01_3_02",
+      "character": "White_NPC01",
+      "content": "旅行者，我主回应了你的请求！祂让河水为你让了路！",
+      "nextId": "White_NPC01_3_03"
+    },
+    {
+      "id": "White_NPC01_3_03",
+      "character": "White_NPC01",
+      "content": "祂总是这般，对子民如此慈爱，愿意动用力量为我们解决燃眉之急。",
+      "nextId": "White_NPC01_3_04"
+    },
+    {
+      "id": "White_NPC01_3_04",
+      "character": "White_NPC01",
+      "content": "前些日子的暴雨过后，渔获便多出了不少，想必也是我主在帮助我们渡过难关吧！",
+      "nextId": "end"
+    }
+  ]
+}

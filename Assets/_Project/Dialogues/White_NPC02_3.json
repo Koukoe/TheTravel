@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "White_NPC02_3_01",
+      "character": "White_NPC02",
+      "content": "真是不可思议，河水竟然分开了，但又在正常地流动着......",
+      "nextId": "White_NPC02_3_02"
+    },
+    {
+      "id": "White_NPC02_3_02",
+      "character": "White_NPC02",
+      "content": "波尼克仍然在这世上关心着我们......",
+      "nextId": "end"
+    }
+  ]
+}

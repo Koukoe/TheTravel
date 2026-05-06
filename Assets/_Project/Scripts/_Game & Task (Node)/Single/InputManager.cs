@@ -32,8 +32,13 @@ public class InputManager : MonoBehaviour
 
     public void SetLookSensitivity(float s)
     {
-        mouseZoomSensitivity = 0.05f * s;
-        gamepadZoomSensitivity = 10f * s;
+        mouseLookSensitivity = 0.1f * s;
+        gamepadLookSensitivity = 10f * s;
+    }
+    public void SetZoomSensitivity(float s)
+    {
+        mouseZoomSensitivity = 0.01f * s;
+        gamepadZoomSensitivity = 1f * s;
     }
 
     /// <summary>

@@ -23,13 +23,13 @@
 
 -纯白小镇npc
 
-
 -后面可能会根据同一个岛屿在流程上的不同状态引入不同的npc，不过这个不重要，只是想让你知道
 
 ## effects字段说明
--功能	写法 Template	说明
 
--NPC移动	{"MoveNpc": {"npc": "xxx", "to": "yyy"}}	让某NPC去某个位置/区域
+-功能 写法 Template 说明
+
+-NPC移动 {"MoveNpc": {"npc": "xxx", "to": "yyy"}} 让某NPC去某个位置/区域
 
 -NPC播放动画	{"PlayActionAndResume": {"npc": "xxx", "action": "yyy"}}	某NPC进行特殊动作/动画
 

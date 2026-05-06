@@ -1,39 +1,39 @@
 {
-  "dialogues": [
-    {
-      "id": "Color_NPC01_1_01",
-      "character": "Color_NPC01",
-      "content": "生面孔呢，从哪来的？",
-      "nextId": "Color_NPC01_1_02"
-    },
-    {
-      "id": "Color_NPC01_1_02",
-      "character": "protagonist",
-      "content": "...海的另一头。",
-      "nextId": "Color_NPC01_1_03"
-    },
-    {
-      "id": "Color_NPC01_1_03",
-      "character": "Color_NPC01",
-      "content": "啊...不想说吗...",
-      "nextId": "Color_NPC01_1_04"
-    },
-    {
-      "id": "Color_NPC01_1_04",
-      "character": "Color_NPC01",
-      "content": "不想说也没关系，来看看我家的大眼鱼吧，今早刚捞上来的，新鲜的很。",
-      "nextId": "Color_NPC01_1_05"
-    },
-    {
-      "id": "Color_NPC01_1_05",
-      "character": "protagonist",
-      "content": "不用了，谢谢。",
-      "effects": [
-        {
-          "SetDialogueIndex": "1"
-        }
-      ],
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "Color_NPC01_1_01",
+			"character": "Color_NPC01",
+			"content": "生面孔呢，从哪来的？",
+			"nextId": "Color_NPC01_1_02"
+		},
+		{
+			"id": "Color_NPC01_1_02",
+			"character": "protagonist",
+			"content": "...海的另一头。",
+			"nextId": "Color_NPC01_1_03"
+		},
+		{
+			"id": "Color_NPC01_1_03",
+			"character": "Color_NPC01",
+			"content": "啊...不想说吗...",
+			"nextId": "Color_NPC01_1_04"
+		},
+		{
+			"id": "Color_NPC01_1_04",
+			"character": "Color_NPC01",
+			"content": "不想说也没关系，来看看我家的大眼鱼吧，今早刚捞上来的，新鲜的很。",
+			"nextId": "Color_NPC01_1_05"
+		},
+		{
+			"id": "Color_NPC01_1_05",
+			"character": "protagonist",
+			"content": "不用了，谢谢。",
+			"effects": [
+				{
+					"SetDialogueIndex": "1"
+				}
+			],
+			"nextId": "end"
+		}
+	]
 }
