@@ -30,7 +30,7 @@
       "content": "好吧好吧，我知道了。",
       "effects": [
         {
-          "SetDialogueIndex": "opening2"
+          "SetDialogueIndex": "1"
         }
       ],
       "nextId": "end"
