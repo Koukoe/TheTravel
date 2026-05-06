@@ -171,6 +171,63 @@ public class Playermove : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 玩家转向，忽略y轴
+    /// </summary>
+    /// <param name="target"></param>
+    public void playerTurn(GameObject target)
+    {
+        if (target == null) return;
+        Vector3 targetPos = target.transform.position;
+        targetPos.y = PlayerTransform.position.y;
+        PlayerTransform.LookAt(targetPos);
+    }
+
+    /// <summary>
+    /// 玩家传送
+    /// </summary>
+    /// <param name="pos"></param>
+    public void playerTransport(Vector3 pos)
+    {
+        PlayerTransform.position = pos;
+    }
+
+    /// <summary>
+    /// 将玩家向目标方向移动，使用前请关闭角色输入，并且只能走直线，建议使用协程
+    /// </summary>
+    /// <param name="speed"></param>
+    /// <param name="direction"></param>
+    public void playerMove(float speed, Vector2 direction)
+    {
+        PlayerRigidbody.velocity = direction * speed;
+    }
+
+
+    /// <summary>
+    /// 将玩家向目标位置移动，使用前请关闭角色输入，并且只能走直线
+    /// </summary>
+    /// <param name="targetPos"></param>
+    /// <param name="timeSession"></param>
+    public void playerMovetoTarget(Vector3 targetPos, float timeSession)
+    {
+        StartCoroutine(MoveToTarget(targetPos, timeSession));
+    }
+
+    private IEnumerator MoveToTarget(Vector3 targetPos, float timeSession)
+    {
+        float timer = 0;
+        float speed = (targetPos - PlayerTransform.position).magnitude / timeSession;
+        Vector3 direction = targetPos - PlayerTransform.position;
+        direction.y = 0;
+        PlayerRigidbody.velocity = direction.normalized * speed;
+        while (timer < timeSession)
+        {
+            timer += Time.deltaTime;
+            yield return null;
+        }
+        yield break;
+    }
+
     //调试
     void OnDrawGizmos()
     {
