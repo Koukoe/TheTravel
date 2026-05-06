@@ -6,16 +6,16 @@
 
 ## 涉及物体
 
-| 物体 | 说明 |
-|------|------|
-| `fountain` | 镇子中央的喷泉，投入四件物品的交互点 |
-| `shell_item` | 海螺，来自石碑解谜（`stone_puzzle`） |
-| `wooden_cup` | 木杯，来自鸟浴池解谜（`bird_bath_puzzle`） |
-| `antony_button` | 纽扣，来自安朵丝花任务（`andosi_flower_pick`） |
-| `radio_disc` | 唱片，来自收音机解谜（`radio_puzzle`） |
-| `river` | 分隔小镇的河流，过场动画中会分开 |
-| `captain` | 老船长，过场动画中跑过河床 |
-| `engineer_house` | 工程师的家，老船长的瞬移目的地 |
+| 物体             | 说明                                           |
+| ---------------- | ---------------------------------------------- |
+| `fountain`       | 镇子中央的喷泉，投入四件物品的交互点           |
+| `shell_item`     | 海螺，来自石碑解谜（`stone_puzzle`）           |
+| `wooden_cup`     | 木杯，来自鸟浴池解谜（`bird_bath_puzzle`）     |
+| `antony_button`  | 纽扣，来自安朵丝花任务（`andosi_flower_pick`） |
+| `radio_disc`     | 唱片，来自收音机解谜（`radio_puzzle`）         |
+| `river`          | 分隔小镇的河流，过场动画中会分开               |
+| `captain`        | 老船长，过场动画中跑过河床                     |
+| `engineer_house` | 工程师的家，老船长的瞬移目的地                 |
 
 ---
 

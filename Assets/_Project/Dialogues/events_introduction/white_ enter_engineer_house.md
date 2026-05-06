@@ -6,12 +6,12 @@
 
 ## 涉及物体
 
-| 物体 | 说明 |
-|------|------|
-| `engineer_house_door` | 工程师家的门，玩家交互入口 |
-| `engineer_house_interior` | 工程师家室内场景/区域 |
-| `engineer` | 工程师 NPC |
-| `captain` | 老船长，此前已瞬移至工程师家 |
+| 物体                      | 说明                         |
+| ------------------------- | ---------------------------- |
+| `engineer_house_door`     | 工程师家的门，玩家交互入口   |
+| `engineer_house_interior` | 工程师家室内场景/区域        |
+| `engineer`                | 工程师 NPC                   |
+| `captain`                 | 老船长，此前已瞬移至工程师家 |
 
 ---
 
