@@ -92,7 +92,7 @@ public class Playermove : MonoBehaviour
         {
 
             targetRotation = Quaternion.LookRotation(input);
-            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, PlayerRotateSpeed);
+            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, PlayerRotateSpeed * Time.deltaTime * 120f);
         }
 
         // PlayerRigidbody.velocity = input * speed;
@@ -111,7 +111,7 @@ public class Playermove : MonoBehaviour
         if (input != Vector3.zero)
         {
             targetRotation = Quaternion.LookRotation(input);
-            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, ShipRotateSpeed);
+            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, ShipRotateSpeed * Time.deltaTime * 120);
         }
 
         shipTransform.position = PlayerTransform.position;
