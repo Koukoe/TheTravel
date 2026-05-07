@@ -66,12 +66,12 @@ Shader "Custom/Cozy/LowPolyLit_Fixed"
                 return OUT;
             }
 
-            // 计算单个光源的贡献
-            float3 CalculateLighting(float3 normal, float3 positionWS, float3 baseColor, float3 shadowColor, float smoothness)
+            half4 frag(Varyings IN) : SV_Target
             {
-                float3 result = 0;
+                float3 normal = normalize(IN.normalWS);
+                float3 positionWS = IN.positionWS;
 
-                // 获取主光源
+                // ========== 1. 主光源计算 ==========
                 Light mainLight = GetMainLight();
                 float3 lightDir = normalize(mainLight.direction);
                 float NdotL = saturate(dot(normal, lightDir));
@@ -84,73 +84,56 @@ Shader "Custom/Cozy/LowPolyLit_Fixed"
                 #endif
 
                 float lightIntensity = NdotL * shadowAttenuation;
-                float smoothIntensity = pow(smoothstep(0, 1, lightIntensity), smoothness);
-                float3 diffuseColor = lerp(shadowColor, baseColor, smoothIntensity);
+                // 修复：删除 smoothstep 和 pow，直接用线性漫反射
+                float3 diffuseColor = lerp(_ShadowColor.rgb, _BaseColor.rgb, lightIntensity);
+                float3 lightingResult = diffuseColor * mainLight.color;
 
-                result += diffuseColor * mainLight.color;
-
-                // 获取额外光源（点光源、聚光灯等）
-                #ifdef _ADDITIONAL_LIGHTS
+                // ========== 2. 额外光源计算（点光源/聚光灯） ==========
+                #if defined(_ADDITIONAL_LIGHTS) || defined(_ADDITIONAL_LIGHTS_VERTEX)
                 uint additionalLightsCount = GetAdditionalLightsCount();
                 for (uint i = 0; i < additionalLightsCount; i++)
                 {
                     Light additionalLight = GetAdditionalLight(i, positionWS);
 
-                    // 计算点光源方向
-                    float3 lightDirAdditional = normalize(additionalLight.direction);
-                    float NdotLAdditional = saturate(dot(normal, lightDirAdditional));
+                    // 点光源方向（从光源指向顶点）
+                    float3 lightDirAdd = normalize(additionalLight.direction);
+                    float NdotLAdd = saturate(dot(normal, lightDirAdd));
 
-                    // 点光源阴影（可选）
-                    float shadowAdditional = 1.0;
+                    // 点光源阴影
+                    float shadowAdd = 1.0;
                     #if defined(_ADDITIONAL_LIGHT_SHADOWS)
-                    shadowAdditional = additionalLight.shadowAttenuation;
+                    shadowAdd = additionalLight.shadowAttenuation;
                     #endif
 
-                    float intensityAdditional = NdotLAdditional * shadowAdditional;
-                    float smoothIntensityAdditional = pow(smoothstep(0, 1, intensityAdditional), smoothness);
-                    float3 diffuseColorAdditional = lerp(shadowColor, baseColor, smoothIntensityAdditional);
+                    float intensityAdd = NdotLAdd * shadowAdd;
+                    float3 diffuseAdd = lerp(_ShadowColor.rgb, _BaseColor.rgb, intensityAdd);
 
-                    result += diffuseColorAdditional * additionalLight.color;
+                    lightingResult += diffuseAdd * additionalLight.color;
                 }
                 #endif
 
-                return result;
-            }
-
-            half4 frag(Varyings IN) : SV_Target
-            {
-                float3 normal = normalize(IN.normalWS);
-
-                // 计算所有光源的贡献
-                float3 lightingResult = CalculateLighting(normal, IN.positionWS, _BaseColor.rgb, _ShadowColor.rgb, _Smoothness);
-
-                // 环境光
+                // ========== 3. 环境光 ==========
                 float3 ambientColor = _AmbientStrength * _BaseColor.rgb;
+                lightingResult += ambientColor;
 
-                // 边缘光（使用主光源方向计算强度）
-                Light mainLight = GetMainLight();
-                float3 lightDir = normalize(mainLight.direction);
-                float NdotL = saturate(dot(normal, lightDir));
-
-                float3 viewDir = normalize(_WorldSpaceCameraPos - IN.positionWS);
-                float rim = 1 - saturate(dot(normal, viewDir));
+                // ========== 4. 边缘光 ==========
+                float3 viewDir = normalize(_WorldSpaceCameraPos - positionWS);
+                float rim = 1.0 - saturate(dot(normal, viewDir));
                 rim = pow(rim, _RimPower);
+                // 边缘光强度受主光源方向影响
                 float3 rimLight = _RimColor.rgb * rim * NdotL;
+                lightingResult += rimLight;
 
-                // 最终颜色组合
-                float3 finalColor = lightingResult;
-                finalColor = lerp(finalColor, finalColor + ambientColor, _AmbientStrength);
-                finalColor += rimLight;
-                finalColor += _Glow;
+                // ========== 5. 自发光 ==========
+                lightingResult += _Glow;
 
-                // 降低饱和度
-                float gray = dot(finalColor, float3(0.3, 0.59, 0.11));
-                finalColor = lerp(finalColor, gray, 1 - _Saturation);
+                // ========== 6. 饱和度调整 ==========
+                float gray = dot(lightingResult, float3(0.3, 0.59, 0.11));
+                float3 finalColor = lerp(lightingResult, gray, 1.0 - _Saturation);
 
-                // 钳制最终颜色
+                // 钳制并输出
                 finalColor = saturate(finalColor);
-
-                return float4(finalColor, 1);
+                return float4(finalColor, 1.0);
             }
             ENDHLSL
         }
