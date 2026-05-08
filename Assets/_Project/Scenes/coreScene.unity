@@ -132,6 +132,7 @@ GameObject:
   m_Component:
   - component: {fileID: 33107830}
   - component: {fileID: 33107831}
+  - component: {fileID: 33107832}
   m_Layer: 0
   m_Name: task1
   m_TagString: Untagged
@@ -168,11 +169,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskName: 
   taskId: 1
-  nextNodesIds: []
+  nextNodesIds:
+  - 2
   taskEffects: []
   taskEndEffects: []
   taskGoals:
-  - taskGoalType: 0
+  - taskGoalType: 4
     isDone: 0
     targetId: 
     GoalTrigger: 0
@@ -183,9 +185,28 @@ MonoBehaviour:
     rotationTolerance: 0
     targetDialogueId: 
     index: 0
+    targetScript: {fileID: 33107832}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
+--- !u!114 &33107832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 33107829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ab8e5ecc0b0c44fb4ec1d6b95a0370, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  cameraMove: {fileID: 8583283907253542838, guid: 5b47b98cc82fe1549878fc163e22274b,
+    type: 3}
+  dialogueText: {fileID: 4900000, guid: 3ea36cb440a993640970918b1cd45737, type: 3}
+  targetY: 10
+  duration: 1
 --- !u!136 &116822166 stripped
 CapsuleCollider:
   m_CorrespondingSourceObject: {fileID: 1839465763698987626, guid: 6a047c96f7cac534ea28d9691e89fb8c,
@@ -649,6 +670,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 535563470}
+  - component: {fileID: 535563471}
+  - component: {fileID: 535563472}
   m_Layer: 0
   m_Name: task2
   m_TagString: Untagged
@@ -671,6 +694,53 @@ Transform:
   m_Children: []
   m_Father: {fileID: 2111936500}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &535563471
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535563469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7311e9a976b960498e7bb2bbdd128f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: 
+  taskId: 2
+  nextNodesIds: []
+  taskEffects: []
+  taskEndEffects: []
+  taskGoals:
+  - taskGoalType: 4
+    isDone: 0
+    targetId: 
+    GoalTrigger: 0
+    GoalItem: 0
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 535563472}
+  nextNodes: []
+  Out: 0
+  isTaskFinished: 0
+--- !u!114 &535563472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 535563469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f067b2cc824695342945b1183ca91eb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
+  dialogueText: {fileID: 4900000, guid: 009014b67bfa53045bfa899d5ef830af, type: 3}
 --- !u!223 &597880723 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3072696902482160940, guid: c5240a486a22d12449e3f8de7ad4c734,
@@ -882,6 +952,86 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1094169121}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1101113604
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1101113605}
+  - component: {fileID: 1101113606}
+  - component: {fileID: 1101113607}
+  m_Layer: 0
+  m_Name: startTask
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1101113605
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101113604}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2111936500}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1101113606
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101113604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7311e9a976b960498e7bb2bbdd128f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: 
+  taskId: 0
+  nextNodesIds:
+  - 1
+  taskEffects: []
+  taskEndEffects: []
+  taskGoals:
+  - taskGoalType: 4
+    isDone: 0
+    targetId: 
+    GoalTrigger: 0
+    GoalItem: 0
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 1101113607}
+  nextNodes: []
+  Out: 0
+  isTaskFinished: 0
+--- !u!114 &1101113607
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1101113604}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0aafc45a9641801479a5741fb0f8785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDone: 0
 --- !u!65 &1161119618 stripped
 BoxCollider:
   m_CorrespondingSourceObject: {fileID: 8215894287829894581, guid: 6a047c96f7cac534ea28d9691e89fb8c,
@@ -948,6 +1098,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1101113605}
   - {fileID: 33107830}
   - {fileID: 535563470}
   m_Father: {fileID: 0}
@@ -964,6 +1115,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b96ff9728754f449f70e54b2bb974c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isGraphInitialized: 0
 --- !u!1001 &7848069430800719565
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1090,8 +1242,8 @@ PrefabInstance:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
-  - {fileID: 2111936500}
   - {fileID: 688526542}
   - {fileID: 190742773}
+  - {fileID: 2111936500}
   - {fileID: 7848069430800719565}
   - {fileID: 123038302}

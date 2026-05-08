@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Threading;
 using UnityEngine;
 
+[DefaultExecutionOrder(1)]
 public class TaskNode : MonoBehaviour
 {
     public string taskName;
@@ -19,12 +20,12 @@ public class TaskNode : MonoBehaviour
     [Header("任务节点目标")]
     public List<TaskGoal> taskGoals = new List<TaskGoal>();
 
-    [ReadOnly(true)] public List<TaskNode> nextNodes = new List<TaskNode>();
-    [Tooltip("这个任务节点的出度")]
-    [ReadOnly(true)] public int Out;
-    [Tooltip("这个任务节点的入度")]
-    [ReadOnly(true)] private int In;
-
+    [HideInInspector]
+    public List<TaskNode> nextNodes = new List<TaskNode>();
+    [HideInInspector]
+    public int Out;
+    private int In = 0;
+    [HideInInspector]
     public bool isTaskFinished = false;
 
 
@@ -33,11 +34,11 @@ public class TaskNode : MonoBehaviour
         get { return In; }
         set
         {
-            TaskManager.Instance.SaveTaskNode(taskId);
             In = value;
-            Debug.Log(taskName + " " + taskId + "In: " + In);
+            TaskManager.Instance.SaveTaskNode(taskId);
+            Debug.Log(taskId + "入度为" + In);
 
-            if (In == 0)
+            if (In == 0 && TaskManager.Instance.IsGraphInitialized && !isTaskFinished)
             {
                 TaskInit();
             }
@@ -59,6 +60,7 @@ public class TaskNode : MonoBehaviour
 
     IEnumerator StartTask()
     {
+        Debug.Log("Start Task: " + taskName + " " + taskId);
         foreach (var effect in taskEffects)
         {
             effect.ApplyEffect();

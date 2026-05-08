@@ -7,7 +7,7 @@ public class CameraMove : MonoBehaviour
     public Transform target;
     public CameraMode currentMode;
     public float smoothSpeed = 0.125f;
-    private float CamY = StaticDefination.CameraY;
+    public float CamY = StaticDefination.CameraY;
     private bool isSmoothActive = true;
 
     // 自由视角专用变量

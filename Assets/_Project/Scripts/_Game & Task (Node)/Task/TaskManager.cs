@@ -2,24 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[DefaultExecutionOrder(1)]
 public class TaskManager : MonoBehaviour
 {
-    public static TaskManager Instance;
-    private bool isGraphInitialized = false;
+    public static TaskManager Instance { get; private set; }
+    public bool isGraphInitialized = false;
+
+    public bool IsGraphInitialized => isGraphInitialized;
     private void Awake()
     {
+        Debug.Log("TaskManager Awake");
         DontDestroyOnLoad(gameObject);
         if (Instance == null)
         {
             Instance = this;
         }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    void Start()
-    {
         StartCoroutine(InitTaskGraph());
     }
 
@@ -53,6 +50,7 @@ public class TaskManager : MonoBehaviour
     IEnumerator InitTaskGraph()
     {
         yield return new WaitForEndOfFrame();
+        yield return new WaitForEndOfFrame();
 
         if (isGraphInitialized) yield break;
         isGraphInitialized = true;
@@ -63,6 +61,7 @@ public class TaskManager : MonoBehaviour
         foreach (var task in tasks)
         {
             var taskNode = task.Value;
+            TaskManager.Instance.SaveTaskNode(task.Key);
             foreach (var id in taskNode.nextNodesIds)
             {
                 TaskNode targetTask = TaskManager.Instance.GetTask(id);
@@ -78,7 +77,8 @@ public class TaskManager : MonoBehaviour
                 }
             }
         }
-        yield break;
+
+        LoadAllTaskNodes(); // 加载所有任务节点
     }
 
     /// <summary>

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 [System.Serializable]
@@ -25,9 +26,16 @@ public class TaskGoal
     [Header("对话索引")]
     public int index = 0;
 
+    [Header("对应脚本协程，协程函数统一命名为TaskIEnumerator")]
+    public TaskBasic targetScript;
+
+
     BaseState targetState;
-    private void checkGoal()
+
+    private bool onCheck = false;
+    private IEnumerator checkGoal()
     {
+        onCheck = true;
         switch (taskGoalType)
         {
             case TaskGoalType.TRIGGER:
@@ -47,7 +55,9 @@ public class TaskGoal
                     IsDone = false;
                     Debug.Log(targetId + "检测失败");
                 }
-                break;
+
+                onCheck = false;
+                yield break;
             case TaskGoalType.ITEM:
                 // Check if the required amount of normal items has been collected
                 targetState = GameFlowManager.Instance.PlayingData.GetState<ItemState>(targetId);
@@ -65,7 +75,9 @@ public class TaskGoal
                     IsDone = false;
                     Debug.Log(targetId + "检测失败");
                 }
-                break;
+
+                onCheck = false;
+                yield break;
             case TaskGoalType.ACTOR:
                 // Check if the required amount of book items has been collected
                 targetState = GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetId);
@@ -86,7 +98,9 @@ public class TaskGoal
                     IsDone = false;
                     Debug.Log(targetId + "检测失败");
                 }
-                break;
+
+                onCheck = false;
+                yield break;
             case TaskGoalType.DIALOGUE:
                 // Check if the DIALOGUE FINISHED
                 if (DialogueManager.Instance.IsDialogueIndexCompleted(targetDialogueId, index))
@@ -99,8 +113,19 @@ public class TaskGoal
                     IsDone = false;
                     Debug.Log(targetDialogueId + " " + index + "检测失败");
                 }
-                break;
 
+                onCheck = false;
+                yield break;
+            case TaskGoalType.SCRIPT:
+                // Check if the script coroutine has finished
+                if (targetScript != null)
+                {
+                    yield return targetScript.TaskIEnumerator();
+                    IsDone = targetScript.isDone;
+                }
+
+                onCheck = false;
+                yield break;
         }
     }
 
@@ -114,7 +139,9 @@ public class TaskGoal
     {
         get
         {
-            checkGoal();
+            if (isDone) return isDone;
+            if (!onCheck) TaskManager.Instance.StartCoroutine(checkGoal());
+            isDone = targetScript.isDone;
             return isDone;
         }
         set
@@ -134,5 +161,6 @@ public enum TaskGoalType
     TRIGGER,
     ITEM,
     ACTOR,
-    DIALOGUE
+    DIALOGUE,
+    SCRIPT
 }
