@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cysharp.Threading.Tasks;
+using System;
 
 public class GameFlowManager : MonoBehaviour
 {
@@ -46,19 +47,35 @@ public class GameFlowManager : MonoBehaviour
         // ...
     }
 
-    public void SaveGame(int slotIndex)
+    public async UniTask<Texture2D> SaveGame(int slotIndex)
     {
-        TaskManager.Instance.SaveAllTaskNodes();  // 保险
+        // 截图并保存到本地
+        string fileName = $"thumb_{slotIndex}.jpg";
+        Texture2D newThumb = await CameraUtils.CaptureAndSaveAsync(Camera.main, fileName);
+
+        // 保险
+        TaskManager.Instance.SaveAllTaskNodes();
+
+        // 更新时间信息
+        PlayingData.saveTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
+
         DataArchivesSystem.Set(slotIndex, PlayingData);
+
+        return newThumb;
     }
-
-
 
     /// <summary>
     /// 存档点触发
     /// </summary>
-    public void OnCheckPoint(int slotIndex)
+    public async UniTaskVoid OnCheckPoint()
     {
-        DataArchivesSystem.Set(slotIndex, PlayingData);
+        Texture2D thumb = await SaveGame(0);
+
+        if (thumb != null)
+        {
+            Destroy(thumb);
+        }
+
+        Debug.Log($"自动存档");
     }
 }

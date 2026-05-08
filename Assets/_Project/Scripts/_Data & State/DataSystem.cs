@@ -28,7 +28,6 @@ public static class DataArchivesSystem
     public static void Save(int index)
     {
         if (index < 0 || index >= _archives.Count) return;
-        _archives[index].saveTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
         DataPersistence.SaveData($"slot_{index}.dat", _archives[index]);
     }
 
@@ -87,6 +86,15 @@ public static class DataArchivesSystem
             }
         }
         return latestIndex;
+    }
+
+    /// <summary>
+    /// 获取指定槽位存档的信息 ( _ -> M )
+    /// </summary>
+    public static string GetInfo(int index)
+    {
+        if (index < 0 || index >= _archives.Count) return null;
+        return _archives[index].saveTime;
     }
 
     /// <summary>

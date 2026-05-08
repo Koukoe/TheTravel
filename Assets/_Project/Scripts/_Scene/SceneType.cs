@@ -7,6 +7,8 @@ using System;
 public abstract class RealScene : SceneBase
 {
     public abstract RealSceneState GetBaseState();
+
+    public bool autoSave = false;
 }
 
 public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
@@ -69,6 +71,10 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
     public override void ExitScene()
     {
         SyncPlayerPosition();
+        if (autoSave)
+        {
+
+        }
         // 场景退出时的清理逻辑（如果有需要）
         // 不要抛出异常
     }

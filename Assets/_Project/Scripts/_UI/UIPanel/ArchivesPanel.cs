@@ -20,6 +20,8 @@ public class ArchivesPanel : MenuPanel
     [SerializeField] private List<UIArchiveSlotSource> slotSources = new List<UIArchiveSlotSource>();
     private int lastSelectedIndex = 0;  // 焦点记忆
 
+    private Texture2D[] _activeTextures = new Texture2D[9];  // 追踪硬盘图片纹理
+
     protected override void Awake()
     {
         base.Awake();
@@ -45,6 +47,46 @@ public class ArchivesPanel : MenuPanel
     {
         this.isSaveMode = isSave;
         if (titleText != null) titleText.text = isSaveMode ? "保存进度" : "载入进度";
+    }
+
+    protected void OnEnable() => RefreshAllSlots().Forget();
+
+    protected void OnDisable() => ClearLoadedTextures();
+
+    private async UniTaskVoid RefreshAllSlots()
+    {
+        // 刷新前先清理旧缓存
+        ClearLoadedTextures();
+
+        for (int i = 0; i < slotSources.Count; i++)
+        {
+            if (DataArchivesSystem.IsSlotOccupied(i))
+            {
+                string fileName = $"thumb_{i}.jpg";
+                Texture2D tex = await ImageLoader.LoadTextureAsync(fileName);
+
+                _activeTextures[i] = tex;
+
+                string description = DataArchivesSystem.GetInfo(i);
+                slotSources[i].RefreshDisplay(tex, description);
+            }
+            else
+            {
+                slotSources[i].RefreshDisplay(null, "空存档位");
+            }
+        }
+    }
+
+    private void ClearLoadedTextures()
+    {
+        for (int i = 0; i < _activeTextures.Length; i++)
+        {
+            if (_activeTextures[i] != null)
+            {
+                Destroy(_activeTextures[i]);
+                _activeTextures[i] = null;
+            }
+        }
     }
 
     private void Update()
@@ -89,9 +131,9 @@ public class ArchivesPanel : MenuPanel
             if (DataArchivesSystem.IsSlotOccupied(i))
             {
                 var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
-                panel.Setup(onConfirm: () => SaveGame(i), title: "", content: "");
+                panel.Setup(onConfirm: () => SaveGame(i).Forget(), title: "", content: "");
             }
-            else { SaveGame(i); }
+            else { SaveGame(i).Forget(); }
         }
         else if (DataArchivesSystem.IsSlotOccupied(i))
         {
@@ -100,13 +142,27 @@ public class ArchivesPanel : MenuPanel
         }
     }
 
-    private void SaveGame(int id)
+    private async UniTaskVoid SaveGame(int id)
     {
         Debug.Log($"保存到档位 {id}");
-        GameFlowManager.Instance.SaveGame(id);
 
-        // 切换对应截图、显示对应信息之类的
+        Texture2D newThumb = await GameFlowManager.Instance.SaveGame(id);
+
+
+        // 清理旧的纹理内存并将新图加入内存追踪列表
+        if (_activeTextures[id] != null)
+        {
+            Destroy(_activeTextures[id]);
+            _activeTextures[id] = null;
+        }
+
+        _activeTextures[id] = newThumb;
+
+        // 刷新 UI 显示
+        string info = DataArchivesSystem.GetInfo(id);
+        slotSources[id].RefreshDisplay(newThumb, info);
     }
+
     private void LoadGame(int id)
     {
         Debug.Log($"读取档位 {id}");

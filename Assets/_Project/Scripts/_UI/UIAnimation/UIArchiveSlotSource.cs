@@ -1,8 +1,14 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class UIArchiveSlotSource : MonoBehaviour, IUIAppearanceSource
 {
     [SerializeField] private bool isProvider = true;
+
+    [SerializeField] public RawImage screenshotPreview;
+    [SerializeField] public TextMeshProUGUI infoText;
+
     public bool IsProvider => isProvider;
 
     public Vector3 PosOffset => currentOffset;
@@ -39,12 +45,26 @@ public class UIArchiveSlotSource : MonoBehaviour, IUIAppearanceSource
         );
     }
 
-    /// <summary>
-    /// 当存档列表刷新或关闭重开时，重置速度缓存，防止出现“弹射”瞬间
-    /// </summary>
     private void OnDisable()
     {
+        // 面板隐藏时重置速度缓存，防止下次打开时 UI 乱飞
         posVelocity = Vector3.zero;
         alphaVelocity = 0f;
+    }
+
+    public void RefreshDisplay(Texture2D tex, string description)
+    {
+        // 设置图片
+        if (screenshotPreview != null)
+        {
+            screenshotPreview.texture = tex;
+            screenshotPreview.color = tex != null ? Color.white : Color.clear;
+        }
+
+        // 设置文本
+        if (infoText != null)
+        {
+            infoText.text = string.IsNullOrEmpty(description) ? "请输入文本" : description;
+        }
     }
 }
