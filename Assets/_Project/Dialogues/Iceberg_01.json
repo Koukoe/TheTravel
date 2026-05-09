@@ -1,0 +1,28 @@
+{
+  "dialogues": [
+    {
+      "id": "iceberg_01_01",
+      "character": "protagonist",
+      "content": "总算从风暴里逃出来了......",
+      "nextId": "iceberg_01_02"
+    },
+    {
+      "id": "iceberg_01_02",
+      "character": "captain",
+      "content": "又回到了这鸟地方，这可真冷啊。",
+      "nextId": "iceberg_01_03"
+    },
+    {
+      "id": "iceberg_01_03",
+      "character": "engineer",
+      "content": "莉薇娅小姐，从这上去就是权杖的所在地了。",
+      "nextId": "iceberg_01_04"
+    },
+    {
+      "id": "iceberg_01_04",
+      "character": "protagonist",
+      "content": "......我们走吧。",
+      "nextId": "end"
+    }
+  ]
+}

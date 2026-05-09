@@ -1,0 +1,34 @@
+{
+  "dialogues": [
+    {
+      "id": "pop_dep_01",
+      "character": "captain",
+      "content": "利奥，四十年没有出海了，你这副身子骨还挺得住吗？哈哈哈！",
+      "nextId": "pop_dep_02"
+    },
+    {
+      "id": "pop_dep_02",
+      "character": "engineer",
+      "content": "威尔，还是先担心担心你自己吧！",
+      "nextId": "pop_dep_03"
+    },
+    {
+      "id": "pop_dep_03",
+      "character": "engineer",
+      "content": "看你这样子，这四十年来想必是没有断过酒吧？",
+      "nextId": "pop_dep_04"
+    },
+    {
+      "id": "pop_dep_04",
+      "character": "captain",
+      "content": "哈！别看我这样，身子骨可硬朗着呢！现在跳进海里去，还能打条鲨鱼上来吃！",
+      "nextId": "pop_dep_05"
+    },
+    {
+      "id": "pop_dep_05",
+      "character": "engineer",
+      "content": "你这吹牛的老毛病还是没变！",
+      "nextId": "end"
+    }
+  ]
+}
