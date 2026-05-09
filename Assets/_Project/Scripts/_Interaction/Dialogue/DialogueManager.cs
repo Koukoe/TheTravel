@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -37,6 +38,7 @@ public class DialogueManager : MonoBehaviour
     private DialogueTypewriter typewriter;
     private DialogueUIController uiController;
     private DialoguePresenter presenter;
+    private bool isDialogueActive;
 
     private const string DialogueContentTextNodeName = "DialogueContentText";
     private const string DialogueNameTextNodeName = "DialogueNameText";
@@ -84,6 +86,41 @@ public class DialogueManager : MonoBehaviour
         activeDialogueStartIndex = source != null ? source.DialogueIndex : 0;
         DialogueLoad();
         DialogueStart();
+    }
+
+    /// <summary>
+    /// 以协程方式播放对话，可在外部 yield 等待对话结束
+    /// </summary>
+    public Coroutine StartWithAsync(TextAsset json, DialogueOnObj source, Action onCompleted = null)
+    {
+        return StartCoroutine(StartWithRoutine(json, source, onCompleted));
+    }
+
+    public Coroutine StartWithAsync(TextAsset json, Action onCompleted = null)
+    {
+        return StartWithAsync(json, null, onCompleted);
+    }
+
+    private IEnumerator StartWithRoutine(TextAsset json, DialogueOnObj source, Action onCompleted)
+    {
+        StartWith(json, source);
+
+        while (isDialogueActive)
+        {
+            yield return null;
+        }
+
+        onCompleted?.Invoke();
+    }
+
+    /// <summary>
+    /// 以 UniTask 方式播放对话，可在外部 await 等待对话结束
+    /// </summary>
+    public async UniTask StartWithAsyncUniTask(TextAsset json, DialogueOnObj source = null)
+    {
+        StartWith(json, source);
+
+        await UniTask.WaitWhile(() => isDialogueActive);
     }
 
     /// <summary>
@@ -281,6 +318,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
+        isDialogueActive = true;
         uiController?.OpenDialoguePanelWithCleanup(OnDialoguePanelReady);
     }
 
@@ -519,6 +557,7 @@ public class DialogueManager : MonoBehaviour
     public void DialogueEnd()
     {
         flowState?.ClearRuntime();
+        isDialogueActive = false;
 
         if (activeDialogueSource != null && !string.IsNullOrWhiteSpace(activeDialogueSource.DialogueGuid))
         {

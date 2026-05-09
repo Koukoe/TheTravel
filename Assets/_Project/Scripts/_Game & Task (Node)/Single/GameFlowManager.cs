@@ -12,6 +12,7 @@ public class GameFlowManager : MonoBehaviour
         Instance = this;
     }
 
+    [SerializeField]
     public DataArchive PlayingData { get; private set; }
 
     public async UniTask NewGame()
