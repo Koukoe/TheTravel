@@ -1,18 +1,19 @@
 using System.Threading;
+using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class task0 : TaskBasic
 {
-    public static bool init = false;
-
-    public override async UniTask TaskIEnumerator()
+    protected override async UniTask OnTaskStart()
     {
-        Debug.Log("Task 0");
+        await UniTask.Yield();
+        Debug.Log("Task 0 Start");
+        await UniTask.Yield();
+    }
 
-        await UniTask.WaitUntil(() => init);
-
-        isDone = true;
-        init = false;
+    protected override void OnTaskEnd()
+    {
+        Debug.Log("Task 0 End");
     }
 }

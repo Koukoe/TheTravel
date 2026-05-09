@@ -13,7 +13,9 @@ public class task1 : TaskBasic
     [SerializeField] private float targetY = 10f;
     [SerializeField] private float duration = 1f;
 
-    public override async UniTask TaskIEnumerator()
+    private float _startY; // 用于记录初始高度
+
+    protected override async UniTask OnTaskStart()
     {
         if (cameraMove == null)
         {
@@ -25,7 +27,7 @@ public class task1 : TaskBasic
             }
         }
 
-        float startY = cameraMove.CamY;
+        _startY = cameraMove.CamY; // 记录 startY
         float elapsed = 0f;
 
         // 向上移动（放大效果）
@@ -34,7 +36,7 @@ public class task1 : TaskBasic
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
-            cameraMove.CamY = Mathf.Lerp(startY, targetY, smoothT);
+            cameraMove.CamY = Mathf.Lerp(_startY, targetY, smoothT);
             await UniTask.Yield();
         }
         cameraMove.CamY = targetY;
@@ -42,19 +44,27 @@ public class task1 : TaskBasic
         // 等待对话
         await WaitForDialogue();
 
+        FinishTask();
+    }
+
+    protected override void OnTaskEnd()
+    {
         // 向下移动（恢复）
-        elapsed = 0f;
+        MoveCameraDown().Forget();
+    }
+
+    private async UniTask MoveCameraDown()
+    {
+        float elapsed = 0f;
         while (elapsed < duration)
         {
             elapsed += Time.deltaTime;
             float t = elapsed / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
-            cameraMove.CamY = Mathf.Lerp(targetY, startY, smoothT);
+            cameraMove.CamY = Mathf.Lerp(targetY, _startY, smoothT);
             await UniTask.Yield();
         }
-        cameraMove.CamY = startY;
-
-        isDone = true;
+        cameraMove.CamY = _startY;
     }
 
     private async UniTask WaitForDialogue()

@@ -5,16 +5,18 @@ public class task2 : TaskBasic
 {
     public TextAsset dialogueText;
 
-    public override async UniTask TaskIEnumerator()
+    protected override async UniTask OnTaskStart()
     {
+        // 直接调用基类的通用方法
         await WaitForDialogue();
-        isDone = true;
+
+        FinishTask();
     }
 
     private async UniTask WaitForDialogue()
     {
         await UniTask.Yield();
-
         await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }
+

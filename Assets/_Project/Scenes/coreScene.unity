@@ -1067,7 +1067,7 @@ MonoBehaviour:
       scene: 
   taskEndEffects: []
   taskGoals:
-  - taskGoalType: 0
+  - taskGoalType: 4
     targetId: 
     GoalTrigger: 0
     GoalItem: 0

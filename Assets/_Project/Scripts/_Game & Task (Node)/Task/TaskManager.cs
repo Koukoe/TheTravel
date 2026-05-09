@@ -12,6 +12,11 @@ public class TaskManager : MonoBehaviour
 
     private bool isLoadingTasks = false;  // 防止加载时重复保存
 
+    private HashSet<TaskNode> activeTasks = new HashSet<TaskNode>();
+
+    public void RegisterActive(TaskNode node) => activeTasks.Add(node);
+    public void UnregisterActive(TaskNode node) => activeTasks.Remove(node);
+
     private void Awake()
     {
         Debug.Log("TaskManager Awake");
@@ -62,7 +67,6 @@ public class TaskManager : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         if (isGraphInitialized) yield break;
-        isGraphInitialized = true;
 
         Debug.Log($"开始初始化任务图，共 {tasks.Count} 个任务");
 
@@ -90,6 +94,8 @@ public class TaskManager : MonoBehaviour
 
         // 加载所有任务节点存档（会恢复任务状态）
         LoadAllTaskNodes();
+
+        isGraphInitialized = true;
 
         // 图初始化完成后，启动所有入度为0且未完成的任务
         StartAllReadyTasks();
@@ -178,40 +184,28 @@ public class TaskManager : MonoBehaviour
     public void LoadTaskNode(string ID)
     {
         TaskNode taskNode = GetTask(ID);
-        if (taskNode == null)
-        {
-            Debug.LogError("TaskNode not found: " + ID);
-            return;
-        }
+        if (taskNode == null) return;
 
-        if (GameFlowManager.Instance?.PlayingData?.TaskNodesDic == null)
-        {
-            Debug.LogWarning("GameFlowManager.PlayingData 未就绪，跳过加载");
-            return;
-        }
-
-        if (GameFlowManager.Instance.PlayingData.TaskNodesDic.ContainsKey(ID))
+        if (GameFlowManager.Instance?.PlayingData?.TaskNodesDic.ContainsKey(ID) == true)
         {
             var (inn, isFinished) = GameFlowManager.Instance.PlayingData.TaskNodesDic[ID];
 
-            // 如果任务之前已完成，直接设置状态
+            // 恢复数值
+            taskNode.isTaskFinished = isFinished;
+            taskNode.Inn = inn;
+
             if (isFinished)
             {
-                taskNode.isTaskFinished = true;
-                taskNode.Inn = inn;
-            }
-            else
-            {
-                // 未完成的任务，恢复入度
-                taskNode.Inn = inn;
-                taskNode.isTaskFinished = false;
+                foreach (var goal in taskNode.taskGoals)
+                {
+                    if (goal.targetScript != null)
+                    {
+                        goal.targetScript.isDone = true;
+                    }
+                }
             }
 
             Debug.Log("已加载任务存档: " + ID);
-        }
-        else
-        {
-            Debug.Log("未找到对应节点存档: " + ID);
         }
     }
 
@@ -250,5 +244,36 @@ public class TaskManager : MonoBehaviour
                 task.StartTask();
             }
         }
+    }
+
+
+    [ContextMenu("Finish All Active Tasks")]
+    public void FinishAllActiveTasks()
+    {
+        foreach (var node in activeTasks)
+        {
+            foreach (var goal in node.taskGoals)
+            {
+                if (goal.targetScript != null)
+                    goal.targetScript.FinishTask();
+                else
+                    goal.IsDone = true;
+            }
+        }
+    }
+
+    // 可视化当前任务
+    private void OnGUI()
+    {
+        if (activeTasks.Count == 0) return;
+
+        GUI.color = Color.green;
+        GUILayout.BeginArea(new Rect(10, 10, 300, 500));
+        GUILayout.Label("--- ACTIVE TASKS ---", GUI.skin.box);
+        foreach (var task in activeTasks)
+        {
+            GUILayout.Label($"ID: {task.taskId} | Name: {task.taskName}");
+        }
+        GUILayout.EndArea();
     }
 }

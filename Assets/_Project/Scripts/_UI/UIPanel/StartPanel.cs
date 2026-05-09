@@ -23,6 +23,5 @@ public class StartPanel : BasePanel
 
         UIManager.Instance.Pop();
         InputManager.Instance.SwitchPlayerMode(true);
-        task0.init = true;
     }
 }

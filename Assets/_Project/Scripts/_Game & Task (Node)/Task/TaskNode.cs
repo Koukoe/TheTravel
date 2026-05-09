@@ -38,12 +38,9 @@ public class TaskNode : MonoBehaviour
         set
         {
             In = value;
-            TaskManager.Instance.SaveTaskNode(taskId);
-            Debug.Log(taskId + "入度为" + In);
-
-            if (In == 0 && TaskManager.Instance.IsGraphInitialized && !isTaskFinished)
+            if (TaskManager.Instance.IsGraphInitialized && In <= 0 && !isTaskFinished)
             {
-                StartTask();  // 直接调用 StartTask
+                StartTask();
             }
         }
     }
@@ -114,10 +111,14 @@ public class TaskNode : MonoBehaviour
         var token = _taskCts.Token;
         isTaskRunning = true;
 
+        // 注册到当前活跃任务（用于外部可视化）
+        if (TaskManager.Instance != null) TaskManager.Instance.RegisterActive(this);
+
         Debug.Log("Start Task: " + taskName + " " + taskId);
 
         try
         {
+            // 引导任务逻辑开始
             // 应用开始效果
             foreach (var effect in taskEffects)
             {
@@ -157,7 +158,9 @@ public class TaskNode : MonoBehaviour
         }
         finally
         {
+            // 无论成功或取消，确保清理状态
             isTaskRunning = false;
+            if (TaskManager.Instance != null) TaskManager.Instance.UnregisterActive(this);
         }
     }
 
@@ -179,6 +182,7 @@ public class TaskNode : MonoBehaviour
                 if (!await goal.IsDoneAsync())
                 {
                     allDone = false;
+                    break; // 只要有一个没完成，本轮轮询结束
                 }
             }
 
@@ -192,6 +196,17 @@ public class TaskNode : MonoBehaviour
 
             // 等待 0.5 秒后继续检查
             await UniTask.Delay(500, cancellationToken: token);
+        }
+    }
+
+
+    // 可视化当前任务
+    private void OnDrawGizmos()
+    {
+        if (isTaskRunning)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, 1.0f);
         }
     }
 }
