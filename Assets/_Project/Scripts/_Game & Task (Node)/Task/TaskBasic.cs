@@ -3,7 +3,21 @@ using Cysharp.Threading.Tasks;
 
 public abstract class TaskBasic : MonoBehaviour
 {
-    public bool isDone = false;
+    [HideInInspector] public string goalID;
+
+    public bool isDone
+    {
+        get
+        {
+            return GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalID).isReached;
+        }
+        set
+        {
+            var state = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalID);
+            state.isReached = value;
+        }
+    }
+
     private UniTaskCompletionSource _taskSignal;
     private bool isTaskRunning = false;
     public async UniTask TaskIEnumerator()
@@ -15,9 +29,7 @@ public abstract class TaskBasic : MonoBehaviour
 
         _taskSignal = new UniTaskCompletionSource();
         await OnTaskStart(); // 开始演出 
-        await UniTask.Yield();
         await _taskSignal.Task; // 卡住，等信号
-        await UniTask.Yield();
         await UniTask.WaitUntil(() => !UIManager.Instance.UISys());  // 确保不是菜单或 Start
         OnTaskEnd();
 

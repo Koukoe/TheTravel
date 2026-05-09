@@ -6,7 +6,10 @@ using UnityEngine;
 public class TaskGoal
 {
     public TaskGoalType taskGoalType;
-    private bool isDone;
+
+    [Header("存档唯一标识符(全局唯一)")]
+    public string goalId;
+
     public string targetId;
     [Header("是否应该触发")]
     public bool GoalTrigger;
@@ -32,13 +35,47 @@ public class TaskGoal
     private bool isChecking = false;
     private UniTaskCompletionSource<bool> pendingCheck;
 
+    public bool IsDone
+    {
+        get
+        {
+            if (GameFlowManager.Instance?.PlayingData == null) return false;
+
+            // 拿数据
+            var goalState = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalId);
+
+            // 异步检查
+            if (!goalState.isReached && !isChecking)
+            {
+                CheckGoalAsync().Forget();
+            }
+
+            return goalState.isReached;
+        }
+        set
+        {
+            if (GameFlowManager.Instance?.PlayingData == null) return;
+
+            var goalState = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalId);
+            if (goalState.isReached == value) return;
+
+            goalState.isReached = value;
+            if (goalState.isReached)
+            {
+                Debug.Log($"Task {goalId} completed!");
+                // 主动告知完成，驱动任务树跳转
+                TaskManager.Instance.OnGoalReached(this);
+            }
+        }
+    }
+
     private async UniTask<bool> CheckGoalAsync()
     {
         if (isChecking)
         {
             if (pendingCheck != null)
                 return await pendingCheck.Task;
-            return isDone;
+            return IsDone;
         }
 
         isChecking = true;
@@ -70,8 +107,8 @@ public class TaskGoal
             isChecking = false;
         }
 
-        pendingCheck.TrySetResult(isDone);
-        return isDone;
+        pendingCheck.TrySetResult(IsDone);
+        return IsDone;
     }
 
     private void CheckTrigger()
@@ -138,6 +175,8 @@ public class TaskGoal
     {
         if (targetScript != null)
         {
+            // 给脚本传入 goalId，使其完成时能正确修改存档
+            targetScript.goalID = this.goalId;
             await targetScript.TaskIEnumerator();
             IsDone = targetScript.isDone;
         }
@@ -155,36 +194,12 @@ public class TaskGoal
         return positionDistance < positionTolerance && rotationAngle < rotationTolerance;
     }
 
-    public bool IsDone
-    {
-        get
-        {
-            if (isDone) return true;
-
-            // 异步检查（非阻塞，立即返回当前状态）
-            if (!isChecking)
-            {
-                CheckGoalAsync().Forget();
-            }
-
-            return isDone;
-        }
-        set
-        {
-            isDone = value;
-            if (isDone)
-            {
-                Debug.Log("Task completed!");
-            }
-        }
-    }
-
     /// <summary>
     /// 异步获取是否完成（会等待检查完成）
     /// </summary>
     public async UniTask<bool> IsDoneAsync()
     {
-        if (isDone) return true;
+        if (IsDone) return true;
         return await CheckGoalAsync();
     }
 }

@@ -43,6 +43,8 @@ public class TaskEffect
 
     public void RevertEffect()
     {
+        if (snapShotState == null) return;
+
         switch (effectType)
         {
             case EffectType.INTERACTABLESTATE:
@@ -60,7 +62,7 @@ public class TaskEffect
         }
 
         // 刷新此物体在当前场景状态
-        state.ScenedNotifyChanged();
+        state?.ScenedNotifyChanged();
     }
 }
 public enum EffectType

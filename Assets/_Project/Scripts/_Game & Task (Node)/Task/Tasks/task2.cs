@@ -7,7 +7,7 @@ public class task2 : TaskBasic
 
     protected override async UniTask OnTaskStart()
     {
-        // 直接调用基类的通用方法
+        await UniTask.Delay(1000);
         await WaitForDialogue();
 
         FinishTask();
@@ -15,7 +15,7 @@ public class task2 : TaskBasic
 
     private async UniTask WaitForDialogue()
     {
-        await UniTask.Yield();
+        await UniTask.WaitUntil(() => !UIManager.Instance.UISys());
         await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }

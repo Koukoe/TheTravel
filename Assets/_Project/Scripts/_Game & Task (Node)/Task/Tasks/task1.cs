@@ -69,7 +69,7 @@ public class task1 : TaskBasic
 
     private async UniTask WaitForDialogue()
     {
-        await UniTask.Yield();
+        await UniTask.WaitUntil(() => !UIManager.Instance.UISys());
         await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }

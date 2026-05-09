@@ -179,3 +179,27 @@ public class RealSceneState : BaseState
         }
     }
 }
+
+[Serializable]
+public class TaskGoalState : BaseState
+{
+    public bool isReached;
+
+    public override void Init(string id)
+    {
+        base.Init(id);
+        isReached = false;
+    }
+
+    public override BaseState Clone()
+    {
+        var clone = new TaskGoalState() { isReached = isReached };
+        clone.SetGUID(guid);
+        return clone;
+    }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        if (targetState is TaskGoalState state) isReached = state.isReached;
+    }
+}

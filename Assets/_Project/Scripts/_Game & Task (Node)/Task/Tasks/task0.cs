@@ -9,7 +9,7 @@ public class task0 : TaskBasic
     {
         await UniTask.Yield();
         Debug.Log("Task 0 Start");
-        await UniTask.Yield();
+        FinishTask();
     }
 
     protected override void OnTaskEnd()

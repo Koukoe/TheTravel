@@ -190,19 +190,13 @@ public class TaskManager : MonoBehaviour
         {
             var (inn, isFinished) = GameFlowManager.Instance.PlayingData.TaskNodesDic[ID];
 
-            // 恢复数值
+            // 恢复任务核心数值
             taskNode.isTaskFinished = isFinished;
             taskNode.Inn = inn;
 
+            // 执行一次完成表现（比如关闭相关 UI 或触发后续）
             if (isFinished)
             {
-                foreach (var goal in taskNode.taskGoals)
-                {
-                    if (goal.targetScript != null)
-                    {
-                        goal.targetScript.isDone = true;
-                    }
-                }
             }
 
             Debug.Log("已加载任务存档: " + ID);
@@ -246,6 +240,20 @@ public class TaskManager : MonoBehaviour
         }
     }
 
+    public void OnGoalReached(TaskGoal goal)
+    {
+        // 找出目前正在运行的任务中，哪一个包含了这个目标
+        foreach (var node in activeTasks)
+        {
+            if (node.taskGoals.Contains(goal))
+            {
+                // 立即让该节点检查自己是否全目标完成
+                node.RefreshStatus();
+                break;
+            }
+        }
+    }
+
 
     [ContextMenu("Finish All Active Tasks")]
     public void FinishAllActiveTasks()
@@ -267,8 +275,8 @@ public class TaskManager : MonoBehaviour
     {
         if (activeTasks.Count == 0) return;
 
-        GUI.color = Color.green;
-        GUILayout.BeginArea(new Rect(10, 10, 300, 500));
+        GUI.color = Color.red;
+        GUILayout.BeginArea(new Rect(15, 15, 300, 500));
         GUILayout.Label("--- ACTIVE TASKS ---", GUI.skin.box);
         foreach (var task in activeTasks)
         {

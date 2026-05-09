@@ -37,7 +37,6 @@ public class GameFlowManager : MonoBehaviour
         }
 
         PlayingData = data;
-        PlayingData = DataArchivesSystem.Get(slotIndex);
         TaskManager.Instance.LoadAllTaskNodes();
 
         if (GameSceneManager.Instance != null)
@@ -50,6 +49,9 @@ public class GameFlowManager : MonoBehaviour
 
     public async UniTask<Texture2D> SaveGame(int slotIndex)
     {
+        // 保存当前位置
+        GameSceneManager.Instance.currentMainLogic.SyncPlayerPosition();
+
         // 截图并保存到本地
         string fileName = $"thumb_{slotIndex}.jpg";
         Texture2D newThumb = await CameraUtils.CaptureAndSaveAsync(Camera.main, fileName);

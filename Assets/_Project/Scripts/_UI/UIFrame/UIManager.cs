@@ -294,17 +294,4 @@ public class UIManager : MonoBehaviour
         }
         _singleList.Clear();
     }
-
-    private void OnGUI()
-    {
-        GUI.backgroundColor = Color.black;
-        GUILayout.BeginArea(new Rect(10, 10, 250, 150), GUI.skin.box);
-        GUILayout.Label($"<color=white>UI Status Monitor</color>");
-        GUILayout.Label($"Peek: <color=yellow>{(Peek() != null ? Peek().name : "None")}</color>");
-        GUILayout.Label($"Closing: <color=orange>{(closingPanel != null ? closingPanel.name : "None")}</color>");
-        GUILayout.Label($"Transitioning: {isTransitioning}");
-        GUILayout.Label($"UniqueDict Count: {_uniqueDict.Count}");
-        GUILayout.Label($"UISys Return: <color=red>{UISys()}</color>");
-        GUILayout.EndArea();
-    }
 }

@@ -39,6 +39,7 @@ public class TaskNode : MonoBehaviour
         {
             In = value;
 
+            Debug.Log(taskId + "入度为" + In);
             TaskManager.Instance.SaveTaskNode(taskId);
 
             if (TaskManager.Instance.IsGraphInitialized && In <= 0 && !isTaskFinished)
@@ -104,6 +105,72 @@ public class TaskNode : MonoBehaviour
         // 注意：TaskGoal 的 isDone 状态需要单独处理
     }
 
+    // --- 【重构部分：新增刷新方法，用于替代原本的 while 轮询】 ---
+
+    /// <summary>
+    /// 刷新任务状态，检查目标是否全部达成
+    /// </summary>
+    public void RefreshStatus()
+    {
+        if (isTaskFinished) return;
+
+        bool allDone = true;
+
+        foreach (var goal in taskGoals)
+        {
+            // 直接读取重构后的 IsDone 属性（内部已关联 PlayingData 存档）
+            if (!goal.IsDone)
+            {
+                allDone = false;
+                break;
+            }
+        }
+
+        if (allDone)
+        {
+            OnTaskSuccess();
+        }
+    }
+
+    /// <summary>
+    /// 统一处理任务成功的逻辑（原本在 CheckTaskFinishedAsync 的 if(allDone) 块中）
+    /// </summary>
+    private void OnTaskSuccess()
+    {
+        isTaskFinished = true;
+
+        // 任务完成时保存
+        TaskManager.Instance.SaveTaskNode(taskId);
+
+        // 任务完成后的效果
+        // 原逻辑：先还原开始效果，再应用结束效果
+        foreach (var effect in taskEffects)
+        {
+            effect.RevertEffect();
+        }
+        foreach (var effect in taskEndEffects)
+        {
+            effect.ApplyEffect();
+        }
+
+        // 减少后继节点的入度
+        foreach (var node in nextNodes)
+        {
+            node.Inn--;
+        }
+
+        Debug.Log($"任务 {taskId} 完成");
+
+        // 无论成功或取消，确保清理状态
+        isTaskRunning = false;
+        if (TaskManager.Instance != null) TaskManager.Instance.UnregisterActive(this);
+
+        // 停止异步等待
+        CancelTask();
+    }
+
+    // --- 【重构部分结束】 ---
+
     private async UniTaskVoid StartTaskAsync()
     {
         // 取消之前的任务
@@ -129,31 +196,17 @@ public class TaskNode : MonoBehaviour
                 effect.ApplyEffect();
             }
 
-            // 等待任务完成（可取消）
-            await CheckTaskFinishedAsync(token);
+            // 【关键改动】不再调用 while 循环的 CheckTaskFinishedAsync
+            // 我们先执行一次初始检查（应对读档后立刻完成的情况）
+            RefreshStatus();
 
-            if (token.IsCancellationRequested) return;
-
-            // 任务完成后的效果
-            foreach (var effect in taskEffects)
+            while (!isTaskFinished)
             {
-                if (token.IsCancellationRequested) return;
-                effect.RevertEffect();
-            }
-            foreach (var effect in taskEndEffects)
-            {
-                if (token.IsCancellationRequested) return;
-                effect.ApplyEffect();
-            }
+                RefreshStatus(); // 里面会检查所有 Goal.IsDone
+                if (isTaskFinished) break;
 
-            // 减少后继节点的入度
-            foreach (var node in nextNodes)
-            {
-                if (token.IsCancellationRequested) return;
-                node.Inn--;
+                await UniTask.Delay(250, cancellationToken: token); // 每0.25秒扫一次，性能极好
             }
-
-            Debug.Log($"任务 {taskId} 完成");
         }
         catch (OperationCanceledException)
         {
@@ -161,47 +214,16 @@ public class TaskNode : MonoBehaviour
         }
         finally
         {
-            // 无论成功或取消，确保清理状态
-            isTaskRunning = false;
-            if (TaskManager.Instance != null) TaskManager.Instance.UnregisterActive(this);
+            // 确保状态清理（如果是被外部取消而非成功完成）
+            if (!isTaskFinished)
+            {
+                isTaskRunning = false;
+                if (TaskManager.Instance != null) TaskManager.Instance.UnregisterActive(this);
+            }
         }
     }
 
-    private async UniTask CheckTaskFinishedAsync(CancellationToken token)
-    {
-        while (!isTaskFinished)
-        {
-            // 检查取消
-            token.ThrowIfCancellationRequested();
-
-            bool allDone = true;
-
-            foreach (var goal in taskGoals)
-            {
-                // 检查取消
-                if (token.IsCancellationRequested) return;
-
-                // 使用异步等待检查结果
-                if (!await goal.IsDoneAsync())
-                {
-                    allDone = false;
-                    break; // 只要有一个没完成，本轮轮询结束
-                }
-            }
-
-            if (allDone)
-            {
-                isTaskFinished = true;
-                // 任务完成时保存
-                TaskManager.Instance.SaveTaskNode(taskId);
-                return;
-            }
-
-            // 等待 0.5 秒后继续检查
-            await UniTask.Delay(500, cancellationToken: token);
-        }
-    }
-
+    // 原 CheckTaskFinishedAsync 已被 RefreshStatus 和 OnTaskSuccess 逻辑平替
 
     // 可视化当前任务
     private void OnDrawGizmos()

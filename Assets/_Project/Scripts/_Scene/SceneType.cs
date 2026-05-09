@@ -6,9 +6,11 @@ using System;
 
 public abstract class RealScene : SceneBase
 {
+    public string sceneName;
     public abstract RealSceneState GetBaseState();
 
     public bool autoSave = false;
+    public abstract void SyncPlayerPosition();
 }
 
 public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
@@ -23,6 +25,7 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
 
     public override void EnterScene()
     {
+        GameFlowManager.Instance.PlayingData.currentScene = sceneName;
         CameraLink.Instance.LinkToMainCamera();
 
         if (PlayerController.Instance != null)
@@ -79,7 +82,7 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         // 不要抛出异常
     }
 
-    public void SyncPlayerPosition()
+    public override void SyncPlayerPosition()
     {
         if (_state != null && player != null)
         {
