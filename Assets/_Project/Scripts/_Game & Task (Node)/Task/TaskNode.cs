@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System.Threading;
+using System;
 
 [DefaultExecutionOrder(1)]
 public class TaskNode : MonoBehaviour
@@ -28,6 +28,9 @@ public class TaskNode : MonoBehaviour
     [HideInInspector]
     public bool isTaskFinished = false;
 
+    // 取消相关
+    private CancellationTokenSource _taskCts;
+    private bool isTaskRunning = false;
 
     public int Inn
     {
@@ -40,7 +43,7 @@ public class TaskNode : MonoBehaviour
 
             if (In == 0 && TaskManager.Instance.IsGraphInitialized && !isTaskFinished)
             {
-                TaskInit();
+                StartTask();  // 直接调用 StartTask
             }
         }
     }
@@ -51,56 +54,144 @@ public class TaskNode : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-    void TaskInit()
+    void OnDestroy()
     {
-        if (isTaskFinished) return;
-        StartCoroutine(StartTask());
+        CancelTask();
     }
 
-    IEnumerator StartTask()
+    /// <summary>
+    /// 启动任务（外部可调用）
+    /// </summary>
+    public void StartTask()
     {
+        if (isTaskFinished)
+        {
+            Debug.Log($"任务 {taskId} 已完成，无需启动");
+            return;
+        }
+
+        if (isTaskRunning)
+        {
+            Debug.Log($"任务 {taskId} 已在运行中");
+            return;
+        }
+
+        StartTaskAsync().Forget();
+    }
+
+    /// <summary>
+    /// 取消当前正在运行的任务
+    /// </summary>
+    public void CancelTask()
+    {
+        if (_taskCts != null)
+        {
+            _taskCts.Cancel();
+            _taskCts.Dispose();
+            _taskCts = null;
+        }
+        isTaskRunning = false;
+    }
+
+    /// <summary>
+    /// 重置任务状态（用于读档后重新启动）
+    /// </summary>
+    public void ResetForLoad()
+    {
+        CancelTask();
+        isTaskFinished = false;
+        isTaskRunning = false;
+        // 注意：TaskGoal 的 isDone 状态需要单独处理
+    }
+
+    private async UniTaskVoid StartTaskAsync()
+    {
+        // 取消之前的任务
+        CancelTask();
+
+        // 创建新的取消令牌
+        _taskCts = new CancellationTokenSource();
+        var token = _taskCts.Token;
+        isTaskRunning = true;
+
         Debug.Log("Start Task: " + taskName + " " + taskId);
-        foreach (var effect in taskEffects)
-        {
-            effect.ApplyEffect();
-        }
 
-        yield return StartCoroutine(CheckTaskFinished());
+        try
+        {
+            // 应用开始效果
+            foreach (var effect in taskEffects)
+            {
+                if (token.IsCancellationRequested) return;
+                effect.ApplyEffect();
+            }
 
-        foreach (var effect in taskEffects)
-        {
-            effect.RevertEffect();
+            // 等待任务完成（可取消）
+            await CheckTaskFinishedAsync(token);
+
+            if (token.IsCancellationRequested) return;
+
+            // 任务完成后的效果
+            foreach (var effect in taskEffects)
+            {
+                if (token.IsCancellationRequested) return;
+                effect.RevertEffect();
+            }
+            foreach (var effect in taskEndEffects)
+            {
+                if (token.IsCancellationRequested) return;
+                effect.ApplyEffect();
+            }
+
+            // 减少后继节点的入度
+            foreach (var node in nextNodes)
+            {
+                if (token.IsCancellationRequested) return;
+                node.Inn--;
+            }
+
+            Debug.Log($"任务 {taskId} 完成");
         }
-        foreach (var effect in taskEndEffects)
+        catch (OperationCanceledException)
         {
-            effect.ApplyEffect();
+            Debug.Log($"任务 {taskId} 被取消");
         }
-        foreach (var node in nextNodes)
+        finally
         {
-            node.Inn--;
+            isTaskRunning = false;
         }
     }
 
-    IEnumerator CheckTaskFinished()
+    private async UniTask CheckTaskFinishedAsync(CancellationToken token)
     {
         while (!isTaskFinished)
         {
-            bool flag = true;
+            // 检查取消
+            token.ThrowIfCancellationRequested();
+
+            bool allDone = true;
+
             foreach (var goal in taskGoals)
             {
-                if (!goal.IsDone)
+                // 检查取消
+                if (token.IsCancellationRequested) return;
+
+                // 使用异步等待检查结果
+                if (!await goal.IsDoneAsync())
                 {
-                    flag = false;
-                    break;
+                    allDone = false;
                 }
             }
-            if (flag)
+
+            if (allDone)
             {
                 isTaskFinished = true;
-                yield break;
+                // 任务完成时保存
+                TaskManager.Instance.SaveTaskNode(taskId);
+                return;
             }
-            yield return new WaitForSeconds(0.5f);
+
+            // 等待 0.5 秒后继续检查
+            await UniTask.Delay(500, cancellationToken: token);
         }
     }
 }

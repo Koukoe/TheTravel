@@ -1,4 +1,4 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class task1 : TaskBasic
@@ -13,7 +13,7 @@ public class task1 : TaskBasic
     [SerializeField] private float targetY = 10f;
     [SerializeField] private float duration = 1f;
 
-    public override IEnumerator TaskIEnumerator()
+    public override async UniTask TaskIEnumerator()
     {
         if (cameraMove == null)
         {
@@ -21,6 +21,7 @@ public class task1 : TaskBasic
             if (cameraMove == null)
             {
                 Debug.LogError("task1: 场景中未找到 CameraMove 组件！");
+                return;
             }
         }
 
@@ -34,12 +35,12 @@ public class task1 : TaskBasic
             float t = elapsed / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
             cameraMove.CamY = Mathf.Lerp(startY, targetY, smoothT);
-            yield return null;
+            await UniTask.Yield();
         }
         cameraMove.CamY = targetY;
 
         // 等待对话
-        yield return WaitForDialogue();
+        await WaitForDialogue();
 
         // 向下移动（恢复）
         elapsed = 0f;
@@ -49,16 +50,16 @@ public class task1 : TaskBasic
             float t = elapsed / duration;
             float smoothT = Mathf.SmoothStep(0f, 1f, t);
             cameraMove.CamY = Mathf.Lerp(targetY, startY, smoothT);
-            yield return null;
+            await UniTask.Yield();
         }
         cameraMove.CamY = startY;
 
         isDone = true;
     }
 
-    private IEnumerator WaitForDialogue()
+    private async UniTask WaitForDialogue()
     {
-        yield return null;
-        yield return DialogueManager.Instance.StartWithAsync(dialogueText);
+        await UniTask.Yield();
+        await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }

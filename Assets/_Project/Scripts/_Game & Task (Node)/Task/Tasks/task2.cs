@@ -1,20 +1,20 @@
-using System.Collections;
-using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class task2 : TaskBasic
 {
     public TextAsset dialogueText;
 
-    public override IEnumerator TaskIEnumerator()
+    public override async UniTask TaskIEnumerator()
     {
-        yield return StartCoroutine(WaitForDialogue());
+        await WaitForDialogue();
         isDone = true;
     }
 
-    private IEnumerator WaitForDialogue()
+    private async UniTask WaitForDialogue()
     {
-        yield return null;
-        yield return DialogueManager.Instance.StartWithAsync(dialogueText);
+        await UniTask.Yield();
+
+        await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }

@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public abstract class TaskBasic : MonoBehaviour
 {
     public bool isDone;
-    public abstract IEnumerator TaskIEnumerator();
+    public abstract UniTask TaskIEnumerator();
 }

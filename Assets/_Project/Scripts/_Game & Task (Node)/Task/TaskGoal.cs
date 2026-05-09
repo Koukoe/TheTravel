@@ -1,6 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 [System.Serializable]
@@ -29,119 +28,145 @@ public class TaskGoal
     [Header("对应脚本协程，协程函数统一命名为TaskIEnumerator")]
     public TaskBasic targetScript;
 
+    private BaseState targetState;
+    private bool isChecking = false;
+    private UniTaskCompletionSource<bool> pendingCheck;
 
-    BaseState targetState;
-
-    private bool onCheck = false;
-    private IEnumerator checkGoal()
+    private async UniTask<bool> CheckGoalAsync()
     {
-        onCheck = true;
-        switch (taskGoalType)
+        if (isChecking)
         {
-            case TaskGoalType.TRIGGER:
-                // Check if the trigger has been activated
-                targetState = GameFlowManager.Instance.PlayingData.GetState<InteractionState>(targetId);
-                if (targetState == null)
-                {
-                    Debug.Log("Target state not found");
-                }
-                if (targetState is InteractionState interactionState && interactionState.isTriggered == GoalTrigger)
-                {
-                    IsDone = true;
-                    Debug.Log(targetId + "检测成功");
-                }
-                else
-                {
-                    IsDone = false;
-                    Debug.Log(targetId + "检测失败");
-                }
+            if (pendingCheck != null)
+                return await pendingCheck.Task;
+            return isDone;
+        }
 
-                onCheck = false;
-                yield break;
-            case TaskGoalType.ITEM:
-                // Check if the required amount of normal items has been collected
-                targetState = GameFlowManager.Instance.PlayingData.GetState<ItemState>(targetId);
-                if (targetState == null)
-                {
-                    Debug.Log("Target state not found");
-                }
-                if (targetState is ItemState itemState && itemState.isPicked == GoalItem)
-                {
-                    IsDone = true;
-                    Debug.Log(targetId + "检测成功");
-                }
-                else
-                {
-                    IsDone = false;
-                    Debug.Log(targetId + "检测失败");
-                }
+        isChecking = true;
+        pendingCheck = new UniTaskCompletionSource<bool>();
 
-                onCheck = false;
-                yield break;
-            case TaskGoalType.ACTOR:
-                // Check if the required amount of book items has been collected
-                targetState = GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetId);
-                if (targetState == null)
-                {
-                    Debug.Log("Target state not found");
-                }
-                if (targetState is ActorState actorState &&
-                            actorState.position.HasValue &&
-                            actorState.rotation.HasValue &&
-                            checkActor(actorState.position.Value, actorState.rotation.Value))
-                {
-                    IsDone = true;
-                    Debug.Log(targetId + "检测成功");
-                }
-                else
-                {
-                    IsDone = false;
-                    Debug.Log(targetId + "检测失败");
-                }
+        try
+        {
+            switch (taskGoalType)
+            {
+                case TaskGoalType.TRIGGER:
+                    CheckTrigger();
+                    break;
+                case TaskGoalType.ITEM:
+                    CheckItem();
+                    break;
+                case TaskGoalType.ACTOR:
+                    CheckActor();
+                    break;
+                case TaskGoalType.DIALOGUE:
+                    CheckDialogue();
+                    break;
+                case TaskGoalType.SCRIPT:
+                    await CheckScript();
+                    break;
+            }
+        }
+        finally
+        {
+            isChecking = false;
+        }
 
-                onCheck = false;
-                yield break;
-            case TaskGoalType.DIALOGUE:
-                // Check if the DIALOGUE FINISHED
-                if (DialogueManager.Instance.IsDialogueIndexCompleted(targetDialogueId, index))
-                {
-                    IsDone = true;
-                    Debug.Log(targetDialogueId + " " + index + "检测成功");
-                }
-                else
-                {
-                    IsDone = false;
-                    Debug.Log(targetDialogueId + " " + index + "检测失败");
-                }
+        pendingCheck.TrySetResult(isDone);
+        return isDone;
+    }
 
-                onCheck = false;
-                yield break;
-            case TaskGoalType.SCRIPT:
-                // Check if the script coroutine has finished
-                if (targetScript != null)
-                {
-                    yield return targetScript.TaskIEnumerator();
-                    IsDone = targetScript.isDone;
-                }
-
-                onCheck = false;
-                yield break;
+    private void CheckTrigger()
+    {
+        targetState = GameFlowManager.Instance?.PlayingData?.GetState<InteractionState>(targetId);
+        if (targetState is InteractionState interactionState)
+        {
+            IsDone = interactionState.isTriggered == GoalTrigger;
+            Debug.Log($"{targetId} 触发检测: {(IsDone ? "成功" : "失败")}");
+        }
+        else
+        {
+            Debug.Log($"Target state not found: {targetId}");
+            IsDone = false;
         }
     }
 
-    private bool checkActor(Vector3 targetPostion, Vector3 targetRotation)
+    private void CheckItem()
     {
-        return Vector3.Distance(GoalPosition, targetPostion) < positionTolerance &&
-               Mathf.Abs(Quaternion.Angle(Quaternion.Euler(GoalRotation), Quaternion.Euler(targetRotation))) < rotationTolerance;
+        targetState = GameFlowManager.Instance?.PlayingData?.GetState<ItemState>(targetId);
+        if (targetState is ItemState itemState)
+        {
+            IsDone = itemState.isPicked == GoalItem;
+            Debug.Log($"{targetId} 物品检测: {(IsDone ? "成功" : "失败")}");
+        }
+        else
+        {
+            Debug.Log($"Target state not found: {targetId}");
+            IsDone = false;
+        }
+    }
+
+    private void CheckActor()
+    {
+        targetState = GameFlowManager.Instance?.PlayingData?.GetState<ActorState>(targetId);
+        if (targetState is ActorState actorState &&
+            actorState.position.HasValue &&
+            actorState.rotation.HasValue)
+        {
+            IsDone = CheckActorPosition(actorState.position.Value, actorState.rotation.Value);
+            Debug.Log($"{targetId} 角色位置检测: {(IsDone ? "成功" : "失败")}");
+        }
+        else
+        {
+            Debug.Log($"Target state not found or missing position/rotation: {targetId}");
+            IsDone = false;
+        }
+    }
+
+    private void CheckDialogue()
+    {
+        if (DialogueManager.Instance != null)
+        {
+            IsDone = DialogueManager.Instance.IsDialogueIndexCompleted(targetDialogueId, index);
+            Debug.Log($"{targetDialogueId} {index} 对话检测: {(IsDone ? "成功" : "失败")}");
+        }
+        else
+        {
+            IsDone = false;
+        }
+    }
+
+    private async UniTask CheckScript()
+    {
+        if (targetScript != null)
+        {
+            await targetScript.TaskIEnumerator();
+            IsDone = targetScript.isDone;
+        }
+        else
+        {
+            IsDone = false;
+        }
+    }
+
+    private bool CheckActorPosition(Vector3 targetPosition, Vector3 targetRotation)
+    {
+        float positionDistance = Vector3.Distance(GoalPosition, targetPosition);
+        float rotationAngle = Quaternion.Angle(Quaternion.Euler(GoalRotation), Quaternion.Euler(targetRotation));
+
+        return positionDistance < positionTolerance && rotationAngle < rotationTolerance;
     }
 
     public bool IsDone
     {
         get
         {
-            if (isDone) return isDone;
-            if (!onCheck) TaskManager.Instance.StartCoroutine(checkGoal());
-            isDone = targetScript.isDone;
+            if (isDone) return true;
+
+            // 异步检查（非阻塞，立即返回当前状态）
+            if (!isChecking)
+            {
+                CheckGoalAsync().Forget();
+            }
+
             return isDone;
         }
         set
@@ -149,10 +174,18 @@ public class TaskGoal
             isDone = value;
             if (isDone)
             {
-                // Perform actions when the task is completed
                 Debug.Log("Task completed!");
             }
         }
+    }
+
+    /// <summary>
+    /// 异步获取是否完成（会等待检查完成）
+    /// </summary>
+    public async UniTask<bool> IsDoneAsync()
+    {
+        if (isDone) return true;
+        return await CheckGoalAsync();
     }
 }
 

@@ -1,15 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class task0 : TaskBasic
 {
     public static bool init = false;
 
-    public override IEnumerator TaskIEnumerator()
+    public override async UniTask TaskIEnumerator()
     {
         Debug.Log("Task 0");
-        yield return new WaitUntil(() => init);
+
+        await UniTask.WaitUntil(() => init);
+
         isDone = true;
         init = false;
     }

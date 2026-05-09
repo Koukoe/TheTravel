@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using UnityEngine;
+using Cysharp.Threading.Tasks;
 
 public class DialogueManager : MonoBehaviour
 {
@@ -110,6 +111,16 @@ public class DialogueManager : MonoBehaviour
         }
 
         onCompleted?.Invoke();
+    }
+
+    /// <summary>
+    /// 以 UniTask 方式播放对话，可在外部 await 等待对话结束
+    /// </summary>
+    public async UniTask StartWithAsyncUniTask(TextAsset json, DialogueOnObj source = null)
+    {
+        StartWith(json, source);
+
+        await UniTask.WaitWhile(() => isDialogueActive);
     }
 
     /// <summary>
