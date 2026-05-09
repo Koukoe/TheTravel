@@ -1,0 +1,22 @@
+{
+  "dialogues": [
+    {
+      "id": "pop_storm_01",
+      "character": "engineer",
+      "content": "这么大的雨，很久没见过了。",
+      "nextId": "pop_storm_02"
+    },
+    {
+      "id": "pop_storm_02",
+      "character": "captain",
+      "content": "我闻到了风暴的味道，我猜我们该做好准备了，各位！",
+      "nextId": "pop_storm_03"
+    },
+    {
+      "id": "pop_storm_03",
+      "character": "cock",
+      "content": "小心，有闪电！",
+      "nextId": "end"
+    }
+  ]
+}
