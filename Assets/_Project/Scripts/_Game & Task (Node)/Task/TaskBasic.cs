@@ -5,10 +5,13 @@ public abstract class TaskBasic : MonoBehaviour
 {
     public bool isDone = false;
     private UniTaskCompletionSource _taskSignal;
-
+    private bool isTaskRunning = false;
     public async UniTask TaskIEnumerator()
     {
         if (isDone) { return; }   // 提前完成
+        if (isTaskRunning) { return; } // 防止重复调用
+
+        isTaskRunning = true;
 
         _taskSignal = new UniTaskCompletionSource();
         await OnTaskStart(); // 开始演出 
@@ -17,6 +20,8 @@ public abstract class TaskBasic : MonoBehaviour
         await UniTask.Yield();
         await UniTask.WaitUntil(() => !UIManager.Instance.UISys());  // 确保不是菜单或 Start
         OnTaskEnd();
+
+        isTaskRunning = false;
         isDone = true;
     }
 

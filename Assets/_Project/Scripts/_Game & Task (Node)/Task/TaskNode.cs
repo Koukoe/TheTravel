@@ -38,6 +38,9 @@ public class TaskNode : MonoBehaviour
         set
         {
             In = value;
+
+            TaskManager.Instance.SaveTaskNode(taskId);
+
             if (TaskManager.Instance.IsGraphInitialized && In <= 0 && !isTaskFinished)
             {
                 StartTask();

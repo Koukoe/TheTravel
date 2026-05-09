@@ -21,6 +21,7 @@ public abstract class BaseState
 
     public abstract BaseState Clone();
 
+    public abstract void Copyfrom(BaseState targetState);
     [NonSerialized] public Action OnDataChanged;  // 当前场景的变化委托，无需保存
 
     public void ScenedNotifyChanged() => OnDataChanged?.Invoke();
@@ -56,6 +57,18 @@ public class ActorState : BaseState
         clone.SetGUID(guid);
         return clone;
     }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as ActorState;
+        if (state != null)
+        {
+            position = state.position;
+            rotation = state.rotation;
+            isVisible = state.isVisible;
+            scene = state.scene;
+        }
+    }
 }
 
 /// <summary> 环境/交互物状态（门、机关） </summary>
@@ -83,6 +96,16 @@ public class InteractionState : BaseState
         clone.SetGUID(guid);
         return clone;
     }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as InteractionState;
+        if (state != null)
+        {
+            isTriggered = state.isTriggered;
+            stateIndex = state.stateIndex;
+        }
+    }
 }
 
 /// <summary> 物品/道具状态（图鉴） </summary>
@@ -106,6 +129,15 @@ public class ItemState : BaseState
         };
         clone.SetGUID(guid);
         return clone;
+    }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as ItemState;
+        if (state != null)
+        {
+            isPicked = state.isPicked;
+        }
     }
 }
 
@@ -136,5 +168,14 @@ public class RealSceneState : BaseState
         };
         clone.SetGUID(guid);
         return clone;
+    }
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as RealSceneState;
+        if (state != null)
+        {
+            targetPortalGuid = state.targetPortalGuid;
+            lastExitPosition = state.lastExitPosition;
+        }
     }
 }

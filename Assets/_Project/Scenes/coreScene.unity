@@ -1048,23 +1048,7 @@ MonoBehaviour:
   taskId: 0
   nextNodesIds:
   - 1
-  taskEffects:
-  - effectType: 0
-    targetGUID: 
-    targetInteractionState:
-      <guid>k__BackingField: 
-      name: 
-      isTriggered: 0
-      stateIndex: 0
-    targetItemState:
-      <guid>k__BackingField: 
-      name: 
-      isPicked: 0
-    targetActorState:
-      <guid>k__BackingField: 
-      name: 
-      isVisible: 0
-      scene: 
+  taskEffects: []
   taskEndEffects: []
   taskGoals:
   - taskGoalType: 4
