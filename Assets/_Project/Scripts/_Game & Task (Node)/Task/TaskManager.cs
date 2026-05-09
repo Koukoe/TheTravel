@@ -12,7 +12,6 @@ public class TaskManager : MonoBehaviour
     private void Awake()
     {
         Debug.Log("TaskManager Awake");
-        DontDestroyOnLoad(gameObject);
         if (Instance == null)
         {
             Instance = this;
