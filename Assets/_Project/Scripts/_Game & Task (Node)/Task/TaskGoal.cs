@@ -6,7 +6,7 @@ using UnityEngine;
 public class TaskGoal
 {
     public TaskGoalType taskGoalType;
-    [SerializeField] private bool isDone;
+    private bool isDone;
     public string targetId;
     [Header("是否应该触发")]
     public bool GoalTrigger;
