@@ -6,7 +6,6 @@ using System;
 [Serializable]
 public class TownSceneState : EntitySceneState
 {
-    public HashSet<string> activeEntityGuids = new HashSet<string>();
 }
 
 public class TownScene : EntityScene<TownSceneState>

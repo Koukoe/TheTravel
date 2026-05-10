@@ -19,7 +19,7 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
 
     [SerializeField] protected Transform defaultSpawnPoint;
 
-    protected T _state;
+    [SerializeField] protected T _state;
 
     public override RealSceneState GetBaseState() => _state;
 
