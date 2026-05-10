@@ -4,22 +4,15 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class ShipSceneState : RealSceneState
+public class ShipSceneState : EntitySceneState
 {
-    public HashSet<string> activeEntityGuids = new HashSet<string>();
 }
 
 public class ShipScene : EntityScene<ShipSceneState>
 {
-    // ...
-
-    protected override IEnumerable<string> GetActiveGuids() => _state.activeEntityGuids;
-
     public override void EnterScene()
     {
         base.EnterScene();
         Playermove.Instance.OnSea = false;
-
-        SpawnEntities();
     }
 }
