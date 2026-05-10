@@ -4,8 +4,6 @@ using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
-using Boxophobic.Constants;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
 
 public abstract class SceneBase : MonoBehaviour
 {
