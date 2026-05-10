@@ -4,6 +4,8 @@ using UnityEngine.SceneManagement;
 using Cysharp.Threading.Tasks;
 using System;
 using System.Threading;
+using Boxophobic.Constants;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 
 public abstract class SceneBase : MonoBehaviour
 {
@@ -79,6 +81,11 @@ public class GameSceneManager : MonoBehaviour
         if (IsLoading) return;
         IsLoading = true;
 
+        InputManager.Instance.SaveMode();
+        InputManager.Instance.SwitchAllMode();
+
+        await EffectManager.Instance.FadeOut();
+
         try
         {
             // 执行当前场景的退出逻辑
@@ -105,7 +112,14 @@ public class GameSceneManager : MonoBehaviour
             // CancelAllPreloadMain();
 
             InitNewMain(sceneName);
+
+            await UniTask.Delay(500);
+
             Debug.Log($"加载主场景 {sceneName} 成功捏");
+
+            InputManager.Instance.RestoreMode();
+
+            await EffectManager.Instance.FadeIn();
         }
         catch (Exception e)
         {

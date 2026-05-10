@@ -226,7 +226,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canvasRenderMode: 0
-  delay: 0
+  isCancelClosable: 0
+  delay: 0.5
   _listeners:
   - {fileID: -1698177666109926463}
 --- !u!114 &-1698177666109926463

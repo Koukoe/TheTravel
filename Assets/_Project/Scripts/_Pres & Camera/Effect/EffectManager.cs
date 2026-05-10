@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
+using DG.Tweening;
 
 public class EffectManager : MonoBehaviour
 {
     public static EffectManager Instance { get; private set; }
 
     [SerializeField] private Volume blurVolume;
+    [SerializeField] private CanvasGroup sceneTrans;
 
     private void Awake()
     {
@@ -20,6 +23,18 @@ public class EffectManager : MonoBehaviour
 
         StopAllCoroutines();
         StartCoroutine(FadeBlur(target));
+    }
+
+    public async UniTask FadeOut(float duration = 0.25f)
+    {
+        sceneTrans.gameObject.SetActive(true);
+        await sceneTrans.DOFade(1f, duration).AsyncWaitForCompletion();
+    }
+
+    public async UniTask FadeIn(float duration = 0.25f)
+    {
+        await sceneTrans.DOFade(0f, duration).AsyncWaitForCompletion();
+        sceneTrans.gameObject.SetActive(false);
     }
 
     private System.Collections.IEnumerator FadeBlur(float targetWeight)

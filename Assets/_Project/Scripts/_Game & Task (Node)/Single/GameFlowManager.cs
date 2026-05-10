@@ -23,7 +23,7 @@ public class GameFlowManager : MonoBehaviour
         // ... 布置背景
 
         InputManager.Instance.SwitchAllMode();
-        await GameSceneManager.Instance.LoadMain("Ocean");
+        GameSceneManager.Instance.LoadMain("Ocean").Forget();
         UIManager.Instance.Push("StartPanel");
     }
     public async UniTask LoadGame(int slotIndex)
