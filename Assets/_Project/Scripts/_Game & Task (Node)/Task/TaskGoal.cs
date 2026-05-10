@@ -1,5 +1,6 @@
 using System;
 using Cysharp.Threading.Tasks;
+using UnityEditor.SearchService;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,11 +12,14 @@ public class TaskGoal
     public string goalId;
 
     public string targetId;
+
+    public bool isCheckPlayer = false;
     [Header("是否应该触发")]
     public bool GoalTrigger;
     [Header("是否应该获得")]
     public bool GoalItem;
     [Header("角色目标位置")]
+    public string sceneName;
     public Vector3 GoalPosition;
     public Vector3 GoalRotation;
     [Header("位置和旋转的容差")]
@@ -143,18 +147,35 @@ public class TaskGoal
 
     private void CheckActor()
     {
-        targetState = GameFlowManager.Instance?.PlayingData?.GetState<ActorState>(targetId);
-        if (targetState is ActorState actorState &&
-            actorState.position.HasValue &&
-            actorState.rotation.HasValue)
+        if (isCheckPlayer)
         {
-            IsDone = CheckActorPosition(actorState.position.Value, actorState.rotation.Value);
-            Debug.Log($"{targetId} 角色位置检测: {(IsDone ? "成功" : "失败")}");
+            GameObject player = TaskManager.Instance.mainPlayer; // 获取玩家
+            if (player != null)
+            {
+                IsDone = CheckActorPosition(player.transform.position, player.transform.eulerAngles) && GameFlowManager.Instance.PlayingData.currentScene == sceneName;
+                Debug.Log($"玩家位置检测: {(IsDone ? "成功" : "失败")}");
+            }
+            else
+            {
+                Debug.Log("玩家未找到");
+                IsDone = false;
+            }
         }
         else
         {
-            Debug.Log($"Target state not found or missing position/rotation: {targetId}");
-            IsDone = false;
+            targetState = GameFlowManager.Instance?.PlayingData?.GetState<ActorState>(targetId);
+            if (targetState is ActorState actorState &&
+                actorState.position.HasValue &&
+                actorState.rotation.HasValue)
+            {
+                IsDone = CheckActorPosition(actorState.position.Value, actorState.rotation.Value) && GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetId).scene == sceneName;
+                Debug.Log($"{targetId} 角色位置检测: {(IsDone ? "成功" : "失败")}");
+            }
+            else
+            {
+                Debug.Log($"Target state not found or missing position/rotation: {targetId}");
+                IsDone = false;
+            }
         }
     }
 

@@ -10,6 +10,7 @@ public class TaskManager : MonoBehaviour
     public bool isGraphInitialized = false;
     public bool IsGraphInitialized => isGraphInitialized;
 
+    public GameObject mainPlayer; // 主玩家对象
     private bool isLoadingTasks = false;  // 防止加载时重复保存
 
     private HashSet<TaskNode> activeTasks = new HashSet<TaskNode>();

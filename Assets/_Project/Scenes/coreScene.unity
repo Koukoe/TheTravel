@@ -178,8 +178,10 @@ MonoBehaviour:
   - taskGoalType: 4
     goalId: Task1
     targetId: 
+    isCheckPlayer: 0
     GoalTrigger: 0
     GoalItem: 0
+    sceneName: 
     GoalPosition: {x: 0, y: 0, z: 0}
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
@@ -400,7 +402,7 @@ PrefabInstance:
     - target: {fileID: 1838346570009627158, guid: 0520016d4adca604cb07430311fbc4ba,
         type: 3}
       propertyPath: ShipRotateSpeed
-      value: 0.28
+      value: 0.45
       objectReference: {fileID: 0}
     - target: {fileID: 1838346570009627158, guid: 0520016d4adca604cb07430311fbc4ba,
         type: 3}
@@ -935,15 +937,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskName: 
   taskId: 2
-  nextNodesIds: []
+  nextNodesIds:
+  - 2
   taskEffects: []
   taskEndEffects: []
   taskGoals:
   - taskGoalType: 4
     goalId: Task2
     targetId: 
+    isCheckPlayer: 0
     GoalTrigger: 0
     GoalItem: 0
+    sceneName: 
     GoalPosition: {x: 0, y: 0, z: 0}
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
@@ -1067,6 +1072,11 @@ PrefabInstance:
       propertyPath: gameCameraCanvasObj
       value: 
       objectReference: {fileID: 190742776}
+    - target: {fileID: 5138782921258128533, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: mainPlayer
+      value: 
+      objectReference: {fileID: 123038303}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1076,6 +1086,73 @@ PrefabInstance:
       addedObject: {fileID: 1063414384}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: deabcb973bdd1b84ba87ca93c9696dda, type: 3}
+--- !u!1 &883867779
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 883867780}
+  - component: {fileID: 883867782}
+  m_Layer: 0
+  m_Name: task3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &883867780
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883867779}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063414384}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &883867782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 883867779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7311e9a976b960498e7bb2bbdd128f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: 
+  taskId: 3
+  nextNodesIds: []
+  taskEffects: []
+  taskEndEffects: []
+  taskGoals:
+  - taskGoalType: 2
+    goalId: Task3
+    targetId: 
+    isCheckPlayer: 1
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: ColorfulTown
+    GoalPosition: {x: 782.32, y: 39.33, z: 151.09}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 5
+    rotationTolerance: 360
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
+  nextNodes: []
+  Out: 0
+  isTaskFinished: 0
 --- !u!1 &1063414383
 GameObject:
   m_ObjectHideFlags: 0
@@ -1108,6 +1185,7 @@ Transform:
   - {fileID: 1101113605}
   - {fileID: 33107830}
   - {fileID: 535563470}
+  - {fileID: 883867780}
   m_Father: {fileID: 223556512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1066129547 stripped
@@ -1277,8 +1355,10 @@ MonoBehaviour:
   - taskGoalType: 4
     goalId: Task0
     targetId: 
+    isCheckPlayer: 0
     GoalTrigger: 0
     GoalItem: 0
+    sceneName: 
     GoalPosition: {x: 0, y: 0, z: 0}
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
