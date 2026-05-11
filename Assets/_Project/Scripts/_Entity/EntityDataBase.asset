@@ -10,12 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65042a0e96b6e3d48a66765f9cd60f90, type: 3}
-  m_Name: EntityDatabase
+  m_Name: EntityDataBase
   m_EditorClassIdentifier: 
   allEntities:
-  - guid: NPC_Default
-    defaultName: NPC_Default
-    prefab: {fileID: 2809459168998376706, guid: 3fc91d911d9416b44a9a05d4c708913b,
+  - guid: ColorfulTown_NPC_01
+    defaultName: 
+    prefab: {fileID: 3640438715340953690, guid: 5361424653cecc1478c2f2b074a4baa1,
       type: 3}
-    defaultPosition: {x: 0, y: 0, z: 0}
-    defaultRotation: {x: 0, y: 0, z: 0}
+    defaultPosition: {x: 728.76, y: 33.35, z: 154.86}
+    defaultRotation: {x: 0, y: 67.25, z: 0}
+  - guid: ColorfulTown_NPC_02
+    defaultName: 
+    prefab: {fileID: 2874207229094686187, guid: 84e7602832fe7754ca44744abb587865,
+      type: 3}
+    defaultPosition: {x: 716.62, y: 50.33, z: 17.19}
+    defaultRotation: {x: 0, y: 100.42, z: 0}
+  - guid: ColorfulTown_NPC_03
+    defaultName: 
+    prefab: {fileID: 8247572275990922520, guid: b76ecf430196682489d09e6fef1dad9a,
+      type: 3}
+    defaultPosition: {x: 693.78, y: 79.97, z: 299.75}
+    defaultRotation: {x: 0, y: 164.04, z: 0}
