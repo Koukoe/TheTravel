@@ -1202,8 +1202,43 @@ MonoBehaviour:
   taskId: 4
   nextNodesIds: []
   taskEffects: []
-  taskEndEffects: []
-  taskGoals: []
+  taskEndEffects:
+  - effectType: 2
+    targetGUID: Old_Captain
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: "\u8001\u8239\u957F"
+      serializedPosition: {x: 538.81, y: 45.7787, z: 467.7}
+      serializedRotation: {x: 0, y: 191.8, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: WhiteTown
+      animState: 0
+  taskGoals:
+  - taskGoalType: 3
+    goalId: task4
+    targetId: Old_Captain
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: Old_Captain
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0

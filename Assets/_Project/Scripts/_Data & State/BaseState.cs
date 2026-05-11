@@ -31,12 +31,43 @@ public abstract class BaseState
 [Serializable]
 public class ActorState : BaseState
 {
-    public Vector3? position = null;
-    public Vector3? rotation = null;
-    public bool isVisible;
-    public string scene;
+    // 序列化用的私有字段
+    [SerializeField] private Vector3 serializedPosition;
+    [SerializeField] private Vector3 serializedRotation;
+    [SerializeField] private bool hasPosition;
+    [SerializeField] private bool hasRotation;
 
-    public string animState;
+    // 公开的可空属性
+    public Vector3? position
+    {
+        get => hasPosition ? serializedPosition : null;
+        set
+        {
+            hasPosition = value.HasValue;
+            serializedPosition = value ?? Vector3.zero;
+        }
+    }
+
+    public Vector3? rotation
+    {
+        get => hasRotation ? serializedRotation : null;
+        set
+        {
+            hasRotation = value.HasValue;
+            serializedRotation = value ?? Vector3.zero;
+        }
+    }
+
+    public bool isVisible;
+
+    [SerializeField] private string Scene; // 改为 SerializeField 以支持序列化
+    public string scene
+    {
+        get => Scene;
+        set => Scene = value;
+    }
+
+    public AnimState animState;
 
     public override void Init(string id)
     {
@@ -46,15 +77,26 @@ public class ActorState : BaseState
         scene = "";
     }
 
+    public enum AnimState
+    {
+        IDLE,
+        WALK,
+        RUN,
+        SIT
+    }
+
     public override BaseState Clone()
     {
         var clone = new ActorState()
         {
             name = name,
-            position = position,
-            rotation = rotation,
+            hasPosition = this.hasPosition,
+            hasRotation = this.hasRotation,
+            serializedPosition = this.serializedPosition,
+            serializedRotation = this.serializedRotation,
             isVisible = isVisible,
-            scene = scene
+            scene = scene,
+            animState = animState
         };
         clone.SetGUID(guid);
         return clone;
@@ -65,10 +107,13 @@ public class ActorState : BaseState
         var state = targetState as ActorState;
         if (state != null)
         {
-            position = state.position;
-            rotation = state.rotation;
+            hasPosition = state.hasPosition;
+            hasRotation = state.hasRotation;
+            serializedPosition = state.serializedPosition;
+            serializedRotation = state.serializedRotation;
             isVisible = state.isVisible;
             scene = state.scene;
+            animState = state.animState;
         }
     }
 }
