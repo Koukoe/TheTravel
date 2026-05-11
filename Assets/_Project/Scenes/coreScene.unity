@@ -1240,7 +1240,7 @@ MonoBehaviour:
     GoalTrigger: 0
     GoalItem: 0
     sceneName: ColorfulTown
-    GoalPosition: {x: 782.32, y: 39.33, z: 151.09}
+    GoalPosition: {x: 782.32, y: 33, z: 151.09}
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 5
     rotationTolerance: 360

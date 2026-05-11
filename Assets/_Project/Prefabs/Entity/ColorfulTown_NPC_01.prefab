@@ -125,6 +125,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 0476ad345e8218244b33f2c5ac96acbc, type: 3}
   - {fileID: 4900000, guid: 2af321f5aaafae34abe7256d3cf9a31d, type: 3}
   dialogueIndex: 0
+  _tipOffset: {x: 0, y: 0, z: 0}
 --- !u!1001 &1820485724159158272
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -136,17 +137,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: b3110757a292eb44a8c0d17d75bc7987,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.85
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3110757a292eb44a8c0d17d75bc7987,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.85
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3110757a292eb44a8c0d17d75bc7987,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.85
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3110757a292eb44a8c0d17d75bc7987,
         type: 3}

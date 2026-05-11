@@ -67,6 +67,7 @@ MonoBehaviour:
   dialogueJsonList:
   - {fileID: 4900000, guid: 52151ea9b471c8545b6d51ae2fb884f4, type: 3}
   dialogueIndex: 0
+  _tipOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8015446812688959205
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,17 +134,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: d8657acf06603b0488e586197c7c19df,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.85
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8657acf06603b0488e586197c7c19df,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.85
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8657acf06603b0488e586197c7c19df,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.85
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: d8657acf06603b0488e586197c7c19df,
         type: 3}
