@@ -489,6 +489,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8680654676382895523, guid: 0520016d4adca604cb07430311fbc4ba,
+        type: 3}
+      propertyPath: detector
+      value: 
+      objectReference: {fileID: 398332639}
     - target: {fileID: 8716819770462710724, guid: 0520016d4adca604cb07430311fbc4ba,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -499,7 +504,8 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 459196953911024146, guid: 0520016d4adca604cb07430311fbc4ba, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 629024614620081278, guid: 0520016d4adca604cb07430311fbc4ba,
@@ -515,6 +521,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 123038310}
+    - targetCorrespondingSourceObject: {fileID: 4954217447448694532, guid: 0520016d4adca604cb07430311fbc4ba,
+        type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 398332639}
   m_SourcePrefab: {fileID: 100100000, guid: 0520016d4adca604cb07430311fbc4ba, type: 3}
 --- !u!1 &123038303 stripped
 GameObject:
@@ -884,6 +894,24 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
+--- !u!1 &398332636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4954217447448694532, guid: 0520016d4adca604cb07430311fbc4ba,
+    type: 3}
+  m_PrefabInstance: {fileID: 123038302}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &398332639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398332636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4043c89ec4a15274e99d8ad5df10b57e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &517527843 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8043200762416623771, guid: c5240a486a22d12449e3f8de7ad4c734,
@@ -1077,6 +1105,74 @@ PrefabInstance:
       propertyPath: mainPlayer
       value: 
       objectReference: {fileID: 123038303}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.size
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[14].name
+      value: InteractTipCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[15].name
+      value: InteractTipWorld
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[16].name
+      value: DialogueBubblePanel
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[14].prefab
+      value: 
+      objectReference: {fileID: 3268397422667552280, guid: 8f332510dda896d42a93b2968fb8d28a,
+        type: 3}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[15].prefab
+      value: 
+      objectReference: {fileID: 3268397422667552280, guid: d9a3c1bfac9211041ad89c5f475fcf46,
+        type: 3}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[16].prefab
+      value: 
+      objectReference: {fileID: 2788164371376000870, guid: 9fe5260167bee424cbc1a14de0382f48,
+        type: 3}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[14].maxSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[15].maxSize
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[16].maxSize
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[14].prewarmCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[15].prewarmCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: configs.Array.data[16].prewarmCount
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:

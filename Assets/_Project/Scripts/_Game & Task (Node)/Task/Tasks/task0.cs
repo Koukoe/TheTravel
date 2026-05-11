@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class task0 : TaskBasic
 {
-    protected override async UniTask OnTaskStart()
+    protected override UniTask OnTaskStart()
     {
         Debug.Log("Task Initial");
         FinishTask();
+        return UniTask.CompletedTask;
     }
 
     protected override void OnTaskEnd()

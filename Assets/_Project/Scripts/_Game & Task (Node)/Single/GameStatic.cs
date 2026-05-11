@@ -23,7 +23,7 @@ public static class GameStatic
         }
         if (!DataGlobalSystem.Get().hasEnteredGame)
         {
-            await GameFlowManager.Instance.NewGame();
+            GameFlowManager.Instance.NewGame();
         }
         else
         {
