@@ -25,10 +25,7 @@ public class InputManager : MonoBehaviour
         _controls = new GameInput();
     }
 
-    private void OnEnable()
-    {
-        if (_controls != null) SwitchAllMode();
-    }
+    private void OnEnable() => _controls?.Enable();
 
     private void OnDisable() => _controls?.Disable();
 
