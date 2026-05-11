@@ -17,8 +17,9 @@ public class DataArchive
     public DataArchive()
     {
         saveTime = "----/--/--";
-        currentScene = "";  // 海
+        currentScene = "Ocean";  // 海
         states = new Dictionary<string, BaseState>();
+        TaskNodesDic = new Dictionary<string, (int, bool)>();
     }
 
 

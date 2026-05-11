@@ -111,9 +111,7 @@ MonoBehaviour:
   m_RequiresDepthTextureOption: 2
   m_RequiresOpaqueTextureOption: 2
   m_CameraType: 0
-  m_Cameras:
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Cameras: []
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
@@ -168,8 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1cab95cdf8a5dc4c961a517bd87a612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cam: {fileID: 4134283878781934809}
-  camPos: {fileID: 4250986594625255979}
   target: {fileID: 0}
   currentMode: 0
   smoothSpeed: 0.125
+  CamY: 50

@@ -1,5 +1,149 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &636175947209617862
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4989414629464645764}
+  - component: {fileID: 840004280599201347}
+  - component: {fileID: 8703890843440354694}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4989414629464645764
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636175947209617862}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5738797098375120236}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &840004280599201347
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636175947209617862}
+  m_CullTransparentMesh: 1
+--- !u!114 &8703890843440354694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 636175947209617862}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
+--- !u!1 &1079029328110484736
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5345650196414182916}
+  - component: {fileID: 4549850531454452458}
+  - component: {fileID: 8280458675147956868}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5345650196414182916
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079029328110484736}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6434556684911698950}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4549850531454452458
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079029328110484736}
+  m_CullTransparentMesh: 1
+--- !u!114 &8280458675147956868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1079029328110484736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1188359478564359038
 GameObject:
   m_ObjectHideFlags: 0
@@ -36,6 +180,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4824340371905621945}
+  - {fileID: 8628875766871376890}
   m_Father: {fileID: 2116850069380713088}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -151,7 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -159,11 +304,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.4
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -171,11 +325,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.4
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -185,9 +356,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -197,10 +377,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &7142742416299879185
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,6 +410,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 7183417572043941927}
+  infoText: {fileID: 8645243877809128865}
 --- !u!1 &1406930854060145348
 GameObject:
   m_ObjectHideFlags: 0
@@ -468,6 +652,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8204621716953601851}
+  - {fileID: 5345650196414182916}
   m_Father: {fileID: 1179829401367757048}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -583,7 +768,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -591,11 +776,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.25
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -603,11 +797,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.25
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -617,9 +828,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -629,10 +849,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &5610124787854105662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -660,6 +882,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 8280458675147956868}
+  infoText: {fileID: 5881770523622881888}
 --- !u!1 &1585898504411045266
 GameObject:
   m_ObjectHideFlags: 0
@@ -696,6 +920,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6203352482544795860}
+  - {fileID: 4989414629464645764}
   m_Father: {fileID: 3779989696312667229}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -811,7 +1036,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -819,11 +1044,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -831,11 +1065,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -845,9 +1096,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -857,10 +1117,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &2982296562812254367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -888,6 +1150,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 8703890843440354694}
+  infoText: {fileID: 5647395889478854108}
 --- !u!1 &1662697415057415939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1287,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &1691703349782116013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5882173337580611420}
+  - component: {fileID: 243677222279288187}
+  - component: {fileID: 6726410214515613763}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5882173337580611420
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691703349782116013}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8053024746566627367}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &243677222279288187
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691703349782116013}
+  m_CullTransparentMesh: 1
+--- !u!114 &6726410214515613763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1691703349782116013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &1760767795522024275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1665,6 +2001,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &2746200731130702313
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8628875766871376890}
+  - component: {fileID: 772808781076748322}
+  - component: {fileID: 7183417572043941927}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8628875766871376890
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2746200731130702313}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1016291421348582681}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &772808781076748322
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2746200731130702313}
+  m_CullTransparentMesh: 1
+--- !u!114 &7183417572043941927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2746200731130702313}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &2841149510771220449
 GameObject:
   m_ObjectHideFlags: 0
@@ -2101,6 +2509,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4016355960905813636}
+  - {fileID: 4609322940233073825}
   m_Father: {fileID: 8722455635862893103}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2216,7 +2625,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -2224,11 +2633,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.2
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -2236,11 +2654,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.2
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -2250,9 +2685,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -2262,10 +2706,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &2896052474135878094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2293,6 +2739,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 5216503199320176740}
+  infoText: {fileID: 7867815948392292263}
+--- !u!1 &4571068751608134292
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4609322940233073825}
+  - component: {fileID: 4151730412819209325}
+  - component: {fileID: 5216503199320176740}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &4609322940233073825
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571068751608134292}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 215939913212635497}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &4151730412819209325
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571068751608134292}
+  m_CullTransparentMesh: 1
+--- !u!114 &5216503199320176740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4571068751608134292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &4620750856300788986
 GameObject:
   m_ObjectHideFlags: 0
@@ -2601,6 +3121,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &5309689828924673924
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 640731084151503670}
+  - component: {fileID: 903142633016727050}
+  - component: {fileID: 2601719553141148312}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &640731084151503670
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309689828924673924}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2921466794526597341}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &903142633016727050
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309689828924673924}
+  m_CullTransparentMesh: 1
+--- !u!114 &2601719553141148312
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5309689828924673924}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &5767213875754328943
 GameObject:
   m_ObjectHideFlags: 0
@@ -2637,6 +3229,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2155990125660990549}
+  - {fileID: 8345812850309251663}
   m_Father: {fileID: 4664257679966670153}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2752,7 +3345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -2760,11 +3353,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.35
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -2772,11 +3374,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.35
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -2786,9 +3405,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -2798,10 +3426,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &581711037729453140
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2829,6 +3459,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 1624319757985289746}
+  infoText: {fileID: 7780293388390783475}
 --- !u!1 &6783838352499835689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3168,6 +3800,78 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!1 &7285154420201617703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8628399199485715743}
+  - component: {fileID: 7221854765784879556}
+  - component: {fileID: 8715408377728298786}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8628399199485715743
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285154420201617703}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8716502832620431867}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &7221854765784879556
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285154420201617703}
+  m_CullTransparentMesh: 1
+--- !u!114 &8715408377728298786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7285154420201617703}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &7611256833382380195
 GameObject:
   m_ObjectHideFlags: 0
@@ -3270,6 +3974,78 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &7891079768864138269
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1629451062563012115}
+  - component: {fileID: 5399890888154929832}
+  - component: {fileID: 6301287225209930819}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1629451062563012115
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891079768864138269}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 940988359607583240}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &5399890888154929832
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891079768864138269}
+  m_CullTransparentMesh: 1
+--- !u!114 &6301287225209930819
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7891079768864138269}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &7897183904796120238
 GameObject:
   m_ObjectHideFlags: 0
@@ -3306,6 +4082,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 46450236617042945}
+  - {fileID: 640731084151503670}
   m_Father: {fileID: 2920485478824140784}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -3421,7 +4198,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -3429,11 +4206,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.15
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -3441,11 +4227,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.15
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -3455,9 +4258,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -3467,10 +4279,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &1142512913769423128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3498,6 +4312,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 2601719553141148312}
+  infoText: {fileID: 3434164367206781212}
 --- !u!1 &8049711160506698757
 GameObject:
   m_ObjectHideFlags: 0
@@ -3636,6 +4452,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6328415505997053242}
+  - {fileID: 1629451062563012115}
   m_Father: {fileID: 4146338383865717627}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -3751,7 +4568,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -3759,11 +4576,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.3
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -3771,11 +4597,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.3
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -3785,9 +4628,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -3797,10 +4649,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &3961306756447757740
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3828,6 +4682,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 6301287225209930819}
+  infoText: {fileID: 3446277938013971883}
 --- !u!1 &8373467849987933345
 GameObject:
   m_ObjectHideFlags: 0
@@ -3930,6 +4786,78 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &8564068316033557916
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8345812850309251663}
+  - component: {fileID: 8864996261132887704}
+  - component: {fileID: 1624319757985289746}
+  m_Layer: 5
+  m_Name: RawImage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &8345812850309251663
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564068316033557916}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1333220321928301951}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &8864996261132887704
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564068316033557916}
+  m_CullTransparentMesh: 1
+--- !u!114 &1624319757985289746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8564068316033557916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1344c3c82d62a2a41a3576d8abb8e3ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Texture: {fileID: 0}
+  m_UVRect:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1
+    height: 1
 --- !u!1 &8604366400197145537
 GameObject:
   m_ObjectHideFlags: 0
@@ -3966,6 +4894,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3789233319273415010}
+  - {fileID: 8628399199485715743}
   m_Father: {fileID: 2560147412032531790}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -4081,7 +5010,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -4089,11 +5018,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.1
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -4101,11 +5039,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.1
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -4115,9 +5070,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -4127,10 +5091,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &3952121674292998725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4158,6 +5124,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 8715408377728298786}
+  infoText: {fileID: 1245192021410404880}
 --- !u!1 &8722844092480842738
 GameObject:
   m_ObjectHideFlags: 0
@@ -4194,6 +5162,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4152864218536905682}
+  - {fileID: 5882173337580611420}
   m_Father: {fileID: 5227417272372917066}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -4309,7 +5278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isProvider: 1
   openConfig:
-    ease:
+    posEase:
       type: 8
       curve:
         serializedVersion: 2
@@ -4317,11 +5286,20 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.05
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   closeConfig:
-    ease:
+    posEase:
       type: 7
       curve:
         serializedVersion: 2
@@ -4329,11 +5307,28 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
+    angleEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
     duration: 0.6
     delay: 0.05
-    offset: {x: 1000, y: 0}
+    posOffset: {x: 1000, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   resumeConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -4343,9 +5338,18 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   suspendConfig:
-  - ease:
+  - posEase:
+      type: 0
+      curve:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+    angleEase:
       type: 0
       curve:
         serializedVersion: 2
@@ -4355,10 +5359,12 @@ MonoBehaviour:
         m_RotationOrder: 4
     duration: 0
     delay: 0
-    offset: {x: 0, y: 0}
+    posOffset: {x: 0, y: 0, z: 0}
+    angleOffset: {x: 0, y: 0, z: 0}
   useHideLogicForSuspend: 1
   rectTransform: {fileID: 0}
-  targetPos: {x: 0, y: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  targetAngles: {x: 0, y: 0, z: 0}
 --- !u!114 &7961318036840315236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4386,3 +5392,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isProvider: 1
+  screenshotPreview: {fileID: 6726410214515613763}
+  infoText: {fileID: 5374651195913442898}

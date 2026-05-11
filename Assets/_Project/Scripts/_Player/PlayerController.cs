@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         if (moveEnable) Playermove.Instance.Move();
     }

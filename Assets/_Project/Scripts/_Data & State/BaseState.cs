@@ -21,6 +21,7 @@ public abstract class BaseState
 
     public abstract BaseState Clone();
 
+    public abstract void Copyfrom(BaseState targetState);
     [NonSerialized] public Action OnDataChanged;  // 当前场景的变化委托，无需保存
 
     public void ScenedNotifyChanged() => OnDataChanged?.Invoke();
@@ -34,6 +35,8 @@ public class ActorState : BaseState
     public Vector3? rotation = null;
     public bool isVisible;
     public string scene;
+
+    public string animState;
 
     public override void Init(string id)
     {
@@ -55,6 +58,18 @@ public class ActorState : BaseState
         };
         clone.SetGUID(guid);
         return clone;
+    }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as ActorState;
+        if (state != null)
+        {
+            position = state.position;
+            rotation = state.rotation;
+            isVisible = state.isVisible;
+            scene = state.scene;
+        }
     }
 }
 
@@ -83,6 +98,16 @@ public class InteractionState : BaseState
         clone.SetGUID(guid);
         return clone;
     }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as InteractionState;
+        if (state != null)
+        {
+            isTriggered = state.isTriggered;
+            stateIndex = state.stateIndex;
+        }
+    }
 }
 
 /// <summary> 物品/道具状态（图鉴） </summary>
@@ -106,6 +131,15 @@ public class ItemState : BaseState
         };
         clone.SetGUID(guid);
         return clone;
+    }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as ItemState;
+        if (state != null)
+        {
+            isPicked = state.isPicked;
+        }
     }
 }
 
@@ -136,5 +170,38 @@ public class RealSceneState : BaseState
         };
         clone.SetGUID(guid);
         return clone;
+    }
+    public override void Copyfrom(BaseState targetState)
+    {
+        var state = targetState as RealSceneState;
+        if (state != null)
+        {
+            targetPortalGuid = state.targetPortalGuid;
+            lastExitPosition = state.lastExitPosition;
+        }
+    }
+}
+
+[Serializable]
+public class TaskGoalState : BaseState
+{
+    public bool isReached;
+
+    public override void Init(string id)
+    {
+        base.Init(id);
+        isReached = false;
+    }
+
+    public override BaseState Clone()
+    {
+        var clone = new TaskGoalState() { isReached = isReached };
+        clone.SetGUID(guid);
+        return clone;
+    }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        if (targetState is TaskGoalState state) isReached = state.isReached;
     }
 }

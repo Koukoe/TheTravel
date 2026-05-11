@@ -74,6 +74,8 @@ public class FountainWaterRipple : MonoBehaviour
         }
     }
 
+
+#if UNITY_EDITOR
     void OnDrawGizmos()
     {
         // 只在选中物体或开启调试时显示
@@ -94,4 +96,6 @@ public class FountainWaterRipple : MonoBehaviour
 
         // 添加文字标签（需要 Handles API，见下方升级版）
     }
+#endif
+
 }

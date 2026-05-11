@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueOnObj : MonoBehaviour
+public class DialogueOnObj : MonoBehaviour, IInteractable
 {
     [SerializeField]
     [Tooltip("用于识别对话进度的唯一 ID。设置后, 索引会通过 DialogueManager 对应的 DialogueState 管理")]
     private string dialogueGuid = string.Empty;
+
+    [SerializeField]
+    [Tooltip("交互优先级")]
+    private int interactionPriority = 0;
 
     [SerializeField] private List<TextAsset> dialogueJsonList = new List<TextAsset>();
     [SerializeField]
@@ -16,6 +20,8 @@ public class DialogueOnObj : MonoBehaviour
     public string DialogueGuid => dialogueGuid;
     public IReadOnlyList<TextAsset> DialogueJsonList => dialogueJsonList;
     public int DialogueIndex => GetEffectiveDialogueIndex();
+
+    public int Priority => interactionPriority;
 
     /// <summary>
     /// 触发当前索引对应的对话
@@ -106,5 +112,31 @@ public class DialogueOnObj : MonoBehaviour
         }
 
         return Mathf.Clamp(index, 0, dialogueJsonList.Count - 1);
+    }
+
+    /// <summary>
+    /// 判断是否可以交互 条件：
+    /// 1. 对话列表非空
+    /// 2. 当前对话文本有效
+    /// </summary>
+    public bool CanInteract()
+    {
+        if (dialogueJsonList == null || dialogueJsonList.Count == 0)
+        {
+            return false;
+        }
+
+        TextAsset currentDialogue = GetCurrentDialogue();
+        if (currentDialogue == null)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
+    public void DoInteract()
+    {
+        TriggerDialogue();
     }
 }

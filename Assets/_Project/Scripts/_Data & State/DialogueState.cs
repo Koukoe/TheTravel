@@ -19,4 +19,9 @@ public class DialogueState : BaseState
     {
         throw new NotImplementedException();
     }
+
+    public override void Copyfrom(BaseState targetState)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -16,6 +15,10 @@ public class InputManager : MonoBehaviour
 
     private GameInput _controls;
 
+    private enum InputMode { UI, All, PlayerDyn, PlayerDia }
+    private InputMode _currentMode = InputMode.UI;
+    private InputMode _lastMode = InputMode.UI;
+
     private void Awake()
     {
         Instance = this;
@@ -24,7 +27,7 @@ public class InputManager : MonoBehaviour
 
     private void OnEnable()
     {
-        if (_controls != null) SwitchUIMode();
+        if (_controls != null) SwitchAllMode();
     }
 
     private void OnDisable() => _controls?.Disable();
@@ -41,12 +44,29 @@ public class InputManager : MonoBehaviour
         gamepadZoomSensitivity = 1f * s;
     }
 
+    public void SaveMode()
+    {
+        _lastMode = _currentMode;
+    }
+
+    public void RestoreMode()
+    {
+        switch (_lastMode)
+        {
+            case InputMode.UI: SwitchUIMode(); break;
+            case InputMode.All: SwitchAllMode(); break;
+            case InputMode.PlayerDyn: SwitchPlayerMode(true); break;
+            case InputMode.PlayerDia: SwitchPlayerMode(false); break;
+        }
+    }
+
     /// <summary>
     /// 切换为面板操作：取消
     /// <paramref name="isMenu"/> 是 Sys（菜单）面板，关闭PlayerSta；是 Game 面板，则无视
     /// </summary>
     public void SwitchUIMode(bool isSys = true)  // 其他操作在Eventsystem里，只是没必要再分一个
     {
+        _currentMode = InputMode.UI;
         UnityEngine.Debug.Log("切换至 UI Map");
         _controls.PlayerDyn.Disable();
         _controls.PlayerDia.Disable();
@@ -61,6 +81,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void SwitchAllMode()
     {
+        _currentMode = InputMode.All;
         UnityEngine.Debug.Log("切换至 All Map");
         _controls.PlayerDyn.Disable();
         _controls.PlayerDia.Disable();
@@ -75,6 +96,7 @@ public class InputManager : MonoBehaviour
     /// </summary>
     public void SwitchPlayerMode(bool isDyn = true)
     {
+        _currentMode = isDyn ? InputMode.PlayerDyn : InputMode.PlayerDia;
         _controls.UI.Disable();
         _controls.All.Disable();
 

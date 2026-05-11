@@ -360,7 +360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e21bd9552bb0a478707c63266e3242, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canvasRenderMode: 0
+  canvasRenderMode: 2
   isCancelClosable: 0
   delay: 0
   _listeners: []

@@ -59,6 +59,21 @@ public class UIManager : MonoBehaviour
     }
 
     public BasePanel Peek() => _singleStack.Count > 0 ? _singleStack.Peek() : null;
+    public bool UISys()
+    {
+        // 检查栈顶面板
+        var topPanel = Peek();
+        bool topIsSys = topPanel != null &&
+                       (topPanel.CanvasRenderMode == CanvasRender.SYS2D ||
+                        topPanel.CanvasRenderMode == CanvasRender.SYS3D);
+
+        // 检查正在离场的面板
+        bool closingIsSys = closingPanel != null &&
+                           (closingPanel.CanvasRenderMode == CanvasRender.SYS2D ||
+                            closingPanel.CanvasRenderMode == CanvasRender.SYS3D);
+        return topIsSys || closingIsSys || isTransitioning;
+    }
+
     public int Count => _singleStack.Count;
 
     /// <summary>

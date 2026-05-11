@@ -1,9 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
+using System.Threading;
+using System;
 
+[DefaultExecutionOrder(1)]
 public class TaskNode : MonoBehaviour
 {
     public string taskName;
@@ -19,27 +20,31 @@ public class TaskNode : MonoBehaviour
     [Header("任务节点目标")]
     public List<TaskGoal> taskGoals = new List<TaskGoal>();
 
-    [ReadOnly(true)] public List<TaskNode> nextNodes = new List<TaskNode>();
-    [Tooltip("这个任务节点的出度")]
-    [ReadOnly(true)] public int Out;
-    [Tooltip("这个任务节点的入度")]
-    [ReadOnly(true)] private int In;
-
+    [HideInInspector]
+    public List<TaskNode> nextNodes = new List<TaskNode>();
+    [HideInInspector]
+    public int Out;
+    private int In = 0;
+    [HideInInspector]
     public bool isTaskFinished = false;
 
+    // 取消相关
+    private CancellationTokenSource _taskCts;
+    private bool isTaskRunning = false;
 
     public int Inn
     {
         get { return In; }
         set
         {
-            TaskManager.Instance.SaveTaskNode(taskId);
             In = value;
-            Debug.Log(taskName + " " + taskId + "In: " + In);
 
-            if (In == 0)
+            Debug.Log(taskId + "入度为" + In);
+            TaskManager.Instance.SaveTaskNode(taskId);
+
+            if (TaskManager.Instance.IsGraphInitialized && In <= 0 && !isTaskFinished)
             {
-                TaskInit();
+                StartTask();
             }
         }
     }
@@ -50,22 +55,95 @@ public class TaskNode : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-
-    void TaskInit()
+    void OnDestroy()
     {
-        if (isTaskFinished) return;
-        StartCoroutine(StartTask());
+        CancelTask();
     }
 
-    IEnumerator StartTask()
+    /// <summary>
+    /// 启动任务（外部可调用）
+    /// </summary>
+    public void StartTask()
     {
-        foreach (var effect in taskEffects)
+        if (isTaskFinished)
         {
-            effect.ApplyEffect();
+            Debug.Log($"任务 {taskId} 已完成，无需启动");
+            return;
         }
 
-        yield return StartCoroutine(CheckTaskFinished());
+        if (isTaskRunning)
+        {
+            Debug.Log($"任务 {taskId} 已在运行中");
+            return;
+        }
 
+        StartTaskAsync().Forget();
+    }
+
+    /// <summary>
+    /// 取消当前正在运行的任务
+    /// </summary>
+    public void CancelTask()
+    {
+        if (_taskCts != null)
+        {
+            _taskCts.Cancel();
+            _taskCts.Dispose();
+            _taskCts = null;
+        }
+        isTaskRunning = false;
+    }
+
+    /// <summary>
+    /// 重置任务状态（用于读档后重新启动）
+    /// </summary>
+    public void ResetForLoad()
+    {
+        CancelTask();
+        isTaskFinished = false;
+        isTaskRunning = false;
+        // 注意：TaskGoal 的 isDone 状态需要单独处理
+    }
+
+    // --- 【重构部分：新增刷新方法，用于替代原本的 while 轮询】 ---
+
+    /// <summary>
+    /// 刷新任务状态，检查目标是否全部达成
+    /// </summary>
+    public void RefreshStatus()
+    {
+        if (isTaskFinished) return;
+
+        bool allDone = true;
+
+        foreach (var goal in taskGoals)
+        {
+            // 直接读取重构后的 IsDone 属性（内部已关联 PlayingData 存档）
+            if (!goal.IsDone)
+            {
+                allDone = false;
+                break;
+            }
+        }
+
+        if (allDone)
+        {
+            OnTaskSuccess();
+        }
+    }
+
+    /// <summary>
+    /// 统一处理任务成功的逻辑（原本在 CheckTaskFinishedAsync 的 if(allDone) 块中）
+    /// </summary>
+    private void OnTaskSuccess()
+    {
+        isTaskFinished = true;
+
+        // 任务完成时保存
+        TaskManager.Instance.SaveTaskNode(taskId);
+
+        // 任务完成后的效果
+        // 原逻辑：先还原开始效果，再应用结束效果
         foreach (var effect in taskEffects)
         {
             effect.RevertEffect();
@@ -74,31 +152,86 @@ public class TaskNode : MonoBehaviour
         {
             effect.ApplyEffect();
         }
+
+        // 减少后继节点的入度
         foreach (var node in nextNodes)
         {
             node.Inn--;
         }
+
+        Debug.Log($"任务 {taskId} 完成");
+
+        // 无论成功或取消，确保清理状态
+        isTaskRunning = false;
+        if (TaskManager.Instance != null) TaskManager.Instance.UnregisterActive(this);
+
+        // 停止异步等待
+        CancelTask();
     }
 
-    IEnumerator CheckTaskFinished()
+    // --- 【重构部分结束】 ---
+
+    private async UniTaskVoid StartTaskAsync()
     {
-        while (!isTaskFinished)
+        // 取消之前的任务
+        CancelTask();
+
+        // 创建新的取消令牌
+        _taskCts = new CancellationTokenSource();
+        var token = _taskCts.Token;
+        isTaskRunning = true;
+
+        // 注册到当前活跃任务（用于外部可视化）
+        if (TaskManager.Instance != null) TaskManager.Instance.RegisterActive(this);
+
+        Debug.Log("Start Task: " + taskName + " " + taskId);
+
+        try
         {
-            bool flag = true;
-            foreach (var goal in taskGoals)
+            // 引导任务逻辑开始
+            // 应用开始效果
+            foreach (var effect in taskEffects)
             {
-                if (!goal.IsDone)
-                {
-                    flag = false;
-                    break;
-                }
+                if (token.IsCancellationRequested) return;
+                effect.ApplyEffect();
             }
-            if (flag)
+
+            // 【关键改动】不再调用 while 循环的 CheckTaskFinishedAsync
+            // 我们先执行一次初始检查（应对读档后立刻完成的情况）
+            RefreshStatus();
+
+            while (!isTaskFinished)
             {
-                isTaskFinished = true;
-                yield break;
+                RefreshStatus(); // 里面会检查所有 Goal.IsDone
+                if (isTaskFinished) break;
+
+                await UniTask.Delay(250, cancellationToken: token); // 每0.25秒扫一次，性能极好
             }
-            yield return new WaitForSeconds(0.5f);
+        }
+        catch (OperationCanceledException)
+        {
+            Debug.Log($"任务 {taskId} 被取消");
+        }
+        finally
+        {
+            // 确保状态清理（如果是被外部取消而非成功完成）
+            if (!isTaskFinished)
+            {
+                isTaskRunning = false;
+                if (TaskManager.Instance != null) TaskManager.Instance.UnregisterActive(this);
+            }
+        }
+    }
+
+    // 原 CheckTaskFinishedAsync 已被 RefreshStatus 和 OnTaskSuccess 逻辑平替
+
+    // 可视化当前任务
+    private void OnDrawGizmos()
+    {
+        if (isTaskRunning)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(transform.position, 1.0f);
         }
     }
 }

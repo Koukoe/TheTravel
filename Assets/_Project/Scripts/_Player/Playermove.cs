@@ -104,18 +104,25 @@ public class Playermove : MonoBehaviour
 
     private void ShipMove()
     {
-        Quaternion targetRotation;
-        Vector3 input = GetMoveInput();
-        Vector3 camForward = PlayerController.mainCam.transform.forward; ;
-        camForward.y = 0;
-        input = camForward * input.magnitude;
-        PlayerRigidbody.velocity = input * shipSpeed;
+        // Quaternion targetRotation;
+        // Vector3 input = GetMoveInput();
+        // Vector3 camForward = PlayerController.mainCam.transform.forward;
+        // camForward.y = 0;
+        // input = camForward * input.magnitude;
+        // PlayerRigidbody.velocity = input * shipSpeed;
 
-        if (input != Vector3.zero)
-        {
-            targetRotation = Quaternion.LookRotation(input);
-            PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, ShipRotateSpeed * Time.deltaTime * 120);
-        }
+        // if (input != Vector3.zero)
+        // {
+        //     targetRotation = Quaternion.LookRotation(input);
+        //     PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, ShipRotateSpeed * Time.deltaTime * 120);
+        // }
+
+
+        Vector3 input = InputManager.Instance.GetMove();
+        float forwardSpeed = input.y * shipSpeed;
+        float turnSpeed = input.x * ShipRotateSpeed;
+        PlayerRigidbody.velocity = PlayerTransform.forward * forwardSpeed;
+        PlayerTransform.Rotate(0, turnSpeed, 0);
 
         shipTransform.position = PlayerTransform.position;
         shipTransform.rotation = PlayerTransform.rotation;

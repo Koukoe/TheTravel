@@ -1,7 +1,5 @@
 using UnityEngine;
 using System;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
-using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using System.Threading.Tasks;
 
 public static class GameStatic

@@ -1,0 +1,40 @@
+{
+  "dialogues": [
+    {
+      "id": "pop_whale_01",
+      "character": "captain",
+      "content": "嚯！真是一条壮硕的鱼儿！",
+      "nextId": "pop_whale_02"
+    },
+    {
+      "id": "pop_whale_02",
+      "character": "engineer",
+      "content": "鲸鱼，真是很久没有见到过了。",
+      "nextId": "pop_whale_03"
+    },
+    {
+      "id": "pop_whale_03",
+      "character": "engineer",
+      "content": "让我想起那天晚上，趁着夜色和玛丽亚到甲板上私会，那晚也有一条鲸鱼在海面上喷水。",
+      "nextId": "pop_whale_04"
+    },
+    {
+      "id": "pop_whale_04",
+      "character": "captain",
+      "content": "你小子还干过这种事？我怎么不知道！",
+      "nextId": "pop_whale_05"
+    },
+    {
+      "id": "pop_whale_05",
+      "character": "engineer",
+      "content": "那能让你知道吗？你这大嘴巴第二天就能把事情传遍整条船！更何况那时候还没人知道我和玛丽亚的事情。",
+      "nextId": "pop_whale_06"
+    },
+    {
+      "id": "pop_whale_06",
+      "character": "captain",
+      "content": "你最后不还是把玛丽亚娶回家了嘛！",
+      "nextId": "end"
+    }
+  ]
+}

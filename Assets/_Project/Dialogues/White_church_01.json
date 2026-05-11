@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "White_church_01_01",
+      "character": "protagonist",
+      "content": "这是......我放进喷泉里的东西？竟然会出现在这里。",
+      "nextId": "White_church_01_02"
+    },
+    {
+      "id": "White_church_01_02",
+      "character": "protagonist",
+      "content": "波尼克，你在看着我吗......？",
+      "nextId": "end"
+    }
+  ]
+}

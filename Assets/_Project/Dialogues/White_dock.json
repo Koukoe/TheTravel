@@ -1,0 +1,103 @@
+{
+  "dialogues": [
+    {
+      "id": "White_dock_01",
+      "character": "captain",
+      "content": "年轻人，你总算回来了！",
+      "nextId": "White_dock_02"
+    },
+    {
+      "id": "White_dock_02",
+      "character": "captain",
+      "content": "拿着！",
+      "nextId": "White_dock_03"
+    },
+    {
+      "id": "White_dock_03",
+      "character": "protagonist",
+      "content": "这是？",
+      "nextId": "White_dock_04"
+    },
+    {
+      "id": "White_dock_04",
+      "character": "captain",
+      "content": "这是老威廉我的航海图！虽然有些老旧了，但还是能帮你指路的。",
+      "nextId": "White_dock_05"
+    },
+    {
+      "id": "White_dock_05",
+      "character": "narrator",
+      "content": "（按M键打开地图）",
+      "nextId": "White_dock_06"
+    },
+    {
+      "id": "White_dock_06",
+      "character": "engineer",
+      "content": "莉薇娅小姐，在您不在的时候，我帮您改造了一下引擎，现在只要是曾经去过的地方，船都能代替人来自动航行，这样将省下不少精力。",
+      "nextId": "White_dock_07"
+    },
+    {
+      "id": "White_dock_07",
+      "character": "protagonist",
+      "content": "这......实在是感激不尽。",
+      "nextId": "White_dock_08"
+    },
+    {
+      "id": "White_dock_08",
+      "character": "cock",
+      "content": "咕咕——",
+      "nextId": "White_dock_09"
+    },
+    {
+      "id": "White_dock_09",
+      "character": "cock",
+      "content": "莉薇娅，不是送这位船长一程吗？怎么又多出一位？怎么又多出一位？\n他们在船上捣鼓些什么，我好害怕！",
+      "nextId": "White_dock_10"
+    },
+    {
+      "id": "White_dock_10",
+      "character": "captain",
+      "content": "小家伙，有什么好怕的，我又不会吃了你个铁疙瘩！",
+      "nextId": "White_dock_11"
+    },
+    {
+      "id": "White_dock_11",
+      "character": "protagonist",
+      "content": "哈哈。",
+      "nextId": "White_dock_12"
+    },
+    {
+      "id": "White_dock_12",
+      "character": "engineer",
+      "content": "时候不早了，如果莉薇娅小姐您还有什么事情要办的话，请尽快吧。",
+      "nextId": "White_dock_13"
+    },
+    {
+      "id": "White_dock_13",
+      "character": "captain",
+      "content": "想听我们年轻时候的故事的话，随时欢迎来找我！",
+      "nextId": "White_dock_14"
+    },
+    {
+      "id": "White_dock_14",
+      "character": "cock",
+      "content": "准备出发了吗？",
+      "options": [
+        {
+          "content": "是的",
+          "nextId": "end",
+          "effects": [
+            {
+              "TriggerEvent": "sail_departure",
+              "targetIsland": "iceberg"
+            }
+          ]
+        },
+        {
+          "content": "不，再等等。",
+          "nextId": "end"
+        }
+      ]
+    }
+  ]
+}

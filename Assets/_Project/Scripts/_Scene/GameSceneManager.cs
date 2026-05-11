@@ -15,7 +15,7 @@ public class GameSceneManager : MonoBehaviour
 {
     public static GameSceneManager Instance { get; private set; }
 
-    private SceneBase currentMainLogic;
+    public RealScene currentMainLogic;
 
     // 预加载任务字典
     private readonly Dictionary<string, (UniTask task, CancellationTokenSource cts)> mainPreLoadTasks = new();
@@ -79,6 +79,11 @@ public class GameSceneManager : MonoBehaviour
         if (IsLoading) return;
         IsLoading = true;
 
+        InputManager.Instance.SaveMode();
+        InputManager.Instance.SwitchAllMode();
+
+        await EffectManager.Instance.FadeOut();
+
         try
         {
             // 执行当前场景的退出逻辑
@@ -105,7 +110,14 @@ public class GameSceneManager : MonoBehaviour
             // CancelAllPreloadMain();
 
             InitNewMain(sceneName);
+
+            await UniTask.Delay(500);
+
             Debug.Log($"加载主场景 {sceneName} 成功捏");
+
+            InputManager.Instance.RestoreMode();
+
+            await EffectManager.Instance.FadeIn();
         }
         catch (Exception e)
         {
@@ -208,25 +220,25 @@ public class GameSceneManager : MonoBehaviour
     private void InitAdditive(string sceneName)
     {
         Scene s = SceneManager.GetSceneByName(sceneName);
-        SceneBase logic = FindLogicInScene(s);
+        RealScene logic = FindLogicInScene(s);
         logic?.EnterScene();
     }
 
-    private SceneBase FindLogicInScene(Scene scene)
+    private RealScene FindLogicInScene(Scene scene)
     {
         var roots = scene.GetRootGameObjects();
 
         // 精准寻找
         foreach (var root in roots)
         {
-            if (root.name == "Scene" && root.TryGetComponent<SceneBase>(out var logic))  // 优先寻找名字为 Scene 的根节点物体
+            if (root.name == "Scene" && root.TryGetComponent<RealScene>(out var logic))  // 优先寻找名字为 Scene 的根节点物体
                 return logic;
         }
 
         // 模糊寻找（提供容错）
         foreach (var root in roots)
         {
-            if (root.TryGetComponent<SceneBase>(out var logic))
+            if (root.TryGetComponent<RealScene>(out var logic))
                 return logic;
         }
 
