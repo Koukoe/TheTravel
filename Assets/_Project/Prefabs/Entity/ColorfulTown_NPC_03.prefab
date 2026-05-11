@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   guid: ColorfulTown_NPC_03
   defaultName: 
+  _animator: {fileID: 7861254813821650801}
 --- !u!114 &4784897272302346867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,7 +210,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: ff3962ca640fe784ba179f9f0dcbf316, type: 2}
+      objectReference: {fileID: 9100000, guid: ca620786bcc302640b640487f323d97f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -218,6 +219,12 @@ PrefabInstance:
 --- !u!4 &4321455968850713867 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 58bf1e4905d64d34ba49b42f988cf097,
+    type: 3}
+  m_PrefabInstance: {fileID: 4355645166978857696}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7861254813821650801 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 58bf1e4905d64d34ba49b42f988cf097,
     type: 3}
   m_PrefabInstance: {fileID: 4355645166978857696}
   m_PrefabAsset: {fileID: 0}

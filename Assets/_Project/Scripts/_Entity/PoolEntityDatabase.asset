@@ -13,21 +13,9 @@ MonoBehaviour:
   m_Name: PoolEntityDatabase
   m_EditorClassIdentifier: 
   allEntities:
-  - guid: ColorfulTown_NPC_01
-    defaultName: 
-    prefab: {fileID: 3640438715340953690, guid: 5361424653cecc1478c2f2b074a4baa1,
+  - guid: Old_Captain
+    defaultName: "\u8001\u8239\u957F"
+    prefab: {fileID: 1348136432636770678, guid: 606d441233b59e04aaf692fbacf889e8,
       type: 3}
-    defaultPosition: {x: 728.76, y: 33.35, z: 154.86}
-    defaultRotation: {x: 0, y: 67.25, z: 0}
-  - guid: ColorfulTown_NPC_02
-    defaultName: 
-    prefab: {fileID: 2874207229094686187, guid: 84e7602832fe7754ca44744abb587865,
-      type: 3}
-    defaultPosition: {x: 716.62, y: 50.33, z: 17.19}
-    defaultRotation: {x: 0, y: 100.42, z: 0}
-  - guid: ColorfulTown_NPC_03
-    defaultName: 
-    prefab: {fileID: 8247572275990922520, guid: b76ecf430196682489d09e6fef1dad9a,
-      type: 3}
-    defaultPosition: {x: 693.78, y: 79.97, z: 299.75}
-    defaultRotation: {x: 0, y: 164.04, z: 0}
+    defaultPosition: {x: 697.2963, y: 104.9991, z: 341.201}
+    defaultRotation: {x: 0, y: -182.21, z: 0}

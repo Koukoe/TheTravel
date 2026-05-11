@@ -1,0 +1,62 @@
+{
+    "dialogues": [
+        {
+            "id": "1",
+            "character": "你2好",
+            "content": "这是对话2"
+        },
+        {
+            "id": "2",
+            "character": "NPC_002",
+            "content": "DilaogueBtn2的对话索引被改为?",
+            "options": [
+                {
+                    "content": "0",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "0",
+                            "SDItarget": "DialogueBtn2"
+                        }
+                    ]
+                },
+                {
+                    "content": "1",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "1",
+                            "SDItarget": "DialogueBtn2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "character": "3号NPC",
+            "content": "下次的对话json被改为什么",
+            "options": [
+                {
+                    "content": "Dilaogue1",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "0"
+                        }
+                    ]
+                },
+                {
+                    "content": "Dilaogue2",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "1"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "4",
+            "character": "4号NPC",
+            "content": "这是2有点不一样的第四句话"
+        }
+    ]
+}
