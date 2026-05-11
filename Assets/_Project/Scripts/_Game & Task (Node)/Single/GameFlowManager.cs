@@ -7,6 +7,8 @@ using System;
 public class GameFlowManager : MonoBehaviour
 {
     public static GameFlowManager Instance { get; private set; }
+    private const string DialogueBubblePanelName = "DialogueBubblePanel";
+
     private void Awake()
     {
         Instance = this;
@@ -36,6 +38,8 @@ public class GameFlowManager : MonoBehaviour
             return;
         }
 
+        await CloseDialogueRelatedPanelsBeforeLoad();
+
         PlayingData = data;
         TaskManager.Instance.LoadAllTaskNodes();
 
@@ -45,6 +49,69 @@ public class GameFlowManager : MonoBehaviour
         }
 
         // ...
+    }
+
+    /// <summary>
+    /// 加载存档前关闭对话相关面板
+    /// </summary>
+    private async UniTask CloseDialogueRelatedPanelsBeforeLoad()
+    {
+        UIManager uiManager = UIManager.Instance;
+        if (uiManager == null)
+        {
+            return;
+        }
+
+        // DialogueBubblePanel 使用 Show/Hide 生命周期, 单独按名称隐藏
+        uiManager.Hide(DialogueBubblePanelName);
+
+        while (uiManager.IsTransitioning)
+        {
+            await UniTask.Yield();
+        }
+
+        Stack<BasePanel> stack = uiManager._singleStack;
+        if (stack == null || stack.Count == 0)
+        {
+            return;
+        }
+
+        // 重建整个栈并剔除对话相关面板
+        BasePanel[] snapshot = stack.ToArray(); // top -> bottom
+        bool removedTopDialoguePanel = snapshot[0] is DialoguePanel || snapshot[0] is DialogueOptionsPanel;
+
+        stack.Clear();
+
+        for (int i = snapshot.Length - 1; i >= 0; i--)
+        {
+            BasePanel panel = snapshot[i];
+            if (panel == null)
+            {
+                continue;
+            }
+
+            bool isDialoguePanel = panel is DialoguePanel || panel is DialogueOptionsPanel;
+            if (isDialoguePanel)
+            {
+                panel.Abort(true);
+                panel.gameObject.SetActive(false);
+                PoolManager.Release(panel.gameObject);
+                continue;
+            }
+
+            stack.Push(panel);
+        }
+
+        // 如果原栈顶被移除，需要恢复新的栈顶面板
+        if (removedTopDialoguePanel && stack.Count > 0)
+        {
+            stack.Peek().Resume();
+        }
+
+        while (uiManager.IsTransitioning)
+        {
+            await UniTask.Yield();
+        }
     }
 
     public async UniTask<Texture2D> SaveGame(int slotIndex)
