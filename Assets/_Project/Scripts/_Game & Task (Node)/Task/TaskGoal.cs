@@ -153,7 +153,7 @@ public class TaskGoal
             if (player != null)
             {
                 IsDone = CheckActorPosition(player.transform.position, player.transform.eulerAngles) && GameFlowManager.Instance.PlayingData.currentScene == sceneName;
-                Debug.Log($"玩家位置检测: {(IsDone ? "成功" : "失败")}");
+                // Debug.Log($"玩家位置检测: {(IsDone ? "成功" : "失败")}");
             }
             else
             {
