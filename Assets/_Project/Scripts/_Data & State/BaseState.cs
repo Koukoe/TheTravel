@@ -36,6 +36,8 @@ public class ActorState : BaseState
     public bool isVisible;
     public string scene;
 
+    public string animState;
+
     public override void Init(string id)
     {
         if (!string.IsNullOrEmpty(guid)) return;
