@@ -1,6 +1,5 @@
 using System;
 using Cysharp.Threading.Tasks;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 [System.Serializable]
@@ -39,6 +38,10 @@ public class TaskGoal
     private bool isChecking = false;
     private UniTaskCompletionSource<bool> pendingCheck;
 
+    // 递归防护
+    [System.NonSerialized] private int _setIsDoneGuard = 0;
+    private const int MaxSetIsDoneDepth = 3;
+
     public bool IsDone
     {
         get
@@ -48,27 +51,46 @@ public class TaskGoal
             // 拿数据
             var goalState = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalId);
 
-            // 异步检查
+            // 异步检查（仅在未完成且未在检查时启动）
             if (!goalState.isReached && !isChecking)
             {
-                CheckGoalAsync().Forget();
+                CheckGoalAsync().Forget(e =>
+                {
+                    if (e != null)
+                        Debug.LogError($"CheckGoalAsync 异常 in {goalId}: {e}");
+                });
             }
 
             return goalState.isReached;
         }
         set
         {
-            if (GameFlowManager.Instance?.PlayingData == null) return;
-
-            var goalState = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalId);
-            if (goalState.isReached == value) return;
-
-            goalState.isReached = value;
-            if (goalState.isReached)
+            // 递归防护
+            if (_setIsDoneGuard > MaxSetIsDoneDepth)
             {
-                Debug.Log($"Task {goalId} completed!");
-                // 主动告知完成，驱动任务树跳转
-                TaskManager.Instance.OnGoalReached(this);
+                Debug.LogError($"IsDone setter 递归调用过深！goalId: {goalId}");
+                return;
+            }
+
+            _setIsDoneGuard++;
+            try
+            {
+                if (GameFlowManager.Instance?.PlayingData == null) return;
+
+                var goalState = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalId);
+                if (goalState.isReached == value) return;
+
+                goalState.isReached = value;
+                if (goalState.isReached)
+                {
+                    Debug.Log($"Task Goal {goalId} completed!");
+                    // 主动告知完成，驱动任务树跳转
+                    TaskManager.Instance.OnGoalReached(this);
+                }
+            }
+            finally
+            {
+                _setIsDoneGuard--;
             }
         }
     }
@@ -106,13 +128,25 @@ public class TaskGoal
                     break;
             }
         }
+        catch (Exception e)
+        {
+            Debug.LogError($"CheckGoalAsync 执行异常 in {goalId}: {e}");
+        }
         finally
         {
             isChecking = false;
         }
 
-        pendingCheck.TrySetResult(IsDone);
-        return IsDone;
+        // 使用 goalState.isReached 而不是 IsDone 属性，避免递归
+        bool finalResult = false;
+        if (GameFlowManager.Instance?.PlayingData != null)
+        {
+            var goalState = GameFlowManager.Instance.PlayingData.GetState<TaskGoalState>(goalId);
+            finalResult = goalState.isReached;
+        }
+
+        pendingCheck.TrySetResult(finalResult);
+        return finalResult;
     }
 
     private void CheckTrigger()
@@ -120,8 +154,9 @@ public class TaskGoal
         targetState = GameFlowManager.Instance?.PlayingData?.GetState<InteractionState>(targetId);
         if (targetState is InteractionState interactionState)
         {
-            IsDone = interactionState.isTriggered == GoalTrigger;
-            Debug.Log($"{targetId} 触发检测: {(IsDone ? "成功" : "失败")}");
+            bool result = interactionState.isTriggered == GoalTrigger;
+            Debug.Log($"{targetId} 触发检测: {(result ? "成功" : "失败")}");
+            IsDone = result;
         }
         else
         {
@@ -135,8 +170,9 @@ public class TaskGoal
         targetState = GameFlowManager.Instance?.PlayingData?.GetState<ItemState>(targetId);
         if (targetState is ItemState itemState)
         {
-            IsDone = itemState.isPicked == GoalItem;
-            Debug.Log($"{targetId} 物品检测: {(IsDone ? "成功" : "失败")}");
+            bool result = itemState.isPicked == GoalItem;
+            Debug.Log($"{targetId} 物品检测: {(result ? "成功" : "失败")}");
+            IsDone = result;
         }
         else
         {
@@ -149,11 +185,15 @@ public class TaskGoal
     {
         if (isCheckPlayer)
         {
-            GameObject player = TaskManager.Instance.mainPlayer; // 获取玩家
+            GameObject player = TaskManager.Instance.mainPlayer;
             if (player != null)
             {
-                IsDone = CheckActorPosition(player.transform.position, player.transform.eulerAngles) && GameFlowManager.Instance.PlayingData.currentScene == sceneName;
-                // Debug.Log($"玩家位置检测: {(IsDone ? "成功" : "失败")}");
+                bool positionCheck = CheckActorPosition(player.transform.position, player.transform.eulerAngles);
+                bool sceneCheck = GameFlowManager.Instance.PlayingData.currentScene == sceneName;
+                bool result = positionCheck && sceneCheck;
+
+                Debug.Log($"玩家位置检测: {(result ? "成功" : "失败")}");
+                IsDone = result;
             }
             else
             {
@@ -168,8 +208,12 @@ public class TaskGoal
                 actorState.position.HasValue &&
                 actorState.rotation.HasValue)
             {
-                IsDone = CheckActorPosition(actorState.position.Value, actorState.rotation.Value) && GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetId).scene == sceneName;
-                Debug.Log($"{targetId} 角色位置检测: {(IsDone ? "成功" : "失败")}");
+                bool positionCheck = CheckActorPosition(actorState.position.Value, actorState.rotation.Value);
+                bool sceneCheck = actorState.scene == sceneName;
+                bool result = positionCheck && sceneCheck;
+
+                Debug.Log($"{targetId} 角色位置检测: {(result ? "成功" : "失败")}");
+                IsDone = result;
             }
             else
             {
@@ -183,11 +227,13 @@ public class TaskGoal
     {
         if (DialogueManager.Instance != null)
         {
-            IsDone = DialogueManager.Instance.IsDialogueIndexCompleted(targetDialogueId, index);
-            Debug.Log($"{targetDialogueId} {index} 对话检测: {(IsDone ? "成功" : "失败")}");
+            bool result = DialogueManager.Instance.IsDialogueIndexCompleted(targetDialogueId, index);
+            Debug.Log($"{targetDialogueId} {index} 对话检测: {(result ? "成功" : "失败")}");
+            IsDone = result;
         }
         else
         {
+            Debug.Log("DialogueManager 未找到");
             IsDone = false;
         }
     }
@@ -203,6 +249,7 @@ public class TaskGoal
         }
         else
         {
+            Debug.Log("targetScript 为空");
             IsDone = false;
         }
     }

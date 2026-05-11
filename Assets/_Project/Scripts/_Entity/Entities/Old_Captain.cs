@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Old_Captain : StaticStateEntity<ActorState>
+public class Old_Captain : PoolStateEntity<ActorState>
 {
     [SerializeField] Animator _animator;
     protected override void OnStateBound()

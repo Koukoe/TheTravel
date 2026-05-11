@@ -966,7 +966,7 @@ MonoBehaviour:
   taskName: 
   taskId: 2
   nextNodesIds:
-  - 2
+  - 3
   taskEffects: []
   taskEndEffects: []
   taskGoals:
