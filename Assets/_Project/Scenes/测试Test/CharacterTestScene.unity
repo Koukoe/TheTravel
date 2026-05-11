@@ -185,6 +185,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: "NPC_03_\u5973_\u77ED"
       objectReference: {fileID: 0}
+    - target: {fileID: 5786366568571184669, guid: d680863065e6feb4d89e1171b4abebb7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cc2a9025a4f3d384a944b1e0777b9bc8, type: 2}
+    - target: {fileID: 6607816709999568121, guid: d680863065e6feb4d89e1171b4abebb7,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cc2a9025a4f3d384a944b1e0777b9bc8, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
