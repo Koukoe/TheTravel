@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Talker's name Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c771e74b6aa095b45bc5674b41007757, type: 2}
   m_sharedMaterial: {fileID: -5283053758413213972, guid: c771e74b6aa095b45bc5674b41007757,
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Dialogue Text
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: c771e74b6aa095b45bc5674b41007757, type: 2}
   m_sharedMaterial: {fileID: -5283053758413213972, guid: c771e74b6aa095b45bc5674b41007757,
