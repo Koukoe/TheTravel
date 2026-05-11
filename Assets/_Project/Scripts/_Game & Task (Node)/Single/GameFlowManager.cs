@@ -15,12 +15,12 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField]
     public DataArchive PlayingData { get; private set; }
 
-    public async UniTask NewGame()
+    public void NewGame()
     {
         Debug.Log("是新游戏哦");
         PlayingData = new DataArchive();
 
-        // ... 布置背景
+        PlayerController.Instance.detector.ResetDetector();  // 清理 Detector
 
         InputManager.Instance.SwitchAllMode();
         GameSceneManager.Instance.LoadMain("Ocean").Forget();

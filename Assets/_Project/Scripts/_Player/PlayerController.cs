@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]
-    public InteractionDetector detector;
+    public PlayerDetector detector;
     public static PlayerController Instance { get; private set; }
 
     public bool moveEnable = true;

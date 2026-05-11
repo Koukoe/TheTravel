@@ -30,9 +30,8 @@ public class UIManager : MonoBehaviour
     };
 
     public Stack<BasePanel> _singleStack = new Stack<BasePanel>();
-    public List<BasePanel> _singleList = new List<BasePanel>();
     public Dictionary<string, BasePanel> _uniqueDict = new Dictionary<string, BasePanel>();
-    public Dictionary<string, Queue<BasePanel>> _multiDict = new Dictionary<string, Queue<BasePanel>>();
+    public Dictionary<string, List<BasePanel>> _multiDict = new Dictionary<string, List<BasePanel>>();
 
     [SerializeField] private bool isTransitioning = false;
     public bool IsTransitioning => isTransitioning;
@@ -193,12 +192,12 @@ public class UIManager : MonoBehaviour
         if (isUnique) _uniqueDict.Add(panelName, newPanel);
         else
         {
-            if (!_multiDict.TryGetValue(panelName, out var q))
+            if (!_multiDict.TryGetValue(panelName, out var list))
             {
-                q = new Queue<BasePanel>();
-                _multiDict.Add(panelName, q);
+                list = new List<BasePanel>();
+                _multiDict.Add(panelName, list);
             }
-            q.Enqueue(newPanel);
+            list.Add(newPanel);
         }
         newPanel.Open();
         return newPanel;
@@ -221,77 +220,108 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        if (_multiDict.TryGetValue(panelName, out var q))
+        if (_multiDict.TryGetValue(panelName, out var list))
         {
             if (all)
             {
-                while (q.TryDequeue(out var p))
+                // 这里利用 for 循环处理，避免 foreach 在 Remove 时可能的冲突
+                for (int i = list.Count - 1; i >= 0; i--)
                 {
-                    var target = p;  // 闭包安全引用
+                    var target = list[i];
                     target.Close(() => PoolManager.Release(target.gameObject));
                 }
                 _multiDict.Remove(panelName);
             }
             else
             {
-                if (q.TryDequeue(out var oldPanel))
+                if (list.Count > 0)
                 {
-                    oldPanel.Close(() =>
-                    {
-                        PoolManager.Release(oldPanel.gameObject);
-                    });
+                    var oldPanel = list[0];
+                    list.RemoveAt(0);
+                    oldPanel.Close(() => PoolManager.Release(oldPanel.gameObject));
                 }
-                if (q.Count == 0) _multiDict.Remove(panelName);
+                if (list.Count == 0) _multiDict.Remove(panelName);
             }
         }
     }
 
-
     /// <summary>
-    /// 初始化列表面板
+    /// 关闭并注销一个特定的面板实例
     /// </summary>
-    public void InitList(params string[] panelNames)
+    public void Hide(BasePanel panel)
     {
-        ClearList();
-        foreach (var name in panelNames)
+        if (panel == null) return;
+
+        // 查找并移除唯一字典中的引用
+        string uniqueKey = null;
+        foreach (var kvp in _uniqueDict)
         {
-            GameObject obj = PoolManager.Global.Get(name);
-            BasePanel panel = obj.GetComponent<BasePanel>();
-            panel.transform.SetParent(CanvasObj(panel.CanvasRenderMode).transform, false);
-            panel.gameObject.SetActive(false);
-            _singleList.Add(panel);
+            if (kvp.Value == panel) { uniqueKey = kvp.Key; break; }
         }
-    }
+        if (uniqueKey != null) _uniqueDict.Remove(uniqueKey);
 
-    /// <summary>
-    /// 切换列表面板的页面
-    /// </summary>
-    public void SwitchPage(int index)
-    {
-        if (index < 0 || index >= _singleList.Count) return;
-
-        for (int i = 0; i < _singleList.Count; i++)
+        // 查找并移除多实例列表中的引用
+        string multiKey = null;
+        foreach (var kvp in _multiDict)
         {
-            if (i == index)
+            if (kvp.Value.Remove(panel))
             {
-                if (!_singleList[i].gameObject.activeSelf) _singleList[i].Open();
-            }
-            else
-            {
-                if (_singleList[i].gameObject.activeSelf) _singleList[i].Close();
+                if (kvp.Value.Count == 0) multiKey = kvp.Key;
+                break;
             }
         }
+        if (multiKey != null) _multiDict.Remove(multiKey);
+
+        // 执行关闭与回收
+        panel.Close(() => PoolManager.Release(panel.gameObject));
     }
 
-    /// <summary>
-    /// 清理列表面板
-    /// </summary>
-    public void ClearList()
-    {
-        foreach (var p in _singleList)
-        {
-            if (p != null) PoolManager.Release(p.gameObject);
-        }
-        _singleList.Clear();
-    }
+
+    // /// <summary>
+    // /// 初始化列表面板
+    // /// </summary>
+    // public void InitList(params string[] panelNames)
+    // {
+    //     ClearList();
+    //     foreach (var name in panelNames)
+    //     {
+    //         GameObject obj = PoolManager.Global.Get(name);
+    //         BasePanel panel = obj.GetComponent<BasePanel>();
+    //         panel.transform.SetParent(CanvasObj(panel.CanvasRenderMode).transform, false);
+    //         panel.gameObject.SetActive(false);
+    //         _singleList.Add(panel);
+    //     }
+    // }
+
+    // /// <summary>
+    // /// 切换列表面板的页面
+    // /// </summary>
+    // public void SwitchPage(int index)
+    // {
+    //     if (index < 0 || index >= _singleList.Count) return;
+
+    //     for (int i = 0; i < _singleList.Count; i++)
+    //     {
+    //         if (i == index)
+    //         {
+    //             if (!_singleList[i].gameObject.activeSelf) _singleList[i].Open();
+    //         }
+    //         else
+    //         {
+    //             if (_singleList[i].gameObject.activeSelf) _singleList[i].Close();
+    //         }
+    //     }
+    // }
+
+    // /// <summary>
+    // /// 清理列表面板
+    // /// </summary>
+    // public void ClearList()
+    // {
+    //     foreach (var p in _singleList)
+    //     {
+    //         if (p != null) PoolManager.Release(p.gameObject);
+    //     }
+    //     _singleList.Clear();
+    // }
 }

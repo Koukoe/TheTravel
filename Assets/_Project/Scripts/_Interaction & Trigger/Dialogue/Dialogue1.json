@@ -1,0 +1,95 @@
+{
+    "dialogues": [
+        {
+            "id": "1",
+            "character": "cock",
+            "content": "这是\n第<i>一句话</i>",
+            "effects": [
+                {
+                    "PlayActionAndResume": "npc_wave_01"
+                },
+                {
+                    "PlayBgm": "bgmID",
+                    "PlayBgmFade": "1.0"
+                }
+            ]
+        },
+        {
+            "id": "2",
+            "character": "captain",
+            "content": "这是第二句话",
+            "effects": [
+                {
+                    "PlaySfx": "sfxID"
+                }
+            ],
+            "options": [
+                {
+                    "content": "到纯白小镇",
+                    "effects": [
+                        {
+                            "GotoScene": "WhiteTown"
+                        }
+                    ]
+                },
+                {
+                    "content": "到3",
+                    "nextId": "3"
+                },
+                {
+                    "content": "到4",
+                    "nextId": "4"
+                }
+            ]
+        },
+        {
+            "id": "3",
+            "character": "NPC_003",
+            "content": "这是第三句话"
+        },
+        {
+            "id": "4",
+            "character": "4号NPC",
+            "content": "下次的对话json被改为什么",
+            "options": [
+                {
+                    "content": "Dilaogue2",
+                    "nextId": "end",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "1"
+                        }
+                    ]
+                },
+                {
+                    "content": "Dilaogue3",
+                    "nextId": "end",
+                    "effects": [
+                        {
+                            "SetDialogueIndex": "2"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": "5",
+            "character": "NPC_005",
+            "content": "这是第五句话",
+            "effects": [
+                {
+                    "SetDialogueIndex": "0",
+                    "SDItarget": "captain"
+                },
+                {
+                    "SetDialogueIndex": "1",
+                    "SDItarget": "cock"
+                },
+                {
+                    "SetDialogueIndex": "6",
+                    "SDItarget": "nina"
+                }
+            ]
+        }
+    ]
+}
