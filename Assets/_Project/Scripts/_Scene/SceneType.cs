@@ -7,6 +7,7 @@ using System;
 public abstract class RealScene : SceneBase
 {
     public string sceneName;
+    public string guid;
     public abstract RealSceneState GetBaseState();
 
     public bool autoSave = false;
@@ -31,9 +32,16 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         if (PlayerController.Instance != null)
             player = PlayerController.Instance.transform;
 
-        _state = GameFlowManager.Instance.PlayingData.GetState<T>(gameObject.scene.name);
+        _state = GameFlowManager.Instance.PlayingData.GetState<T>(guid);
+        if (!_state.isInitialized)
+        {
+            StateInitial();
+        }
+        _state.isInitialized = true;
         HandlePlayerPosition();
     }
+
+    protected virtual void StateInitial() { }
 
     protected virtual void HandlePlayerPosition()
     {
@@ -97,6 +105,37 @@ public class EntitySceneState : RealSceneState
     public List<string> poolEntityGuids = new List<string>();
     [NonSerialized] public Action OnEntityChanged;
 
+    public override void Init(string id)
+    {
+        if (!string.IsNullOrEmpty(guid)) return;
+        base.Init(id);
+        poolEntityGuids = new List<string>();
+    }
+
+    public override BaseState Clone()
+    {
+        var clone = new EntitySceneState();
+        clone.Copyfrom(this);
+        clone.SetGUID(guid);
+        return clone;
+    }
+    public override void Copyfrom(BaseState targetState)
+    {
+        base.Copyfrom(targetState);
+
+        var state = targetState as EntitySceneState;
+        if (state != null)
+        {
+            if (state.poolEntityGuids != null)
+            {
+                poolEntityGuids = new List<string>(state.poolEntityGuids);
+            }
+            else
+            {
+                poolEntityGuids = new List<string>();
+            }
+        }
+    }
     /// <summary>
     /// 将实体登记到场景数据名单中
     /// </summary>
@@ -126,6 +165,9 @@ public class EntitySceneState : RealSceneState
 public abstract class EntityScene<TState> : RealScene<TState>
     where TState : EntitySceneState, new()
 {
+    // 初始
+    [SerializeField] protected List<string> initPoolGuids;
+
     public EntityDatabase entityDb;
 
     // 缓存已生成的实体，方便回收
@@ -143,6 +185,8 @@ public abstract class EntityScene<TState> : RealScene<TState>
         // 执行初始生成
         RefreshSceneEntities();
     }
+
+    protected override void StateInitial() { _state.poolEntityGuids = new List<string>(initPoolGuids); }
 
     public override void ExitScene()
     {

@@ -197,12 +197,16 @@ public class RealSceneState : BaseState
 
     // 记录玩家离开场景时的最后坐标
     public Vector3? lastExitPosition;
+
+    public bool isInitialized = false;
+
     public override void Init(string id)
     {
         if (!string.IsNullOrEmpty(guid)) return;
         base.Init(id);
         targetPortalGuid = null;
         lastExitPosition = null;
+        isInitialized = false;
     }
 
     public override BaseState Clone()
@@ -211,7 +215,8 @@ public class RealSceneState : BaseState
         {
             name = name,
             targetPortalGuid = targetPortalGuid,
-            lastExitPosition = lastExitPosition
+            lastExitPosition = lastExitPosition,
+            isInitialized = false
         };
         clone.SetGUID(guid);
         return clone;
@@ -223,6 +228,7 @@ public class RealSceneState : BaseState
         {
             targetPortalGuid = state.targetPortalGuid;
             lastExitPosition = state.lastExitPosition;
+            isInitialized = false;
         }
     }
 }

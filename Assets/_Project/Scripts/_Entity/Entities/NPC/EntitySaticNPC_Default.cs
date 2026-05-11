@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
-public class ColorFulTown_NPC_05 : StaticStateEntity<ActorState>
+public class EntityStaticNPC_Default : StaticStateEntity<ActorState>
 {
     [SerializeField] Animator _animator;
     protected override void OnStateBound()

@@ -64,8 +64,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1274455440675930711}
-  - component: {fileID: 9174679402125729413}
   - component: {fileID: 3047607795420549978}
+  - component: {fileID: 4734233255538832581}
   m_Layer: 0
   m_Name: ColorfulTown_NPC_04
   m_TagString: Untagged
@@ -90,21 +90,6 @@ Transform:
   - {fileID: 6217448459273654461}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &9174679402125729413
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8267771842825193085}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd14a9ac86796e428589417b6ea2754, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  guid: ColorfulTown_NPC_04
-  defaultName: 
-  _animator: {fileID: 47565672639859399}
 --- !u!114 &3047607795420549978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -123,6 +108,21 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 8ea3f3c392c564547ae29c33fad0ac5b, type: 3}
   dialogueIndex: 0
   _tipOffset: {x: 0, y: 0, z: 0}
+--- !u!114 &4734233255538832581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8267771842825193085}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f490b91d0723c5f4eb63e0ca5eda911e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: ColorfulTown_NPC_04
+  defaultName: 
+  _animator: {fileID: 47565672639859399}
 --- !u!1001 &5891386796485588822
 PrefabInstance:
   m_ObjectHideFlags: 0

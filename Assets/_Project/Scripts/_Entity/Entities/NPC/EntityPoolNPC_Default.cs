@@ -3,12 +3,22 @@ using System.Collections.Generic;
 using UnityEditor.Animations;
 using UnityEngine;
 
-public class EntityNPC_Default : PoolStateEntity<ActorState>
+public class EntityPoolNPC_Default : PoolStateEntity<ActorState>
 {
     [SerializeField] Animator _animator;
 
     protected override void OnStateBound()
     {
+        if (_state.position != null) gameObject.transform.position = _state.position.Value;
+        if (_state.rotation != null) gameObject.transform.rotation = Quaternion.Euler(_state.rotation.Value);
+
+        if (_state.isVisible)
+        {
+        }
+        else
+        {
+        }
+
         if (_state.animState == ActorState.AnimState.SIT)
         {
             _animator.SetBool("isSitting", true);
