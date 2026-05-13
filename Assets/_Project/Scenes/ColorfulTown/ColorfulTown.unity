@@ -730,14 +730,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: ColorfulTown
+  guid: 
   autoSave: 0
+  scenePortals:
+  - portalName: 
+    transform: {fileID: 0}
   defaultSpawnPoint: {fileID: 218514784}
   _state:
     <guid>k__BackingField: ColorfulTown
     name: 
     targetPortalGuid: 
+    isInitialized: 0
     poolEntityGuids:
     - Old_Captain
+  initPoolGuids: []
   entityDb: {fileID: 11400000, guid: 861f8143ec2a20345a5d3eb4909bc7bc, type: 2}
 --- !u!1001 &225417298
 PrefabInstance:

@@ -197,6 +197,7 @@ public class RealSceneState : BaseState
 
     // 记录玩家离开场景时的最后坐标
     public Vector3? lastExitPosition;
+    public Quaternion? lastExitRotation;
 
     public bool isInitialized = false;
 

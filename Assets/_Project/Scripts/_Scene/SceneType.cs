@@ -14,9 +14,18 @@ public abstract class RealScene : SceneBase
     public abstract void SyncPlayerPosition();
 }
 
+[Serializable]
+public struct PortalInfo
+{
+    public string portalName;
+    public Transform transform;
+}
+
 public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
 {
     protected static Transform player;
+
+    [SerializeField] private List<PortalInfo> scenePortals = new List<PortalInfo>();
 
     [SerializeField] protected Transform defaultSpawnPoint;
 
@@ -50,33 +59,40 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         // 传送目标地点
         if (!string.IsNullOrEmpty(_state.targetPortalGuid))
         {
-            GameObject portal = GameObject.Find(_state.targetPortalGuid);
-            if (portal != null)
+            var portal = scenePortals.Find(p => p.portalName == _state.targetPortalGuid);
+
+            if (portal.transform != null)
             {
-                player.position = portal.transform.position;
-                _state.targetPortalGuid = null;  // 清理传送位置
-                _state.lastExitPosition = player.position;
+                ApplyPosition(portal.transform.position, portal.transform.rotation);
+                _state.targetPortalGuid = null;
                 return;
             }
+            Debug.LogWarning($"未找到传送点: {_state.targetPortalGuid}");
         }
 
         // 最后离开位置
         if (_state.lastExitPosition.HasValue)
         {
-            player.position = _state.lastExitPosition.Value;
+            ApplyPosition(_state.lastExitPosition.Value, _state.lastExitRotation.Value);
             return;
         }
 
         // 默认出生点
         if (defaultSpawnPoint != null)
         {
-            player.position = defaultSpawnPoint.position;
-            _state.lastExitPosition = player.position;
+            ApplyPosition(defaultSpawnPoint.position, defaultSpawnPoint.rotation);
+            SyncPlayerPosition();
         }
         else
         {
             Debug.LogWarning($"场景 {gameObject.scene.name} 传送失败");
         }
+    }
+
+    private void ApplyPosition(Vector3 pos, Quaternion rot)
+    {
+        player.position = pos;
+        player.rotation = rot;
     }
 
     public override void ExitScene()
@@ -95,6 +111,7 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         if (_state != null && player != null)
         {
             _state.lastExitPosition = player.position;
+            _state.lastExitRotation = player.rotation;
         }
     }
 }
