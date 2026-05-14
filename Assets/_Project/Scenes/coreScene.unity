@@ -1318,7 +1318,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   taskName: 
   taskId: 4
-  nextNodesIds: []
+  nextNodesIds:
+  - 5
   taskEffects: []
   taskEndEffects:
   - effectType: 2
@@ -1342,6 +1343,50 @@ MonoBehaviour:
       hasRotation: 1
       isVisible: 1
       Scene: WhiteTown
+      animState: 0
+  - effectType: 0
+    targetGUID: ColorfulTownOut
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+  - effectType: 0
+    targetGUID: WhiteTownIn
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
       animState: 0
   taskGoals:
   - taskGoalType: 3
@@ -1395,6 +1440,7 @@ Transform:
   - {fileID: 535563470}
   - {fileID: 883867780}
   - {fileID: 911250035}
+  - {fileID: 1534430282}
   m_Father: {fileID: 223556512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1066129547 stripped
@@ -1597,6 +1643,73 @@ BoxCollider:
     type: 3}
   m_PrefabInstance: {fileID: 7848069430800719565}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1534430281
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1534430282}
+  - component: {fileID: 1534430283}
+  m_Layer: 0
+  m_Name: task5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1534430282
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534430281}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063414384}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1534430283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1534430281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7311e9a976b960498e7bb2bbdd128f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: 
+  taskId: 5
+  nextNodesIds: []
+  taskEffects: []
+  taskEndEffects: []
+  taskGoals:
+  - taskGoalType: 2
+    goalId: task5
+    targetId: 
+    isCheckPlayer: 1
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: WhiteTown
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
+  nextNodes: []
+  Out: 0
+  isTaskFinished: 0
 --- !u!1 &1545487496 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2291615090636412617, guid: 6a047c96f7cac534ea28d9691e89fb8c,
