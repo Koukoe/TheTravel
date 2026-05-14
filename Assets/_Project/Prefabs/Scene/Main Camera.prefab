@@ -169,4 +169,4 @@ MonoBehaviour:
   target: {fileID: 0}
   currentMode: 0
   smoothSpeed: 0.125
-  CamY: 50
+  CamY: 30
