@@ -5,6 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class TaskGoal
 {
+    [Tooltip("调试用，或者在Demo里占位")]
+    public bool isAutoFinish;
     public TaskGoalType taskGoalType;
 
     [Header("存档唯一标识符(全局唯一)")]
@@ -109,6 +111,14 @@ public class TaskGoal
 
         try
         {
+            // 自动完成：调试/Demo 用，跳过具体检测直接标记完成
+            if (isAutoFinish)
+            {
+                IsDone = true;
+                Debug.Log($"{goalId} 自动完成 (isAutoFinish)");
+                return true;
+            }
+
             switch (taskGoalType)
             {
                 case TaskGoalType.TRIGGER:

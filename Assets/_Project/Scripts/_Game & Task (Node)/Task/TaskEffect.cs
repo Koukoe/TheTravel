@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -13,6 +14,9 @@ public class TaskEffect
     public bool isChangeActorScene;
     public string currentScene;
     public string targetActorSceneName;
+
+    public List<(string, int)> targetDialogueList;
+
 
     private BaseState snapShotState;
     public void ApplyEffect()
@@ -54,6 +58,14 @@ public class TaskEffect
                 snapShotState = state.Clone();
                 state.Copyfrom(targetActorState);
                 break;
+            case EffectType.DIALOGUESTATE:
+                foreach (var dialogue in targetDialogueList)
+                {
+                    var (dialogueguid, dialogueIndex) = dialogue;
+                    DialogueManager.Instance.SetDialogueIndex(dialogueguid, dialogueIndex);
+                }
+                break;
+
         }
 
         // 刷新此物体在当前场景状态
@@ -88,5 +100,6 @@ public enum EffectType
 {
     INTERACTABLESTATE,
     ITEMSTATE,
-    ACTORSTATE
+    ACTORSTATE,
+    DIALOGUESTATE
 }

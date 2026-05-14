@@ -3,7 +3,12 @@ guid: eb27d0a093d8ba141a66531f7e152ad8
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hailuo
+    second: {fileID: 2100000, guid: 6a68804a8657ff840b86d8de8e8cf142, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
