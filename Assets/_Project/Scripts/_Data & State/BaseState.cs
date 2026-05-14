@@ -202,7 +202,7 @@ public class RealSceneState : BaseState
     public Vector3? lastExitPosition;
     public Quaternion? lastExitRotation;
 
-        // isInitialized 不从存档传播，场景加载时由 SceneManager 重新设置
+    // isInitialized 不从存档传播，场景加载时由 SceneManager 重新设置
     public bool isInitialized = false;
 
     public override void Init(string id)

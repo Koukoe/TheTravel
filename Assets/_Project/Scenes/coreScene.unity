@@ -466,6 +466,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6671650986620744858, guid: 0520016d4adca604cb07430311fbc4ba,
         type: 3}
+      propertyPath: m_Drag
+      value: 3.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671650986620744858, guid: 0520016d4adca604cb07430311fbc4ba,
+        type: 3}
+      propertyPath: m_Mass
+      value: 0.0000001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6671650986620744858, guid: 0520016d4adca604cb07430311fbc4ba,
+        type: 3}
       propertyPath: m_Constraints
       value: 112
       objectReference: {fileID: 0}
@@ -991,6 +1001,9 @@ MonoBehaviour:
       isVisible: 0
       Scene: 
       animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
   taskGoals:
   - taskGoalType: 4
     goalId: Task2
@@ -1344,6 +1357,9 @@ MonoBehaviour:
       isVisible: 1
       Scene: WhiteTown
       animState: 0
+    isChangeActorScene: 1
+    currentScene: ColorfulTown
+    targetActorSceneName: WhiteTown
   - effectType: 0
     targetGUID: ColorfulTownOut
     targetInteractionState:
@@ -1366,6 +1382,9 @@ MonoBehaviour:
       isVisible: 0
       Scene: 
       animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
   - effectType: 0
     targetGUID: WhiteTownIn
     targetInteractionState:
@@ -1388,6 +1407,9 @@ MonoBehaviour:
       isVisible: 0
       Scene: 
       animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
   taskGoals:
   - taskGoalType: 3
     goalId: task4

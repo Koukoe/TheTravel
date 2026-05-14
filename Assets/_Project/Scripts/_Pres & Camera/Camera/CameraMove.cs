@@ -12,7 +12,7 @@ public class CameraMove : MonoBehaviour
 
     // 自由视角专用变量
     private float freePitch = 25f;      // 俯角
-    private float freeYaw = 0f;         // 水平角
+    private float freeYaw = 180f;         // 水平角
     void Start()
     {
         if (target == null)

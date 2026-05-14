@@ -1,5 +1,5 @@
 ---
-description: 根据情况读取整个工作区的文件
+description: 当前工作区目录
 ---
 
-当我明确要求时去读取整个工作区的文件并根据我的语句筛选相关条目
+工作区位置在 "F:\project\TheTravel\TheTravel"
