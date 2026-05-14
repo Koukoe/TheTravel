@@ -31,14 +31,32 @@ public class DataArchive
         if (states.TryGetValue(id, out BaseState state))
         {
             if (state is T target) return target;
+
+            // 兼容：新旧都是 RealSceneState 家族时，迁移基类字段（如 targetPortalGuid）
+            if (state is RealSceneState oldScene && typeof(T).IsSubclassOf(typeof(RealSceneState)))
+            {
+                T newState = new T();
+                newState.Init(id);
+                var newScene = newState as RealSceneState;
+                if (newScene != null)
+                {
+                    newScene.targetPortalGuid = oldScene.targetPortalGuid;
+                    newScene.lastExitPosition = oldScene.lastExitPosition;
+                    newScene.lastExitRotation = oldScene.lastExitRotation;
+                    newScene.isInitialized = oldScene.isInitialized;
+                }
+                states[id] = newState;
+                return newState;
+            }
+
             states.Remove(id);
             Debug.LogWarning($"Key {id} 类型转换失败，覆盖新实例");
         }
 
-        T newState = new T();
-        newState.Init(id);
-        states[id] = newState;
-        return newState;
+        T freshState = new T();
+        freshState.Init(id);
+        states[id] = freshState;
+        return freshState;
     }
 }
 

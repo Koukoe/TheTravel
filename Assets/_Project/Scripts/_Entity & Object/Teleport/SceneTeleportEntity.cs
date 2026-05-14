@@ -33,7 +33,7 @@ public class SceneTeleportEntity : StaticStateEntity<InteractionState>, IInterac
     {
         try
         {
-            GameFlowManager.Instance.PlayingData.GetState<RealSceneState>("TargetSceneGuid").targetPortalGuid = TargetPortal;
+            GameFlowManager.Instance.PlayingData.GetState<RealSceneState>(TargetSceneGuid).targetPortalGuid = TargetPortal;
             GameSceneManager.Instance.LoadMain(TargetSceneName).Forget();
         }
         catch
