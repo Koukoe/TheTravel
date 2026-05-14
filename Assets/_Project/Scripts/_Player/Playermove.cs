@@ -102,6 +102,18 @@ public class Playermove : MonoBehaviour
         PlayerRigidbody.velocity = Velocity;
     }
 
+    [Header("进阶船只控制")]
+
+    // 决定起步的爆发力。如果觉得加速慢，就猛加这个值（建议 10-30）
+    public float shipAcceleration = 10f;
+
+    // 决定松开按键后船滑行多久。数值越大，停得越快
+    public float shipBraking = 5f;
+
+    // 视觉效果：转弯时船体向侧面倾斜的角度（建议 5-10）
+    public float leanAmount = 5f;
+    public float _currentForwardSpeed;
+
     private void ShipMove()
     {
         // Quaternion targetRotation;
@@ -118,21 +130,54 @@ public class Playermove : MonoBehaviour
         // }
 
 
-        Vector3 input = InputManager.Instance.GetMove();
-        float forwardSpeed = input.y * shipSpeed;
-        float turnSpeed = input.x * ShipRotateSpeed;
-        PlayerRigidbody.velocity = PlayerTransform.forward * forwardSpeed;
-        PlayerTransform.Rotate(0, turnSpeed, 0);
+        // Vector3 input = InputManager.Instance.GetMove();
+        // float forwardSpeed = input.y * shipSpeed;
+        // float turnSpeed = input.x * ShipRotateSpeed;
+        // PlayerRigidbody.velocity = PlayerTransform.forward * forwardSpeed;
+        // PlayerTransform.Rotate(0, turnSpeed, 0);
 
+        // shipTransform.position = PlayerTransform.position;
+        // shipTransform.rotation = PlayerTransform.rotation;
+    }
+
+    private void ShipPhysics()
+    {
+        Vector2 input = InputManager.Instance.GetMove();
+        float targetSpeed = input.y * shipSpeed;
+        float currentAccel = (Mathf.Abs(input.y) > 0.1f) ? shipAcceleration : shipBraking;
+
+        _currentForwardSpeed = Mathf.MoveTowards(_currentForwardSpeed, targetSpeed, currentAccel * Time.fixedDeltaTime);
+
+        // 物理层只管位移
+        PlayerRigidbody.velocity = PlayerTransform.forward * _currentForwardSpeed;
+
+        float steerAbility = Mathf.Clamp(Mathf.Abs(_currentForwardSpeed) / (shipSpeed + 0.1f), 0.2f, 1.0f);
+        float turnAmount = input.x * ShipRotateSpeed * steerAbility * Time.fixedDeltaTime * 100f;
+        PlayerTransform.Rotate(0, turnAmount, 0);
+    }
+
+    // 视觉同步逻辑：必须放到 Update 里
+    public void SyncShipVisuals()
+    {
+        if (!Onsea || shipTransform == null) return;
+
+        // 1. 位置：如果不是子物体，直接强行同步，Rigidbody 的 Interpolate 会处理平滑
         shipTransform.position = PlayerTransform.position;
-        shipTransform.rotation = PlayerTransform.rotation;
+
+        // 2. 侧倾：使用 Time.deltaTime 实现真正的丝滑
+        Vector2 input = InputManager.Instance.GetMove();
+        float steerAbility = Mathf.Clamp(Mathf.Abs(_currentForwardSpeed) / (shipSpeed + 0.1f), 0.2f, 1.0f);
+
+        Quaternion targetVisualRot = PlayerTransform.rotation * Quaternion.Euler(0, 0, -input.x * leanAmount * steerAbility);
+        // 这里用 Slerp 且配合 Time.deltaTime 才是防抖关键
+        shipTransform.rotation = Quaternion.Slerp(shipTransform.rotation, targetVisualRot, Time.deltaTime * 10f);
     }
 
     public void Move()
     {
         if (Onsea)
         {
-            ShipMove();
+            ShipPhysics();
         }
         else
         {
