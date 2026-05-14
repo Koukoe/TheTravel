@@ -991,6 +991,9 @@ MonoBehaviour:
       isVisible: 0
       Scene: 
       animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
   taskGoals:
   - taskGoalType: 4
     goalId: Task2
@@ -1344,6 +1347,9 @@ MonoBehaviour:
       isVisible: 1
       Scene: WhiteTown
       animState: 0
+    isChangeActorScene: 1
+    currentScene: ColorfulTown
+    targetActorSceneName: WhiteTown
   - effectType: 0
     targetGUID: ColorfulTownOut
     targetInteractionState:
@@ -1366,6 +1372,9 @@ MonoBehaviour:
       isVisible: 0
       Scene: 
       animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
   - effectType: 0
     targetGUID: WhiteTownIn
     targetInteractionState:
@@ -1388,6 +1397,9 @@ MonoBehaviour:
       isVisible: 0
       Scene: 
       animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
   taskGoals:
   - taskGoalType: 3
     goalId: task4

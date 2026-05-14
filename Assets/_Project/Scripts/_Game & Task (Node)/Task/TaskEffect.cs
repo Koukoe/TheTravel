@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
@@ -11,6 +9,10 @@ public class TaskEffect
     public InteractionState targetInteractionState;
     public ItemState targetItemState;
     public ActorState targetActorState;
+
+    public bool isChangeActorScene;
+    public string currentScene;
+    public string targetActorSceneName;
 
     private BaseState snapShotState;
     public void ApplyEffect()
@@ -30,7 +32,24 @@ public class TaskEffect
                 state.Copyfrom(targetItemState);
                 break;
             case EffectType.ACTORSTATE:
-                state = GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetGUID);
+                ActorState actorState = GameFlowManager.Instance.PlayingData.GetState<ActorState>(targetGUID);
+                state = actorState;
+                if (isChangeActorScene)
+                {
+                    if (string.IsNullOrEmpty(currentScene))
+                    {
+                        Debug.Log("currentScene is null");
+                    }
+                    if (string.IsNullOrEmpty(targetActorSceneName))
+                    {
+                        Debug.Log("targetActorSceneName is null");
+                    }
+                    if (!string.IsNullOrEmpty(currentScene) && !string.IsNullOrEmpty(targetActorSceneName))
+                    {
+                        GameFlowManager.Instance.PlayingData.GetState<EntitySceneState>(currentScene).UnregisterPoolEntity(actorState.guid);
+                        GameFlowManager.Instance.PlayingData.GetState<EntitySceneState>(targetActorSceneName).RegisterPoolEntity(actorState.guid);
+                    }
+                }
 
                 snapShotState = state.Clone();
                 state.Copyfrom(targetActorState);
