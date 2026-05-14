@@ -591,6 +591,37 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 121130158}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &170132794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 170132795}
+  m_Layer: 0
+  m_Name: ColorfulTownOut
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &170132795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170132794}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 7.68, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 682678523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &174234648
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -730,20 +761,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: ColorfulTown
-  guid: 
-  autoSave: 0
+  guid: ColorfulTown
+  autoSave: 1
   scenePortals:
-  - portalName: 
-    transform: {fileID: 0}
+  - portalName: ColorfulTownOut
+    transform: {fileID: 170132795}
   defaultSpawnPoint: {fileID: 218514784}
   _state:
-    <guid>k__BackingField: ColorfulTown
+    <guid>k__BackingField: 
     name: 
     targetPortalGuid: 
     isInitialized: 0
-    poolEntityGuids:
-    - Old_Captain
-  initPoolGuids: []
+    poolEntityGuids: []
+  initPoolGuids:
+  - Old_Captain
   entityDb: {fileID: 11400000, guid: 861f8143ec2a20345a5d3eb4909bc7bc, type: 2}
 --- !u!1001 &225417298
 PrefabInstance:
@@ -1760,13 +1791,32 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 8256890880996137350, guid: 2b2ceed5c23da444e8d69a5001a63293, type: 3}
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 5075860860247562863, guid: 2b2ceed5c23da444e8d69a5001a63293,
+        type: 3}
+      insertIndex: 2
+      addedObject: {fileID: 1374340256}
+    - targetCorrespondingSourceObject: {fileID: 8680793580930852359, guid: 2b2ceed5c23da444e8d69a5001a63293,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2103990292}
+    - targetCorrespondingSourceObject: {fileID: 8680793580930852359, guid: 2b2ceed5c23da444e8d69a5001a63293,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 170132795}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b2ceed5c23da444e8d69a5001a63293, type: 3}
 --- !u!4 &682678522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5075860860247562863, guid: 2b2ceed5c23da444e8d69a5001a63293,
+    type: 3}
+  m_PrefabInstance: {fileID: 682678521}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &682678523 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8680793580930852359, guid: 2b2ceed5c23da444e8d69a5001a63293,
     type: 3}
   m_PrefabInstance: {fileID: 682678521}
   m_PrefabAsset: {fileID: 0}
@@ -4115,6 +4165,59 @@ Transform:
   - {fileID: 682678522}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1374340255
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1374340256}
+  - component: {fileID: 1374340257}
+  m_Layer: 0
+  m_Name: bounce4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1374340256
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374340255}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: -0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: -1.104, y: 0.934, z: 0.93}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 682678522}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -45}
+--- !u!65 &1374340257
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1374340255}
+  m_Material: {fileID: 13400000, guid: 0647c500b4d57124397313d61b59c8cb, type: 2}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.39, y: 0.03, z: 1.2}
+  m_Center: {x: -0.11, y: 0.05, z: 0}
 --- !u!1001 &1383144622
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7344,6 +7447,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2102927981}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2103990291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2103990292}
+  - component: {fileID: 2103990293}
+  - component: {fileID: 2103990294}
+  m_Layer: 0
+  m_Name: Interactable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2103990292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103990291}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 682678523}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2103990293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103990291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70556e4a0b599a144b061dc06893455f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  guid: ColorfulTownOut
+  defaultName: 
+  TargetSceneName: Ocean
+  TargetSceneGuid: ColorfulTown
+  TargetPortal: ColorfulTownIn
+  _tipOffset: {x: 0, y: 2, z: 0}
+--- !u!136 &2103990294
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2103990291}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.36
+  m_Height: 8.71
+  m_Direction: 1
+  m_Center: {x: -0.32, y: -2.84, z: 0}
 --- !u!1 &2107741506
 GameObject:
   m_ObjectHideFlags: 0

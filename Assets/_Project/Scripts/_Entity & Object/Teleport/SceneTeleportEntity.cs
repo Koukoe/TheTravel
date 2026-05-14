@@ -26,7 +26,7 @@ public class SceneTeleportEntity : StaticStateEntity<InteractionState>, IInterac
 
     public bool CanInteract()
     {
-        return true;
+        return _state.isInteracble ? true : false;
     }
 
     public void DoInteract()

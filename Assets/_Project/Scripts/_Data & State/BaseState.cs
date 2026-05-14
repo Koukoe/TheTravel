@@ -124,6 +124,7 @@ public class InteractionState : BaseState
 {
     public bool isTriggered;
     public int stateIndex;
+    public bool isInteracble;
     public override void Init(string id)
     {
         if (!string.IsNullOrEmpty(guid)) return;
@@ -138,7 +139,8 @@ public class InteractionState : BaseState
         {
             name = name,
             isTriggered = isTriggered,
-            stateIndex = stateIndex
+            stateIndex = stateIndex,
+            isInteracble = isInteracble
         };
         clone.SetGUID(guid);
         return clone;
@@ -151,6 +153,7 @@ public class InteractionState : BaseState
         {
             isTriggered = state.isTriggered;
             stateIndex = state.stateIndex;
+            isInteracble = state.isInteracble;
         }
     }
 }
