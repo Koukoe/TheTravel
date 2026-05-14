@@ -203,7 +203,10 @@ public abstract class EntityScene<TState> : RealScene<TState>
         RefreshSceneEntities();
     }
 
-    protected override void StateInitial() { _state.poolEntityGuids = new List<string>(initPoolGuids); }
+    protected override void StateInitial()
+    {
+        _state.poolEntityGuids = new List<string>(initPoolGuids);
+    }
 
     public override void ExitScene()
     {

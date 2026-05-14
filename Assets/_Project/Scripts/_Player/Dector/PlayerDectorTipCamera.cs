@@ -15,10 +15,6 @@ public class PlayerDetectorTipCamera : PlayerDetector
         {
             _candidates.Add(interactable);
         }
-        if (UIManager.Instance != null)
-        {
-            UIManager.Instance.Show("InteractTipCamera");
-        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -31,12 +27,19 @@ public class PlayerDetectorTipCamera : PlayerDetector
         {
             _candidates.Remove(interactable);
         }
-        if (_candidates.Count == 0 || GetTarget() == null)
+    }
+
+    private void Update()
+    {
+        if (UIManager.Instance == null) return;
+
+        if (GetTarget() != null)
         {
-            if (UIManager.Instance != null)
-            {
-                UIManager.Instance.Hide("InteractTipCamera");
-            }
+            UIManager.Instance.Show("InteractTipCamera");
+        }
+        else
+        {
+            UIManager.Instance.Hide("InteractTipCamera");
         }
     }
 }
