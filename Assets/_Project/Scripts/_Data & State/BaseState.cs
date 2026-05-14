@@ -202,6 +202,7 @@ public class RealSceneState : BaseState
     public Vector3? lastExitPosition;
     public Quaternion? lastExitRotation;
 
+        // isInitialized 不从存档传播，场景加载时由 SceneManager 重新设置
     public bool isInitialized = false;
 
     public override void Init(string id)
@@ -220,7 +221,7 @@ public class RealSceneState : BaseState
             name = name,
             targetPortalGuid = targetPortalGuid,
             lastExitPosition = lastExitPosition,
-            isInitialized = false
+            // isInitialized — 不传播，场景加载时重新设置
         };
         clone.SetGUID(guid);
         return clone;
@@ -232,7 +233,8 @@ public class RealSceneState : BaseState
         {
             targetPortalGuid = state.targetPortalGuid;
             lastExitPosition = state.lastExitPosition;
-            isInitialized = false;
+            lastExitRotation = state.lastExitRotation;
+            // isInitialized — 不传播
         }
     }
 }
@@ -244,13 +246,14 @@ public class TaskGoalState : BaseState
 
     public override void Init(string id)
     {
+        if (!string.IsNullOrEmpty(guid)) return;
         base.Init(id);
         isReached = false;
     }
 
     public override BaseState Clone()
     {
-        var clone = new TaskGoalState() { isReached = isReached };
+        var clone = new TaskGoalState() { name = name, isReached = isReached };
         clone.SetGUID(guid);
         return clone;
     }
