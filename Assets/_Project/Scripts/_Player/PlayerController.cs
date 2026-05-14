@@ -61,4 +61,9 @@ public class PlayerController : MonoBehaviour
     {
         if (moveEnable) Playermove.Instance.Move();
     }
+
+    void Update()
+    {
+        Playermove.Instance.SyncShipVisuals();
+    }
 }
