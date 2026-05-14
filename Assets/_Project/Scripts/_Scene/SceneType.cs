@@ -205,7 +205,20 @@ public abstract class EntityScene<TState> : RealScene<TState>
 
     protected override void StateInitial()
     {
-        _state.poolEntityGuids = new List<string>(initPoolGuids);
+        if (_state.poolEntityGuids == null || _state.poolEntityGuids.Count == 0)
+        {
+            _state.poolEntityGuids = new List<string>(initPoolGuids);
+        }
+        else
+        {
+            foreach (var guid in initPoolGuids)
+            {
+                if (!_state.poolEntityGuids.Contains(guid))
+                {
+                    _state.poolEntityGuids.Add(guid);
+                }
+            }
+        }
     }
 
     public override void ExitScene()
