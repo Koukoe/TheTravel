@@ -124,6 +124,7 @@ Assets/
     RadioBodyEntity.cs
     RadioKnobAmpEntity.cs
     RadioKnobFreqEntity.cs
+    WaveDecodeController.cs
    Teleport/
     SceneTeleportEntity.cs
     SceneTeleportObject.cs
@@ -224,7 +225,6 @@ Assets/
     SceneTeleport.cs
     UIMethods.cs
     UIType.cs
-  shaders/WaveDecodeController.cs
 Temp/obj/Debug/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
