@@ -107,6 +107,7 @@ Assets/
    DynamicbutNoState/FountainWater/FountainWaterRipple.cs
    EntityDatabase.cs
    NPC/
+    Engineer.cs
     EntityPoolNPC_Default.cs
     EntitySaticNPC_Default.cs
     Old_Captain.cs
