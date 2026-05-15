@@ -1372,6 +1372,8 @@ MonoBehaviour:
     targetDialogueList:
     - dialogueguid: WhiteTown_NPC_03
       dialogueIndex: 1
+    - dialogueguid: WhiteTown_NPC_01
+      dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
