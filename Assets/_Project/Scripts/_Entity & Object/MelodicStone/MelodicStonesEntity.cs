@@ -7,6 +7,10 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
 
     [SerializeField] private int[] _melody;
 
+
+    public TextAsset dialogueText;
+    public string itemID;
+
     protected override void OnStateBound()
     {
 
@@ -28,6 +32,8 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
         if (_state.stateIndex == _melody.Length)
         {
             // Finish Task
+            DialogueManager.Instance.StartWith(dialogueText);
+            GameFlowManager.Instance.PlayingData.GetState<ItemState>(itemID).isPicked = true;
         }
     }
 }

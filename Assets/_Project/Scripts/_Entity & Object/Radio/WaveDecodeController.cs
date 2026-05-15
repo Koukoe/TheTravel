@@ -26,7 +26,7 @@ public class WaveDecodeController : MonoBehaviour
     [SerializeField] private float matchRequired = 0.9f; // % of wave points must match to decode
     
     [Header("Events")]
-    [SerializeField] private UnityEngine.Events.UnityEvent onDecodeSuccess;
+    public UnityEngine.Events.UnityEvent onDecodeSuccess;
     [SerializeField] private UnityEngine.Events.UnityEvent onDecodeFail;
     
     [Header("UI (Optional)")]

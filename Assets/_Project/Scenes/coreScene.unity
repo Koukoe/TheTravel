@@ -336,7 +336,22 @@ MonoBehaviour:
   - 21
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 1
+    goalId: task17
+    targetId: record
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 1
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -897,7 +912,22 @@ MonoBehaviour:
   - 27
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: task26
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -1146,7 +1176,90 @@ MonoBehaviour:
   nextNodesIds: []
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: task27
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
+  nextNodes: []
+  Out: 0
+  isTaskFinished: 0
+--- !u!1 &369038600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 369038601}
+  - component: {fileID: 369038602}
+  m_Layer: 0
+  m_Name: task28
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &369038601
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369038600}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1063414384}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &369038602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 369038600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7311e9a976b960498e7bb2bbdd128f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  taskName: 
+  taskId: 27
+  nextNodesIds: []
+  taskEffects: []
+  taskEndEffects: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: task28
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -1219,7 +1332,7 @@ MonoBehaviour:
   taskEffects: []
   taskEndEffects: []
   taskGoals:
-  - isAutoFinish: 0
+  - isAutoFinish: 1
     taskGoalType: 3
     goalId: task8
     targetId: 
@@ -1653,7 +1766,22 @@ MonoBehaviour:
   - 17
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: 
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -1882,7 +2010,22 @@ MonoBehaviour:
   - 26
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: task25
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -2261,7 +2404,7 @@ MonoBehaviour:
   taskEffects: []
   taskEndEffects: []
   taskGoals:
-  - isAutoFinish: 0
+  - isAutoFinish: 1
     taskGoalType: 0
     goalId: task9
     targetId: 
@@ -2336,6 +2479,7 @@ Transform:
   - {fileID: 744867459}
   - {fileID: 193337399}
   - {fileID: 337046525}
+  - {fileID: 369038601}
   m_Father: {fileID: 223556512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &1066129547 stripped
@@ -2394,7 +2538,22 @@ MonoBehaviour:
   - 16
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: 
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -2806,7 +2965,59 @@ MonoBehaviour:
   nextNodesIds:
   - 24
   taskEffects: []
-  taskEndEffects: []
+  taskEndEffects:
+  - effectType: 2
+    targetGUID: Old_Captain
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: Old_Captain
+      serializedPosition: {x: 832.85, y: 28.09, z: 467.49}
+      serializedRotation: {x: 0, y: 40.71, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: WhiteTown
+      animState: 0
+    isChangeActorScene: 1
+    currentScene: EngineerHouse
+    targetActorSceneName: WhiteTown
+    targetDialogueList: []
+  - effectType: 2
+    targetGUID: Engineer
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Engineer
+      name: Engineer
+      serializedPosition: {x: 841.67, y: 28.09, z: 476.45}
+      serializedRotation: {x: 0, y: 89.52, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: WhiteTown
+      animState: 0
+    isChangeActorScene: 1
+    currentScene: EngineerHouse
+    targetActorSceneName: WhiteTown
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -2876,7 +3087,22 @@ MonoBehaviour:
   - 11
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 4
+    goalId: task10
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -3189,9 +3415,9 @@ MonoBehaviour:
     targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
-    taskGoalType: 0
-    goalId: 
-    targetId: 
+    taskGoalType: 3
+    goalId: task21
+    targetId: Engineer
     isCheckPlayer: 0
     GoalTrigger: 0
     GoalItem: 0
@@ -3200,7 +3426,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: 
+    targetDialogueId: Engineer
     index: 0
     targetScript: {fileID: 0}
   nextNodes: []
@@ -3353,7 +3579,22 @@ MonoBehaviour:
   - 25
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: task24
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
