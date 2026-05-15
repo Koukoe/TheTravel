@@ -130,6 +130,7 @@ public class InteractionState : BaseState
         if (!string.IsNullOrEmpty(guid)) return;
         base.Init(id);
         isTriggered = false;
+        isInteracble = false;
         stateIndex = 0;
     }
 

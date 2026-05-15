@@ -4,7 +4,7 @@ using Unity.IO.LowLevel.Unsafe;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MelodicStoneSingleInteractable : MonoBehaviour, IInteractable
+public class radioKnobFreq : MonoBehaviour, IInteractable
 {
 
     [SerializeField] private int _priority;

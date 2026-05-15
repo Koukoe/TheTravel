@@ -28,7 +28,7 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
 
         if (_state.stateIndex == melodyLength - 1)
         {
-
+            // Finish Task
         }
     }
 }

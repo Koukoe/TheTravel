@@ -115,6 +115,10 @@ Assets/
     EntitySaticNPC_Default.cs
     Old_Captain.cs
    Object/andosi.cs
+   Radio/
+    RadioBodyEntity.cs
+    RadioKnobAmpEntity.cs
+    RadioKnobFreqEntity.cs
    Teleport/
     SceneTeleportEntity.cs
     SceneTeleportObject.cs
