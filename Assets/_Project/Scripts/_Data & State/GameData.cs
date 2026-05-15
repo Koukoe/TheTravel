@@ -41,18 +41,21 @@ public class DataArchive
                 newState.Copyfrom(state);
 
                 states[id] = newState;
-                Debug.Log($"[DataArchive] 自动迁移状态类型: {id} -> {typeof(T).Name}");
                 return newState;
             }
 
-            states.Remove(id);
-            Debug.LogWarning($"Key {id} 类型转换失败，覆盖新实例");
+            // 类型不匹配：不删除旧状态，返回临时实例
+            // （避免同 guid 同时被 ActorState 和 DialogueState 使用时互相覆盖）
+            Debug.LogWarning($"[DataArchive] 类型不匹配: id={id}, 已有={state.GetType().Name}, 请求={typeof(T).Name}，返回临时实例");
+            T freshState = new T();
+            freshState.Init(id);
+            return freshState;
         }
 
-        T freshState = new T();
-        freshState.Init(id);
-        states[id] = freshState;
-        return freshState;
+        T newFreshState = new T();
+        newFreshState.Init(id);
+        states[id] = newFreshState;
+        return newFreshState;
     }
 }
 

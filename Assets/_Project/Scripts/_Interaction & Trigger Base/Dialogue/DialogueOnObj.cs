@@ -100,7 +100,8 @@ public class DialogueOnObj : MonoBehaviour, IInteractable
     {
         if (!string.IsNullOrWhiteSpace(dialogueGuid) && DialogueManager.Instance != null)
         {
-            Debug.Log($"获取 {name} 的对话索引: {dialogueGuid} -> {dialogueIndex}");
+            // 把它注释掉因为它会在对话过程中刷屏控制台。。。
+            // Debug.Log($"获取 {name} 的对话索引: {dialogueGuid} -> {dialogueIndex}");
             return DialogueManager.Instance.GetDialogueIndex(dialogueGuid, dialogueIndex);
         }
 

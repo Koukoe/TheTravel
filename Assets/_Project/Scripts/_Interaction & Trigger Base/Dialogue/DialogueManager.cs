@@ -144,6 +144,7 @@ public class DialogueManager : MonoBehaviour
         }
 
         DialogueState state = GameFlowManager.Instance.PlayingData.GetState<DialogueState>(dialogueGuid);
+        // Debug.Log($"[DialogueManager] GetDialogueIndex: guid={dialogueGuid}, state.dialogueIndex={state?.dialogueIndex}, fallback={fallbackIndex}");
         return state != null ? state.dialogueIndex : fallbackIndex;
     }
 
@@ -253,6 +254,8 @@ public class DialogueManager : MonoBehaviour
         {
             return;
         }
+
+        // Debug.Log($"[DialogueManager] SetDialogueIndex: guid={dialogueGuid}, old={state.dialogueIndex}, new={index}");
 
         state.dialogueIndex = Mathf.Max(0, index);
     }
