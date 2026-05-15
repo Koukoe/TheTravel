@@ -114,7 +114,12 @@ Assets/
     EntityPoolNPC_Default.cs
     EntitySaticNPC_Default.cs
     Old_Captain.cs
-   Object/andosi.cs
+   Object/
+    andosi.cs
+    conch.cs
+    cup.cs
+    Fountain.cs
+    river.cs
    Teleport/
     SceneTeleportEntity.cs
     SceneTeleportObject.cs
@@ -215,6 +220,7 @@ Assets/
     SceneTeleport.cs
     UIMethods.cs
     UIType.cs
+  shaders/WaveDecodeController.cs
 Temp/obj/Debug/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]

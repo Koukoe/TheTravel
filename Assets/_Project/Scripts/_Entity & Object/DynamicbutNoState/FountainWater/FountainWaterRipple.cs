@@ -56,7 +56,7 @@ public class FountainWaterRipple : MonoBehaviour
         StartCoroutine(OnRippling(rippleDuration));
     }
 
-    public static void CreateRipple()
+    public void CreateRipple()
     {
         if (Instance != null)
         {

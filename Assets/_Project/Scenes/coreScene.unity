@@ -1374,6 +1374,10 @@ MonoBehaviour:
       dialogueIndex: 1
     - dialogueguid: WhiteTown_NPC_01
       dialogueIndex: 1
+    - dialogueguid: WhiteTown_NPC_02
+      dialogueIndex: 1
+    - dialogueguid: WhiteTown_NPC_04
+      dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -2103,6 +2107,34 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList: []
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: Old_Captain
+      dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -2623,7 +2655,59 @@ MonoBehaviour:
   nextNodesIds:
   - 21
   taskEffects: []
-  taskEndEffects: []
+  taskEndEffects:
+  - effectType: 1
+    targetGUID: button
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: button
+      name: button
+      isPicked: 1
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
+  - effectType: 1
+    targetGUID: andosi
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: andosi
+      name: andosi
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -2828,7 +2912,7 @@ MonoBehaviour:
     GoalPosition: {x: 840, y: 30, z: 421}
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 10
-    rotationTolerance: 0
+    rotationTolerance: 360
     targetDialogueId: 
     index: 0
     targetScript: {fileID: 0}
@@ -3000,7 +3084,80 @@ MonoBehaviour:
       dialogueIndex: 3
     - dialogueguid: WhiteTown_NPC_01
       dialogueIndex: 2
-  taskGoals: []
+    - dialogueguid: WhiteTown_NPC_02
+      dialogueIndex: 2
+    - dialogueguid: WhiteTown_NPC_04
+      dialogueIndex: 2
+    - dialogueguid: WhiteTown_NPC_05
+      dialogueIndex: 2
+  - effectType: 2
+    targetGUID: river
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: river
+      name: 
+      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 1
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
+  - effectType: 2
+    targetGUID: Old_Captain
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: 
+      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: EngineerHouse
+      animState: 0
+    isChangeActorScene: 1
+    currentScene: WhiteTown
+    targetActorSceneName: EngineerHouse
+    targetDialogueList: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 0
+    goalId: 
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
