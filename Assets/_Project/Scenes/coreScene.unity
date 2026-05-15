@@ -971,7 +971,7 @@ MonoBehaviour:
     isCheckPlayer: 0
     GoalTrigger: 0
     GoalItem: 0
-    sceneName: 
+    sceneName: WhiteTown
     GoalPosition: {x: 0, y: 0, z: 0}
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
@@ -2555,7 +2555,22 @@ MonoBehaviour:
   - 14
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 1
+    goalId: task13
+    targetId: andosi
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 1
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -2609,7 +2624,22 @@ MonoBehaviour:
   - 21
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 3
+    goalId: task14
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: WhiteTown_NPC_03
+    index: 2
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -2663,7 +2693,22 @@ MonoBehaviour:
   - 24
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 3
+    goalId: task23
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: Engineer
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -2924,7 +2969,37 @@ MonoBehaviour:
   nextNodesIds:
   - 22
   taskEffects: []
-  taskEndEffects: []
+  taskEndEffects:
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: WhiteTown_NPC_03
+      dialogueIndex: 3
+    - dialogueguid: WhiteTown_NPC_01
+      dialogueIndex: 2
   taskGoals: []
   nextNodes: []
   Out: 0
@@ -2978,8 +3053,51 @@ MonoBehaviour:
   nextNodesIds:
   - 13
   taskEffects: []
-  taskEndEffects: []
-  taskGoals: []
+  taskEndEffects:
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: WhiteTown_NPC_03
+      dialogueIndex: 2
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 3
+    goalId: task12
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: WhiteTown_NPC_03
+    index: 1
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
