@@ -107,7 +107,7 @@ Assets/
    DynamicbutNoState/FountainWater/FountainWaterRipple.cs
    EntityDatabase.cs
    MelodicStone/
-    MelodicStoneEntity.cs
+    MelodicStonesEntity.cs
     MelodicStoneSingleInteractable.cs
    NPC/
     Engineer.cs

@@ -5,8 +5,7 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
 {
     public InteractionState GetState { get => _state; private set { _state = value; } }
 
-    [SerializeField] private int[] melodies;
-    [SerializeField] private int melodyLength;
+    [SerializeField] private int[] _melody;
 
     protected override void OnStateBound()
     {
@@ -15,7 +14,7 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
 
     public void JugdeSolfege(int solfege)
     {
-        if (melodies[_state.stateIndex] == solfege)
+        if (_melody[_state.stateIndex] == solfege)
         {
             _state.stateIndex++;
             AudioManager.Instance.PlaySFX($"StoneMelody_{solfege}");
@@ -26,7 +25,7 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
             AudioManager.Instance.PlaySFX($"StoneMelody_Error");
         }
 
-        if (_state.stateIndex == melodyLength - 1)
+        if (_state.stateIndex == _melody.Length)
         {
             // Finish Task
         }

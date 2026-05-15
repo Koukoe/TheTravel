@@ -9,6 +9,9 @@ public class GameFlowManager : MonoBehaviour
     public static GameFlowManager Instance { get; private set; }
     private const string DialogueBubblePanelName = "DialogueBubblePanel";
 
+    /// <summary>读档进行中，防止 OnCheckPoint auto-save 把残留任务状态写进 PlayingData</summary>
+    private bool _isLoadingSaveGame = false;
+
     private void Awake()
     {
         Instance = this;
@@ -40,13 +43,38 @@ public class GameFlowManager : MonoBehaviour
 
         await CloseDialogueRelatedPanelsBeforeLoad();
 
+        _isLoadingSaveGame = true;
         PlayingData = data;
-        TaskManager.Instance.LoadAllTaskNodes();
+        Debug.Log("[GameFlowManager] 开始读取存档，先重置所有任务运行状态");
 
+        // 第 1 步：重置任务运行状态（取消运行中任务、清理连接、重置图标记）
+        //     不销毁 TaskNode 对象（它们在 GlobalManager/T 层级中跨场景存活）
+        if (TaskManager.Instance != null)
+        {
+            TaskManager.Instance.ClearAllTaskNodesForLoad();
+        }
+
+        // 第 2 步：加载目标场景（新场景的 TaskNode 会在 Awake 中注册到字典）
         if (GameSceneManager.Instance != null)
         {
+            Debug.Log("[GameFlowManager] 开始加载场景: " + PlayingData.currentScene);
             await GameSceneManager.Instance.LoadMain(PlayingData.currentScene);
+            Debug.Log("[GameFlowManager] 场景加载完成");
         }
+
+        // 等待至少一帧，确保场景中所有 TaskNode 的 Awake 已执行完毕
+        // （有些项目通过 Addressables / 动态实例化延迟创建 TaskNode，多等几帧更安全）
+        await UniTask.Yield(PlayerLoopTiming.Update);
+        await UniTask.Yield(PlayerLoopTiming.Update);
+        Debug.Log("[GameFlowManager] 已等待两帧，开始重建任务图");
+
+        // 第 3 步：场景加载完成后，从存档重建任务图（连接 + 恢复状态 + 启动就绪任务）
+        if (TaskManager.Instance != null)
+        {
+            TaskManager.Instance.RebuildGraphFromSave();
+        }
+
+        _isLoadingSaveGame = false;
 
         // ...
     }
@@ -119,17 +147,16 @@ public class GameFlowManager : MonoBehaviour
         // 保存当前位置
         GameSceneManager.Instance.currentMainLogic.SyncPlayerPosition();
 
-        // 截图并保存到本地
-        string fileName = $"thumb_{slotIndex}.jpg";
-        Texture2D newThumb = await CameraUtils.CaptureAndSaveAsync(Camera.main, fileName);
-
-        // 保险
+        // 1. 锁定任务状态到 PlayingData
         TaskManager.Instance.SaveAllTaskNodes();
 
-        // 更新时间信息
+        // 2. ★ 立刻存盘，中间无任何 yield/await，防止任务推进篡改 PlayingData
         PlayingData.saveTime = DateTime.Now.ToString("yyyy/MM/dd HH:mm");
-
         DataArchivesSystem.Set(slotIndex, PlayingData);
+
+        // 3. 截图（纯 UI 用途，不影响存档数据）
+        string fileName = $"thumb_{slotIndex}.jpg";
+        Texture2D newThumb = await CameraUtils.CaptureAndSaveAsync(Camera.main, fileName);
 
         return newThumb;
     }
@@ -139,6 +166,12 @@ public class GameFlowManager : MonoBehaviour
     /// </summary>
     public async UniTaskVoid OnCheckPoint()
     {
+        if (_isLoadingSaveGame)
+        {
+            Debug.Log("[GameFlowManager] 读档进行中，跳过自动存档");
+            return;
+        }
+
         Texture2D thumb = await SaveGame(0);
 
         if (thumb != null)
