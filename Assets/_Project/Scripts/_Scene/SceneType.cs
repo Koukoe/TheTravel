@@ -45,8 +45,8 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         if (!_state.isInitialized)
         {
             StateInitial();
+            _state.isInitialized = true;
         }
-        _state.isInitialized = true;
         HandlePlayerPosition();
     }
 
@@ -205,7 +205,7 @@ public abstract class EntityScene<TState> : RealScene<TState>
 
     protected override void StateInitial()
     {
-        if (_state.poolEntityGuids == null || _state.poolEntityGuids.Count == 0)
+        if (_state.poolEntityGuids == null)
         {
             _state.poolEntityGuids = new List<string>(initPoolGuids);
         }
