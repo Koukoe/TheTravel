@@ -33,19 +33,15 @@ public class DataArchive
             if (state is T target) return target;
 
             // 兼容：新旧都是 RealSceneState 家族时，迁移基类字段（如 targetPortalGuid）
-            if (state is RealSceneState oldScene && typeof(T).IsSubclassOf(typeof(RealSceneState)))
+            if (state is RealSceneState && typeof(T).IsSubclassOf(typeof(RealSceneState)))
             {
                 T newState = new T();
                 newState.Init(id);
-                var newScene = newState as RealSceneState;
-                if (newScene != null)
-                {
-                    newScene.targetPortalGuid = oldScene.targetPortalGuid;
-                    newScene.lastExitPosition = oldScene.lastExitPosition;
-                    newScene.lastExitRotation = oldScene.lastExitRotation;
-                    newScene.isInitialized = oldScene.isInitialized;
-                }
+
+                newState.Copyfrom(state);
+
                 states[id] = newState;
+                Debug.Log($"[DataArchive] 自动迁移状态类型: {id} -> {typeof(T).Name}");
                 return newState;
             }
 
