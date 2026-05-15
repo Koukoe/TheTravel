@@ -114,6 +114,7 @@ Assets/
     EntityPoolNPC_Default.cs
     EntitySaticNPC_Default.cs
     Old_Captain.cs
+   Object/andosi.cs
    Teleport/
     SceneTeleportEntity.cs
     SceneTeleportObject.cs
