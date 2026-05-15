@@ -2,6 +2,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+public class TargetDialogue
+{
+    public string dialogueguid;
+    public int dialogueIndex;
+}
+
+[System.Serializable]
 public class TaskEffect
 {
     public EffectType effectType;
@@ -15,7 +22,7 @@ public class TaskEffect
     public string currentScene;
     public string targetActorSceneName;
 
-    public List<(string, int)> targetDialogueList;
+    public List<TargetDialogue> targetDialogueList;
 
 
     private BaseState snapShotState;
@@ -61,8 +68,7 @@ public class TaskEffect
             case EffectType.DIALOGUESTATE:
                 foreach (var dialogue in targetDialogueList)
                 {
-                    var (dialogueguid, dialogueIndex) = dialogue;
-                    DialogueManager.Instance.SetDialogueIndex(dialogueguid, dialogueIndex);
+                    DialogueManager.Instance.SetDialogueIndex(dialogue.dialogueguid, dialogue.dialogueIndex);
                 }
                 break;
 

@@ -1343,7 +1343,35 @@ MonoBehaviour:
   - 15
   - 18
   taskEffects: []
-  taskEndEffects: []
+  taskEndEffects:
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: WhiteTown_NPC_03
+      dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -1445,6 +1473,7 @@ MonoBehaviour:
     isChangeActorScene: 0
     currentScene: 
     targetActorSceneName: 
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 4
@@ -2019,6 +2048,7 @@ MonoBehaviour:
     isChangeActorScene: 1
     currentScene: ColorfulTown
     targetActorSceneName: WhiteTown
+    targetDialogueList: []
   - effectType: 0
     targetGUID: ColorfulTownOut
     targetInteractionState:
@@ -2044,6 +2074,7 @@ MonoBehaviour:
     isChangeActorScene: 0
     currentScene: 
     targetActorSceneName: 
+    targetDialogueList: []
   - effectType: 0
     targetGUID: WhiteTownIn
     targetInteractionState:
@@ -2069,6 +2100,7 @@ MonoBehaviour:
     isChangeActorScene: 0
     currentScene: 
     targetActorSceneName: 
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
