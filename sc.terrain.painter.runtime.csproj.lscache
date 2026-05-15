@@ -69,10 +69,7 @@ Assets/Plugins/ProceduralTerrainPainter/Runtime/
 Temp/obj/Debug/sc.terrain.painter.runtime/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
-Assets/Plugins/DOTween/
- DOTween.dll
- Editor/DOTweenEditor.dll
-E:/Unity/editor/2022.3.62f3c1/Editor/Data/Managed/
+../../../../../../Program Files/Unity/Editor/2022.3.62f3c1/Editor/Data/Managed/
  UnityEditor.Graphs.dll
  UnityEngine/
   UnityEditor.CoreModule.dll
@@ -158,7 +155,7 @@ E:/Unity/editor/2022.3.62f3c1/Editor/Data/Managed/
   UnityEngine.VRModule.dll
   UnityEngine.WindModule.dll
   UnityEngine.XRModule.dll
-E:/Unity/editor/2022.3.62f3c1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/
+../../../../../../Program Files/Unity/Editor/2022.3.62f3c1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/
  mscorlib.dll
  System.ComponentModel.Composition.dll
  System.Core.dll
@@ -176,7 +173,7 @@ E:/Unity/editor/2022.3.62f3c1/Editor/Data/NetStandard/compat/2.1.0/shims/netfx/
  System.Xml.dll
  System.Xml.Linq.dll
  System.Xml.Serialization.dll
-E:/Unity/editor/2022.3.62f3c1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/
+../../../../../../Program Files/Unity/Editor/2022.3.62f3c1/Editor/Data/NetStandard/compat/2.1.0/shims/netstandard/
  Microsoft.Win32.Primitives.dll
  System.AppContext.dll
  System.Buffers.dll
@@ -280,12 +277,13 @@ E:/Unity/editor/2022.3.62f3c1/Editor/Data/NetStandard/compat/2.1.0/shims/netstan
  System.Xml.XmlSerializer.dll
  System.Xml.XPath.dll
  System.Xml.XPath.XDocument.dll
-E:/Unity/editor/2022.3.62f3c1/Editor/Data/NetStandard/
+../../../../../../Program Files/Unity/Editor/2022.3.62f3c1/Editor/Data/NetStandard/
  Extensions/2.0.0/System.Runtime.InteropServices.WindowsRuntime.dll
  ref/2.1.0/netstandard.dll
-E:/Unity/editor/2022.3.62f3c1/Editor/Data/PlaybackEngines/
- MetroSupport/UnityEditor.UWP.Extensions.dll
- WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+../../../../../../Program Files/Unity/Editor/2022.3.62f3c1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
+Assets/Plugins/DOTween/
+ DOTween.dll
+ Editor/DOTweenEditor.dll
 Library/PackageCache/com.unity.collab-proxy@2.11.4/Lib/Editor/
  log4netPlastic.dll
  Unity.Plastic.Antlr3.Runtime.dll
@@ -304,10 +302,10 @@ Library/ScriptAssemblies/
  UnityEngine.UI.dll
 
 [analyzerReferences]
-C:/Users/Rechenz.LAPTOP-7LP922U2/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.2/Analyzers/Microsoft.Unity.Analyzers.dll
-E:/Unity/editor/2022.3.62f3c1/Editor/Data/Tools/Unity.SourceGenerators/
+../../../../../../Program Files/Unity/Editor/2022.3.62f3c1/Editor/Data/Tools/Unity.SourceGenerators/
  Unity.Properties.SourceGenerator.dll
  Unity.SourceGenerators.dll
+C:/Users/RaKyU/.vscode/extensions/visualstudiotoolsforunity.vstuc-1.2.2/Analyzers/Microsoft.Unity.Analyzers.dll
 
 [analyzerConfigFiles]
 Temp/obj/Debug/sc.terrain.painter.runtime/sc.terrain.painter.runtime.GeneratedMSBuildEditorConfig.editorconfig
