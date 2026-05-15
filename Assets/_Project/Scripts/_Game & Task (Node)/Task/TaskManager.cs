@@ -39,9 +39,22 @@ public class TaskManager : MonoBehaviour
 
     public void AddTask(string taskId, TaskNode taskNode)
     {
-        if (tasks.ContainsKey(taskId))
+        if (tasks.TryGetValue(taskId, out var existing))
         {
-            Debug.LogError("TaskId already exists: " + taskId);
+            if (existing == taskNode)
+            {
+                // 同一实例重新注册，忽略
+                return;
+            }
+            // 旧节点仍然存活 —— 可能是清理不彻底，覆盖并销毁旧节点
+            Debug.LogWarning($"[TaskManager] TaskId '{taskId}' 冲突！旧节点: {existing.name}(inst:{existing.GetInstanceID()}), 新节点: {taskNode.name}(inst:{taskNode.GetInstanceID()})");
+            Debug.LogWarning($"[TaskManager] 销毁旧节点，使用新节点");
+            if (existing != null && existing.gameObject != null)
+            {
+                existing.CancelTask();
+                Destroy(existing.gameObject);
+            }
+            tasks[taskId] = taskNode;
         }
         else
         {
@@ -109,7 +122,7 @@ public class TaskManager : MonoBehaviour
     {
         foreach (var task in tasks.Values)
         {
-            if (task.Inn == 0 && !task.isTaskFinished)
+            if (task.Inn <= 0 && !task.isTaskFinished)
             {
                 Debug.Log($"启动任务: {task.taskId}");
                 task.StartTask();
@@ -128,7 +141,6 @@ public class TaskManager : MonoBehaviour
         {
             SaveTaskNode(task.Key);
         }
-        Debug.Log("所有任务节点已保存");
     }
 
     /// <summary>
@@ -137,6 +149,12 @@ public class TaskManager : MonoBehaviour
     public void LoadAllTaskNodes()
     {
         isLoadingTasks = true;
+
+        // 在加载存档前先重置所有任务，确保之前运行中的旧任务不会保留
+        foreach (var t in tasks)
+        {
+            t.Value.ResetForLoad();
+        }
 
         foreach (var task in tasks)
         {
@@ -191,6 +209,13 @@ public class TaskManager : MonoBehaviour
         {
             var (inn, isFinished) = GameFlowManager.Instance.PlayingData.TaskNodesDic[ID];
 
+            // 修正：入度不应为负数（防御性 clamp）
+            if (inn < 0)
+            {
+                Debug.LogWarning($"[TaskManager] 任务 {ID} 存档入度为 {inn}，已修正为 0");
+                inn = 0;
+            }
+
             // 恢复任务核心数值
             taskNode.isTaskFinished = isFinished;
             taskNode.Inn = inn;
@@ -233,12 +258,103 @@ public class TaskManager : MonoBehaviour
 
         foreach (var task in tasks.Values)
         {
-            if (task.Inn == 0 && !task.isTaskFinished)
+            if (task.Inn <= 0 && !task.isTaskFinished)
             {
                 Debug.Log($"重新启动任务: {task.taskId}");
                 task.StartTask();
             }
         }
+    }
+
+    // ========== 读档专用流程：重置运行状态 → 加载场景 → 重建图 ==========
+
+    /// <summary>
+    /// 重置所有任务节点的运行状态（读档时、加载新场景前调用）。
+    /// 不销毁 GameObject（节点在 GlobalManager/T 层级中需要跨场景存活），
+    /// 只取消运行中任务、清理 nextNodes 引用、重置图初始化标记。
+    /// </summary>
+    public void ClearAllTaskNodesForLoad()
+    {
+        Debug.Log("[TaskManager] ========== 重置所有任务运行状态（读档准备）==========");
+
+        // 1. 取消所有正在运行的任务
+        foreach (var kvp in tasks)
+        {
+            kvp.Value?.CancelTask();
+        }
+
+        // 2. 清除所有 nextNodes 引用（连接将在 RebuildGraphFromSave 中重建）
+        foreach (var kvp in tasks)
+        {
+            if (kvp.Value != null)
+            {
+                kvp.Value.nextNodes.Clear();
+                kvp.Value.Out = 0;
+            }
+        }
+
+        // 3. 清空活跃集合，重置图初始化标记
+        activeTasks.Clear();
+        isGraphInitialized = false;
+        isLoadingTasks = false;
+
+        Debug.Log("[TaskManager] ========== 任务运行状态已全部重置 ==========");
+    }
+
+    /// <summary>
+    /// 场景加载完成后，从存档重建任务图。
+    /// 前提：TaskNode 对象在 GlobalManager/T 层级中未销毁，字典中引用仍有效。
+    /// </summary>
+    public void RebuildGraphFromSave()
+    {
+        Debug.Log("[TaskManager] ========== 从存档重建任务图 ==========");
+        Debug.Log($"[TaskManager] 当前已注册任务数: {tasks.Count}");
+
+        // ------------------------------------------------------------------
+        // 阶段 1：构建图连接（nextNodes），同时禁止 Inn setter 覆盖存档
+        // ------------------------------------------------------------------
+        isLoadingTasks = true; // SaveTaskNode 中会 return，保护存档不被覆盖
+
+        // 1a. 先将所有节点的 Inn 归零（避免旧入度残留）
+        foreach (var kvp in tasks)
+        {
+            if (kvp.Value != null)
+                kvp.Value.Inn = 0;
+        }
+
+        // 1b. 重建图连接
+        foreach (var kvp in tasks)
+        {
+            var taskNode = kvp.Value;
+            taskNode.nextNodes.Clear();
+
+            foreach (var id in taskNode.nextNodesIds)
+            {
+                TaskNode targetTask = GetTask(id);
+                if (targetTask != null)
+                {
+                    taskNode.nextNodes.Add(targetTask);
+                    targetTask.Inn++;       // isLoadingTasks=true，SaveTaskNode 被跳过
+                    taskNode.Out++;
+                }
+            }
+        }
+
+        // ------------------------------------------------------------------
+        // 阶段 2：恢复存档写入，从存档加载（恢复正确的 Inn / isFinished）
+        // ------------------------------------------------------------------
+        isLoadingTasks = false;
+        LoadAllTaskNodes();
+
+        // ------------------------------------------------------------------
+        // 阶段 3：标记图已初始化，启动就绪任务
+        // ------------------------------------------------------------------
+        isGraphInitialized = true;
+        Debug.Log("[TaskManager] isGraphInitialized = true");
+
+        StartAllReadyTasks();
+
+        Debug.Log("[TaskManager] ========== 任务图重建完成 ==========");
     }
 
     public void OnGoalReached(TaskGoal goal)
