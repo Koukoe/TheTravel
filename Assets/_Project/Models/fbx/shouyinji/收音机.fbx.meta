@@ -3,7 +3,32 @@ guid: a172cb3a18b833744b7ffce7a00f2c4d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: ping
+    second: {fileID: 2100000, guid: 13e1f8037900bac4fa0400485a4e3b13, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u5C4F\u5E55"
+    second: {fileID: 2100000, guid: ef52b8f9bb001da4ca5482ac3b3c82c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u6309\u94AE"
+    second: {fileID: 2100000, guid: cf8c27d7906990346ab273f14bf9527b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u673A\u4F53"
+    second: {fileID: 2100000, guid: 4e95d8f69bb76244a8d6f1af62c76d66, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "\u7EBF"
+    second: {fileID: 2100000, guid: 469861042b527f14c9bddd302ab292e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
