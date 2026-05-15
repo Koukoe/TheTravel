@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "White_NPC04_3_01",
+      "character": "White_NPC04",
+      "content": "呵呵......年轻人，波尼克回应了你的请求呢。",
+      "nextId": "White_NPC04_3_02"
+    },
+    {
+      "id": "White_NPC04_3_02",
+      "character": "White_NPC04",
+      "content": "心诚之人总能引起祂的注意。年轻人，继续你的路途吧！",
+      "nextId": "end"
+    }
+  ]
+}

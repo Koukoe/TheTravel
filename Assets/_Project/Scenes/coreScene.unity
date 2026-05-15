@@ -963,7 +963,22 @@ MonoBehaviour:
   - 7
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 1
+    taskGoalType: 0
+    goalId: task6
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -1203,7 +1218,22 @@ MonoBehaviour:
   - 9
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 3
+    goalId: task8
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: stonetablet
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -1314,7 +1344,22 @@ MonoBehaviour:
   - 18
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 3
+    goalId: task7
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: WhiteTown_NPC_05
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0
@@ -2093,7 +2138,22 @@ MonoBehaviour:
   - 10
   taskEffects: []
   taskEndEffects: []
-  taskGoals: []
+  taskGoals:
+  - isAutoFinish: 0
+    taskGoalType: 0
+    goalId: task9
+    targetId: 
+    isCheckPlayer: 0
+    GoalTrigger: 0
+    GoalItem: 0
+    sceneName: 
+    GoalPosition: {x: 0, y: 0, z: 0}
+    GoalRotation: {x: 0, y: 0, z: 0}
+    positionTolerance: 0
+    rotationTolerance: 0
+    targetDialogueId: 
+    index: 0
+    targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
   isTaskFinished: 0

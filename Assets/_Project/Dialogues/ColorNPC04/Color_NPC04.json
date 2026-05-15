@@ -1,0 +1,16 @@
+{
+  "dialogues": [
+    {
+      "id": "Color_NPC04_1_01",
+      "character": "Color_NPC04",
+      "content": "在这座岛的另一头有一扇巨大的石门，上面刻着没人能看懂的花纹。不知道门后有什么东西，据说那里藏着许多的财宝。",
+      "nextId": "Color_NPC04_1_02"
+    },
+    {
+      "id": "Color_NPC04_1_02",
+      "character": "protagonist",
+      "content": "（说不定能找到开门的方法，先记下吧。）",
+      "nextId": "end"
+    }
+  ]
+}

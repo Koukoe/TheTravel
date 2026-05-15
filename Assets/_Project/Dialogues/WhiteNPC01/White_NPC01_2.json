@@ -1,0 +1,76 @@
+{
+  "dialogues": [
+    {
+      "id": "White_NPC01_2_01",
+      "character": "White_NPC01",
+      "content": " 一块多余的石头，不如一滴救命的淡水。",
+      "nextId": "White_NPC01_2_02"
+    },
+    {
+      "id": "White_NPC01_2_02",
+      "character": "protagonist",
+      "content": "这句话是？",
+      "nextId": "White_NPC01_2_03"
+    },
+    {
+      "id": "White_NPC01_2_03",
+      "character": "White_NPC01",
+      "content": "这正是波尼克“八诫”之一，教导着我们不要沉溺于浮夸的装饰，而是去专注于有意义的事情。",
+      "nextId": "White_NPC01_2_04"
+    },
+    {
+      "id": "White_NPC01_2_04",
+      "character": "protagonist",
+      "content": "是这样啊......",
+      "nextId": "White_NPC01_2_05"
+    },
+    {
+      "id": "White_NPC01_2_05",
+      "character": "White_NPC01",
+      "content": "旅行者，您在寻找过河的办法对吧？",
+      "nextId": "White_NPC01_2_06"
+    },
+    {
+      "id": "White_NPC01_2_06",
+      "character": "protagonist",
+      "content": "对，请问您能不能给我些建议呢？",
+      "nextId": "White_NPC01_2_07"
+    },
+    {
+      "id": "White_NPC01_2_07",
+      "character": "White_NPC01",
+      "content": "镇子中央的喷泉，传说往里面投入某些东西，会有不可思议的事情发生呢。",
+      "nextId": "White_NPC01_2_08"
+    },
+    {
+      "id": "White_NPC01_2_08",
+      "character": "protagonist",
+      "content": "嗯，不过只是随便扔个硬币进去肯定没有什么效果的吧？",
+      "nextId": "White_NPC01_2_09"
+    },
+    {
+      "id": "White_NPC01_2_09",
+      "character": "White_NPC01",
+      "content": "要让我主听见您的请求，可能需要一些，特殊的东西。",
+      "nextId": "White_NPC01_2_10"
+    },
+    {
+      "id": "White_NPC01_2_10",
+      "character": "White_NPC01",
+      "content": "也许波尼克的诫言能给你一些提示？",
+      "nextId": "White_NPC01_2_11"
+    },
+    {
+      "id": "White_NPC01_2_11",
+      "character": "protagonist",
+      "content": "诫言吗......？谢谢您为我说这些。",
+      "nextId": "White_NPC01_2_12"
+    },
+    {
+      "id": "White_NPC01_2_12",
+      "character": "White_NPC01",
+      "content": "不必道谢，这只是随手之劳罢了。",
+      "nextId": "end"
+    }
+  ]
+}
