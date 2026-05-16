@@ -51,6 +51,11 @@
       "id": "StoneTablet_1_08",
       "character": "protagonist",
       "content": "要是能复现这段旋律，说不定会发生什么......",
+      "effects": [
+        {
+          "PlayActionAndResume": "PlayStoneMelody"
+        }
+      ],
       "nextId": "end"
     }
   ]

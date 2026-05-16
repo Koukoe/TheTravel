@@ -71,6 +71,13 @@ public class TaskEffect
                     DialogueManager.Instance.SetDialogueIndex(dialogue.dialogueguid, dialogue.dialogueIndex);
                 }
                 break;
+            case EffectType.CALLMETHOD:
+                if (targetGUID == "FountainRipple")
+                {
+                    if (FountainWaterRipple.Instance != null)
+                        FountainWaterRipple.Instance.CreateRipple();
+                }
+                break;
 
         }
 
@@ -107,5 +114,6 @@ public enum EffectType
     INTERACTABLESTATE,
     ITEMSTATE,
     ACTORSTATE,
-    DIALOGUESTATE
+    DIALOGUESTATE,
+    CALLMETHOD
 }

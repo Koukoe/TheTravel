@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +8,7 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
 
     [SerializeField] private int[] _melody;
 
+    public int MelodyLength => _melody != null ? _melody.Length : 0;
 
     public TextAsset dialogueText;
     public string itemID;
@@ -14,6 +16,22 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
     protected override void OnStateBound()
     {
 
+    }
+
+    public void PlayTargetMelody()
+    {
+        StartCoroutine(PlayMelodyCoroutine());
+    }
+
+    private IEnumerator PlayMelodyCoroutine()
+    {
+        if (_melody == null) yield break;
+
+        for (int i = 0; i < _melody.Length; i++)
+        {
+            AudioManager.Instance.PlaySFX($"StoneMelody_{_melody[i]}");
+            yield return new WaitForSeconds(0.6f);
+        }
     }
 
     public void JugdeSolfege(int solfege)
@@ -34,6 +52,7 @@ public class MelodicStonesEntity : StaticStateEntity<InteractionState>
             // Finish Task
             DialogueManager.Instance.StartWith(dialogueText);
             GameFlowManager.Instance.PlayingData.GetState<ItemState>(itemID).isPicked = true;
+            DialogueManager.Instance.SetDialogueIndex("stonetablet", 2);
         }
     }
 }

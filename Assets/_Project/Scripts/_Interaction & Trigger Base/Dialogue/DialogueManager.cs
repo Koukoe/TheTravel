@@ -479,7 +479,30 @@ public class DialogueManager : MonoBehaviour
     /// <param name="onCompleted">动作结束后的继续回调</param>
     private void PlayActionAndResume(string actionId, Action onCompleted)
     {
-        Debug.LogWarning($"PlayActionAndResume 还未接入角色动作系统, actionId={actionId}，当前先直接继续对话");
+        if (actionId == "PlayStoneMelody")
+        {
+            var stone = FindObjectOfType<MelodicStonesEntity>();
+            if (stone != null)
+            {
+                StartCoroutine(PlayMelodyAndResume(stone, onCompleted));
+            }
+            else
+            {
+                Debug.LogWarning("PlayStoneMelody: 场景中未找到 MelodicStonesEntity");
+                onCompleted?.Invoke();
+            }
+            return;
+        }
+
+        Debug.LogWarning($"PlayActionAndResume 未识别的 actionId: {actionId}，直接继续对话");
+        onCompleted?.Invoke();
+    }
+
+    private IEnumerator PlayMelodyAndResume(MelodicStonesEntity stone, Action onCompleted)
+    {
+        stone.PlayTargetMelody();
+        float waitTime = stone.MelodyLength * 0.6f;
+        yield return new WaitForSeconds(waitTime);
         onCompleted?.Invoke();
     }
 

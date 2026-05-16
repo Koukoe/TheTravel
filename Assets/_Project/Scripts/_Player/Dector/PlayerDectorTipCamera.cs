@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class PlayerDetectorTipCamera : PlayerDetector
 {
@@ -10,10 +11,14 @@ public class PlayerDetectorTipCamera : PlayerDetector
         // 自动触发逻辑
         other.GetComponentInParent<ITriggerable>()?.OnEntered();
 
-        var interactable = other.GetComponentInParent<IInteractable>();
-        if (interactable != null && !_candidates.Contains(interactable))
+        // 获取物体上所有 IInteractable 组件，避免 GetComponentInParent 只返回第一个的问题
+        var interactables = other.GetComponentsInParent<IInteractable>();
+        foreach (var interactable in interactables)
         {
-            _candidates.Add(interactable);
+            if (interactable != null && !_candidates.Contains(interactable))
+            {
+                _candidates.Add(interactable);
+            }
         }
     }
 
@@ -22,8 +27,8 @@ public class PlayerDetectorTipCamera : PlayerDetector
         // 自动触发逻辑
         other.GetComponentInParent<ITriggerable>()?.OnExited();
 
-        var interactable = other.GetComponentInParent<IInteractable>();
-        if (interactable != null)
+        var interactables = other.GetComponentsInParent<IInteractable>();
+        foreach (var interactable in interactables)
         {
             _candidates.Remove(interactable);
         }

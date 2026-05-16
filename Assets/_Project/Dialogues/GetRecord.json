@@ -1,0 +1,10 @@
+{
+  "dialogues": [
+    {
+      "id": "get_record_01",
+      "character": "protagonist",
+      "content": "捡到了一张唱片。",
+      "nextId": "end"
+    }
+  ]
+}

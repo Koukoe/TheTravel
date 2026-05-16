@@ -1,0 +1,10 @@
+{
+  "dialogues": [
+    {
+      "id": "birdbath_takecup_01",
+      "character": "protagonist",
+      "content": "好华丽的圣杯...就放在那边的石台上。先收起来吧，也许会派上用场。",
+      "nextId": "end"
+    }
+  ]
+}

@@ -21,6 +21,7 @@ public class RadioBodyEntity : StaticStateEntity<InteractionState>, IInteractabl
     public WaveDecodeController waveDecoder;
 
     // 直接用波形匹配完成触发 item 收集，不再暴露额外事件
+    public TextAsset getRecord;
 
     public bool CanInteract()
     {
@@ -40,7 +41,6 @@ public class RadioBodyEntity : StaticStateEntity<InteractionState>, IInteractabl
         if (waveDecoder != null)
         {
             waveDecoder.NewPuzzle();
-            waveDecoder.onDecodeSuccess.AddListener(OnDecodeSuccess);
         }
     }
 
@@ -68,6 +68,20 @@ public class RadioBodyEntity : StaticStateEntity<InteractionState>, IInteractabl
     private void OnDecodeSuccess()
     {
         GameFlowManager.Instance.PlayingData.GetState<ItemState>("record").isPicked = true;
+        DialogueManager.Instance.StartWith(getRecord);
+
+        // 解密完成后禁掉旋钮交互
+        if (freqEntity != null) freqEntity.State.isInteracble = false;
+        if (ampEntity != null) ampEntity.State.isInteracble = false;
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+
+        // 监听解密完成事件，只绑定一次
+        if (waveDecoder != null)
+            waveDecoder.onDecodeSuccess.AddListener(OnDecodeSuccess);
     }
 
     protected override void OnStateBound() { }
