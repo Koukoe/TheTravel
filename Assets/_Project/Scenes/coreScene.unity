@@ -1506,6 +1506,66 @@ MonoBehaviour:
       dialogueIndex: 1
     - dialogueguid: WhiteTown_NPC_04_Dialogue
       dialogueIndex: 1
+  - effectType: 0
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: WhiteTown_NPC_03_Dialogue
+      dialogueIndex: 1
+    - dialogueguid: WhiteTown_NPC_01_Dialogue
+      dialogueIndex: 1
+    - dialogueguid: WhiteTown_NPC_02_Dialogue
+      dialogueIndex: 1
+    - dialogueguid: WhiteTown_NPC_04_Dialogue
+      dialogueIndex: 1
+  - effectType: 0
+    targetGUID: RadioBody
+    targetInteractionState:
+      <guid>k__BackingField: RadioBody
+      name: RadioBody
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
