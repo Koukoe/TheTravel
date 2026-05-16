@@ -22,7 +22,7 @@ public class cup : StaticStateEntity<ItemState>, IInteractable
     {
         try
         {
-            GameFlowManager.Instance.PlayingData.GetState<ItemState>(_state.guid).isPicked = true;
+            GameFlowManager.Instance.PlayingData.GetState<ItemState>("cup").isPicked = true;
         }
         catch
         {
