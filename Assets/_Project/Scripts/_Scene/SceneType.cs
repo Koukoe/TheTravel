@@ -104,6 +104,8 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         }
         // 场景退出时的清理逻辑（如果有需要）
         // 不要抛出异常
+
+        PlayerController.Instance.detector.ResetDetector();
     }
 
     public override void SyncPlayerPosition()
