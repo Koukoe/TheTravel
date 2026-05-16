@@ -11,8 +11,10 @@ public class WaveDecodeController : MonoBehaviour
     [Header("Answer Wave (Target)")]
     [SerializeField] private float answerAmplitude = 1.2f;
     [SerializeField] private float answerFrequency = 4.5f;
-    [SerializeField] private float answerPhase;
-    [SerializeField] private float answerOffset;
+    
+    // 答案波形固定无相位偏移，因为玩家无法调节 phase/offset
+    private const float ANSWER_PHASE = 0f;
+    private const float ANSWER_OFFSET = 0f;
     
     [Header("Player Wave (Adjustable)")]
     [Range(0.1f, 2.0f)]
@@ -110,13 +112,19 @@ public class WaveDecodeController : MonoBehaviour
         SyncMaterial();
     }
     
-    /// <summary>Randomize the answer wave.</summary>
+    /// <summary>Randomize the answer wave — picks values that align with knob discrete steps.</summary>
     public void RandomizeAnswer()
     {
-        answerAmplitude = Random.Range(0.3f, 1.8f);
-        answerFrequency = Random.Range(1.0f, 9.0f);
-        answerPhase = Random.Range(0f, Mathf.PI * 2f);
-        answerOffset = Random.Range(-0.5f, 0.5f);
+        // 两个旋钮都是 4 档 (stateIndex 0~3)，映射到 Lerp 范围
+        // 频率: Mathf.Lerp(0.5f, 10f, index / 3f)
+        // 振幅: Mathf.Lerp(0.1f, 2f, index / 3f)
+        // 答案直接从这些离散值里选，保证玩家一定能调出完美匹配
+        
+        int freqStep = Random.Range(0, 4);
+        int ampStep  = Random.Range(0, 4);
+        
+        answerFrequency = Mathf.Lerp(0.5f, 10f, freqStep / 3f);
+        answerAmplitude = Mathf.Lerp(0.1f, 2f, ampStep / 3f);
         
         PushAnswerToShader();
         isDecoded = false;
@@ -145,8 +153,8 @@ public class WaveDecodeController : MonoBehaviour
         
         material.SetFloat("_AnsAmplitude", answerAmplitude);
         material.SetFloat("_AnsFrequency", answerFrequency);
-        material.SetFloat("_AnsPhase", answerPhase);
-        material.SetFloat("_AnsOffset", answerOffset);
+        material.SetFloat("_AnsPhase", ANSWER_PHASE);
+        material.SetFloat("_AnsOffset", ANSWER_OFFSET);
         material.SetFloat("_MatchThreshold", matchThreshold);
     }
     
@@ -167,7 +175,7 @@ public class WaveDecodeController : MonoBehaviour
         {
             float x = (float)i / SAMPLE_POINTS;
             
-            float ansY = WaveY(x, answerAmplitude, answerFrequency, answerPhase, answerOffset);
+            float ansY = WaveY(x, answerAmplitude, answerFrequency, ANSWER_PHASE, ANSWER_OFFSET);
             float playerY = WaveY(x, amplitude, frequency, 0f, 0f);
             
             if (Mathf.Abs(ansY - playerY) < matchThreshold)
