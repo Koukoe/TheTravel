@@ -3067,6 +3067,32 @@ MonoBehaviour:
     currentScene: EngineerHouse
     targetActorSceneName: WhiteTown
     targetDialogueList: []
+  - effectType: 0
+    targetGUID: WhiteTownOut
+    targetInteractionState:
+      <guid>k__BackingField: WhiteTownOut
+      name: WhiteTownOut
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Engineer
+      name: Engineer
+      serializedPosition: {x: 841.67, y: 28.09, z: 476.45}
+      serializedRotation: {x: 0, y: 89.52, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: WhiteTown
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -3475,6 +3501,58 @@ MonoBehaviour:
     isChangeActorScene: 1
     currentScene: WhiteTown
     targetActorSceneName: EngineerHouse
+    targetDialogueList: []
+  - effectType: 0
+    targetGUID: EngineerHouseIn
+    targetInteractionState:
+      <guid>k__BackingField: EngineerHouseIn
+      name: EngineerHouseIn
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: 
+      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: EngineerHouse
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
+  - effectType: 0
+    targetGUID: EngineerHouseOut
+    targetInteractionState:
+      <guid>k__BackingField: EngineerHouseOut
+      name: EngineerHouseOut
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: 
+      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: EngineerHouse
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
     targetDialogueList: []
   taskGoals:
   - isAutoFinish: 0
