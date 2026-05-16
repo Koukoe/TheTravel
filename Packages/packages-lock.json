@@ -7,6 +7,15 @@
       "dependencies": {},
       "hash": "a9e27c03d411d2fca01cc7410c24c97cd77cb539"
     },
+    "com.mzbswh.unity-mcp": {
+      "version": "https://github.com/mzbswh/unity-mcp.git?path=unity-mcp",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "39fe64d9ca350a05e6bae6296482b327759ef27c"
+    },
     "com.unity.addressables": {
       "version": "1.22.3",
       "depth": 1,

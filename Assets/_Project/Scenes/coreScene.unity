@@ -1498,13 +1498,13 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList:
-    - dialogueguid: WhiteTown_NPC_03
+    - dialogueguid: WhiteTown_NPC_03_Dialogue
       dialogueIndex: 1
-    - dialogueguid: WhiteTown_NPC_01
+    - dialogueguid: WhiteTown_NPC_01_Dialogue
       dialogueIndex: 1
-    - dialogueguid: WhiteTown_NPC_02
+    - dialogueguid: WhiteTown_NPC_02_Dialogue
       dialogueIndex: 1
-    - dialogueguid: WhiteTown_NPC_04
+    - dialogueguid: WhiteTown_NPC_04_Dialogue
       dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
@@ -1519,7 +1519,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: WhiteTown_NPC_05
+    targetDialogueId: WhiteTown_NPC_05_Dialogue
     index: 0
     targetScript: {fileID: 0}
   nextNodes: []
@@ -2332,7 +2332,7 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList:
-    - dialogueguid: Old_Captain
+    - dialogueguid: Old_Captain_Dialogue
       dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
@@ -2347,7 +2347,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: Old_Captain
+    targetDialogueId: Old_Captain_Dialogue
     index: 0
     targetScript: {fileID: 0}
   nextNodes: []
@@ -2910,7 +2910,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: WhiteTown_NPC_03
+    targetDialogueId: WhiteTown_NPC_03_Dialogue
     index: 2
     targetScript: {fileID: 0}
   nextNodes: []
@@ -3031,7 +3031,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: Engineer
+    targetDialogueId: Engineer_Dialogue
     index: 0
     targetScript: {fileID: 0}
   nextNodes: []
@@ -3351,15 +3351,15 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList:
-    - dialogueguid: WhiteTown_NPC_03
+    - dialogueguid: WhiteTown_NPC_03_Dialogue
       dialogueIndex: 3
-    - dialogueguid: WhiteTown_NPC_01
+    - dialogueguid: WhiteTown_NPC_01_Dialogue
       dialogueIndex: 2
-    - dialogueguid: WhiteTown_NPC_02
+    - dialogueguid: WhiteTown_NPC_02_Dialogue
       dialogueIndex: 2
-    - dialogueguid: WhiteTown_NPC_04
+    - dialogueguid: WhiteTown_NPC_04_Dialogue
       dialogueIndex: 2
-    - dialogueguid: WhiteTown_NPC_05
+    - dialogueguid: WhiteTown_NPC_05_Dialogue
       dialogueIndex: 2
   - effectType: 2
     targetGUID: river
@@ -3426,7 +3426,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: Engineer
+    targetDialogueId: Engineer_Dialogue
     index: 0
     targetScript: {fileID: 0}
   nextNodes: []
@@ -3508,7 +3508,7 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList:
-    - dialogueguid: WhiteTown_NPC_03
+    - dialogueguid: WhiteTown_NPC_03_Dialogue
       dialogueIndex: 2
   taskGoals:
   - isAutoFinish: 0
@@ -3523,7 +3523,7 @@ MonoBehaviour:
     GoalRotation: {x: 0, y: 0, z: 0}
     positionTolerance: 0
     rotationTolerance: 0
-    targetDialogueId: WhiteTown_NPC_03
+    targetDialogueId: WhiteTown_NPC_03_Dialogue
     index: 1
     targetScript: {fileID: 0}
   nextNodes: []

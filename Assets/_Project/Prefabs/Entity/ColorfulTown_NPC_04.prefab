@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueGuid: ColorfulTown_NPC_04
+  dialogueGuid: ColorfulTown_NPC_04_Dialogue
   interactionPriority: 0
   dialogueJsonList:
   - {fileID: 4900000, guid: 8ea3f3c392c564547ae29c33fad0ac5b, type: 3}

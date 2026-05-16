@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2446978057393590888}
   - component: {fileID: 8250189903373076014}
-  - component: {fileID: 6020583955751539347}
+  - component: {fileID: 3113926772644923530}
   m_Layer: 0
   m_Name: WhiteTown_NPC_02
   m_TagString: Untagged
@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueGuid: WhiteTown_NPC_02
+  dialogueGuid: WhiteTown_NPC_02_Dialogue
   interactionPriority: 0
   dialogueJsonList:
   - {fileID: 4900000, guid: 441a9b70e406e6440a152c921c1f033e, type: 3}
@@ -110,7 +110,7 @@ MonoBehaviour:
   - {fileID: 4900000, guid: 2b77e90d3e56c51498eb7bc628c9e457, type: 3}
   dialogueIndex: 0
   _tipOffset: {x: 0, y: 0, z: 0}
---- !u!114 &6020583955751539347
+--- !u!114 &3113926772644923530
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,10 +119,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2809459168998376706}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9dc3efc0e75a974abc0eeed65599e13, type: 3}
+  m_Script: {fileID: 11500000, guid: f490b91d0723c5f4eb63e0ca5eda911e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultName: NPC_Default
+  guid: WhiteTown_NPC_02
+  defaultName: 
   _animator: {fileID: 9103730557713411327}
 --- !u!1001 &3403708790969782638
 PrefabInstance:

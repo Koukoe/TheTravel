@@ -75,7 +75,7 @@ public class TaskEffect
         }
 
         // 刷新此物体在当前场景状态
-        state.ScenedNotifyChanged();
+        state?.ScenedNotifyChanged();
     }
 
     public void RevertEffect()
