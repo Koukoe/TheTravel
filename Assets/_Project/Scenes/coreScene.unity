@@ -1507,13 +1507,13 @@ MonoBehaviour:
     - dialogueguid: WhiteTown_NPC_04_Dialogue
       dialogueIndex: 1
   - effectType: 0
-    targetGUID: 
+    targetGUID: MelodicStones
     targetInteractionState:
-      <guid>k__BackingField: 
-      name: 
+      <guid>k__BackingField: MelodicStones
+      name: MelodicStones
       isTriggered: 0
       stateIndex: 0
-      isInteracble: 0
+      isInteracble: 1
     targetItemState:
       <guid>k__BackingField: 
       name: 
@@ -1531,15 +1531,7 @@ MonoBehaviour:
     isChangeActorScene: 0
     currentScene: 
     targetActorSceneName: 
-    targetDialogueList:
-    - dialogueguid: WhiteTown_NPC_03_Dialogue
-      dialogueIndex: 1
-    - dialogueguid: WhiteTown_NPC_01_Dialogue
-      dialogueIndex: 1
-    - dialogueguid: WhiteTown_NPC_02_Dialogue
-      dialogueIndex: 1
-    - dialogueguid: WhiteTown_NPC_04_Dialogue
-      dialogueIndex: 1
+    targetDialogueList: []
   - effectType: 0
     targetGUID: RadioBody
     targetInteractionState:
