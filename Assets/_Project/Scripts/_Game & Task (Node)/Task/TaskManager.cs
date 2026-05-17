@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[DefaultExecutionOrder(1)]
+[DefaultExecutionOrder(-10)]
 public class TaskManager : MonoBehaviour
 {
     public static TaskManager Instance { get; private set; }
