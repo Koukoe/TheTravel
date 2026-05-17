@@ -2797,7 +2797,7 @@ MonoBehaviour:
   taskEffects: []
   taskEndEffects: []
   taskGoals:
-  - isAutoFinish: 0
+  - isAutoFinish: 1
     taskGoalType: 2
     goalId: Task3
     targetId: 
