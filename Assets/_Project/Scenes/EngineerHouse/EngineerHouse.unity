@@ -1270,7 +1270,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1321859804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d44b3dbdbe8c9a7498a9eea574f90ee9, type: 3}
+  m_Script: {fileID: 11500000, guid: 6528a02c40bf59e4182ef8f26c343a02, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sceneName: EngineerHouse
@@ -1278,8 +1278,9 @@ MonoBehaviour:
   autoSave: 0
   scenePortals:
   - portalName: EngineerHouseOut
-    transform: {fileID: 0}
+    transform: {fileID: 1321859805}
   defaultSpawnPoint: {fileID: 1321859805}
+  ambSourceObjects: []
   _state:
     <guid>k__BackingField: 
     name: 

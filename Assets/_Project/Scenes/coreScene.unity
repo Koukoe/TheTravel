@@ -3644,7 +3644,7 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Engineer
       name: Engineer
-      serializedPosition: {x: 841.67, y: 28.09, z: 476.45}
+      serializedPosition: {x: 841.67, y: 25, z: 476.45}
       serializedRotation: {x: 0, y: 89.52, z: 0}
       hasPosition: 1
       hasRotation: 1
@@ -3670,7 +3670,7 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Engineer
       name: Engineer
-      serializedPosition: {x: 841.67, y: 28.09, z: 476.45}
+      serializedPosition: {x: 841.67, y: 25, z: 476.45}
       serializedRotation: {x: 0, y: 89.52, z: 0}
       hasPosition: 1
       hasRotation: 1
@@ -4079,7 +4079,7 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Old_Captain
       name: 
-      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedPosition: {x: 462, y: 0, z: 495.6}
       serializedRotation: {x: 0, y: 0, z: 0}
       hasPosition: 1
       hasRotation: 1
