@@ -19,6 +19,7 @@ public class ArchivesPanel : MenuPanel
     private bool isSaveMode;
     [SerializeField] private List<UIArchiveSlotSource> slotSources = new List<UIArchiveSlotSource>();
     private int lastSelectedIndex = 0;  // 焦点记忆
+    private int previousAudioIndex = -1; // 追踪切换音效的索引
 
     private Texture2D[] _activeTextures = new Texture2D[9];  // 追踪硬盘图片纹理
 
@@ -49,7 +50,11 @@ public class ArchivesPanel : MenuPanel
         if (titleText != null) titleText.text = isSaveMode ? "保存进度" : "载入进度";
     }
 
-    protected void OnEnable() => RefreshAllSlots().Forget();
+    protected void OnEnable()
+    {
+        previousAudioIndex = -1; // 面板打开时重置音效追踪
+        RefreshAllSlots().Forget();
+    }
 
     protected void OnDisable() => ClearLoadedTextures();
 
@@ -109,6 +114,16 @@ public class ArchivesPanel : MenuPanel
 
         lastSelectedIndex = selectedIndex;
 
+        // 切换音效逻辑
+        if (selectedIndex != previousAudioIndex)
+        {
+            if (previousAudioIndex != -1 && AudioManager.Instance != null)
+            {
+                AudioManager.Instance.PlaySFX("Select_button_UI");
+            }
+            previousAudioIndex = selectedIndex;
+        }
+
         for (int i = 0; i < slotSources.Count; i++)
         {
             int indexOffset = i - selectedIndex;
@@ -123,9 +138,13 @@ public class ArchivesPanel : MenuPanel
             slotSources[i].SetTarget(new Vector3(0, targetY, targetZ), targetAlpha, smoothTime);
         }
     }
-
     private void OnSlotClicked(int i)
     {
+        if (AudioManager.Instance != null)
+        {
+            AudioManager.Instance.PlaySFX("UI_sound");
+        }
+
         if (isSaveMode)
         {
             if (DataArchivesSystem.IsSlotOccupied(i))
