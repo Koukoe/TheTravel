@@ -28,6 +28,8 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
     [SerializeField] private List<PortalInfo> scenePortals = new List<PortalInfo>();
 
     [SerializeField] protected Transform defaultSpawnPoint;
+    [SerializeField] protected List<AmbSourceObject> ambSourceObjects;
+    protected List<GameObject> ambSourceObjectsCache;
 
     [SerializeField] protected T _state;
 
@@ -48,6 +50,15 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
             _state.isInitialized = true;
         }
         HandlePlayerPosition();
+
+
+        foreach (AmbSourceObject aso in ambSourceObjects)
+        {
+            if (aso != null)
+            {
+                aso.PlayAmbient();
+            }
+        }
     }
 
     protected virtual void StateInitial() { }
@@ -104,6 +115,14 @@ public abstract class RealScene<T> : RealScene where T : RealSceneState, new()
         }
         // 场景退出时的清理逻辑（如果有需要）
         // 不要抛出异常
+
+        foreach (AmbSourceObject aso in ambSourceObjects)
+        {
+            if (aso != null)
+            {
+                aso.StopAmbient();
+            }
+        }
 
         PlayerController.Instance.detector.ResetDetector();
     }
