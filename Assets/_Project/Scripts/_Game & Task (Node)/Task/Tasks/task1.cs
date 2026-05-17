@@ -67,9 +67,10 @@ public class task1 : TaskBasic
         cameraMove.CamY = _startY;
     }
 
-    private async UniTask WaitForDialogue()
+    protected virtual async UniTask WaitForDialogue()
     {
         await UniTask.WaitUntil(() => !UIManager.Instance.UISys());
+        await UniTask.WaitUntil(() => !(UIManager.Instance.Peek() is BookPanel));
         await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }

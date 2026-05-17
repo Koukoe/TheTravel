@@ -1413,7 +1413,7 @@ MonoBehaviour:
   m_Navigation:
     m_Mode: 4
     m_WrapAround: 0
-    m_SelectOnUp: {fileID: 1816409058856658999}
+    m_SelectOnUp: {fileID: 2064753782587913487}
     m_SelectOnDown: {fileID: 1146654716431113376}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
@@ -1940,7 +1940,7 @@ MonoBehaviour:
     m_Mode: 4
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 1184064476380251935}
-    m_SelectOnDown: {fileID: 1816409058856658999}
+    m_SelectOnDown: {fileID: 8490067733586533676}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
   m_Transition: 0
@@ -2124,7 +2124,7 @@ MonoBehaviour:
     m_PressedTrigger: Pressed
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
-  m_Interactable: 1
+  m_Interactable: 0
   m_TargetGraphic: {fileID: 1075704823720897402}
   m_OnClick:
     m_PersistentCalls:

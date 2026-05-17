@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using System.Collections;
 using System;
+using UnityEditor.AssetImporters;
 
 [RequireComponent(typeof(CanvasGroup))]
 public abstract class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHandler, IUIAppearanceSource
@@ -12,8 +13,8 @@ public abstract class UIButtonState : MonoBehaviour, ISelectHandler, IDeselectHa
 
     [Header("Disabled")]
     [Range(0, 1)] public float disabledAlpha = 0.6f;
-    [SerializeField] private Selectable selectable;
-    [SerializeField] private CanvasGroup canvasGroup;
+    [SerializeField] protected Selectable selectable;
+    [SerializeField] protected CanvasGroup canvasGroup;
     private float currentAlphaMult = 1f;
 
     public virtual Vector3 PosOffset => Vector3.zero;

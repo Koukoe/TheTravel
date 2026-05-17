@@ -13,9 +13,10 @@ public class task2 : TaskBasic
         FinishTask();
     }
 
-    private async UniTask WaitForDialogue()
+    protected virtual async UniTask WaitForDialogue()
     {
         await UniTask.WaitUntil(() => !UIManager.Instance.UISys());
+        await UniTask.WaitUntil(() => !(UIManager.Instance.Peek() is BookPanel));
         await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }
