@@ -4057,7 +4057,7 @@ MonoBehaviour:
       serializedRotation: {x: 0, y: 0, z: 0}
       hasPosition: 1
       hasRotation: 0
-      isVisible: 0
+      isVisible: 1
       Scene: 
       animState: 0
     isChangeActorScene: 0
@@ -4142,6 +4142,34 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList: []
+  - effectType: 3
+    targetGUID: Fountain
+    targetInteractionState:
+      <guid>k__BackingField: EngineerHouseOut
+      name: EngineerHouseOut
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: 
+      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: EngineerHouse
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: Fountain
+      dialogueIndex: 3
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
