@@ -14,6 +14,6 @@ public class HouseScene : EntityScene<HouseSceneState>
     {
         base.EnterScene();
         Playermove.Instance.OnSea = false;
-
+        PlayerController.mainCam.GetComponent<CameraMove>().CamY = 20;
     }
 }

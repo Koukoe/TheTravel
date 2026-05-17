@@ -23,5 +23,5 @@ MonoBehaviour:
     defaultName: "\u5DE5\u7A0B\u5E08"
     prefab: {fileID: 1793028592104960287, guid: 5bfcf597799e282478213a84c2f97e84,
       type: 3}
-    defaultPosition: {x: 4.91, y: 0.1, z: 2.24}
-    defaultRotation: {x: 0, y: 95, z: 0}
+    defaultPosition: {x: 4.87, y: 0.1, z: 16.1}
+    defaultRotation: {x: 0, y: -90, z: 0}

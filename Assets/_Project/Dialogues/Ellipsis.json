@@ -1,0 +1,10 @@
+{
+  "dialogues": [
+    {
+      "id": "ellipsis_01",
+      "character": "protagonist",
+      "content": "......",
+      "nextId": "end"
+    }
+  ]
+}

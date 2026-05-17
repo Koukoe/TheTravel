@@ -1452,7 +1452,7 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList:
-    - dialogueguid: Fountain
+    - dialogueguid: BirdBath
       dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
@@ -3681,6 +3681,36 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList: []
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Engineer
+      name: Engineer
+      serializedPosition: {x: 841.67, y: 25, z: 476.45}
+      serializedRotation: {x: 0, y: 89.52, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: WhiteTown
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: Engineer_Dialogue
+      dialogueIndex: 1
+    - dialogueguid: Old_Captain_Dialogue
+      dialogueIndex: 2
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -4000,7 +4030,35 @@ MonoBehaviour:
   taskId: 21
   nextNodesIds:
   - 22
-  taskEffects: []
+  taskEffects:
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: Fountain
+      dialogueIndex: 2
   taskEndEffects:
   - effectType: 3
     targetGUID: 
@@ -4184,7 +4242,7 @@ MonoBehaviour:
     positionTolerance: 0
     rotationTolerance: 0
     targetDialogueId: Fountain
-    index: 1
+    index: 2
     targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
@@ -4457,10 +4515,8 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList:
-    - dialogueguid: BirdBath
-      dialogueIndex: 1
     - dialogueguid: Fountain
-      dialogueIndex: 0
+      dialogueIndex: 1
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3

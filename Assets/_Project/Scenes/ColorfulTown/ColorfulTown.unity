@@ -778,6 +778,7 @@ MonoBehaviour:
   initPoolGuids:
   - Old_Captain
   entityDb: {fileID: 11400000, guid: 861f8143ec2a20345a5d3eb4909bc7bc, type: 2}
+  camY: 30
 --- !u!1001 &225417298
 PrefabInstance:
   m_ObjectHideFlags: 0

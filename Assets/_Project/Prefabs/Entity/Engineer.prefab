@@ -51,6 +51,7 @@ MonoBehaviour:
   interactionPriority: 0
   dialogueJsonList:
   - {fileID: 4900000, guid: 4d09280a9190f0941878ed0de4dd18a4, type: 3}
+  - {fileID: 4900000, guid: 91c4fb363f549294189cc89c344d72c2, type: 3}
   dialogueIndex: 0
   _tipOffset: {x: 0, y: 0, z: 0}
 --- !u!114 &7453502550058435306
