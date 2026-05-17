@@ -20,17 +20,48 @@ public class GameFlowManager : MonoBehaviour
     [SerializeField]
     public DataArchive PlayingData { get; private set; }
 
-    public void NewGame()
+    public async UniTask NewGame(bool newCome = true)
     {
         Debug.Log("是新游戏哦");
         PlayingData = new DataArchive();
+        if (newCome == true)
+        {
+            InputManager.Instance.SwitchAllMode();
+            GameSceneManager.Instance.LoadMain("Ocean").Forget();
+            UIManager.Instance.Push("StartPanel");
+        }
+        else
+        {
+            InputManager.Instance.SwitchAllMode();
+            await CloseDialogueRelatedPanelsBeforeLoad();
 
-        PlayerController.Instance.detector.ResetDetector();  // 清理 Detector
-        UIManager.Instance.PopAll();
+            // 第 1 步：重置任务运行状态（取消运行中任务、清理连接、重置图标记）
+            //     不销毁 TaskNode 对象（它们在 GlobalManager/T 层级中跨场景存活）
+            if (TaskManager.Instance != null)
+            {
+                TaskManager.Instance.ClearAllTaskNodesForLoad();
+            }
 
-        InputManager.Instance.SwitchAllMode();
-        GameSceneManager.Instance.LoadMain("Ocean").Forget();
-        UIManager.Instance.Push("StartPanel");
+            // 第 2 步：加载目标场景（新场景的 TaskNode 会在 Awake 中注册到字典）
+            if (GameSceneManager.Instance != null)
+            {
+                await GameSceneManager.Instance.LoadMain("Ocean");
+                Debug.Log("[GameFlowManager] 场景加载完成");
+            }
+
+            // 等待至少一帧，确保场景中所有 TaskNode 的 Awake 已执行完毕
+            // （有些项目通过 Addressables / 动态实例化延迟创建 TaskNode，多等几帧更安全）
+            await UniTask.Yield(PlayerLoopTiming.Update);
+            await UniTask.Yield(PlayerLoopTiming.Update);
+            Debug.Log("[GameFlowManager] 已等待两帧，开始重建任务图");
+
+            // 第 3 步：场景加载完成后，从存档重建任务图（连接 + 恢复状态 + 启动就绪任务）
+            if (TaskManager.Instance != null)
+            {
+                TaskManager.Instance.RebuildGraphFromSave();
+            }
+            UIManager.Instance.PopAll();
+        }
     }
     public async UniTask LoadGame(int slotIndex)
     {
@@ -76,7 +107,6 @@ public class GameFlowManager : MonoBehaviour
         }
 
         _isLoadingSaveGame = false;
-
         // ...
     }
 

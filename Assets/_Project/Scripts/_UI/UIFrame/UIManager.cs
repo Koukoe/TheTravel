@@ -173,6 +173,7 @@ public class UIManager : MonoBehaviour
         }
         isTransitioning = false;
         InputManager.Instance.SwitchPlayerMode(true);
+        EffectManager.Instance.SetBackgroundBlur(false);
     }
 
 

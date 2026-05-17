@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 
 public static class GameStatic
 {
@@ -23,12 +24,11 @@ public static class GameStatic
         }
         if (!DataGlobalSystem.Get().hasEnteredGame)
         {
-            GameFlowManager.Instance.NewGame();
+            GameFlowManager.Instance.NewGame().Forget();
         }
         else
         {
             await GameFlowManager.Instance.LoadGame(DataArchivesSystem.GetLatestIndex());
-            MenuManager.Instance.Menu();
         }
     }
 

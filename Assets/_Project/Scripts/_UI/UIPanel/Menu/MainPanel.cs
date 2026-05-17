@@ -88,6 +88,6 @@ public class MainPanel : MenuPanel
     {
         var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
 
-        panel.Setup(onConfirm: () => GameFlowManager.Instance.NewGame(), title: "", content: ""); ;
+        panel.Setup(onConfirm: () => GameFlowManager.Instance.NewGame(false).Forget(), title: "", content: ""); ;
     }
 }
