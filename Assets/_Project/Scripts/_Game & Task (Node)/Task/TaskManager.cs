@@ -387,7 +387,8 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    // 可视化当前任务
+    // 可视化当前任务（仅在编辑器中显示）
+#if UNITY_EDITOR
     private void OnGUI()
     {
         if (activeTasks.Count == 0) return;
@@ -401,4 +402,5 @@ public class TaskManager : MonoBehaviour
         }
         GUILayout.EndArea();
     }
+#endif
 }
