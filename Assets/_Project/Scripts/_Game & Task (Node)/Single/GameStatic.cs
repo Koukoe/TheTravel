@@ -29,6 +29,7 @@ public static class GameStatic
         else
         {
             await GameFlowManager.Instance.LoadGame(DataArchivesSystem.GetLatestIndex());
+            InputManager.Instance.SwitchPlayerMode();
         }
     }
 
