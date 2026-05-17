@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &5841522512280538696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -598,6 +598,8 @@ MonoBehaviour:
   disabledAlpha: 0.6
   selectable: {fileID: 8950157783191481877}
   canvasGroup: {fileID: 5560255866619516706}
+  SubmitSFXName: UI_sound
+  SelectSFXName: Select_button_UI
   scaleEase:
     type: 0
     curve:
