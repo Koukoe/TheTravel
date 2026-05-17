@@ -26,6 +26,7 @@ public class GameFlowManager : MonoBehaviour
         PlayingData = new DataArchive();
 
         PlayerController.Instance.detector.ResetDetector();  // 清理 Detector
+        UIManager.Instance.PopAll();
 
         InputManager.Instance.SwitchAllMode();
         GameSceneManager.Instance.LoadMain("Ocean").Forget();

@@ -15,8 +15,7 @@ public class task2 : TaskBasic
 
     protected virtual async UniTask WaitForDialogue()
     {
-        await UniTask.WaitUntil(() => !UIManager.Instance.UISys());
-        await UniTask.WaitUntil(() => !(UIManager.Instance.Peek() is BookPanel));
+        await UniTask.WaitUntil(() => !UIManager.Instance.UISys()&& !(UIManager.Instance.Peek() is BookPanel));
         await DialogueManager.Instance.StartWithAsyncUniTask(dialogueText);
     }
 }

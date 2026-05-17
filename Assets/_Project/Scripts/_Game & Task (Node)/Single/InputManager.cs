@@ -15,7 +15,7 @@ public class InputManager : MonoBehaviour
 
     private GameInput _controls;
 
-    private enum InputMode { UI, All, PlayerDyn, PlayerDia }
+    public enum InputMode { UI, All, PlayerDyn, PlayerDia }
     private InputMode _currentMode = InputMode.UI;
     private InputMode _lastMode = InputMode.UI;
 

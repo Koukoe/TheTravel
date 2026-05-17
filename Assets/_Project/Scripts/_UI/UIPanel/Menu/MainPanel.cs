@@ -21,7 +21,7 @@ public class MainPanel : MenuPanel
         // 绑定按钮监听事件
         saveBtn?.onClick.AddListener(() => OnArchivesClicked());
         loadBtn?.onClick.AddListener(() => OnArchivesClicked(false));
-        exitBtn?.onClick.AddListener(OnNewGameClicked);
+        newBtn?.onClick.AddListener(OnNewGameClicked);
         settingsBtn?.onClick.AddListener(OnSettingsClicked);
         aboutBtn?.onClick.AddListener(OnAboutClicked);
         backBtn?.onClick.AddListener(OnBackClicked);
@@ -87,6 +87,7 @@ public class MainPanel : MenuPanel
     public void OnNewGameClicked()
     {
         var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+
         panel.Setup(onConfirm: () => GameFlowManager.Instance.NewGame(), title: "", content: ""); ;
     }
 }
