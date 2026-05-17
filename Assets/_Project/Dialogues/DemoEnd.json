@@ -1,0 +1,10 @@
+{
+  "dialogues": [
+    {
+      "id": "demo_end_01",
+      "character": "protagonist",
+      "content": "Demo到此结束，感谢您的游玩，希望您可以查看游戏文件夹，那里有我们的一段话",
+      "nextId": "end"
+    }
+  ]
+}
