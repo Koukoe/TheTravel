@@ -2043,8 +2043,103 @@ PrefabInstance:
       objectReference: {fileID: 123038303}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
+      propertyPath: ambSounds.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
       propertyPath: sfxSounds.Array.size
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63e985380d0d2654bbd5e0dbc9be39ce, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[0].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[0].name
+      value: Foutain
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8f6a31335e6253341bedc91a6225f4d6, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[1].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[1].name
+      value: InsectChirping
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e56d821f813f7af4f98f824f3ee5382a, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[2].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[2].name
+      value: OceanWaves
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: bdbe3e1218f1b1f4395c4f8948206c78, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[3].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[3].name
+      value: RiverWater
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b26de8a2fcf81c34183d77ebf4ca5365, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[4].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[4].name
+      value: Habor
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: cd2613eaceaf3ff4e9d5342ca8870e13, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[5].loop
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[5].name
+      value: Seagull
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2149,6 +2244,36 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[6].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[0].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[1].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[2].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[3].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[4].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: ambSounds.Array.data[5].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
