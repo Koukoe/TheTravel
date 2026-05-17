@@ -42,6 +42,7 @@ public class UIOptionToggle : MonoBehaviour, ISelectHandler, IDeselectHandler, I
         // 截获左右移动
         if (Mathf.Abs(eventData.moveVector.x) > 0.5f)
         {
+            AudioManager.Instance.PlaySFX("Select_button_UI");
             int direction = eventData.moveVector.x > 0 ? 1 : -1;
             int lastIndex = currentIndex;
             currentIndex = Mathf.Clamp(currentIndex + direction, 0, options.Length - 1);

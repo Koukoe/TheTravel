@@ -152,6 +152,8 @@ MonoBehaviour:
   disabledAlpha: 0.6
   selectable: {fileID: 789431742610370000}
   canvasGroup: {fileID: 4316763645012169959}
+  SubmitSFXName: UI_sound
+  SelectSFXName: Select_button_UI
   targetImage: {fileID: 5275476603265854631}
   normalSprite: {fileID: -1798155402, guid: 5c300ec1e4318794ab91747edfa69f4a, type: 3}
   selectedSprite: {fileID: 1770787792, guid: 5c300ec1e4318794ab91747edfa69f4a, type: 3}
@@ -171,7 +173,7 @@ MonoBehaviour:
   floatRange: {x: 0, y: 5, z: 0}
   floatFrequency: 1.5
   scaleAmplitude: 0
-  scaleFrequency: 0
+  scaleFrequency: 1
   randomStart: 0
   smoothSuspend: 1
   rect: {fileID: 0}
@@ -327,6 +329,8 @@ MonoBehaviour:
   disabledAlpha: 0.6
   selectable: {fileID: 3814565143263063109}
   canvasGroup: {fileID: 5799829610930010210}
+  SubmitSFXName: UI_sound
+  SelectSFXName: Select_button_UI
   targetImage: {fileID: 1277379591462829806}
   normalSprite: {fileID: -1798155402, guid: 5c300ec1e4318794ab91747edfa69f4a, type: 3}
   selectedSprite: {fileID: 1770787792, guid: 5c300ec1e4318794ab91747edfa69f4a, type: 3}
@@ -346,7 +350,7 @@ MonoBehaviour:
   floatRange: {x: 0, y: -5, z: 0}
   floatFrequency: 1.5
   scaleAmplitude: 0
-  scaleFrequency: 0
+  scaleFrequency: 1
   randomStart: 0
   smoothSuspend: 1
   rect: {fileID: 0}
