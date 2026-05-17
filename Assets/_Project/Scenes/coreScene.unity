@@ -2049,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.size
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2318,6 +2318,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
+      propertyPath: sfxSounds.Array.data[17].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ceb5a981c90015143a69e43489a42c19, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: sfxSounds.Array.data[17].name
+      value: MelodicStoneExample
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
       propertyPath: sfxSounds.Array.data[1].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -2433,6 +2443,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
+      propertyPath: sfxSounds.Array.data[17].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
       propertyPath: sfxSounds.Array.data[1].volume
       value: 1
       objectReference: {fileID: 0}
@@ -2509,6 +2524,11 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[16].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: sfxSounds.Array.data[17].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
