@@ -1,10 +1,10 @@
 {
-  "dialogues": [
-    {
-      "id": "birdbath_fillwater_01",
-      "character": "protagonist",
-      "content": "把杯子伸进池中，清澈的泉水缓缓流入杯中......好了，现在回去洗羊毛杯吧。",
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "birdbath_fillwater_01",
+			"character": "protagonist",
+			"content": "把杯子伸进池中，清澈的泉水缓缓流入杯中......好了，现在回去洗木杯吧。",
+			"nextId": "end"
+		}
+	]
 }

@@ -2049,7 +2049,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.size
-      value: 17
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2145,7 +2145,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[0].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 74c0e952ce350d34fb4355055db663bd, type: 3}
+      objectReference: {fileID: 8300000, guid: fe962c592add9f849a51d49186d7ca63, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[0].name
@@ -2155,7 +2155,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: c3801596116ef9a489e2b3065371fca4, type: 3}
+      objectReference: {fileID: 8300000, guid: e6748bab19ff16a488cb4eddcfb08960, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[1].name
@@ -2165,7 +2165,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[2].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 781077114a025554c99043b2b90ce62f, type: 3}
+      objectReference: {fileID: 8300000, guid: ad98af03d64c4894d961057a24c2ddb1, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[2].name
@@ -2175,7 +2175,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[3].clip
       value: 
-      objectReference: {fileID: 8300000, guid: d178f19cc37db574e921fd65c124b32e, type: 3}
+      objectReference: {fileID: 8300000, guid: 951be3811b272b44f9b018f8e5bedba1, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[3].name
@@ -2185,7 +2185,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[4].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 094e7af3907528745beaf17ec15056a9, type: 3}
+      objectReference: {fileID: 8300000, guid: 02bde264812b87d44b9167b39a308389, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[4].name
@@ -2195,7 +2195,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[5].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 41462a4e963d91043995a64d1e51b0a6, type: 3}
+      objectReference: {fileID: 8300000, guid: 83c67e0bfa81efd44b0fed8236ca04e4, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[5].name
@@ -2205,7 +2205,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sfxSounds.Array.data[6].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 8541a558d36c04d4c9c2c7706b6e8c04, type: 3}
+      objectReference: {fileID: 8300000, guid: 97d2ef18c63bc134eaf7ff5a1ad181d0, type: 3}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[6].name
@@ -2318,6 +2318,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
+      propertyPath: sfxSounds.Array.data[17].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ceb5a981c90015143a69e43489a42c19, type: 3}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: sfxSounds.Array.data[17].name
+      value: MelodicStoneExample
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
       propertyPath: sfxSounds.Array.data[1].pitch
       value: 1
       objectReference: {fileID: 0}
@@ -2374,7 +2384,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: ambSounds.Array.data[2].volume
-      value: 1
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2429,6 +2439,11 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[16].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: sfxSounds.Array.data[17].pitch
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
@@ -2509,6 +2524,11 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[16].volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
+        type: 3}
+      propertyPath: sfxSounds.Array.data[17].volume
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7983233053404264549, guid: deabcb973bdd1b84ba87ca93c9696dda,
@@ -2777,7 +2797,7 @@ MonoBehaviour:
   taskEffects: []
   taskEndEffects: []
   taskGoals:
-  - isAutoFinish: 0
+  - isAutoFinish: 1
     taskGoalType: 2
     goalId: Task3
     targetId: 
@@ -3624,7 +3644,7 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Engineer
       name: Engineer
-      serializedPosition: {x: 841.67, y: 28.09, z: 476.45}
+      serializedPosition: {x: 841.67, y: 25, z: 476.45}
       serializedRotation: {x: 0, y: 89.52, z: 0}
       hasPosition: 1
       hasRotation: 1
@@ -3650,7 +3670,7 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Engineer
       name: Engineer
-      serializedPosition: {x: 841.67, y: 28.09, z: 476.45}
+      serializedPosition: {x: 841.67, y: 25, z: 476.45}
       serializedRotation: {x: 0, y: 89.52, z: 0}
       hasPosition: 1
       hasRotation: 1
@@ -4037,7 +4057,7 @@ MonoBehaviour:
       serializedRotation: {x: 0, y: 0, z: 0}
       hasPosition: 1
       hasRotation: 0
-      isVisible: 0
+      isVisible: 1
       Scene: 
       animState: 0
     isChangeActorScene: 0
@@ -4059,7 +4079,7 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Old_Captain
       name: 
-      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedPosition: {x: 462, y: 0, z: 495.6}
       serializedRotation: {x: 0, y: 0, z: 0}
       hasPosition: 1
       hasRotation: 1
@@ -4122,6 +4142,34 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList: []
+  - effectType: 3
+    targetGUID: Fountain
+    targetInteractionState:
+      <guid>k__BackingField: EngineerHouseOut
+      name: EngineerHouseOut
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: Old_Captain
+      name: 
+      serializedPosition: {x: 462, y: 52.3, z: 495.6}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 1
+      hasRotation: 1
+      isVisible: 1
+      Scene: EngineerHouse
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: Fountain
+      dialogueIndex: 3
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3

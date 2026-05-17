@@ -20,6 +20,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/WhiteTown/WhiteTown.unity
     guid: 27ba8b6da8502e543b110c0292257e90
+  - enabled: 1
+    path: Assets/_Project/Scenes/EngineerHouse/EngineerHouse.unity
+    guid: dec52719375dfee4bb95a26cce1af9b4
+  - enabled: 1
+    path: Assets/_Project/Scenes/IceBerg/TheEntry/IceBergEntry.unity
+    guid: f57796e372e1b5c4d9535e70ce04c643
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 0e40284c528a87449907cbb8dd8c1c76,
       type: 2}

@@ -1,10 +1,10 @@
 {
-  "dialogues": [
-    {
-      "id": "birdbath_throwitems_01",
-      "character": "protagonist",
-      "content": "喷泉在微微发光...它需要海螺、羊毛杯、纽扣和一张唱片。都投进去吧，会有什么发生呢？",
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "birdbath_throwitems_01",
+			"character": "protagonist",
+			"content": "喷泉在微微发光...它需要海螺、木头杯、纽扣和一张唱片。都投进去吧，会有什么发生呢？",
+			"nextId": "end"
+		}
+	]
 }

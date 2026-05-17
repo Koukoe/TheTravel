@@ -1,10 +1,10 @@
 {
-  "dialogues": [
-    {
-      "id": "birdbath_pourwater_01",
-      "character": "protagonist",
-      "content": "把圣杯里的水倒进鸟浴池...羊毛杯应该就能洗出来了。",
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "birdbath_pourwater_01",
+			"character": "protagonist",
+			"content": "把圣杯里的水倒进鸟浴池...木杯应该就能洗出来了。",
+			"nextId": "end"
+		}
+	]
 }

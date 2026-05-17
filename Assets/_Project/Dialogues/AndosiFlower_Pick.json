@@ -1,0 +1,10 @@
+{
+  "dialogues": [
+    {
+      "id": "andosi_flower_pick_01",
+      "character": "protagonist",
+      "content": "在乱石堆中找到了一株安朵丝花。",
+      "nextId": "end"
+    }
+  ]
+}

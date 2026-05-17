@@ -16,16 +16,16 @@ public class AudioManager : MonoBehaviour
     [Header("音频库")]
     public List<SFX> sfxSounds = new List<SFX>();
     public List<AudioTrack> bgmSounds = new List<AudioTrack>();
-    public List<AudioTrack> ambSounds = new List<AudioTrack>();
+    public List<Sound> ambSounds = new List<Sound>();
     public List<AudioTrack> voiceSounds = new List<AudioTrack>();
 
     private Dictionary<string, SFX> sfxDict = new Dictionary<string, SFX>();
     private Dictionary<string, AudioTrack> bgmDict = new Dictionary<string, AudioTrack>();
-    private Dictionary<string, AudioTrack> ambDict = new Dictionary<string, AudioTrack>();
+    private Dictionary<string, Sound> ambDict = new Dictionary<string, Sound>();
     private Dictionary<string, AudioTrack> voiceDict = new Dictionary<string, AudioTrack>();
 
+    private Dictionary<GameObject, Coroutine> activeFadeCoroutines = new Dictionary<GameObject, Coroutine>();
     private AudioChannelGroup _bgmGroup;
-    private AudioChannelGroup _ambGroup;
     private AudioChannelGroup _voiceGroup;
 
     private void Awake()
@@ -46,7 +46,6 @@ public class AudioManager : MonoBehaviour
     private void InitLogicalChannels()
     {
         _bgmGroup = CreateGroup("BGM");
-        _ambGroup = CreateGroup("Ambient");
         _voiceGroup = CreateGroup("Voice");
     }
 
@@ -76,13 +75,6 @@ public class AudioManager : MonoBehaviour
     }
     public void StopBGM(StopTarget target = StopTarget.All, float fade = 1.0f) => _bgmGroup.Stop(target, fade);
 
-    /// <summary> 播放环境音 </summary>
-    public void PlayAmbient(string name, float fade = 1.0f)
-    {
-        if (ambDict.TryGetValue(name, out var s)) _ambGroup.Play(s, fade, ambGroup);
-    }
-    public void StopAmbient(StopTarget target = StopTarget.All, float fade = 1.0f) => _ambGroup.Stop(target, fade);
-
     /// <summary> 播放人声对白 </summary>
     public void PlayVoice(string name, float fade = 0f)
     {
@@ -110,11 +102,115 @@ public class AudioManager : MonoBehaviour
         StartCoroutine(ReturnToPool(obj, s.clip.length / Mathf.Max(0.1f, source.pitch)));
     }
 
+    /// <summary> 
+    /// 播放环境音
+    /// </summary>
+    /// <param name="name">音频库配置名</param>
+    /// <param name="pos">3D世界坐标，不传则为2D全局音</param>
+    /// <param name="fadeTime">淡入时间</param>
+    /// <returns>返回生成的 GameObject</returns>
+    public GameObject PlayAmbient(string name, Vector3? pos = null, float fadeTime = 1.0f)
+    {
+        if (!ambDict.TryGetValue(name, out Sound s)) return null;
+
+        // 创建实例
+        GameObject obj = PoolManager.Global.Get(audioPrefabName);
+        AudioSource source = obj.GetComponent<AudioSource>();
+
+        // 配置属性
+        source.outputAudioMixerGroup = ambGroup;
+        source.clip = s.clip;
+        source.loop = true;
+
+        // 处理 3D
+        source.spatialBlend = pos.HasValue ? 1f : 0f;
+        if (pos.HasValue) obj.transform.position = pos.Value;
+
+        source.Play();
+
+        // 6平滑淡入
+        if (fadeTime > 0f) StartCoroutine(FadeInInternal(source, s.volume, fadeTime));
+        else source.volume = s.volume;
+
+        return obj;
+    }
+
+    /// <summary>
+    /// 停止环境音
+    /// </summary>
+    /// <param name="audioObj">PlayAmbient 返回的 GameObject 实例</param>
+    /// <param name="fadeTime">淡出时间</param>
+    public void StopAmbient(GameObject audioObj, float fadeTime = 1.0f)
+    {
+        if (audioObj == null) return;
+        AudioSource source = audioObj.GetComponent<AudioSource>();
+
+        StartCoroutine(AmbientRecycleCoroutine(audioObj, source, fadeTime));
+    }
+    #endregion
+
+    #region 内部方法
     private IEnumerator ReturnToPool(GameObject obj, float delay)
     {
         yield return new WaitForSeconds(delay);
         if (obj != null) PoolManager.Release(obj);
     }
+
+    private IEnumerator FadeInInternal(AudioSource source, float targetVol, float duration)
+    {
+        source.volume = 0f;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            // 安全检查：预防渐变中途场景切换或物体意外销毁
+            if (source == null) yield break;
+
+            elapsed += Time.deltaTime;
+            float normalizedTime = Mathf.Clamp01(elapsed / duration);
+
+            // 完美同步你原本的 OutSine 缓动曲线
+            float easeT = EasingUtils.GetValue(EasingUtils.EaseType.OutSine, normalizedTime);
+
+            source.volume = Mathf.Lerp(0f, targetVol, easeT);
+            yield return null;
+        }
+
+        if (source != null) source.volume = targetVol;
+    }
+
+    private IEnumerator AmbientRecycleCoroutine(GameObject obj, AudioSource source, float duration)
+    {
+        if (duration > 0f && source != null && source.isPlaying)
+        {
+            float startVol = source.volume;
+            float elapsed = 0f;
+
+            while (elapsed < duration)
+            {
+                if (source == null) yield break;
+
+                elapsed += Time.deltaTime;
+                float normalizedTime = Mathf.Clamp01(elapsed / duration);
+
+                float easeT = EasingUtils.GetValue(EasingUtils.EaseType.InSine, normalizedTime);
+
+                source.volume = Mathf.Lerp(startVol, 0f, easeT);
+                yield return null;
+            }
+        }
+
+        if (obj != null)
+        {
+            if (source != null)
+            {
+                source.Stop();
+                source.clip = null;
+            }
+            PoolManager.Release(obj);
+        }
+    }
+
     #endregion
 
 
