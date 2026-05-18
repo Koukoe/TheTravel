@@ -1468,7 +1468,7 @@ MonoBehaviour:
     positionTolerance: 0
     rotationTolerance: 0
     targetDialogueId: Fountain
-    index: 0
+    index: 1
     targetScript: {fileID: 0}
   nextNodes: []
   Out: 0
@@ -1849,6 +1849,34 @@ MonoBehaviour:
     currentScene: 
     targetActorSceneName: 
     targetDialogueList: []
+  - effectType: 3
+    targetGUID: 
+    targetInteractionState:
+      <guid>k__BackingField: 
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 0
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList:
+    - dialogueguid: Fountain
+      dialogueIndex: 0
   taskGoals:
   - isAutoFinish: 0
     taskGoalType: 3
@@ -3646,8 +3674,8 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Old_Captain
       name: Old_Captain
-      serializedPosition: {x: 832.85, y: 28.09, z: 467.49}
-      serializedRotation: {x: 0, y: 40.71, z: 0}
+      serializedPosition: {x: 832.85, y: 25, z: 467.49}
+      serializedRotation: {x: 0, y: -50, z: 0}
       hasPosition: 1
       hasRotation: 1
       isVisible: 1
@@ -4195,8 +4223,8 @@ MonoBehaviour:
     targetActorState:
       <guid>k__BackingField: Old_Captain
       name: 
-      serializedPosition: {x: 462, y: 0, z: 495.6}
-      serializedRotation: {x: 0, y: 0, z: 0}
+      serializedPosition: {x: -11.12, y: 0.1, z: 16.1}
+      serializedRotation: {x: 0, y: 90, z: 0}
       hasPosition: 1
       hasRotation: 1
       isVisible: 1
