@@ -4144,7 +4144,7 @@ MonoBehaviour:
   - 22
   taskEffects:
   - effectType: 3
-    targetGUID: 
+    targetGUID: Fountain
     targetInteractionState:
       <guid>k__BackingField: 
       name: 

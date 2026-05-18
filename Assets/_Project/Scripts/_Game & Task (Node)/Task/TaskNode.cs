@@ -31,13 +31,22 @@ public class TaskNode : MonoBehaviour
     // 取消相关
     private CancellationTokenSource _taskCts;
     private bool isTaskRunning = false;
+    private bool isCompleting = false;
 
     public int Inn
     {
         get { return In; }
         set
         {
+            // int oldIn = In;
             In = value;
+
+            // 🎯 调试追踪：task21 的入度每次变化都打印调用堆栈
+            // if (taskId == "task21")
+            // {
+            //     string delta = (In > oldIn) ? $"+{In - oldIn}" : $"{In - oldIn}";
+            //     Debug.Log($"[DBG] task21 入度变化: {oldIn} → {In} ({delta}) | 调用栈:\n{StackTraceUtility.ExtractStackTrace()}");
+            // }
 
             Debug.Log(taskId + "入度为" + In);
             TaskManager.Instance.SaveTaskNode(taskId);
@@ -137,6 +146,13 @@ public class TaskNode : MonoBehaviour
     /// </summary>
     private void OnTaskSuccess()
     {
+        // 防止重复进入（可能通过 CheckGoalAsync 回调链再次触发）
+        if (isCompleting || isTaskFinished) return;
+        isCompleting = true;
+
+        // 🎯 调试：调用栈追踪，看谁重复调了 OnTaskSuccess
+        // Debug.LogError($"[DBG 调用栈] {taskId} 的 OnTaskSuccess 被调用\n{StackTraceUtility.ExtractStackTrace()}");
+
         isTaskFinished = true;
 
         // 任务完成时保存
@@ -154,6 +170,9 @@ public class TaskNode : MonoBehaviour
         }
 
         // 减少后继节点的入度
+        // 🎯 调试追踪：看看哪些后继被减了
+        // string successors = string.Join(", ", nextNodes.ConvertAll(n => n.taskId));
+        // Debug.Log($"[DBG] 任务 {taskId} 完成，通知后继: [{successors}]");
         foreach (var node in nextNodes)
         {
             node.Inn--;
@@ -167,6 +186,8 @@ public class TaskNode : MonoBehaviour
 
         // 停止异步等待
         CancelTask();
+
+        isCompleting = false;
     }
 
     // --- 【重构部分结束】 ---
