@@ -44,6 +44,12 @@
       "id": "White_NPC03_3_06",
       "character": "protagonist",
       "content": "......谢谢，我会永远记得这位素未谋面的朋友的。",
+      "nextId": "White_NPC03_3_06_plus"
+    },
+    {
+      "id": "White_NPC03_3_06_plus",
+      "character": "protagonist",
+      "content": "获得了安东尼的纽扣。",
       "nextId": "White_NPC03_3_07"
     },
     {

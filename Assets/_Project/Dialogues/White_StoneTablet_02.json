@@ -4,6 +4,12 @@
       "id": "White_StoneTablet_02_01",
       "character": "protagonist",
       "content": "嚯嚯，现在这个海螺就能拿下来了呢。",
+      "nextId": "White_StoneTablet_02_01_hint"
+    },
+    {
+      "id": "White_StoneTablet_02_01_hint",
+      "character": "protagonist",
+      "content": "获得了海螺。",
       "nextId": "White_StoneTablet_02_02"
     },
     {
