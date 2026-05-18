@@ -20,9 +20,9 @@ public static class GameStatic
     {
         if (MenuManager.Instance != null)
         {
-            MenuManager.Instance.ApplySettings(DataSettingSystem.Get());
+            MenuManager.Instance.ApplySettings(DataSettingSystem.GetShallow());
         }
-        if (!DataGlobalSystem.Get().hasEnteredGame)
+        if (!DataGlobalSystem.GetDeep().hasEnteredGame)
         {
             GameFlowManager.Instance.NewGame().Forget();
         }
