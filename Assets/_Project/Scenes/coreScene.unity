@@ -1243,7 +1243,33 @@ MonoBehaviour:
   taskId: 27
   nextNodesIds: []
   taskEffects: []
-  taskEndEffects: []
+  taskEndEffects:
+  - effectType: 0
+    targetGUID: Demo
+    targetInteractionState:
+      <guid>k__BackingField: Demo
+      name: 
+      isTriggered: 0
+      stateIndex: 0
+      isInteracble: 1
+    targetItemState:
+      <guid>k__BackingField: 
+      name: 
+      isPicked: 0
+    targetActorState:
+      <guid>k__BackingField: 
+      name: 
+      serializedPosition: {x: 0, y: 0, z: 0}
+      serializedRotation: {x: 0, y: 0, z: 0}
+      hasPosition: 0
+      hasRotation: 0
+      isVisible: 0
+      Scene: 
+      animState: 0
+    isChangeActorScene: 0
+    currentScene: 
+    targetActorSceneName: 
+    targetDialogueList: []
   taskGoals:
   - isAutoFinish: 1
     taskGoalType: 0
