@@ -1,76 +1,76 @@
 {
-  "dialogues": [
-    {
-      "id": "White_NPC02_1_01",
-      "character": "White_NPC02",
-      "content": "日安。",
-      "nextId": "White_NPC02_1_02"
-    },
-    {
-      "id": "White_NPC02_1_02",
-      "character": "protagonist",
-      "content": "日安。",
-      "nextId": "White_NPC02_1_03"
-    },
-    {
-      "id": "White_NPC02_1_03",
-      "character": "White_NPC02",
-      "content": "这座小镇有着独具一格的风格呢，与外界很不同。",
-      "nextId": "White_NPC02_1_04"
-    },
-    {
-      "id": "White_NPC02_1_04",
-      "character": "protagonist",
-      "content": "嗯......是啊，该怎么形容呢，很......纯净。",
-      "nextId": "White_NPC02_1_05"
-    },
-    {
-      "id": "White_NPC02_1_05",
-      "character": "White_NPC02",
-      "content": "我们这里的居民都是海神波尼克的信徒。传说当年有一场灭世的大洪水摧毁了旧世界，而波尼克以祂的身体为方舟，拯救了一部分人类，让文明的火种得以延续。",
-      "nextId": "White_NPC02_1_06"
-    },
-    {
-      "id": "White_NPC02_1_06",
-      "character": "White_NPC02",
-      "content": "而当年波尼克在救下人们后，就在这里运用祂的力量，强行压制住了大洪水。等到一切风平浪静以后，祂就藏身于那永不停歇的大漩涡中休养，那大漩涡就是常说的“波尼克之眼”。",
-      "nextId": "White_NPC02_1_07"
-    },
-    {
-      "id": "White_NPC02_1_07",
-      "character": "protagonist",
-      "content": "是这样啊，我还是第一次知道。",
-      "nextId": "White_NPC02_1_08"
-    },
-    {
-      "id": "White_NPC02_1_08",
-      "character": "White_NPC02",
-      "content": "不过啊，这些事迹很多人都淡忘了。这圣波尼克岛之外的人，能记住波尼克事迹的很少了。",
-      "nextId": "White_NPC02_1_09"
-    },
-    {
-      "id": "White_NPC02_1_09",
-      "character": "protagonist",
-      "content": "那场洪水是多少年前的了？大概两百年？",
-      "nextId": "White_NPC02_1_10"
-    },
-    {
-      "id": "White_NPC02_1_10",
-      "character": "White_NPC02",
-      "content": "按照旧世界的历法，到今天差不多是253年。",
-      "nextId": "White_NPC02_1_11"
-    },
-    {
-      "id": "White_NPC02_1_11",
-      "character": "White_NPC02",
-      "content": "“沧海桑田”，来形容这个世界再合适不过了。谁能想象到以前的世界有着一望无际的陆地，而不是大海呢？",
-      "nextId": "White_NPC02_1_12"
-    },
-    {
-      "id": "White_NPC02_1_12",
-      "character": "White_NPC02",
-      "content": "但波尼克告诉我们，要珍惜眼前，而不是感伤过往。所以，请向前看吧，旅行者。",
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "White_NPC02_1_01",
+			"character": "White_NPC02",
+			"content": "日安。",
+			"nextId": "White_NPC02_1_02"
+		},
+		{
+			"id": "White_NPC02_1_02",
+			"character": "protagonist",
+			"content": "日安。",
+			"nextId": "White_NPC02_1_03"
+		},
+		{
+			"id": "White_NPC02_1_03",
+			"character": "White_NPC02",
+			"content": "这座小镇有着独具一格的风格呢，与外界很不同。",
+			"nextId": "White_NPC02_1_04"
+		},
+		{
+			"id": "White_NPC02_1_04",
+			"character": "protagonist",
+			"content": "嗯......是啊，该怎么形容呢，很......纯净。",
+			"nextId": "White_NPC02_1_05"
+		},
+		{
+			"id": "White_NPC02_1_05",
+			"character": "White_NPC02",
+			"content": "我们这里的居民都是海神波尼克的信徒。传说当年有一场灭世的大洪水摧毁了旧世界，而波尼克以它的身体为方舟，拯救了一部分人类，让文明的火种得以延续。",
+			"nextId": "White_NPC02_1_06"
+		},
+		{
+			"id": "White_NPC02_1_06",
+			"character": "White_NPC02",
+			"content": "而当年波尼克在救下人们后，就在这里运用它的力量，强行压制住了大洪水。等到一切风平浪静以后，它就藏身于那永不停歇的大漩涡中休养，那大漩涡就是常说的“波尼克之眼”。",
+			"nextId": "White_NPC02_1_07"
+		},
+		{
+			"id": "White_NPC02_1_07",
+			"character": "protagonist",
+			"content": "是这样啊，我还是第一次知道。",
+			"nextId": "White_NPC02_1_08"
+		},
+		{
+			"id": "White_NPC02_1_08",
+			"character": "White_NPC02",
+			"content": "不过啊，这些事迹很多人都淡忘了。这圣波尼克岛之外的人，能记住波尼克事迹的很少了。",
+			"nextId": "White_NPC02_1_09"
+		},
+		{
+			"id": "White_NPC02_1_09",
+			"character": "protagonist",
+			"content": "那场洪水是多少年前的了？大概两百年？",
+			"nextId": "White_NPC02_1_10"
+		},
+		{
+			"id": "White_NPC02_1_10",
+			"character": "White_NPC02",
+			"content": "按照旧世界的历法，到今天差不多是253年。",
+			"nextId": "White_NPC02_1_11"
+		},
+		{
+			"id": "White_NPC02_1_11",
+			"character": "White_NPC02",
+			"content": "“沧海桑田”，来形容这个世界再合适不过了。谁能想象到以前的世界有着一望无际的陆地，而不是大海呢？",
+			"nextId": "White_NPC02_1_12"
+		},
+		{
+			"id": "White_NPC02_1_12",
+			"character": "White_NPC02",
+			"content": "但波尼克告诉我们，要珍惜眼前，而不是感伤过往。所以，请向前看吧，旅行者。",
+			"nextId": "end"
+		}
+	]
 }
