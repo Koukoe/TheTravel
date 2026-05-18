@@ -1,80 +1,80 @@
 {
-  "dialogues": [
-    {
-      "id": "White_NPC03_3_01",
-      "character": "White_NPC03",
-      "content": "谢谢你，陌生人。请将花儿交给我吧，让我与安东尼说几句话。",
-      "nextId": "White_NPC03_3_02"
-    },
-    {
-      "id": "White_NPC03_3_02",
-      "character": "protagonist",
-      "content": "给你。",
-      "effects": [
-        {
-          "LoseItem": "andosi_flower"
-        }
-      ],
-      "nextId": "White_NPC03_3_03"
-    },
-    {
-      "id": "White_NPC03_3_03",
-      "character": "White_NPC03",
-      "content": "请收下这个，就当作是安东尼给你的谢礼。",
-      "effects": [
-        {
-          "GetItem": "antony_button"
-        }
-      ],
-      "nextId": "White_NPC03_3_04"
-    },
-    {
-      "id": "White_NPC03_3_04",
-      "character": "protagonist",
-      "content": "这是？",
-      "nextId": "White_NPC03_3_05"
-    },
-    {
-      "id": "White_NPC03_3_05",
-      "character": "White_NPC03",
-      "content": "这是安东尼那天穿的衣服上的扣子，我想这扣子也是他陪伴我们的形式之一吧。",
-      "nextId": "White_NPC03_3_06"
-    },
-    {
-      "id": "White_NPC03_3_06",
-      "character": "protagonist",
-      "content": "......谢谢，我会永远记得这位素未谋面的朋友的。",
-      "nextId": "White_NPC03_3_06_plus"
-    },
-    {
-      "id": "White_NPC03_3_06_plus",
-      "character": "protagonist",
-      "content": "获得了安东尼的纽扣。",
-      "nextId": "White_NPC03_3_07"
-    },
-    {
-      "id": "White_NPC03_3_07",
-      "character": "White_NPC03",
-      "content": "我看你好像还有些要紧事要做，请去吧，陌生人。",
-      "nextId": "White_NPC03_3_08"
-    },
-    {
-      "id": "White_NPC03_3_08",
-      "character": "protagonist",
-      "content": "再见。",
-      "nextId": "White_NPC03_3_09"
-    },
-    {
-      "id": "White_NPC03_3_09",
-      "character": "White_NPC03",
-      "content": "......",
-      "nextId": "White_NPC03_3_10"
-    },
-    {
-      "id": "White_NPC03_3_10",
-      "character": "White_NPC03",
-      "content": "安东，你这个傻瓜......",
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "White_NPC03_3_01",
+			"character": "White_NPC03",
+			"content": "谢谢你，陌生人。请将花儿交给我吧，让我与安东尼说几句话。",
+			"nextId": "White_NPC03_3_02"
+		},
+		{
+			"id": "White_NPC03_3_02",
+			"character": "protagonist",
+			"content": "给你。",
+			"effects": [
+				{
+					"LoseItem": "andosi_flower"
+				}
+			],
+			"nextId": "White_NPC03_3_03"
+		},
+		{
+			"id": "White_NPC03_3_03",
+			"character": "White_NPC03",
+			"content": "请收下这个，就当作是安东尼给你的谢礼。",
+			"effects": [
+				{
+					"GetItem": "antony_button"
+				}
+			],
+			"nextId": "White_NPC03_3_04"
+		},
+		{
+			"id": "White_NPC03_3_04",
+			"character": "protagonist",
+			"content": "这是？",
+			"nextId": "White_NPC03_3_05"
+		},
+		{
+			"id": "White_NPC03_3_05",
+			"character": "White_NPC03",
+			"content": "这是安东尼那天穿的衣服上的扣子，我想这扣子也是他陪伴我们的形式之一吧。",
+			"nextId": "White_NPC03_3_06"
+		},
+		{
+			"id": "White_NPC03_3_06",
+			"character": "protagonist",
+			"content": "......谢谢，我会永远记得这位素未谋面的朋友的。",
+			"nextId": "White_NPC03_3_06_plus"
+		},
+		{
+			"id": "White_NPC03_3_06_plus",
+			"character": "protagonist",
+			"content": "获得了[安东尼的纽扣]",
+			"nextId": "White_NPC03_3_07"
+		},
+		{
+			"id": "White_NPC03_3_07",
+			"character": "White_NPC03",
+			"content": "我看你好像还有些要紧事要做，请去吧，陌生人。",
+			"nextId": "White_NPC03_3_08"
+		},
+		{
+			"id": "White_NPC03_3_08",
+			"character": "protagonist",
+			"content": "再见。",
+			"nextId": "White_NPC03_3_09"
+		},
+		{
+			"id": "White_NPC03_3_09",
+			"character": "White_NPC03",
+			"content": "......",
+			"nextId": "White_NPC03_3_10"
+		},
+		{
+			"id": "White_NPC03_3_10",
+			"character": "White_NPC03",
+			"content": "安东，你这个傻瓜......",
+			"nextId": "end"
+		}
+	]
 }
