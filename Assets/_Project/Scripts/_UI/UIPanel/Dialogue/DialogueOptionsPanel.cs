@@ -13,6 +13,8 @@ public class DialogueOptionsPanel : MenuPanel
     private readonly List<Button> runtimeButtons = new List<Button>();
     private Coroutine focusRoutine;
     private int focusedOptionIndex = 0;
+    private readonly List<string> optionTexts = new List<string>();
+    private GameObject lastSelectedOption;
 
     public override void OnOpen()
     {
@@ -69,6 +71,7 @@ public class DialogueOptionsPanel : MenuPanel
             {
                 text.text = option.content;
             }
+            optionTexts.Add(option.content);
 
             int optionIndex = i;
             button.onClick.RemoveAllListeners();
@@ -170,6 +173,8 @@ public class DialogueOptionsPanel : MenuPanel
         }
 
         runtimeButtons.Clear();
+        optionTexts.Clear();
+        lastSelectedOption = null;
     }
 
     private void SelectFirstOption()
@@ -229,6 +234,32 @@ public class DialogueOptionsPanel : MenuPanel
         yield return null;
         focusRoutine = null;
         SelectFirstOption();
+        UpdateSelectionIndicator();
     }
 
+    private void Update()
+    {
+        if (runtimeButtons.Count == 0) return;
+
+        GameObject currentSelected = EventSystem.current?.currentSelectedGameObject;
+        if (currentSelected == lastSelectedOption) return;
+
+        lastSelectedOption = currentSelected;
+        UpdateSelectionIndicator();
+    }
+
+    private void UpdateSelectionIndicator()
+    {
+        for (int i = 0; i < runtimeButtons.Count; i++)
+        {
+            if (runtimeButtons[i] == null) continue;
+
+            TMP_Text text = runtimeButtons[i].GetComponentInChildren<TMP_Text>(true);
+            if (text == null) continue;
+
+            bool isSelected = runtimeButtons[i].gameObject == lastSelectedOption;
+            string original = i < optionTexts.Count ? optionTexts[i] : "";
+            text.text = isSelected ? original + "<" : original;
+        }
+    }
 }

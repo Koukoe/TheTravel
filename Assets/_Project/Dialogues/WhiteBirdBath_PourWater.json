@@ -9,7 +9,7 @@
 		{
 			"id": "birdbath_pourwater_02",
 			"character": "protagonist",
-			"content": "获得了「木杯」。",
+			"content": "获得了[木杯]。",
 			"nextId": "end"
 		}
 	]
