@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class andosi : StaticStateEntity<ItemState>, IInteractable
 {
+
+    public TextAsset textAsset;
     public int Priority => 1;
 
     public Transform InteractTransform => gameObject.transform;
@@ -25,6 +27,7 @@ public class andosi : StaticStateEntity<ItemState>, IInteractable
         try
         {
             GameFlowManager.Instance.PlayingData.GetState<ItemState>(_state.guid).isPicked = true;
+            DialogueManager.Instance.StartWith(textAsset);
         }
         catch
         {

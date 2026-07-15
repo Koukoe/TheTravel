@@ -12,6 +12,7 @@ public class DataArchive
     public string currentScene;
     public Dictionary<string, BaseState> states;
     public Dictionary<string, (int, bool)> TaskNodesDic;
+    public bool startFinish;
 
     public DataArchive()
     {
@@ -19,6 +20,7 @@ public class DataArchive
         currentScene = "Ocean";  // 海
         states = new Dictionary<string, BaseState>();
         TaskNodesDic = new Dictionary<string, (int, bool)>();
+        startFinish = false;
     }
 
 
@@ -94,6 +96,20 @@ public class DataSetting
         resolutionIndex = 1; // 默认 1080p
         isFullScreen = 1;
         sensitivityIndex = 2;
+    }
+
+    public static bool IsDataSettingSame(DataSetting a, DataSetting b)
+    {
+        if (a == null && b == null) return true;
+        if (a == null || b == null) return false;
+
+        return a.sensitivityIndex == b.sensitivityIndex &&
+               a.masterVolumeIndex == b.masterVolumeIndex &&
+               a.musicVolumeIndex == b.musicVolumeIndex &&
+               a.sfxVolumeIndex == b.sfxVolumeIndex &&
+               a.ambVolumeIndex == b.ambVolumeIndex &&
+               a.resolutionIndex == b.resolutionIndex &&
+               a.isFullScreen == b.isFullScreen;
     }
 }
 

@@ -95,11 +95,10 @@ public class Playermove : MonoBehaviour
             PlayerTransform.rotation = Quaternion.RotateTowards(PlayerTransform.rotation, targetRotation, PlayerRotateSpeed * Time.deltaTime * 120f);
         }
 
-        // PlayerRigidbody.velocity = input * speed;
-        Vector3 Velocity = PlayerRigidbody.velocity;
-        Velocity.x = (input * speed).x;
-        Velocity.z = (input * speed).z;
-        PlayerRigidbody.velocity = Velocity;
+        // 用 AddForce 驱动水平移动，重力完全交给物理引擎
+        Vector3 targetVelocity = input * speed;
+        Vector3 velocityDiff = targetVelocity - new Vector3(PlayerRigidbody.velocity.x, 0, PlayerRigidbody.velocity.z);
+        PlayerRigidbody.AddForce(velocityDiff, ForceMode.VelocityChange);
     }
 
     [Header("进阶船只控制")]

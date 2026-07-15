@@ -493,6 +493,78 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b47b98cc82fe1549878fc163e22274b, type: 3}
+--- !u!1 &628332646
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 628332647}
+  - component: {fileID: 628332648}
+  - component: {fileID: 628332649}
+  m_Layer: 8
+  m_Name: Interactable
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &628332647
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628332646}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.29, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1671608840}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &628332648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628332646}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e91844abb7a9f949a3ceeb0b18229d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueGuid: Demo
+  interactionPriority: 0
+  dialogueJsonList:
+  - {fileID: 4900000, guid: 68a960ab2616b4846a77a1577edc719e, type: 3}
+  dialogueIndex: 0
+  _tipOffset: {x: 0, y: 0, z: 0}
+--- !u!65 &628332649
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 628332646}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5.57, y: 0.02, z: 9.26}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &664739763
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1033,7 +1105,7 @@ MeshCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
@@ -1100,7 +1172,8 @@ Transform:
   m_LocalPosition: {x: 121.9, y: 126.4, z: 227.9}
   m_LocalScale: {x: 6.03, y: 6.03, z: 6.03}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 628332647}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: -0.38, y: -2.138, z: 79.936}
 --- !u!1 &1807474686
@@ -1232,6 +1305,7 @@ MonoBehaviour:
   - portalName: IceBergEntryOut
     transform: {fileID: 1035059561}
   defaultSpawnPoint: {fileID: 1825371018}
+  ambSourceObjects: []
   _state:
     <guid>k__BackingField: 
     name: 
@@ -1240,6 +1314,7 @@ MonoBehaviour:
     poolEntityGuids: []
   initPoolGuids: []
   entityDb: {fileID: 11400000, guid: 861f8143ec2a20345a5d3eb4909bc7bc, type: 2}
+  camY: 0
 --- !u!4 &1825371018
 Transform:
   m_ObjectHideFlags: 0

@@ -77,7 +77,7 @@ public class ArchivesPanel : MenuPanel
             }
             else
             {
-                slotSources[i].RefreshDisplay(null, "空");
+                slotSources[i].RefreshDisplay(null, " ");
             }
         }
     }

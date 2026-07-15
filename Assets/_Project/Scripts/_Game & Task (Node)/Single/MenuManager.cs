@@ -45,7 +45,7 @@ public class MenuManager : MonoBehaviour
     {
         EffectManager.Instance.SetBackgroundBlur(true);
         if (UIManager.Instance.IsTransitioning) return;
-        if (InputManager.Instance.PlayerDialogueActions.enabled || InputManager.Instance.UIActions.enabled)
+        if (InputManager.Instance.PlayerDialogueActions.enabled || InputManager.Instance.UIActions.enabled || GameFlowManager.Instance.PlayingData.startFinish == false)
         {
             UIManager.Instance.Push("MainBrokenPanel");
         }

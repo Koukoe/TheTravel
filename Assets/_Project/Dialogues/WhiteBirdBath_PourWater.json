@@ -4,6 +4,12 @@
 			"id": "birdbath_pourwater_01",
 			"character": "protagonist",
 			"content": "把圣杯里的水倒进鸟浴池...木杯应该就能洗出来了。",
+			"nextId": "birdbath_pourwater_02"
+		},
+		{
+			"id": "birdbath_pourwater_02",
+			"character": "protagonist",
+			"content": "获得了[木杯]。",
 			"nextId": "end"
 		}
 	]

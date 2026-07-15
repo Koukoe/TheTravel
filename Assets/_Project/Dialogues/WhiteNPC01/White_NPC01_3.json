@@ -9,13 +9,13 @@
     {
       "id": "White_NPC01_3_02",
       "character": "White_NPC01",
-      "content": "旅行者，我主回应了你的请求！祂让河水为你让了路！",
+      "content": "旅行者，我主回应了你的请求！它让河水为你让了路！",
       "nextId": "White_NPC01_3_03"
     },
     {
       "id": "White_NPC01_3_03",
       "character": "White_NPC01",
-      "content": "祂总是这般，对子民如此慈爱，愿意动用力量为我们解决燃眉之急。",
+      "content": "它总是这般，对子民如此慈爱，愿意动用力量为我们解决燃眉之急。",
       "nextId": "White_NPC01_3_04"
     },
     {

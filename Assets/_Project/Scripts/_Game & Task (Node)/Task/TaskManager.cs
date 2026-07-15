@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-[DefaultExecutionOrder(1)]
+[DefaultExecutionOrder(-10)]
 public class TaskManager : MonoBehaviour
 {
     public static TaskManager Instance { get; private set; }
@@ -12,6 +12,7 @@ public class TaskManager : MonoBehaviour
 
     public GameObject mainPlayer; // 主玩家对象
     private bool isLoadingTasks = false;  // 防止加载时重复保存
+    private Coroutine _initGraphCoroutine; // 保存 InitTaskGraph 协程引用，以便读档时停止
 
     private HashSet<TaskNode> activeTasks = new HashSet<TaskNode>();
 
@@ -32,7 +33,7 @@ public class TaskManager : MonoBehaviour
             return;
         }
 
-        StartCoroutine(InitTaskGraph());
+        _initGraphCoroutine = StartCoroutine(InitTaskGraph());
     }
 
     private static Dictionary<string, TaskNode> tasks = new Dictionary<string, TaskNode>();
@@ -293,7 +294,15 @@ public class TaskManager : MonoBehaviour
             }
         }
 
-        // 3. 清空活跃集合，重置图初始化标记
+        // 3. 停掉 InitTaskGraph 协程（如果还在运行），防止它在 LoadMain 期间重建图并启动任务
+        if (_initGraphCoroutine != null)
+        {
+            StopCoroutine(_initGraphCoroutine);
+            _initGraphCoroutine = null;
+            Debug.Log("[TaskManager] 已停止 InitTaskGraph 协程");
+        }
+
+        // 4. 清空活跃集合、重置图初始化标记、锁定读存档标记
         activeTasks.Clear();
         isGraphInitialized = false;
         isLoadingTasks = false;
@@ -387,7 +396,8 @@ public class TaskManager : MonoBehaviour
         }
     }
 
-    // 可视化当前任务
+    // 可视化当前任务（仅在编辑器中显示）
+#if UNITY_EDITOR
     private void OnGUI()
     {
         if (activeTasks.Count == 0) return;
@@ -401,4 +411,5 @@ public class TaskManager : MonoBehaviour
         }
         GUILayout.EndArea();
     }
+#endif
 }

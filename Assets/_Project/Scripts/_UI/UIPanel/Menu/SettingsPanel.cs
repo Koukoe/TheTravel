@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -17,7 +18,7 @@ public class SettingsPanel : MenuPanel
     {
         base.Awake();
 
-        backBtn?.onClick.AddListener(() => UIManager.Instance.Pop());
+        backBtn?.onClick.AddListener(OnBackClicked);
 
         graphicsBtn?.onClick.AddListener(() =>
         {
@@ -55,7 +56,7 @@ public class SettingsPanel : MenuPanel
     public override void OnOpen()
     {
         base.OnOpen();
-        _temp = DataSettingSystem.Get();
+        _temp = DataSettingSystem.GetDeep();
     }
 
     public override void OnClose()
@@ -67,15 +68,31 @@ public class SettingsPanel : MenuPanel
     private void OnDefaultClicked()
     {
         DataSettingSystem.Reset();
-        _temp = DataSettingSystem.Get();
+        _temp = DataSettingSystem.GetDeep();
     }
 
     private void OnApplyClicked()
     {
+        if (DataSetting.IsDataSettingSame(_temp, DataSettingSystem.GetShallow())) return;
         DataSettingSystem.Set(_temp);
         DataSettingSystem.Save();
         MenuManager.Instance.ApplySettings(_temp);
         Debug.Log("设置已应用并保存");
+    }
+
+    public override void OnBackClicked()
+    {
+        if (UIManager.Instance.IsTransitioning) return;
+
+        if (DataSetting.IsDataSettingSame(_temp, DataSettingSystem.GetShallow()))
+        {
+            if (isCancelClosable) UIManager.Instance.Pop();
+        }
+        else
+        {
+            var panel = UIManager.Instance.Push<ConfirmPanel>("ConfirmPanel");
+            panel.Setup(onConfirm: base.OnBackClicked, title: "", content: "");
+        }
     }
 
     protected override GameObject DefaultFocused() => graphicsBtn != null ? graphicsBtn.gameObject : null;

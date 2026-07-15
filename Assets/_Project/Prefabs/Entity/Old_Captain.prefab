@@ -47,7 +47,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7b686e6cf6480140b4867c23a43e877, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  guid: Old_Captain
   defaultName: 
   _animator: {fileID: 4117112212098981872}
 --- !u!114 &1570185606120078945
@@ -66,6 +65,7 @@ MonoBehaviour:
   interactionPriority: 0
   dialogueJsonList:
   - {fileID: 4900000, guid: 52151ea9b471c8545b6d51ae2fb884f4, type: 3}
+  - {fileID: 4900000, guid: 91c4fb363f549294189cc89c344d72c2, type: 3}
   dialogueIndex: 0
   _tipOffset: {x: 0, y: 0, z: 0}
 --- !u!1 &8015446812688959205

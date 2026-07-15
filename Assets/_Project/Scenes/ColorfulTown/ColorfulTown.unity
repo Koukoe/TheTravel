@@ -767,6 +767,8 @@ MonoBehaviour:
   - portalName: ColorfulTownOut
     transform: {fileID: 170132795}
   defaultSpawnPoint: {fileID: 218514784}
+  ambSourceObjects:
+  - {fileID: 1892330239}
   _state:
     <guid>k__BackingField: 
     name: 
@@ -776,6 +778,7 @@ MonoBehaviour:
   initPoolGuids:
   - Old_Captain
   entityDb: {fileID: 11400000, guid: 861f8143ec2a20345a5d3eb4909bc7bc, type: 2}
+  camY: 30
 --- !u!1001 &225417298
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6399,6 +6402,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1892330238}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f038f56d846186241ad1815080304479,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1892330239}
   m_SourcePrefab: {fileID: 100100000, guid: f038f56d846186241ad1815080304479, type: 3}
 --- !u!4 &1892330236 stripped
 Transform:
@@ -6433,6 +6440,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 48.25, y: 1, z: 21.72}
   m_Center: {x: 4.3, y: 0, z: 0}
+--- !u!114 &1892330239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1892330237}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad9b4466f67cd1a41a9b4a65fca2bc02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ambName: Habor
+  is3D: 1
 --- !u!1 &1895677019
 GameObject:
   m_ObjectHideFlags: 0

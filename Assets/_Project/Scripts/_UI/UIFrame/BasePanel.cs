@@ -8,7 +8,7 @@ public abstract class BasePanel : MonoBehaviour
     [SerializeField] private CanvasRender canvasRenderMode = CanvasRender.SYS2D;
     public CanvasRender CanvasRenderMode => canvasRenderMode;
 
-    [SerializeField] private bool isCancelClosable = false;
+    [SerializeField] protected bool isCancelClosable = false;
     public bool IsCancelClosable => isCancelClosable;
 
     public float delay = 0f;

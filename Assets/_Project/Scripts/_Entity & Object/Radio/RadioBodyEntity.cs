@@ -69,6 +69,7 @@ public class RadioBodyEntity : StaticStateEntity<InteractionState>, IInteractabl
     {
         GameFlowManager.Instance.PlayingData.GetState<ItemState>("record").isPicked = true;
         DialogueManager.Instance.StartWith(getRecord);
+        AudioManager.Instance.PlaySFX("ClassicMusic");
 
         // 解密完成后禁掉旋钮交互
         if (freqEntity != null) freqEntity.State.isInteracble = false;

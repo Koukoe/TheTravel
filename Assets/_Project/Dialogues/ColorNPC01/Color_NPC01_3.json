@@ -1,48 +1,48 @@
 {
-  "dialogues": [
-    {
-      "id": "Color_NPC01_3_01",
-      "character": "Color_NPC01",
-      "content": "来了？来一条吧！",
-      "nextId": "Color_NPC01_3_02"
-    },
-    {
-      "id": "Color_NPC01_3_02",
-      "character": "protagonist",
-      "content": "好。",
-      "nextId": "Color_NPC01_3_03"
-    },
-    {
-      "id": "Color_NPC01_3_03",
-      "character": "Color_NPC01",
-      "content": "好嘞！",
-      "nextId": "Color_NPC01_3_04"
-    },
-    {
-      "id": "Color_NPC01_3_04",
-      "character": "Color_NPC01",
-      "content": "您拿好，慢走！",
-      "nextId": "Color_NPC01_3_05"
-    },
-    {
-      "id": "Color_NPC01_3_05",
-      "character": "protagonist",
-      "content": "（买这鱼是要干嘛......）",
-      "nextId": "Color_NPC01_3_06"
-    },
-    {
-      "id": "Color_NPC01_3_06",
-      "character": "narrator",
-      "content": "获得道具“大眼鱼”",
-      "effects": [
-        {
-          "GetItem": "item_fish_bigeye"
-        },
-        {
-          "SetDialogueIndex": "3"
-        }
-      ],
-      "nextId": "end"
-    }
-  ]
+	"dialogues": [
+		{
+			"id": "Color_NPC01_3_01",
+			"character": "Color_NPC01",
+			"content": "来了？来一条吧！",
+			"nextId": "Color_NPC01_3_02"
+		},
+		{
+			"id": "Color_NPC01_3_02",
+			"character": "protagonist",
+			"content": "好。",
+			"nextId": "Color_NPC01_3_03"
+		},
+		{
+			"id": "Color_NPC01_3_03",
+			"character": "Color_NPC01",
+			"content": "好嘞！",
+			"nextId": "Color_NPC01_3_04"
+		},
+		{
+			"id": "Color_NPC01_3_04",
+			"character": "Color_NPC01",
+			"content": "您拿好，慢走！",
+			"nextId": "Color_NPC01_3_05"
+		},
+		{
+			"id": "Color_NPC01_3_05",
+			"character": "protagonist",
+			"content": "（买这鱼是要干嘛......）",
+			"nextId": "Color_NPC01_3_06"
+		},
+		{
+			"id": "Color_NPC01_3_06",
+			"character": "narrator",
+			"content": "获得道具[大眼鱼]",
+			"effects": [
+				{
+					"GetItem": "item_fish_bigeye"
+				},
+				{
+					"SetDialogueIndex": "3"
+				}
+			],
+			"nextId": "end"
+		}
+	]
 }

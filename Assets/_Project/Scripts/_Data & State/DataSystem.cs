@@ -138,7 +138,16 @@ public static class DataSettingSystem
     /// <summary>
     /// 获取当前设置数据的深拷贝 ( _ -> M )
     /// </summary>
-    public static DataSetting Get()
+    public static DataSetting GetDeep()
+    {
+        string json = JsonConvert.SerializeObject(_current, DataPersistence.Settings);
+        return JsonConvert.DeserializeObject<DataSetting>(json, DataPersistence.Settings);
+    }
+
+    /// <summary>
+    /// 获取当前设置数据的浅拷贝 ( _ -> M )
+    /// </summary>
+    public static DataSetting GetShallow()
     {
         string json = JsonConvert.SerializeObject(_current, DataPersistence.Settings);
         return JsonConvert.DeserializeObject<DataSetting>(json, DataPersistence.Settings);
@@ -196,12 +205,17 @@ public static class DataGlobalSystem
     /// <summary>
     /// 获取当前全局数据的深拷贝 ( _ -> M )
     /// </summary>
-    public static DataGlobal Get()
+    public static DataGlobal GetDeep()
     {
         if (_current == null) return null;
         string json = JsonConvert.SerializeObject(_current, DataPersistence.Settings);
         return JsonConvert.DeserializeObject<DataGlobal>(json, DataPersistence.Settings);
     }
+
+    /// <summary>
+    /// 获取当前全局数据的浅拷贝 ( _ -> M )
+    /// </summary>
+    public static DataGlobal GetShallow() => _current;
 
     /// <summary>
     /// 设置当前全局数据并自动保存到文件 ( M -> _ & F )

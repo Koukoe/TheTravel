@@ -65,6 +65,7 @@ public class InputManager : MonoBehaviour
     {
         _currentMode = InputMode.UI;
         UnityEngine.Debug.Log("切换至 UI Map");
+        // UnityEngine.Debug.Log($"[InputManager] SwitchUIMode 调用来源: {new System.Diagnostics.StackTrace(true)}");
         _controls.PlayerDyn.Disable();
         _controls.PlayerDia.Disable();
         _controls.All.Disable();
