@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: "\u6C34\u4F53"
+  m_Shader: {fileID: 4800000, guid: bbba11663f3e1284aac4c72e98289f1f, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _Absorption: 1
+    - _Amp: 0.39
+    - _DiffPower: 0.2
+    - _DisTime: 3
+    - _DisTimeMp: 4
+    - _FallPower: 0.6
+    - _FoamDistance: 0.3
+    - _WaveHeight: 0.5
+    - _WaveHight: 1
+    - _WaveLength: 3
+    - _WaveSpeed: 1
+    m_Colors:
+    - _WaterColor: {r: 0.15810788, g: 0.8820755, b: 0.8820755, a: 1}
+  m_BuildTextureStacks: []
