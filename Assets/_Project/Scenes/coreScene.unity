@@ -2438,7 +2438,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: ambSounds.Array.data[2].volume
-      value: 0.01
+      value: 0.015
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2448,7 +2448,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: ambSounds.Array.data[4].volume
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2563,7 +2563,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[13].volume
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
@@ -2573,7 +2573,7 @@ PrefabInstance:
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}
       propertyPath: sfxSounds.Array.data[15].volume
-      value: 1
+      value: 0.15
       objectReference: {fileID: 0}
     - target: {fileID: 7047051930128365585, guid: deabcb973bdd1b84ba87ca93c9696dda,
         type: 3}

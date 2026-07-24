@@ -20,6 +20,7 @@ public static class GameStatic
     {
         if (MenuManager.Instance != null)
         {
+            await UniTask.Yield();
             MenuManager.Instance.ApplySettings(DataSettingSystem.GetShallow());
         }
         if (!DataGlobalSystem.GetDeep().hasEnteredGame)
